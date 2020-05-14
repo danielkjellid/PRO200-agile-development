@@ -2,7 +2,7 @@
     "name": "smidig",
     "version": "1.0.0",
     "license": "LGPL-3.0",
-    "main": "frontend/src/index.js",
+    "main": "frontend/src/index.jsx",
     "babel": {
         "plugins": [
           "@babel/plugin-proposal-class-properties"
