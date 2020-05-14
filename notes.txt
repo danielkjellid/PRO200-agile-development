@@ -9,7 +9,7 @@ I' must have called a thousand times
 
  Ludvig og Daniel vil jobbe på styling og interaksjon i 'public' mappen 
  
- Marcin jobber på UserProfile;
+ Marcin jobber på {UserProfile};
  Ingrid jobber på Tickets;
  SignUp
  Fredrik jobber på Home;
