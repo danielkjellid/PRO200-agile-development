@@ -48,10 +48,15 @@ class UserProfile extends Component {
         if(this.state.singleTicket === true){
             return (
                 <React.Fragment>
-                    <BuySingleTicketBS ></BuySingleTicketBS>
+                    <BuySingleTicketBS hideBuySingleTicket={this.hideBuySingleTicket}></BuySingleTicketBS>
                 </React.Fragment>
             )
         } 
+    }
+
+    hideBuySingleTicket = () => {
+        this.setState({singleTicket: false});
+        this.newTicketButtonHandler();
     }
 
 

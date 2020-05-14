@@ -24,30 +24,36 @@ class BuySingleTicketBS extends Component {
         }
     }
 
-
     editTravellersHandler = () => {
         this.setState({editNumberOfTravellers: true})
     }
 
     renderEditNumberOfTravellers = () => {
         if(this.state.editNumberOfTravellers === true){
-                return(this.state.numberOfTravellers.map(item => {
-                    return(
-                        
-                            <EditTravellers key={item.id} type={item.type} number={item.number} 
-                                            add={() => this.addNumber(item.id)} 
-                                            remove={() => this.removeNumber(item.id)}>
-                            </EditTravellers>
-                        
-                    )
-                }) 
+                return(
+                    <div>
+                        {this.state.numberOfTravellers.map(item => {
+                        return(
+                            
+                                <EditTravellers key={item.id} type={item.type} number={item.number} 
+                                                add={() => this.addNumber(item.id)} 
+                                                remove={() => this.removeNumber(item.id)}>
+                                </EditTravellers>
+                        )
+                    })}
+                        <button onClick={this.hideEditNumberOfTravellers}>Fortsett</button>
+                    </div>
                 )}
+    }
+
+    hideEditNumberOfTravellers = () => {
+        this.setState({editNumberOfTravellers: false});
     }
 
     render() {
         return (
             <div>
-                <p>Tilbake til billettvalg</p>
+                <p onClick={this.props.hideBuySingleTicket}>Tilbake til billettvalg</p>
                 <h3>Hvor mange skal reise?</h3>
                 
                 {this.state.numberOfTravellers.map(item => {
