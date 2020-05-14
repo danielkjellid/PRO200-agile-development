@@ -14,11 +14,13 @@ class UserProfile extends Component {
     render() {
         return (
             <div>
-                <h1>Hei {this.state.user.name}</h1>
+                <h1>Hei, {this.state.user.name}</h1>
                 <button>Ny billett</button>
 
                 <h3>Billetter</h3>
                 <Link to={'/tickets'}>Se alle billetter</Link>
+
+                <div>Miljøkalkulator</div>
             </div>
         );
     }
