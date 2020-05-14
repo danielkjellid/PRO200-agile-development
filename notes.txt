@@ -12,16 +12,8 @@ I' must have called a thousand times
  Marcin jobber på UserProfile;
  Ingrid jobber på Tickets;
  SignUp
-<<<<<<< HEAD
- Home
-=======
  Fredrik jobber på Home;
->>>>>>> 1ca509336131bd6f5ebffdc570a662a273959b74
  Login
  UserDetails
 
  kanskje alle kan lage egne branches i git?;
-<<<<<<< HEAD
- 
-=======
->>>>>>> 1ca509336131bd6f5ebffdc570a662a273959b74
