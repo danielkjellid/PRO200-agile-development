@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 class ChooseTicketBS extends Component {
-    
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <div>
                 <h4>Velg billett</h4>
-                <button>Enkeltbillett</button>
-                <button>Periodebillett</button>
+                <button id="single" onClick={this.props.click}>Enkeltbillett</button>
+                <button id="period">Periodebillett</button>
                 <p>Ekstra soner</p>
                 <p>Kjøp til andre</p>
             </div>

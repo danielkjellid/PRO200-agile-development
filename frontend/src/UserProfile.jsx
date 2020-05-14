@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
+import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
 
 class UserProfile extends Component {
     constructor(props){
@@ -10,11 +11,13 @@ class UserProfile extends Component {
             user : {
                 name: "Jonathan Swallow",    
             },
-            chooseTicket: false
+            chooseTicket: false,
+            singleTicket: false,
+            periodTicket: false
         }
     }
 
-    newTicketHandler = () => {
+    newTicketButtonHandler = () => {
         if(this.state.chooseTicket === false){
             this.setState({chooseTicket: true});
         } else {
@@ -22,14 +25,33 @@ class UserProfile extends Component {
         }
     }
 
+    buySingleTicketButtonHandler = () => {
+        if(this.state.singleTicket === false){
+            this.setState({singleTicket: true});
+        } else {
+            this.setState({singleTicket: false});
+        }
+        this.setState({chooseTicket: false})
+    }
+
     renderChooseTicket = () => {
         if(this.state.chooseTicket) {
             return (
                 <React.Fragment>
-                    <ChooseTicketBS></ChooseTicketBS>
+                    <ChooseTicketBS click={this.buySingleTicketButtonHandler} ></ChooseTicketBS>
                 </React.Fragment>
             )
         }
+    }
+
+    renderBuySingleTicket = () => {
+        if(this.state.singleTicket === true){
+            return (
+                <React.Fragment>
+                    <BuySingleTicketBS ></BuySingleTicketBS>
+                </React.Fragment>
+            )
+        } 
     }
 
 
@@ -37,7 +59,7 @@ class UserProfile extends Component {
         return (
             <div>
                 <h1>Hei, {this.state.user.name}</h1>
-                <button onClick={this.newTicketHandler}>Ny billett</button>
+                <button onClick={this.newTicketButtonHandler}>Ny billett</button>
 
                 <h3>Billetter</h3>
                 <Link to={'/tickets'}>Se alle billetter</Link>
@@ -45,6 +67,8 @@ class UserProfile extends Component {
                 <div>Miljøkalkulator</div>
 
                 {this.renderChooseTicket()}
+                {this.renderBuySingleTicket()}
+
             </div>
         );
     }
