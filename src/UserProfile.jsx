@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class UserProfile extends Component {
     constructor(props){
         super(props);
         this.state = {
             //I create fake user data for now
-            user = {
+            user : {
                 name: "Jonathan Swallow",    
             }
         }
