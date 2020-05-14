@@ -12,7 +12,7 @@ I' must have called a thousand times
  Marcin jobber på UserProfile;
  Ingrid jobber på Tickets;
  SignUp
- Home
+ Fredrik jobber på Home;
  Login
  UserDetails
 
