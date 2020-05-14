@@ -3,3 +3,17 @@ There's such a difference between uuuuus and a milion miles.
 Hello from the other side
 I' must have called a thousand times
 
+
+ 1.før vi starter må alle kjøre yarn / npm install i terminal;
+ 2.så hvis man har lyst til å se resultatet i browseren må man kjøre yarn / npm start;
+
+ Ludvig og Daniel vil jobbe på styling og interaksjon i 'public' mappen 
+ 
+ Marcin jobber på UserProfile;
+ Ingrid jobber på Tickets;
+ SignUp
+ Home
+ Login
+ UserDetails
+
+ kanskje alle kan lage egne branches i git?;
