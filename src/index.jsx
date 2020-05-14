@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
+import Home from './Home';
+import Login from './Login';
+import SignUp from './SignUp';
+import Tickets from './Tickets';
+import UserDetails from './UserDetails';
+import UserProfile from './UserProfile';
 
 
 class App extends Component {
@@ -15,7 +21,7 @@ class App extends Component {
 
     notFound = () => {
         return(
-            <H1>not found</H1>
+            <h1>not found</h1>
         )
     }
 
@@ -24,7 +30,7 @@ class App extends Component {
 
             <BrowserRouter>
                 <div>
-                    <HeaderBar></HeaderBar>
+                    {/* <HeaderBar></HeaderBar> */}
                     <Switch>
                         <Route exact path="/" 
                         render={props => <Home {...props}></Home>}>
