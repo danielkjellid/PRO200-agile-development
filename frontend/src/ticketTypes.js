@@ -3,7 +3,7 @@ const editTravellers =  [
     {
         id: 0,
         type: "Voksen",
-        number: 0
+        number: 1
     },
     {
         id: 1,

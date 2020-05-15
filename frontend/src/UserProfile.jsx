@@ -21,20 +21,13 @@ class UserProfile extends Component {
     }
 
     newTicketButtonHandler = () => {
-        if(this.state.chooseTicket === false){
-            this.setState({chooseTicket: true});
-        } else {
-            this.setState({chooseTicket: false});
-        }
+        const newTicketShow = this.state.chooseTicket;
+        this.setState({chooseTicket: !newTicketShow});
     }
 
     buySingleTicketButtonHandler = () => {
-        if(this.state.singleTicket === false){
-            this.setState({singleTicket: true});
-        } else {
-            this.setState({singleTicket: false});
-        }
-        this.setState({chooseTicket: false})
+        const buySingleTicketShow = this.state.singleTicket;
+        this.setState({singleTicket: !buySingleTicketShow});
     }
 
     renderChooseTicket = () => {
