@@ -13,7 +13,7 @@ I' must have called a thousand times
  Ingrid jobber på Tickets;
  SignUp
  Fredrik jobber på Home;
- Login
+ Greger jobber på Login
  UserDetails
 
  kanskje alle kan lage egne branches i git?;
