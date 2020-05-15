@@ -30,21 +30,6 @@ class App extends Component {
 						<Route
 							exact
 							path="/"
-							render={(props) => <Home {...props}></Home>}
-						></Route>
-						<Route
-							exact
-							path="/login"
-							render={(props) => <Login {...props}></Login>}
-						></Route>
-						<Route
-							exact
-							path="/signup"
-							render={(props) => <SignUp {...props}></SignUp>}
-						></Route>
-						<Route
-							exact
-							path="/userprofile"
 							render={(props) => <UserProfile {...props}></UserProfile>}
 						></Route>
 						<Route
