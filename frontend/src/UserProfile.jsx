@@ -1,5 +1,10 @@
+// e8007e4db60528762be401e35489e959
+// Add this as a X-TripGo-Key header to your API calls to authenticate.
+
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
+import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
 
 class UserProfile extends Component {
     constructor(props){
@@ -8,17 +13,70 @@ class UserProfile extends Component {
             //I create fake user data for now
             user : {
                 name: "Jonathan Swallow",    
-            }
+            },
+            chooseTicket: false,
+            singleTicket: false,
+            periodTicket: false
         }
     }
+
+    newTicketButtonHandler = () => {
+        if(this.state.chooseTicket === false){
+            this.setState({chooseTicket: true});
+        } else {
+            this.setState({chooseTicket: false});
+        }
+    }
+
+    buySingleTicketButtonHandler = () => {
+        if(this.state.singleTicket === false){
+            this.setState({singleTicket: true});
+        } else {
+            this.setState({singleTicket: false});
+        }
+        this.setState({chooseTicket: false})
+    }
+
+    renderChooseTicket = () => {
+        if(this.state.chooseTicket) {
+            return (
+                <React.Fragment>
+                    <ChooseTicketBS click={this.buySingleTicketButtonHandler} ></ChooseTicketBS>
+                </React.Fragment>
+            )
+        }
+    }
+
+    renderBuySingleTicket = () => {
+        if(this.state.singleTicket === true){
+            return (
+                <React.Fragment>
+                    <BuySingleTicketBS hideBuySingleTicket={this.hideBuySingleTicket}></BuySingleTicketBS>
+                </React.Fragment>
+            )
+        } 
+    }
+
+    hideBuySingleTicket = () => {
+        this.setState({singleTicket: false});
+        this.newTicketButtonHandler();
+    }
+
+
     render() {
         return (
             <div>
-                <h1>Hei {this.state.user.name}</h1>
-                <button>Ny billett</button>
+                <h1>Hei, {this.state.user.name}</h1>
+                <button onClick={this.newTicketButtonHandler}>Ny billett</button>
 
                 <h3>Billetter</h3>
                 <Link to={'/tickets'}>Se alle billetter</Link>
+
+                <div>Miljøkalkulator</div>
+
+                {this.renderChooseTicket()}
+                {this.renderBuySingleTicket()}
+
             </div>
         );
     }
