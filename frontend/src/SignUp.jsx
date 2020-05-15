@@ -3,7 +3,10 @@ class SignUp extends Component {
     state = {  }
     render() {
         return (
-            <div>Sign up page</div>
+            <div>
+                <div>Sign Up page</div>
+                <Link to={'/userprofile'}>User Profile</Link>
+            </div>
         );
     }
 }
