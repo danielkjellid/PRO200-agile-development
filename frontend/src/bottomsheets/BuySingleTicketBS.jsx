@@ -32,12 +32,12 @@ class BuySingleTicketBS extends Component {
         if(this.state.editNumberOfTravellers === true){
                 return(
                     <div>
-                        {this.state.numberOfTravellers.map(item => {
+                        {this.state.numberOfTravellers.map((item,index) => {
                         return(
                             
-                                <EditTravellers key={item.id} type={item.type} number={item.number} 
-                                                add={() => this.addNumber(item.id)} 
-                                                remove={() => this.removeNumber(item.id)}>
+                                <EditTravellers key={index} type={item.type} number={item.number} 
+                                                add={() => this.addNumber(index)} 
+                                                remove={() => this.removeNumber(index)}>
                                 </EditTravellers>
                         )
                     })}
