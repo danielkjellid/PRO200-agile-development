@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
 import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
+import Navbar from './components/navbar';
 
 class UserProfile extends Component {
     constructor(props){
@@ -28,13 +29,14 @@ class UserProfile extends Component {
     buySingleTicketButtonHandler = () => {
         const buySingleTicketShow = this.state.singleTicket;
         this.setState({singleTicket: !buySingleTicketShow});
+        this.newTicketButtonHandler();
     }
 
     renderChooseTicket = () => {
         if(this.state.chooseTicket) {
             return (
                 <React.Fragment>
-                    <ChooseTicketBS click={this.buySingleTicketButtonHandler} ></ChooseTicketBS>
+                    <ChooseTicketBS click={this.buySingleTicketButtonHandler} clickX={this.newTicketButtonHandler} ></ChooseTicketBS>
                 </React.Fragment>
             )
         }
@@ -57,21 +59,97 @@ class UserProfile extends Component {
 
 
     render() {
+
+        //temporary styling
+        const styleNewTicketButton = {
+            padding: "10px 50px",
+            width: "90%",
+            backgroundColor: "#00685E",
+            color: "white",
+            border: "none",
+        }
+
+        const container = {
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            zIndex: -1
+        }
+
+        const profileImage = {
+            width: "50px",
+            height: "100%",
+            backgroundColor: "yellow"
+        }
+
+        const welcome = {
+            display: "flex",
+            height: "60px",
+            flexDirection: "row",
+            marginBottom: "20px",
+            alignItems: "center"
+        }
+
+        const section = {
+            display: "flex",
+            width: "90%",
+            flexDirection: "column",
+            alignItems: "center"
+        }
+
+        const header = {
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "space-between"
+        }
+
+        const acticeTikcetContainer = {
+            width: "80%",
+            height: "200px",
+            border: "solid 2px black",
+            textAlign: "center"
+
+        }
+      
+
+
         return (
+
             <div>
-                <h1>Hei, {this.state.user.name}</h1>
-                <button onClick={this.newTicketButtonHandler}>Ny billett</button>
-
-                <h3>Billetter</h3>
-                <Link to={'/tickets'}>Se alle billetter</Link>
-
-                <div>Miljøkalkulator</div>
-
                 {this.renderChooseTicket()}
                 {this.renderBuySingleTicket()}
+                <Navbar></Navbar>
+                <div style={container}>
+                    <div style={welcome}>
+                        <div style={profileImage}>Image</div>
+                        <h2>Hei, {this.state.user.name}</h2>
+                    </div>
 
+                    <button style={styleNewTicketButton} onClick={this.newTicketButtonHandler}>Ny billett</button>
+
+                    <div style={section}>
+                        <div style={header}>
+                            <h3>Billetter</h3>
+                            <Link to={'/tickets'}>Se alle billetter</Link>
+                        </div>
+
+                        <div style={acticeTikcetContainer}>Aktiv billett section</div>
+                    </div>
+                    <div style={section}>
+                        <div style={header}>
+                            <h3>Miljøkalkulator</h3>
+                        </div>
+                        <div style={acticeTikcetContainer}>Miljø greier</div>
+                    </div>
+
+                
+                    
+
+                </div>
             </div>
-        );
+        ); 
     }
 }
 

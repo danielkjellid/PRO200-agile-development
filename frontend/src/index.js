@@ -22,7 +22,6 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<Navbar />
 					<Switch>
 						<Route
 							exact
