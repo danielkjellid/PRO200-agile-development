@@ -12,23 +12,37 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {};
+		this.state = {
+			coverSite: false
+		};
 	}
 
 	notFound = () => {
 		return <h1>not found</h1>;
 	};
 
+	startTransaction = () => {
+		this.setState({coverSite: true});
+	}
+
+	cancelTransaction = () => {
+		this.setState({coverSite: false});
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
 				<div>
-				
+					<div className={ this.state.coverSite ? "modalBack" : null }></div>
+					<Navbar></Navbar>
 					<Switch>
 						<Route
 							exact
 							path="/"
-							render={(props) => <UserProfile {...props}></UserProfile>}
+							render={(props) => <UserProfile {...props}
+												startTransaction={this.startTransaction}
+												cancelTransaction={this.cancelTransaction}
+							></UserProfile>}
 						></Route>
 						<Route
 							exact

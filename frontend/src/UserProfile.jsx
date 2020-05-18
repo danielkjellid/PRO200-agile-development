@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
 import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
-import Navbar from './components/navbar';
+
 
 class UserProfile extends Component {
     constructor(props){
@@ -23,20 +23,27 @@ class UserProfile extends Component {
 
     newTicketButtonHandler = () => {
         const newTicketShow = this.state.chooseTicket;
-        this.setState({chooseTicket: !newTicketShow});
+
+        if(newTicketShow) {
+            this.setState({chooseTicket: false});
+            this.props.cancelTransaction()
+        } else {
+            this.setState({chooseTicket: true});
+            this.props.startTransaction()
+        }
     }
 
     buySingleTicketButtonHandler = () => {
         const buySingleTicketShow = this.state.singleTicket;
         this.setState({singleTicket: !buySingleTicketShow});
         this.newTicketButtonHandler();
+        this.props.startTransaction()
     }
 
     renderChooseTicket = () => {
         if(this.state.chooseTicket) {
             return (
                 <React.Fragment>
-                    <div onClick={this.cancelTransaction} className="modalBack"></div>
                     <ChooseTicketBS click={this.buySingleTicketButtonHandler} clickX={this.newTicketButtonHandler} ></ChooseTicketBS>
                 </React.Fragment>
             )
@@ -47,7 +54,6 @@ class UserProfile extends Component {
         if(this.state.singleTicket === true){
             return (
                 <React.Fragment>
-                    <div onClick={this.cancelTransaction} className="modalBack"></div>
                     <BuySingleTicketBS cancelTransaction = {this.cancelTransaction} hideBuySingleTicket={this.hideBuySingleTicket}></BuySingleTicketBS>
                 </React.Fragment>
             )
@@ -57,10 +63,12 @@ class UserProfile extends Component {
     hideBuySingleTicket = () => {
         this.setState({singleTicket: false});
         this.newTicketButtonHandler();
+        this.props.cancelTransaction()
     }
 
     cancelTransaction = () => {
         this.setState({singleTicket: false});
+        this.props.cancelTransaction()
     }
 
     render() {
@@ -71,7 +79,7 @@ class UserProfile extends Component {
             <div>
                 {this.renderChooseTicket()}
                 {this.renderBuySingleTicket()}
-                <Navbar></Navbar>
+                
                 <div className="container">
                     <div className="welcome">
                         <div className="profileImage">Image</div>
