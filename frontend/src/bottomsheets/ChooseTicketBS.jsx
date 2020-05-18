@@ -34,7 +34,6 @@ class ChooseTicketBS extends Component {
 
         return (
             <div>
-                {/* <div onClick={this.props.clickX} style={modalBack}></div> */}
                 <div style={modalContainer}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <h4>Velg billett</h4>

@@ -81,6 +81,7 @@ class BuySingleTicketBS extends Component {
                         <button onClick={this.props.cancelTransaction}>X</button>
                     </div>
 
+                    
                     <div className={ this.state.chooseDestination ?  "displayBlock" : "displayNone" }>
                         <div>
                             <p onClick={this.props.hideBuySingleTicket}>Tilbake til billettvalg</p>
@@ -90,16 +91,13 @@ class BuySingleTicketBS extends Component {
                                 <input className="input"placeholder="Destinasjon"/>
                             </div>
                         </div>
-                        
-                        
-                        
                         <div>Når vil du reise?</div> {/* this section will be developed later */}
                         <button onClick={this.continueToDepartures} className="fortsettButton">Fortsett til avganger og billetter</button>
                     </div> 
                     
-                    
                     <div className={ this.state.chooseDeparture ?  "displayBlock" : "displayNone" }>
-                        <div className="modalContainer">
+                        <div>
+                        <div className={ this.state.editNumberOfTravellers ? "modalBack" : null }></div>
                             <div className= "numberOfTravellers"> 
                                 <div>
                                     {this.state.numberOfTravellers.map(item => {
@@ -109,7 +107,6 @@ class BuySingleTicketBS extends Component {
                                     })}
                                 </div>
                                 <button className="button" onClick={this.editTravellersHandler}>Rediger</button>
-                                
                             </div>
 
                             <div>
@@ -141,9 +138,12 @@ class BuySingleTicketBS extends Component {
                                 </div>
                                 <button onClick={this.continueToSeats} className="fortsettButton">Fortsett til valg av sete</button>
                             </div>
+                            {this.renderEditNumberOfTravellers()}
                         </div>
                     </div>
-                                {this.renderEditNumberOfTravellers()}
+                                   
+                    
+                    
                     <div className={ this.state.chooseSeat ?  "displayBlock" : "displayNone" }>
                         <div>Choose the seat site</div>
                         <button onClick={this.continueToPayment} className="fortsettButton">Fortsett til betaling</button>
@@ -160,6 +160,8 @@ class BuySingleTicketBS extends Component {
                         <button  className="fortsettButton">Se billettene</button>  
                     </div>
                 </div>
+                   
+                
             </div>
         );
     }
