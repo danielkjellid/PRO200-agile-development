@@ -9,11 +9,19 @@ I' must have called a thousand times
 
  Ludvig og Daniel vil jobbe på styling og interaksjon i 'public' mappen 
  
+
+komponenter til å ta
+ActiveTickets
+RouteCard
+ChooseSeat
+Contact
+UserDetails
+
  Marcin jobber på {UserProfile};
- Ingrid jobber på Tickets;
- SignUp
- Fredrik jobber på Home;
+ Ingrid jobber på Send tickets;
+
+ Fredrik jobber på Home; 
  Greger jobber på Login
- UserDetails
+
 
  kanskje alle kan lage egne branches i git?;
