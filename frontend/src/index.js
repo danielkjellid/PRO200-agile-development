@@ -21,11 +21,11 @@ class App extends Component {
 		return <h1>not found</h1>;
 	};
 
-	startTransaction = () => {
+	startTransaction = () => { //this function make the faded background appear behind modals
 		this.setState({coverSite: true});
 	}
 
-	cancelTransaction = () => {
+	cancelTransaction = () => { //this function make the faded background disappear 
 		this.setState({coverSite: false});
 	}
 
