@@ -17,7 +17,7 @@ ChooseSeat
 Contact
 UserDetails
 
- Marcin jobber på {UserProfile};
+ Marcin jobber på {UserProfile, BuySingleTicket};
  Ingrid jobber på Send tickets;
 
  Fredrik jobber på Home; 
