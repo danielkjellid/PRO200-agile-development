@@ -46,7 +46,7 @@ class UserProfile extends Component {
         if(this.state.singleTicket === true){
             return (
                 <React.Fragment>
-                    <BuySingleTicketBS hideBuySingleTicket={this.hideBuySingleTicket}></BuySingleTicketBS>
+                    <BuySingleTicketBS cancelTransaction = {this.cancelTransaction} hideBuySingleTicket={this.hideBuySingleTicket}></BuySingleTicketBS>
                 </React.Fragment>
             )
         } 
@@ -57,77 +57,40 @@ class UserProfile extends Component {
         this.newTicketButtonHandler();
     }
 
+    cancelTransaction = () => {
+        this.setState({singleTicket: false});
+    }
 
     render() {
 
-        //temporary styling
-        
-
-        const profileImage = {
-            width: "50px",
-            height: "100%",
-            backgroundColor: "yellow"
-        }
-
-        const welcome = {
-            display: "flex",
-            height: "60px",
-            flexDirection: "row",
-            marginBottom: "20px",
-            alignItems: "center"
-        }
-
-        const section = {
-            display: "flex",
-            width: "90%",
-            flexDirection: "column",
-            alignItems: "center"
-        }
-
-        const header = {
-            display: "flex",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "space-between"
-        }
-
-        const acticeTikcetContainer = {
-            width: "80%",
-            height: "200px",
-            border: "solid 2px black",
-            textAlign: "center"
-
-        }
-      
-
-
+    
         return (
 
             <div>
                 {this.renderChooseTicket()}
                 {this.renderBuySingleTicket()}
                 <Navbar></Navbar>
-                <div style={container}>
-                    <div style={welcome}>
-                        <div style={profileImage}>Image</div>
+                <div className="container">
+                    <div className="welcome">
+                        <div className="profileImage">Image</div>
                         <h2>Hei, {this.state.user.name}</h2>
                     </div>
 
-                    <button style={styleNewTicketButton} onClick={this.newTicketButtonHandler}>Ny billett</button>
+                    <button className="styleNewTicketButton" onClick={this.newTicketButtonHandler}>Ny billett</button>
 
-                    <div style={section}>
-                        <div style={header}>
+                    <div className="section">
+                        <div className="header">
                             <h3>Billetter</h3>
                             <Link to={'/tickets'}>Se alle billetter</Link>
                         </div>
 
-                        <div style={acticeTikcetContainer}>Aktiv billett section</div>
+                        <div className="acticeTikcetContainer">Aktiv billett section</div>
                     </div>
-                    <div style={section}>
-                        <div style={header}>
+                    <div className="section">
+                        <div className="header">
                             <h3>Miljøkalkulator</h3>
                         </div>
-                        <div style={acticeTikcetContainer}>Miljø greier</div>
+                        <div className="acticeTikcetContainer">Miljø greier</div>
                     </div>
 
                 
