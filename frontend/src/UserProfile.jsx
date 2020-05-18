@@ -61,21 +61,7 @@ class UserProfile extends Component {
     render() {
 
         //temporary styling
-        const styleNewTicketButton = {
-            padding: "10px 50px",
-            width: "90%",
-            backgroundColor: "#00685E",
-            color: "white",
-            border: "none",
-        }
-
-        const container = {
-            display: "flex",
-            width: "100%",
-            flexDirection: "column",
-            alignItems: "center",
-            zIndex: -1
-        }
+        
 
         const profileImage = {
             width: "50px",
