@@ -36,6 +36,7 @@ class UserProfile extends Component {
         if(this.state.chooseTicket) {
             return (
                 <React.Fragment>
+                    <div onClick={this.cancelTransaction} className="modalBack"></div>
                     <ChooseTicketBS click={this.buySingleTicketButtonHandler} clickX={this.newTicketButtonHandler} ></ChooseTicketBS>
                 </React.Fragment>
             )
@@ -46,6 +47,7 @@ class UserProfile extends Component {
         if(this.state.singleTicket === true){
             return (
                 <React.Fragment>
+                    <div onClick={this.cancelTransaction} className="modalBack"></div>
                     <BuySingleTicketBS cancelTransaction = {this.cancelTransaction} hideBuySingleTicket={this.hideBuySingleTicket}></BuySingleTicketBS>
                 </React.Fragment>
             )

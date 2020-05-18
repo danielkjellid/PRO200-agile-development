@@ -75,7 +75,7 @@ class BuySingleTicketBS extends Component {
        
         return (
             <div>
-                <div onClick={this.props.cancelTransaction} className="modalBack"></div>
+                
                 <div className="modalContainer">
                     <div style={{display: "flex", flexDirection: "row",justifyContent: "space-between" }}>
                         <p>Kjøp enkeltbillett</p>
