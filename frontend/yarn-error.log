@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js install
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js start
 
 PATH: 
-  /Users/Amish1188/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /Users/Amish1188/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Amish1188/.rbenv/shims
 
 Yarn version: 
   1.22.4
