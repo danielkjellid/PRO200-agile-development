@@ -99,7 +99,7 @@ class UserProfile extends Component {
 
 					<div className="section">
 						<div className="header">
-							<h3>Billetter</h3>
+							<h3 className="text-orange-600">Billetter</h3>
 							<Link to={'/tickets'}>Se alle billetter</Link>
 						</div>
 
