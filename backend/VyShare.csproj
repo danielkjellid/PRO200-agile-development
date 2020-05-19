@@ -11,6 +11,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqLite" Version="3.1.4" />
+    <PackageReference Include="NSwag.SwaggerGeneration.AspNetCore" Version="12.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.4.1" />
   </ItemGroup>
 
 

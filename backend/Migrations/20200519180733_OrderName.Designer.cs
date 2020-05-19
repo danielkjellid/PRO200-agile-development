@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VyShare;
 
 namespace VyShare.Migrations
 {
     [DbContext(typeof(VyShareContext))]
-    partial class VyShareContextModelSnapshot : ModelSnapshot
+    [Migration("20200519180733_OrderName")]
+    partial class OrderName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
