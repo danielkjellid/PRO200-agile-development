@@ -72,6 +72,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    align-items: center;
     bottom: 0%;
     position: fixed;
     z-index: 2;
@@ -79,6 +80,9 @@
     background-color: white;
 }
 
+.modalContent {
+    width: 90%;
+}
 
 
 .modalBack {
@@ -114,7 +118,7 @@
 
 .fortsettButton {
     padding: 10px 50px;
-    width: 90%;
+    width: 100%;
     background-color: #00685E;
     color: white;
     border: none;
@@ -127,7 +131,12 @@
     border: 2px solid black;
     display: flex;
     flex-direction: column;
+    padding: 30px;
     margin-bottom: 5%;
+}
+
+.routeCardBackgroundGreen {
+    background-color: #F2FAF6;
 }
 
 .routeCardHeader {
@@ -136,12 +145,20 @@
     justify-content: space-between;
 }
 
-.routeCardHours {
-    margin-top: 20%;
+.routeCardHours, .track {
+    margin-top: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
+.priceShow {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 
 .numberOfTravellers {
     margin-top: 5%;
