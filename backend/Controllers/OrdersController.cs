@@ -8,7 +8,7 @@ using VyShare.Models.Dto;
 
 namespace VyShare.Controllers
 {
-    [Route("users/{userId}/orders")]
+    [Route("orders")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -20,28 +20,18 @@ namespace VyShare.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<OrderDto>>> GetAll(Guid userId)
+        public async Task<ActionResult<List<OrderDto>>> GetAll()
         {
-            var user = await db.Users.Include(e => e.Orders).FirstOrDefaultAsync(e => e.Id == userId);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            var ordersDto = user.Orders.Select(e => new OrderDto(e));
+            var orders = await db.Orders.ToListAsync();
+            var ordersDto = orders.Select(e => new OrderDto(e));
             return Ok(ordersDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(Guid userId, OrderDto orderDto)
+        public async Task<ActionResult> Add(OrderDto orderDto)
         {
-            var user = await db.Users.Include(e => e.Orders).FirstOrDefaultAsync(e => e.Id == userId);
-            if (user == null)
-            {
-                return NotFound();
-            }
             var order = orderDto.ToOrder();
-            user.Orders.Add(order);
+            db.Orders.Add(order);
             await db.SaveChangesAsync();
             orderDto = new OrderDto(order);
 

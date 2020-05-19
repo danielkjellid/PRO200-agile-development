@@ -1,5 +1,8 @@
+using System;
+
 namespace VyShare.Models
 {
+    [Obsolete("Use BasicTicket", true)]
     public class Ticket : Entity
     {
         public Person TicketHolder { get; set; }

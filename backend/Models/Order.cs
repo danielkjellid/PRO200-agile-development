@@ -5,6 +5,6 @@ namespace VyShare.Models
     public class Order : Entity
     {
         public string Name { get; set; }
-        public IEnumerable<Ticket> Tickets { get; set; }
+        public virtual ICollection<BasicTicket> BasicTickets { get; set; }
     }
 }
