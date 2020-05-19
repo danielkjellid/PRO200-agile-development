@@ -11,7 +11,7 @@ I' must have called a thousand times
  
 
 komponenter til å ta
-ActiveTickets
+Fredrik jobber på ActiveTickets
 RouteCard
 ChooseSeat
 Contact
@@ -20,7 +20,7 @@ UserDetails
  Marcin jobber på {UserProfile, BuySingleTicket};
  Ingrid jobber på Send tickets;
 
- Fredrik jobber på Home; 
+Home; 
  Greger jobber på Login
 
 
