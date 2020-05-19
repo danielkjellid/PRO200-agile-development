@@ -14,6 +14,7 @@ class UserProfile extends Component {
 			//I create fake user data for now
 			user: {
 				name: 'Jonathan Swallow',
+				singleTicket: true
 			},
 			chooseTicket: false,
 			singleTicket: false,
@@ -104,7 +105,7 @@ class UserProfile extends Component {
 
 						<div className="acticeTikcetContainer">
 							<ActiveTickets
-								singleTicket={this.state.singleTicket}
+								singleTicket={this.state.user.singleTicket}
 								periodTicket={this.state.periodTicket}
 							/>
 						</div>
