@@ -17,7 +17,8 @@ class BuySingleTicketBS extends Component {
             chooseDeparture: false,
             chooseSeat: false,
             choosePayment: false,
-            confirmation: false
+            confirmation: false,
+            active: null
         }
     }
 
@@ -123,7 +124,7 @@ class BuySingleTicketBS extends Component {
 
                                 {this.state.routes.map(item => {
                                     return(
-                                        <RouteCard key={item.id} startStation={item.stationStart}
+                                        <RouteCard click={} key={item.id} startStation={item.stationStart}
                                         endStation={item.stationEnd} travelTime={item.travelTime} 
                                         startTime={item.startTime} endTime={item.endTime}
                                         track={item.track} numOfStops={item.numberOfStops}
