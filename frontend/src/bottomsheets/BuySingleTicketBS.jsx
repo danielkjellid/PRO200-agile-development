@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 //import numberOfTravellers from '../numberOfTravellers';
 import EditTravellers from '../bottomsheets/EditTravellers';
-import ticketTypes from '../ticketTypes';
+import ticketTypes from '../fakeData/ticketTypes';
+import routes from '../fakeData/readyRoutes';
+import RouteCard from '../components/RouteCard';
+
 
 class BuySingleTicketBS extends Component {
     constructor(props){
@@ -9,6 +12,7 @@ class BuySingleTicketBS extends Component {
         this.state = {
             editNumberOfTravellers: false,
             numberOfTravellers: ticketTypes,
+            routes: routes,
             chooseDestination: true,
             chooseDeparture: false,
             chooseSeat: false,
@@ -74,9 +78,9 @@ class BuySingleTicketBS extends Component {
     render() {
        
         return (
-            <div>
-                <div className="modalContainer">
-                    <div style={{display: "flex", flexDirection: "row",justifyContent: "space-between" }}>
+            <div className="modalContainer">
+                <div className="modalContent">
+                    <div style={{ display: "flex", flexDirection: "row",justifyContent: "space-between" }}>
                         <p>Kjøp enkeltbillett</p>
                         <button onClick={this.props.cancelTransaction}>X</button>
                     </div>
@@ -109,33 +113,23 @@ class BuySingleTicketBS extends Component {
                                 <button className="button" onClick={this.editTravellersHandler}>Rediger</button>
                             </div>
 
-                            <div>
-                                <button className="button2">Tog</button>
-                                <button className="button3">Buss</button>
-                                <div className="routeCard">
-                                    <div className="routeCardHeader">
-                                        <p>Oslo S</p>
-                                        <p>2t 0min</p>
-                                        <p>Gjøvik</p>
-                                    </div>
-                                    <div className="routeCardHours">
-                                        <p>21:44</p>
-                                        <div>image</div>
-                                        <p>23:34</p>
-                                    </div>
+                            <div style={{display: "flex", flexDirection: "column", alignItems: "center", width:"100%"}} >
+                                <div style={{display:"flex", flexDirection: "row", width:"100%", justifyContent: "center"}}>
+                                    <button className="button2">Tog</button>
+                                    <button className="button3">Buss</button>
                                 </div>
-                                <div className="routeCard">
-                                    <div className="routeCardHeader">
-                                        <p>Oslo S</p>
-                                        <p>2t 0min</p>
-                                        <p>Gjøvik</p>
-                                    </div>
-                                    <div className="routeCardHours">
-                                        <p>21:44</p>
-                                        <div>image</div>
-                                        <p>23:34</p>
-                                    </div>
-                                </div>
+
+                                {this.state.routes.map(item => {
+                                    return(
+                                        <RouteCard key={item.id} startStation={item.stationStart}
+                                        endStation={item.stationEnd} travelTime={item.travelTime} 
+                                        startTime={item.startTime} endTime={item.endTime}
+                                        track={item.track} numOfStops={item.numberOfStops}
+                                        price={item.price}></RouteCard>
+                                    )
+                                })}
+                               
+                                
                                 <button onClick={this.continueToSeats} className="fortsettButton">Fortsett til valg av sete</button>
                             </div>
                             {this.renderEditNumberOfTravellers()}
