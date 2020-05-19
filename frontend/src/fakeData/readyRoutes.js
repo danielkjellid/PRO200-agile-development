@@ -1,6 +1,6 @@
 const routes = [
     {
-        id: 1,
+        id: 0,
         stationStart: "Oslo S",
         stationEnd: "Gjøvik",
         travelTime: "2",
@@ -8,10 +8,11 @@ const routes = [
         endTime: "23:34",
         track: 11,
         numberOfStops: 6,
-        price: 1062.00
+        price: 1062.00,
+        clicked: false
     },
     {
-        id: 2,
+        id: 1,
         stationStart: "Oslo S",
         stationEnd: "Gjøvik",
         travelTime: "2",
@@ -19,7 +20,8 @@ const routes = [
         endTime: "00:18",
         track: 11,
         numberOfStops: 6,
-        price: 1062.00
+        price: 1062.00,
+        clicked: false
     },
 
 ]

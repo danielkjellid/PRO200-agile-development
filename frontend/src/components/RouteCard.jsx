@@ -5,12 +5,14 @@ class RouteCard extends Component {
     constructor(props){
         super(props)
         this.state = { 
-
+           
          }
     }
+
+  
     render() {
         return (
-            <div className="routeCard">
+            <div className="routeCard ">
                 <div className="routeCardHeader">
                     <h3>{this.props.startStation}</h3>
                     <p>{this.props.travelTime}</p>
@@ -31,5 +33,4 @@ class RouteCard extends Component {
         );
     }
 }
-
 export default RouteCard;

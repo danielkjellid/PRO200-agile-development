@@ -36,6 +36,8 @@ class BuySingleTicketBS extends Component {
         this.setState({editNumberOfTravellers: true})
     }
 
+ 
+
     renderEditNumberOfTravellers = () => {
         if(this.state.editNumberOfTravellers === true){
                 return(
