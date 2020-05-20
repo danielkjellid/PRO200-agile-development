@@ -37,6 +37,11 @@ class SendTicketBS extends Component {
     }
   };
 
+  backToSendTickets = () => {
+      this.setState({reviewTicketsShow: true, contactListShow: false})
+
+  }
+
   renderButton = () => {
       let buttonClassNameToggle;
 
@@ -50,7 +55,7 @@ class SendTicketBS extends Component {
       if (this.state.contactListShow) {
         buttonClassNameToggle = "fortsettButton fortsettButtonActive";
         return(
-            <button className={buttonClassNameToggle}>
+            <button onClick={this.backToSendTickets} className={buttonClassNameToggle}>
                 {this.state.renderButtonText[1]}
             </button>
         )
