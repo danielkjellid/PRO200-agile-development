@@ -44,7 +44,7 @@ class UserProfile extends Component {
 
     if (newTicketShow) {
       this.setState({ chooseTicket: false });
-      this.props.cancelTransaction();
+      this.props.endTransaction();
     } else {
       this.setState({ chooseTicket: true });
       this.props.startTransaction();
@@ -72,16 +72,22 @@ class UserProfile extends Component {
   };
 
   renderBuySingleTicket = () => {
-    if (this.state.singleTicket === true) {
+    if (this.state.singleTicket) {
       return (
         <React.Fragment>
           <BuySingleTicketBS
-            cancelTransaction={this.cancelTransaction}
+            endTransaction={this.endTransaction}
             hideBuySingleTicket={this.hideBuySingleTicket}
+            renderSendTicket={this.sendTicketsHandler}
           ></BuySingleTicketBS>
         </React.Fragment>
       );
     }
+  };
+
+  sendTicketsHandler = () => {
+    this.setState({ sendTicketShow: true });
+    this.endTransaction();
   };
 
   renderSendTicket = () => {
@@ -97,12 +103,12 @@ class UserProfile extends Component {
   hideBuySingleTicket = () => {
     this.setState({ singleTicket: false });
     this.newTicketButtonHandler();
-    this.props.cancelTransaction();
+    this.props.endTransaction();
   };
 
-  cancelTransaction = () => {
+  endTransaction = () => {
     this.setState({ singleTicket: false });
-    this.props.cancelTransaction();
+    this.props.endTransaction();
   };
 
   render() {
