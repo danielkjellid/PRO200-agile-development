@@ -14,6 +14,27 @@ class sendTicketBS extends Component {
         }
     }
 
+    pickContact = (id) => {
+        openContactList();
+        this.setState({
+            reviewTicketsShow: false,
+            contactListShow: true
+        })
+    }
+
+    openContactList = () => {
+        if (this.state.contactListShow) {
+            return(
+            <div>
+                <p>Tilbake til billettoversikt</p>
+                <button>Kontakter</button>
+                <button>Grupper</button>
+                <input placeholder="Søk"/>
+            </div>
+            )
+        }
+    }
+
     reviewTicket = () => {
         if (this.state.reviewTicketsShow) {
             return(
@@ -22,9 +43,12 @@ class sendTicketBS extends Component {
                         {this.state.boughtTickets.map(item => {
                             return(
                             <div>
-                                {item.ticket} 
+                                {item.ticket}
+                                <div onClick={() => {this.pickContact(item.id)}}>
                                 {item.activeTicket} 
                                 {item.passiveTicket}
+                                </div>
+                                
                             </div>)
                             })}
                     </div>
