@@ -99,17 +99,13 @@ class BuySingleTicketBS extends Component {
         ));
 
     return (
-      <div className="modalContainer">
-        <div className="modalContent">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <p>Kjøp enkeltbillett</p>
-            <button onClick={this.props.cancelTransaction}>X</button>
+      <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
+        <div className="">
+          <div className="flex flex-row justify-between p-5 border-b border-grey-300 mb-5">
+            <p className="font-medium">Kjøp enkeltbillett</p>
+            <button onClick={this.props.cancelTransaction}>
+              <svg className="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"/></svg>
+            </button>
           </div>
 
           <div
@@ -118,29 +114,28 @@ class BuySingleTicketBS extends Component {
             }
           >
             <div>
-              <p onClick={this.props.hideBuySingleTicket}>
-                Tilbake til billettvalg
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "90%",
-                }}
-              >
-                <p>Avreise og destinasjon</p>
-                <input className="input" placeholder="Avreise" />
-                <input className="input" placeholder="Destinasjon" />
+              <div className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer" onClick={this.props.hideBuySingleTicket}>
+              <svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
+                <p className="text-sm font-medium">Tilbake til billettvalg</p>
+              </div>
+              <div className="pl-5 pr-5 pb-5">
+                <p className="text-sm font-medium pb-1 text-gray-800">Avreise og destinasjon</p>
+                <input className="p-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Avreise" />
+                <input className="p-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Destinasjon" />
               </div>
             </div>
-            <div>Når vil du reise?</div>{" "}
+            <div className="pr-5 pl-5 pb-5">
+              <p className="text-sm font-medium pb-1 text-gray-800">Når vil du reise?</p>
+            </div>{" "}
             {/* this section will be developed later */}
-            <button
-              onClick={this.continueToDepartures}
-              className="fortsettButton fortsettButtonActive"
-            >
-              Fortsett til avganger og billetter
-            </button>
+            <div className="p-5">
+              <button
+                onClick={this.continueToDepartures}
+                className="p-3 w-full bg-green-800 text-center text-sm font-medium text-white rounded-md"
+              >
+                Fortsett til avganger og billetter
+              </button>
+            </div>
           </div>
 
           <div

@@ -73,6 +73,11 @@
   background-color: white;
 }
 
+.modal {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
 .modalContent {
   width: 90%;
 }
