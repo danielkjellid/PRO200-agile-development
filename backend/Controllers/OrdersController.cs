@@ -27,6 +27,18 @@ namespace VyShare.Controllers
             return Ok(ordersDto);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OrderDto>> GetById(Guid id)
+        {
+            var order = await db.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            var orderDto = new OrderDto(order);
+            return Ok(orderDto);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Add(OrderDto orderDto)
         {
