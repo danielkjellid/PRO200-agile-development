@@ -1,0 +1,48 @@
+body {
+  background-color: rgb(22, 26, 36);
+  margin: 0px auto;
+}
+.mobile {
+  outline: none;
+  position: relative;
+  min-width: 100vw;
+}
+.mobile-skin {
+  position: relative;
+  background-size: 100% !important;
+  background-position: 50% !important;
+  margin: 0 auto;
+  width: 420px;
+  height: 855px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.skin-overlay {
+  background: url('../images/iphone-screen.png');
+  background-size: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+}
+.mobile-viewport {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  width: 375px;
+  height: 812px;
+  z-index: 10;
+  left: 22px;
+  top: 20px;
+}
+.canvas {
+  height: 100%;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+.content {
+  height: 653px;
+  overflow-y: auto;
+}
