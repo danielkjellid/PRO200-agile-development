@@ -10,9 +10,8 @@ class Tickets extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch("https://localhost:5001/orders", {
-        mode: "no-cors", method: "get"
-      });
+      const response = await fetch("https://localhost:5001/orders");
+      console.log(response);
       const payload = await response.json();
       this.setState({
         orders: payload,
