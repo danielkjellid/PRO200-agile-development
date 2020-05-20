@@ -219,8 +219,6 @@ class BuySingleTicketBS extends Component {
           <div
             className={this.state.chooseSeat ? "displayBlock" : "displayNone"}
           >
-
-            
             <div>Choose the seat site</div>
             <button
               onClick={this.continueToPayment}
@@ -248,7 +246,10 @@ class BuySingleTicketBS extends Component {
             className={this.state.confirmation ? "displayBlock" : "displayNone"}
           >
             <div>Betaling site</div>
-            <button className="fortsettButton">
+            <button
+              onClick={this.props.sendTicketShow}
+              className="fortsettButton"
+            >
               Send billetter til venner
             </button>
             <button
