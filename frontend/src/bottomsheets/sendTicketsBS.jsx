@@ -15,7 +15,6 @@ class SendTicketBS extends Component {
     }
 
     pickContact = (id) => {
-        this.openContactList();
         this.setState({
             reviewTicketsShow: false,
             contactListShow: true
@@ -25,13 +24,15 @@ class SendTicketBS extends Component {
     openContactList = () => {
         if (this.state.contactListShow) {
             return(
-            <div>
+            <React.Fragment>
+                <div>
                 <p>Tilbake til billettoversikt</p>
                 <button>Kontakter</button>
                 <button>Grupper</button>
                 <input placeholder="Søk"/>
                 <div>Kontaktliste</div>
-            </div>
+                </div>
+            </React.Fragment>
             )
         }
     }
@@ -67,6 +68,7 @@ class SendTicketBS extends Component {
                 <p>Send billetter</p>
                 <button>x</button>
                 {this.reviewTicket()}
+                {this.openContactList()}
                 <button className="fortsettButton fortsettButtonDisabled">{this.state.renderButtonText}</button>
             </div>
         )
