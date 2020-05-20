@@ -10,7 +10,7 @@ class SendTicketBS extends Component {
       contactListShow: false,
       sentTicketsConfirmationShow: false,
       boughtTickets: boughtTickets,
-      renderButtonText: "Send billetter",
+      renderButtonText: ["Send billetter", "Fortsett"]
     };
   }
 
@@ -36,6 +36,26 @@ class SendTicketBS extends Component {
       );
     }
   };
+
+  renderButton = () => {
+      let buttonClassNameToggle;
+
+      if (this.state.reviewTicketsShow) {
+          buttonClassNameToggle = "fortsettButton fortsettButtonDisabled";
+          return(
+              <button className={buttonClassNameToggle}>
+                  {this.state.renderButtonText[0]}
+              </button>)
+      }
+      if (this.state.contactListShow) {
+        buttonClassNameToggle = "fortsettButton fortsettButtonActive";
+        return(
+            <button className={buttonClassNameToggle}>
+                {this.state.renderButtonText[1]}
+            </button>
+        )
+      }
+  }
 
   reviewTicket = () => {
     if (this.state.reviewTicketsShow) {
@@ -70,9 +90,7 @@ class SendTicketBS extends Component {
         <button>x</button>
         {this.reviewTicket()}
         {this.openContactList()}
-        <button className="fortsettButton fortsettButtonDisabled">
-          {this.state.renderButtonText}
-        </button>
+          {this.renderButton()}
       </div>
     );
   }
