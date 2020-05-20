@@ -14,7 +14,7 @@ class ChooseTicketBS extends Component {
 
         return (
             <div>
-                <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg">
+                <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg modal">
                     <div className="flex flex-row justify-between p-5 border-b border-grey-300 mb-5">
                         <h4 className="font-medium">Velg billett</h4>
                         <button onClick={this.props.clickX}>
