@@ -35,27 +35,31 @@ class App extends Component {
 				<div>
 					<div className={ this.state.coverSite ? "modalBack" : null }></div>
 					<Navbar></Navbar>
-					<Switch>
-						<Route
-							exact
-							path="/"
-							render={(props) => <UserProfile {...props}
-												startTransaction={this.startTransaction}
-												cancelTransaction={this.cancelTransaction}
-							></UserProfile>}
-						></Route>
-						<Route
-							exact
-							path="/userdetails"
-							render={(props) => <UserDetails {...props}></UserDetails>}
-						></Route>
-						<Route
-							exact
-							path="/tickets"
-							render={(props) => <Tickets {...props}></Tickets>}
-						></Route>
-						<Route component={this.notFound}></Route>
-					</Switch>
+					<div class="bg-gray-100 canvas">
+							<div class="content">
+								<Switch>
+									<Route
+										exact
+										path="/"
+										render={(props) => <UserProfile {...props}
+															startTransaction={this.startTransaction}
+															cancelTransaction={this.cancelTransaction}
+										></UserProfile>}
+									></Route>
+									<Route
+										exact
+										path="/userdetails"
+										render={(props) => <UserDetails {...props}></UserDetails>}
+									></Route>
+									<Route
+										exact
+										path="/tickets"
+										render={(props) => <Tickets {...props}></Tickets>}
+									></Route>
+									<Route component={this.notFound}></Route>
+								</Switch>
+							</div>
+					</div>
 				</div>
 			</BrowserRouter>
 		);

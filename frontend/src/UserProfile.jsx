@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
 import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
 import ActiveTickets from './components/ActiveTickets';
+import SendTicketBS from './bottomsheets/sendTicketsBS';
 
 class UserProfile extends Component {
 	constructor(props) {
@@ -19,6 +20,7 @@ class UserProfile extends Component {
 			chooseTicket: false,
 			singleTicket: false,
 			periodTicket: false,
+			sendTicketShow: true,
 		};
 	}
 
@@ -67,6 +69,18 @@ class UserProfile extends Component {
 		}
 	};
 
+	renderSendTicket = () => {
+		if (this.state.sendTicketShow) {
+			return (
+				<React.Fragment>
+					<SendTicketBS>
+
+					</SendTicketBS>
+				</React.Fragment>
+			)
+		}
+	}
+
 	hideBuySingleTicket = () => {
 		this.setState({ singleTicket: false });
 		this.newTicketButtonHandler();
@@ -83,6 +97,7 @@ class UserProfile extends Component {
 			<div>
 				{this.renderChooseTicket()}
 				{this.renderBuySingleTicket()}
+				{this.renderSendTicket()}
 
 				<div className="container">
 					<div className="welcome">
