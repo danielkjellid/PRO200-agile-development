@@ -7,6 +7,7 @@ import Tickets from './Tickets';
 import UserDetails from './UserDetails';
 import UserProfile from './UserProfile';
 import Navbar from './components/navbar';
+import Contact from './components/Contact';
 
 class App extends Component {
 	constructor(props) {
@@ -56,6 +57,15 @@ class App extends Component {
 										path="/tickets"
 										render={(props) => <Tickets {...props}></Tickets>}
 									></Route>
+									
+									{/* For testing the component */}
+									<Route 
+										exact 
+										path="/contact" 
+										render={(props) => <Contact {...this.props}></Contact>}>
+
+									</Route>
+
 									<Route component={this.notFound}></Route>
 								</Switch>
 							</div>

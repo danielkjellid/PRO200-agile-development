@@ -1,3 +1,4 @@
 node_modules/
 backend/vyshare.db
 frontend/public/css/tailwind.generated.css
+package-lock.json
