@@ -64,5 +64,18 @@ namespace VyShare.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var contact = await db.Contacts.FindAsync(id);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            db.Contacts.Remove(contact);
+            await db.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }

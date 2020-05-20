@@ -14,14 +14,15 @@ komponenter til å ta
 Fredrik jobber på ActiveTickets
 
 ChooseSeat
-Contact
+
 UserDetails
 
  Marcin jobber på {UserProfile, BuySingleTicket, RouteCard};
  Ingrid jobber på Send tickets;
+ Greger jobber på Contact;
 
 Home; 
- Greger jobber på Login
+Login;
 
 
  kanskje alle kan lage egne branches i git?;

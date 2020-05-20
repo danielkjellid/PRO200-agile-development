@@ -52,5 +52,18 @@ namespace VyShare.Controllers
             return Ok(basicTicketDto);
         }
 
+
+        [Route("/contacts/{id}/tickets")]
+        [Route("/users/{id}/tickets")]
+        [HttpGet]
+        public async Task<ActionResult<List<BasicTicketDto>>> GetPersonTickets(Guid id){
+            var tickets = await db.BasicTickets
+                .Include(e => e.TicketHolder)
+                .Where(e => e.TicketHolder.Id == id).ToListAsync();
+            var ticketDtos = tickets.Select(e => new BasicTicketDto(e)).ToList();
+            return ticketDtos;
+        }
+
+
     }
 }
