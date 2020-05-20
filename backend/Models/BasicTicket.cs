@@ -7,6 +7,7 @@ namespace VyShare.Models
         public string StartPoint { get; set; }
         public string EndPoint { get; set; }
         public string ReferenceCode { get; set; } // Frontend: https://getyourticket.no/ref/272732738
+        public string Seat { get; set; }
         public decimal Price { get; set; }
     }
 }
