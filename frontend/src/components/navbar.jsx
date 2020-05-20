@@ -1,17 +1,7 @@
 import React from 'react';
 
 const Navbar = () => {
-	const imgLink = 'https://www.vy.no/web-assets/favicons/favicon-512x512.png';
-
-	const imgStyle = {
-		width: '50px',
-		height: '50px',
-	};
-
 	return (
-		//<div style={{ borderBottom: 'grey solid 2px' }}>
-		//<img style={imgStyle} src={imgLink} alt="VY-logo"></img>
-		//</div>
 		<nav>
 			<div className="navbar px-5 pb-5 pt-6 bg-white border-b border-gray-300">
 				<div className="flex items-center justify-between">
@@ -22,7 +12,7 @@ const Navbar = () => {
 						</svg>
 					</div>
 					<button type="button">
-						<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" className="text-gray-600 h-8 w-8">
+						<svg fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" stroke="currentColor" viewBox="0 0 24 24" className="text-gray-600 h-8 w-8">
 							<path d="M4 6h16M4 12h16m-7 6h7"></path>
 						</svg>
 					</button>
