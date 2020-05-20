@@ -8,6 +8,8 @@ namespace VyShare.Models.Dto
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 
         public UserDto()
         {
@@ -20,6 +22,8 @@ namespace VyShare.Models.Dto
             Username = user.Username;
             FirstName = user.FirstName;
             LastName = user.LastName;
+            Email = user.Email;
+            PhoneNumber = user.PhoneNumber;
         }
 
         public User ToUser(User user = null)
@@ -31,6 +35,8 @@ namespace VyShare.Models.Dto
             user.Username = Username;
             user.FirstName = FirstName;
             user.LastName = LastName;
+            user.Email = Email;
+            user.PhoneNumber = PhoneNumber;
             return user;
         }
 

@@ -8,6 +8,8 @@ namespace VyShare.Models.Dto
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 
         public ContactDto()
         {
@@ -19,6 +21,8 @@ namespace VyShare.Models.Dto
             Id = contact.Id;
             FirstName = contact.FirstName;
             LastName = contact.LastName;
+            Email = contact.Email;
+            PhoneNumber = contact.PhoneNumber;
         }
 
         public Contact ToContact(Contact contact = null)
@@ -29,6 +33,8 @@ namespace VyShare.Models.Dto
             }
             contact.FirstName = FirstName;
             contact.LastName = LastName;
+            contact.Email = Email;
+            contact.PhoneNumber = PhoneNumber;
             return contact;
         }
 
