@@ -37,8 +37,8 @@ class App extends Component {
         <div>
           <div className={this.state.coverSite ? "modalBack" : null}></div>
           <Navbar></Navbar>
-          <div class="bg-gray-100 canvas">
-            <div class="content">
+          <div className="bg-gray-100 canvas">
+            <div className="content">
               <Switch>
                 <Route
                   exact

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import boughtTickets from "../fakeData/boughtTicket";
+import Contact from "../components/Contact";
 
 class SendTicketBS extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class SendTicketBS extends Component {
       contactListShow: false,
       sentTicketsConfirmationShow: false,
       boughtTickets: boughtTickets,
-      renderButtonText: ["Send billetter", "Fortsett"]
+      renderButtonText: ["Send billetter", "Fortsett"],
     };
   }
 
@@ -30,7 +31,7 @@ class SendTicketBS extends Component {
             <button>Kontakter</button>
             <button>Grupper</button>
             <input placeholder="Søk" />
-            <div>Kontaktliste</div>
+            <Contact></Contact>
           </div>
         </React.Fragment>
       );
@@ -38,29 +39,32 @@ class SendTicketBS extends Component {
   };
 
   backToSendTickets = () => {
-      this.setState({reviewTicketsShow: true, contactListShow: false})
-
-  }
+    this.setState({ reviewTicketsShow: true, contactListShow: false });
+  };
 
   renderButton = () => {
-      let buttonClassNameToggle;
+    let buttonClassNameToggle;
 
-      if (this.state.reviewTicketsShow) {
-          buttonClassNameToggle = "fortsettButton fortsettButtonDisabled";
-          return(
-              <button className={buttonClassNameToggle}>
-                  {this.state.renderButtonText[0]}
-              </button>)
-      }
-      if (this.state.contactListShow) {
-        buttonClassNameToggle = "fortsettButton fortsettButtonActive";
-        return(
-            <button onClick={this.backToSendTickets} className={buttonClassNameToggle}>
-                {this.state.renderButtonText[1]}
-            </button>
-        )
-      }
-  }
+    if (this.state.reviewTicketsShow) {
+      buttonClassNameToggle = "fortsettButton fortsettButtonDisabled";
+      return (
+        <button className={buttonClassNameToggle}>
+          {this.state.renderButtonText[0]}
+        </button>
+      );
+    }
+    if (this.state.contactListShow) {
+      buttonClassNameToggle = "fortsettButton fortsettButtonActive";
+      return (
+        <button
+          onClick={this.backToSendTickets}
+          className={buttonClassNameToggle}
+        >
+          {this.state.renderButtonText[1]}
+        </button>
+      );
+    }
+  };
 
   reviewTicket = () => {
     if (this.state.reviewTicketsShow) {
@@ -95,7 +99,7 @@ class SendTicketBS extends Component {
         <button>x</button>
         {this.reviewTicket()}
         {this.openContactList()}
-          {this.renderButton()}
+        {this.renderButton()}
       </div>
     );
   }

@@ -8,6 +8,12 @@ import BuySingleTicketBS from "./bottomsheets/BuySingleTicketBS";
 import ActiveTicket from "./components/ActiveTicket";
 import SendTicketBS from "./bottomsheets/sendTicketsBS";
 
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//API that fetches Contacts from db must be implemented here and save in a state
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +21,6 @@ class UserProfile extends Component {
       //I create fake user data for now
       user: {
         name: "Per",
-        singleTicket: true,
       },
       chooseTicket: false,
       singleTicket: false,
@@ -23,6 +28,7 @@ class UserProfile extends Component {
       sendTicketShow: false,
       activeTicket: true,
       activeTicketDetails: {
+        //this state is a hardcoded active ticket. shall be deleted later
         type: "Enkeltbillett",
         group: "Student",
         sharedTicket: true,
