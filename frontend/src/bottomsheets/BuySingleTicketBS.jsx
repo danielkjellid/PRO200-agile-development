@@ -219,6 +219,8 @@ class BuySingleTicketBS extends Component {
           <div
             className={this.state.chooseSeat ? "displayBlock" : "displayNone"}
           >
+
+            
             <div>Choose the seat site</div>
             <button
               onClick={this.continueToPayment}
