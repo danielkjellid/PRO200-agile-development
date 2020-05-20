@@ -9,7 +9,7 @@ using VyShare;
 namespace VyShare.Migrations
 {
     [DbContext(typeof(VyShareContext))]
-    [Migration("20200520161059_InitDb")]
+    [Migration("20200520175212_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,44 @@ namespace VyShare.Migrations
                     b.HasIndex("TicketHolderId");
 
                     b.ToTable("BasicTickets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f76eef48-7a89-400e-9258-b82cfc83e8c6"),
+                            EndPoint = "Grønnåsen Skole",
+                            OrderId = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            Price = 412m,
+                            ReferenceCode = "YXHA5",
+                            Seat = "13A",
+                            StartPoint = "Volda",
+                            TicketHolderId = new Guid("8489d192-933a-40c0-b01c-d4253bcdb211"),
+                            Type = "Honnør"
+                        },
+                        new
+                        {
+                            Id = new Guid("e9444419-1a72-4f4e-a3c8-bc87b87c1a43"),
+                            EndPoint = "Grønnåsen Skole",
+                            OrderId = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            Price = 375m,
+                            ReferenceCode = "YXHBA6",
+                            Seat = "13B",
+                            StartPoint = "Volda",
+                            TicketHolderId = new Guid("647e718c-ad13-4229-964b-16cf84ac5f6b"),
+                            Type = "Student"
+                        },
+                        new
+                        {
+                            Id = new Guid("66d89f1b-fe89-4ed8-88cb-fb33d9b43524"),
+                            EndPoint = "Grønnåsen Skole",
+                            OrderId = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            Price = 468m,
+                            ReferenceCode = "YXWO2",
+                            Seat = "01D",
+                            StartPoint = "Solheimen",
+                            TicketHolderId = new Guid("5eca00d9-0810-4698-b61b-0bd4fc09fca3"),
+                            Type = "Honnør"
+                        });
                 });
 
             modelBuilder.Entity("VyShare.Models.Order", b =>
@@ -74,6 +112,13 @@ namespace VyShare.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            Name = "Familietur til Grønnåsen 15.06.20"
+                        });
                 });
 
             modelBuilder.Entity("VyShare.Models.Person", b =>
@@ -110,6 +155,24 @@ namespace VyShare.Migrations
                     b.HasBaseType("VyShare.Models.Person");
 
                     b.HasDiscriminator().HasValue("Contact");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8489d192-933a-40c0-b01c-d4253bcdb211"),
+                            Email = "katofje@online.no",
+                            FirstName = "Kato",
+                            LastName = "Fjellberg",
+                            PhoneNumber = "90125872"
+                        },
+                        new
+                        {
+                            Id = new Guid("647e718c-ad13-4229-964b-16cf84ac5f6b"),
+                            Email = "kathi95@gmail.com",
+                            FirstName = "Kathrine",
+                            LastName = "Wesenlund",
+                            PhoneNumber = "40912854"
+                        });
                 });
 
             modelBuilder.Entity("VyShare.Models.User", b =>
@@ -123,6 +186,17 @@ namespace VyShare.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5eca00d9-0810-4698-b61b-0bd4fc09fca3"),
+                            Email = "popokatepetl@online.no",
+                            FirstName = "Pål",
+                            LastName = "Fjellberg",
+                            PhoneNumber = "90035412",
+                            Username = "popokatepetl"
+                        });
                 });
 
             modelBuilder.Entity("VyShare.Models.BasicTicket", b =>
