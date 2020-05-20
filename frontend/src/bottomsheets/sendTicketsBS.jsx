@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import boughtTickets from "../fakeData/boughtTicket";
 
-class sendTicketBS extends Component {
+class SendTicketBS extends Component {
     constructor(props) {
         super(props)
 
@@ -15,7 +15,7 @@ class sendTicketBS extends Component {
     }
 
     pickContact = (id) => {
-        openContactList();
+        this.openContactList();
         this.setState({
             reviewTicketsShow: false,
             contactListShow: true
@@ -30,6 +30,7 @@ class sendTicketBS extends Component {
                 <button>Kontakter</button>
                 <button>Grupper</button>
                 <input placeholder="Søk"/>
+                <div>Kontaktliste</div>
             </div>
             )
         }
@@ -74,4 +75,4 @@ class sendTicketBS extends Component {
 
 }
 
-export default sendTicketBS;
+export default SendTicketBS;
