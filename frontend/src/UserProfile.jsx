@@ -20,7 +20,7 @@ class UserProfile extends Component {
       chooseTicket: false,
       singleTicket: false,
       periodTicket: false,
-      sendTicketShow: true,
+      sendTicketShow: false,
       activeTicket: true,
       activeTicketDetails: {
         type: "Enkeltbillett",
