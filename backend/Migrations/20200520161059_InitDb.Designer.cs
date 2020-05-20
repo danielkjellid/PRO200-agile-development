@@ -9,8 +9,8 @@ using VyShare;
 namespace VyShare.Migrations
 {
     [DbContext(typeof(VyShareContext))]
-    [Migration("20200520154934_TicketSeat")]
-    partial class TicketSeat
+    [Migration("20200520161059_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace VyShare.Migrations
 
                     b.HasIndex("TicketHolderId");
 
-                    b.ToTable("BasicTicket");
+                    b.ToTable("BasicTickets");
                 });
 
             modelBuilder.Entity("VyShare.Models.Order", b =>

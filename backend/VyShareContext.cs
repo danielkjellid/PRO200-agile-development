@@ -14,7 +14,7 @@ namespace VyShare
         public DbSet<User> Users { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Order> Orders { get; set; }
-        //public DbSet<BasicTicket> BasicTickets { get; set; }  // Retrieved via Order
+        public DbSet<BasicTicket> BasicTickets { get; set; }
 
     }
 }

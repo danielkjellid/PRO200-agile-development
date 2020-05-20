@@ -52,7 +52,7 @@ namespace VyShare.Migrations
 
                     b.HasIndex("TicketHolderId");
 
-                    b.ToTable("BasicTicket");
+                    b.ToTable("BasicTickets");
                 });
 
             modelBuilder.Entity("VyShare.Models.Order", b =>

@@ -45,7 +45,7 @@ namespace VyShare.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BasicTicket",
+                name: "BasicTickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -54,20 +54,21 @@ namespace VyShare.Migrations
                     StartPoint = table.Column<string>(nullable: true),
                     EndPoint = table.Column<string>(nullable: true),
                     ReferenceCode = table.Column<string>(nullable: true),
+                    Seat = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     OrderId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BasicTicket", x => x.Id);
+                    table.PrimaryKey("PK_BasicTickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BasicTicket_Orders_OrderId",
+                        name: "FK_BasicTickets_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BasicTicket_People_TicketHolderId",
+                        name: "FK_BasicTickets_People_TicketHolderId",
                         column: x => x.TicketHolderId,
                         principalTable: "People",
                         principalColumn: "Id",
@@ -75,13 +76,13 @@ namespace VyShare.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasicTicket_OrderId",
-                table: "BasicTicket",
+                name: "IX_BasicTickets_OrderId",
+                table: "BasicTickets",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasicTicket_TicketHolderId",
-                table: "BasicTicket",
+                name: "IX_BasicTickets_TicketHolderId",
+                table: "BasicTickets",
                 column: "TicketHolderId");
 
             migrationBuilder.CreateIndex(
@@ -93,7 +94,7 @@ namespace VyShare.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BasicTicket");
+                name: "BasicTickets");
 
             migrationBuilder.DropTable(
                 name: "Orders");
