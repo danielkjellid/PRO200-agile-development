@@ -80,11 +80,6 @@ class BuySingleTicketBS extends Component {
 				chooseDestination={this.state.chooseDestination}
 				hideBuySingleTicket={this.props.hideBuySingleTicket}
 				continueToDepartures={this.continueToDepartures}
-				editTravellersHandler={this.editTravellersHandler}
-				
-				renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
-				continueToSeats={this.continueToSeats}
-				
 			></ChooseDestination>
 		)
 	}
@@ -95,16 +90,29 @@ class BuySingleTicketBS extends Component {
 				chooseDeparture={this.state.chooseDeparture}
 				editNumberOfTravellers={this.state.editNumberOfTravellers}
 				numberOfTravellers={this.state.numberOfTravellers}
+				editTravellersHandler={this.editTravellersHandler}
+				renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
+				continueToSeats={this.continueToSeats}
 			></ChooseDeparture>
 		)
 	}
 
 	renderChooseSeats = () => {
-		if (this.state.chooseSeat === true) {
+		console.log(this.state.chooseSeat);
+		if(this.state.chooseSeat){
 			return (
-				<div>
-					<Seats />
-				</div>
+				<div
+						className={this.state.chooseSeat ? 'displayBlock' : 'displayNone'}
+					>
+						<div>Choose the seat site</div>
+						<Seats />
+						<button
+							onClick={this.continueToPayment}
+							className="fortsettButton fortsettButtonActive"
+						>
+							Fortsett til betaling
+						</button>
+					</div>	
 			);
 		}
 	};
@@ -112,7 +120,7 @@ class BuySingleTicketBS extends Component {
 	
 
 	//////////////////////////////////////////////////////////////////////////////
-	// functions to active different modals depend on which one is 'true' in state
+	// functions to trigger different modals depend on which one is 'true' in state
 	//////////////////////////////////////////////////////////////////////////////
 	continueToDepartures = () => {
 		this.setState({ chooseDestination: false, chooseDeparture: true });
@@ -147,23 +155,17 @@ class BuySingleTicketBS extends Component {
 					</div>
 
 
-				{this.renderChooseDestination()}	
-				{this.renderChooseDeparture()}
-				{this.renderEditNumberOfTravellers()}
-          
+					{this.renderChooseDestination()}	
 					
+					{this.renderChooseDeparture()}
+					
+					{this.renderEditNumberOfTravellers()}
+					
+					{this.renderChooseSeats()}
+			
+						
 
-					<div
-						className={this.state.chooseSeat ? 'displayBlock' : 'displayNone'}
-					>
-						<div>Choose the seat site{this.renderChooseSeats()}</div>
-						<button
-							onClick={this.continueToPayment}
-							className="fortsettButton fortsettButtonActive"
-						>
-							Fortsett til betaling
-						</button>
-					</div>
+					
 
 					<div
 						className={

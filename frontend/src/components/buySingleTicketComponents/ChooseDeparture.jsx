@@ -17,14 +17,15 @@ class ChooseDeparture extends Component {
 
     render() {
         let fortsettButton;
-		this.props.active !== null
-		? (fortsettButton = (<button onClick={this.props.continueToSeats} 
+		this.state.active !== null
+		? fortsettButton = <button onClick={this.props.continueToSeats} 
 							className="fortsettButton fortsettButtonActive">
 								Fortsett til betaling
-							</button>))
-		: (fortsettButton = (<button className="fortsettButton fortsettButtonDisabled">
+							</button>
+		: fortsettButton = <button className="fortsettButton fortsettButtonDisabled">
 								Fortsett til betaling
-							</button>));
+							</button>
+                            
         return (
             <div className={this.props.chooseDeparture ? 'displayBlock' : 'displayNone'}>
 				<div>
@@ -46,33 +47,32 @@ class ChooseDeparture extends Component {
 
 					<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',width: '100%',}}>
 						<div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'center',}}>
-									<button className="button2">Tog</button>
-									<button className="button3">Buss</button>
-								</div>
-
-								{this.state.routes.map((item) => {
-									return (
-										<RouteCard
-											active={this.state.active}
-											click={() => this.turnToActive(item.id)}
-											key={item.id}
-											id={item.id}
-											startStation={item.stationStart}
-											endStation={item.stationEnd}
-											travelTime={item.travelTime}
-											startTime={item.startTime}
-											endTime={item.endTime}
-											track={item.track}
-											numOfStops={item.numberOfStops}
-											price={item.price}
-										></RouteCard>
-									);
-								})}
-
-								{fortsettButton}
-							</div>
+							<button className="button2">Tog</button>
+							<button className="button3">Buss</button>
 						</div>
+                        {this.state.routes.map((item) => {
+							return (
+								<RouteCard
+									active={this.state.active}
+									click={() => this.turnToActive(item.id)}
+									key={item.id}
+									id={item.id}
+									startStation={item.stationStart}
+									endStation={item.stationEnd}
+									travelTime={item.travelTime}
+									startTime={item.startTime}
+									endTime={item.endTime}
+									track={item.track}
+									numOfStops={item.numberOfStops}
+									price={item.price}									
+                                ></RouteCard>
+							);
+						})}
+
+						{fortsettButton}
 					</div>
+			    </div>
+			</div>
         );
     }
 }
