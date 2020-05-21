@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+
 class Tickets extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +47,9 @@ class Tickets extends Component {
   
   renderTicketsByOrder = () => {
     
-        return (this.state.ticketsByOrder.map((item) => {
+        return (this.state.ticketsByOrder.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               <p>{item.type}</p>
               <p>{item.startPoint}</p>
               <p>{item.endPoint}</p>
@@ -59,15 +61,25 @@ class Tickets extends Component {
   }
   
   render() {
+    let inhold;
     if (this.state.isLoaded) {
-      return <div>Is Loading</div>;
+      inhold =  <div>Is Loading</div>;
     } else {
-      return (this.state.orders.map((item) => {
-        return (<div><p key={item.id} onClick={() => this.showTicketsByOrder(item.id)}>
+      inhold= (this.state.orders.map((item) => {
+        return (<div key={item.id}><p  onClick={() => this.showTicketsByOrder(item.id)}>
           {item.name}</p><div>{this.renderTicketsByOrder()}</div></div>)
       }
-      ))}
+      ))
     }
+    
+    return (
+      <div>
+        <Link to={'/'}>Tilbake</Link>
+        {inhold}
+      </div>    
+    )
+  }
+  
 }
 
 export default Tickets;
