@@ -19,9 +19,9 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       //I create fake user data for now
-      user: {
-        name: "Per",
-      },
+      user: [],
+      loadUser: true,
+      contactList: [],
       chooseTicket: false,
       singleTicket: false,
       periodTicket: false,
@@ -43,6 +43,18 @@ class UserProfile extends Component {
         price: 199,
       },
     };
+  }
+
+  componentDidMount() {
+    this.fetchUserInfo();
+  }
+
+  fetchUserInfo = async () => { 
+    try{
+      const response = await fetch("https://localhost:5001/users");
+      const payload = await response.json();
+      this.setState({user: payload, loadUser: false})  
+    } catch(err){console.log(err);}
   }
 
   newTicketButtonHandler = () => {
@@ -118,6 +130,8 @@ class UserProfile extends Component {
   };
 
   render() {
+    let userName = !this.state.loadUser ? this.state.user[0].firstName : "un"
+    
     return (
       <div>
         {this.renderChooseTicket()}
@@ -134,8 +148,9 @@ class UserProfile extends Component {
                   {/* img TBA */}
                 </div>
                 <div className="ml-5">
+
                   <h1 className="font-bold text-2xl text-gray-800">
-                    God morgen, {this.state.user.name}
+                    God morgen, {userName}
                   </h1>
                   <div className="flex items-center">
                     <svg
