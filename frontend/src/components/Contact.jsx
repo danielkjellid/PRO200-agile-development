@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // denne 
 class Contact extends Component {
 
-	testStyle = {
+	containerStyle = {
         backgroundColor: "grey",
         padding: "10px 25px",
       
@@ -11,36 +11,45 @@ class Contact extends Component {
     nameStyle = {
         whiteSpace: "nowrap",
         overflow: "hidden",
-        textverflow: "ellipsis",
 
+        // Does not work..
+        textverflow: "ellipsis",
     };
 
-    valueStyle = {
+    contactInfoStyle = {
         whiteSpace: "nowrap",
         overflow: "hidden",
-        textverflow: "ellipsis",
-        marginBottom: "5px"
+        marginBottom: "5px",
+
+        // Does not work..
+        textverflow: "ellipsis"
+       
     };
 
 	render() {
 		
 			return (
-				<div style={this.testStyle}>
+				<div class="flex" style={this.containerStyle} >
 
-                    <div style={{backgroundColor: "red", width: "35px", height: "35px", borderRadius: "50%"}}>
+                    {/* Contact picture */}
+                    <div class="w-1/4 mx-4" style={{backgroundColor: "red", width: "35px", height: "35px", borderRadius: "50%"}}>
                         {/* TODO: Add rounded img */}
                     </div>
 
-                    <div>
-                    <p style={this.nameStyle}>
-                        Navn Navnesen
-                    </p>
-                    <p style={this.valueStyle}>
-                        +47 490 92 421
-                    </p>
+                   
+                    <div class="w-1/2">
+                        {/* Contact name */}
+                        <p class="text-500 font-bold" style={this.nameStyle}>
+                            Navn Navnesen asd asd asd 
+                        </p>
+                        {/* Contact info */}
+                        <p class="text-black text-opacity-75" style={this.contactInfoStyle}>
+                            +47 490 92 421
+                        </p>
                     </div>
 
-                    <div>
+                    {/* Checkbox */}
+                    <div class="w-1/4 pl-4 mt-4">
                         <input type="checkbox"></input>
                     </div>
 
