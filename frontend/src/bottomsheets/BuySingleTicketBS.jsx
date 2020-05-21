@@ -120,7 +120,7 @@ class BuySingleTicketBS extends Component {
 						}}
 					>
 						<p>Kjøp enkeltbillett</p>
-						<button onClick={this.props.cancelTransaction}>X</button>
+						<button onClick={this.props.endTransaction}>X</button>
 					</div>
 
 					<div
@@ -256,12 +256,12 @@ class BuySingleTicketBS extends Component {
 					<div
 						className={this.state.confirmation ? 'displayBlock' : 'displayNone'}
 					>
-						<div>Betaling site</div>
-						<button className="fortsettButton">
+						<div>Send videre</div>
+						<button onClick={this.props.renderSendTicket} className="fortsettButton fortsettButtonActive">
 							Send billetter til venner
 						</button>
 						<button
-							onClick={this.continueToConfirmation}
+							
 							className="fortsettButton fortsettButtonActive"
 						>
 							Se billettene
