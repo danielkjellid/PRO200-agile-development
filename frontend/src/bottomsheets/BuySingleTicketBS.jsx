@@ -38,6 +38,26 @@ class BuySingleTicketBS extends Component {
 	}
 
 	
+	/*
+	const createTicket = () => {
+    let ticketsPrint =  [];
+    
+    for(let i =0; i<tickets.length; i++){
+        if(tickets[i].number > 0){
+            let count = tickets[i].number;
+            while(count > 0){
+                ticketsPrint.push({type: tickets[i].type});
+                count--;
+            } 
+        }
+    }
+    return ticketsPrint;
+};
+
+console.log(createTicket());
+	
+	
+	*/
 
 
 
