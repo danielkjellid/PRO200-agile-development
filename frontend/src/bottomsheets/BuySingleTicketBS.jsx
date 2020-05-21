@@ -11,8 +11,6 @@ import ChooseDeparture from '../components/buySingleTicketComponents/ChooseDepar
 class BuySingleTicketBS extends Component {
 	constructor(props) {
 		super(props);
-
-
 		this.state = {
 			editNumberOfTravellers: false,
 			numberOfTravellers: ticketTypes,
@@ -21,7 +19,24 @@ class BuySingleTicketBS extends Component {
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
+			order: {
+				orderName: '',
+				tickets: []
+			}
 		};
+	}
+
+
+	componentDidMount() {
+		let name;
+   		let date = new Date();
+    	name = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}
+    	${date.getSeconds()}`
+    
+    	this.setState({order: {
+      		orderName: name,
+      		tickets: []
+    	}})
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -56,7 +71,7 @@ class BuySingleTicketBS extends Component {
 	//////////////////////////////////////////////////////////////////////////////
 
 	renderEditNumberOfTravellers = () => {
-		if (this.state.editNumberOfTravellers === true) {
+		if (this.state.editNumberOfTravellers) {
 			return (
 				<div className="editNumberOfTravellersContainer">
 					{this.state.numberOfTravellers.map((item, index) => {
@@ -98,7 +113,6 @@ class BuySingleTicketBS extends Component {
 	}
 
 	renderChooseSeats = () => {
-		console.log(this.state.chooseSeat);
 		if(this.state.chooseSeat){
 			return (
 				<div
@@ -141,7 +155,7 @@ class BuySingleTicketBS extends Component {
 
 
 	render() {
-		
+		console.log(this.state.order.orderName);
 
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">

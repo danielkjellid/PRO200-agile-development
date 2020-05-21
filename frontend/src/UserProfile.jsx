@@ -20,6 +20,7 @@ class UserProfile extends Component {
     this.state = {
       //I create fake user data for now
       user: [],
+      name: '',
       loadUser: true,
       contactList: [],
       chooseTicket: false,
@@ -75,15 +76,22 @@ class UserProfile extends Component {
       this.props.endTransaction();
     } else {
       this.setState({ chooseTicket: true });
-      this.props.startTransaction();
+      this.props.fadeBackground();
     }
   };
+
+  resetOrderName = () => {
+    
+  }
+
+
+    
 
   buySingleTicketButtonHandler = () => {
     const buySingleTicketShow = this.state.singleTicket;
     this.setState({ singleTicket: !buySingleTicketShow });
     this.newTicketButtonHandler();
-    this.props.startTransaction();
+    this.props.fadeBackground();
   };
 
   renderChooseTicket = () => {
@@ -145,7 +153,6 @@ class UserProfile extends Component {
 
   render() {
     let userName = !this.state.loadUser ? this.state.user[0].firstName : "un"
-    
     return (
       <div>
         {this.renderChooseTicket()}

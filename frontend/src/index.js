@@ -21,7 +21,7 @@ class App extends Component {
     return <h1>not found</h1>;
   };
 
-  startTransaction = () => {
+  fadeBackground = () => {
     //this function make the faded background appear behind modals
     this.setState({ coverSite: true });
   };
@@ -46,7 +46,7 @@ class App extends Component {
                   render={(props) => (
                     <UserProfile
                       {...props}
-                      startTransaction={this.startTransaction}
+                      fadeBackground={this.fadeBackground}
                       endTransaction={this.endTransaction}
                     ></UserProfile>
                   )}
@@ -66,7 +66,7 @@ class App extends Component {
                 <Route
                   exact
                   path="/contact"
-                  render={(props) => <Contact {...this.props}></Contact>}
+                  render={(props) => <Contact {...props}></Contact>}
                 ></Route>
 
                 <Route component={this.notFound}></Route>
