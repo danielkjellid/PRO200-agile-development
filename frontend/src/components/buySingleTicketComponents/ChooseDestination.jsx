@@ -20,7 +20,7 @@ class ChooseDestination extends Component {
                 {/* this section will be developed later */}
                 <div className="p-5">
                     <button onClick={this.props.continueToDepartures}
-                            className="p-3 w-full bg-green-800 text-center text-sm font-medium text-white rounded-md">
+                            className="p-3 w-full bg-vy-green-700 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-900">
                             Fortsett til avganger og billetter
                     </button>
                 </div>
