@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+// denne 
 class Contact extends Component {
 
 	containerStyle = {
