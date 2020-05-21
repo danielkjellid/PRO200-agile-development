@@ -10,14 +10,15 @@ class Tickets extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch("https://localhost:5001/orders");
-      console.log(response);
+      const response = await fetch("https://localhost:5001/orders", {method: "get"});
+      
       const payload = await response.json();
+      console.log(payload);
       this.setState({
         orders: payload,
         isLoaded: false,
       });
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
@@ -26,7 +27,9 @@ class Tickets extends Component {
     if (this.state.isLoaded) {
       return <div>Is Loading</div>;
     } else {
-      return <p>{this.state.orders.name}</p>;
+      return (this.state.orders.map((item) => {
+        return (<p>{item.name}</p>)
+      }))
     }
   }
 }
