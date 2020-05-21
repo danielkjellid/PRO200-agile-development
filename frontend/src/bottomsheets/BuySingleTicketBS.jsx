@@ -15,18 +15,34 @@ class BuySingleTicketBS extends Component {
 			editNumberOfTravellers: false,
 			numberOfTravellers: ticketTypes,
 			chooseDestination: true,
+			startPoint: '',
+			endPoint: '',
 			chooseDeparture: false,
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
 			order: {
 				orderName: '',
-				tickets: []
+				tickets: [
+					{
+						type: "Voksen",
+						startPoint: '',
+						endPoint: '',
+						referenceCode: '',
+						seat: '',
+						price: 0
+					}
+				]
 			}
 		};
 	}
 
+	
 
+
+
+
+	//function that creates unique name for the order every time it's mounted
 	componentDidMount() {
 		let name;
    		let date = new Date();
@@ -37,6 +53,14 @@ class BuySingleTicketBS extends Component {
       		orderName: name,
       		tickets: []
     	}})
+	}
+
+	setStartPoint = (value) => {
+		this.setState({startPoint: value})
+	}
+
+	setEndPoint = (value) => {
+		this.setState({endPoint: value})
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -95,11 +119,14 @@ class BuySingleTicketBS extends Component {
 				chooseDestination={this.state.chooseDestination}
 				hideBuySingleTicket={this.props.hideBuySingleTicket}
 				continueToDepartures={this.continueToDepartures}
+				setStartPoint={this.setStartPoint}
+				setEndPoint={this.setEndPoint}
 			></ChooseDestination>
 		)
 	}
 
 	renderChooseDeparture = () => {
+		
 		return(
 			<ChooseDeparture
 				chooseDeparture={this.state.chooseDeparture}
@@ -108,6 +135,8 @@ class BuySingleTicketBS extends Component {
 				editTravellersHandler={this.editTravellersHandler}
 				renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
 				continueToSeats={this.continueToSeats}
+				startPoint={this.state.startPoint}
+				endPoint={this.state.endPoint}
 			></ChooseDeparture>
 		)
 	}
@@ -155,7 +184,6 @@ class BuySingleTicketBS extends Component {
 
 
 	render() {
-		console.log(this.state.order.orderName);
 
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">

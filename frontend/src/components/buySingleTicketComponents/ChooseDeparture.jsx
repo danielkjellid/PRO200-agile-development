@@ -57,8 +57,8 @@ class ChooseDeparture extends Component {
 									click={() => this.turnToActive(item.id)}
 									key={item.id}
 									id={item.id}
-									startStation={item.stationStart}
-									endStation={item.stationEnd}
+									startStation={this.props.startPoint}
+									endStation={this.props.endPoint}
 									travelTime={item.travelTime}
 									startTime={item.startTime}
 									endTime={item.endTime}

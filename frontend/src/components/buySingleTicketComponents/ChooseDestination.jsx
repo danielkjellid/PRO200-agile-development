@@ -10,8 +10,8 @@ class ChooseDestination extends Component {
                     </div>
                     <div className="pl-5 pr-5 pb-5">
                         <p className="text-sm font-medium pb-1 text-gray-800">Avreise og destinasjon</p>
-                        <input className="p-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Avreise" />
-                        <input className="p-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Destinasjon" />
+                        <input className="p-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Avreise" onChange={e => this.props.setStartPoint(e.target.value)}/>
+                        <input className="p-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Destinasjon" onChange={e => this.props.setEndPoint(e.target.value)} />
                     </div>
                 </div>
                 <div className="pr-5 pl-5 pb-5">
