@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 // denne 
 class Contact extends Component {
+    constructor(props){
+        super(props)
+    }
 
 	containerStyle = {
         backgroundColor: "grey",
@@ -40,11 +43,11 @@ class Contact extends Component {
                     <div class="w-1/2">
                         {/* Contact name */}
                         <p class="text-500 font-bold" style={this.nameStyle}>
-                            Navn Navnesen asd asd asd 
+                            {this.props.name} 
                         </p>
                         {/* Contact info */}
                         <p class="text-black text-opacity-75" style={this.contactInfoStyle}>
-                            +47 490 92 421
+                            {this.props.phone}
                         </p>
                     </div>
 

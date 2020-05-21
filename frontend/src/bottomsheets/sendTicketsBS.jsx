@@ -31,7 +31,10 @@ class SendTicketBS extends Component {
             <button>Kontakter</button>
             <button>Grupper</button>
             <input placeholder="Søk" />
-            <Contact></Contact>
+            
+            {this.props.contactList.map((item)=> {
+              return(<Contact name={item.firstName} lastName={item.lastName} phone={item.phoneNumber}></Contact>)
+            })}
           </div>
         </React.Fragment>
       );

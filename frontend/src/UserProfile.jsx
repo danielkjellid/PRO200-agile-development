@@ -47,6 +47,7 @@ class UserProfile extends Component {
 
   componentDidMount() {
     this.fetchUserInfo();
+    this.fetchContactList();
   }
 
   fetchUserInfo = async () => { 
@@ -54,6 +55,15 @@ class UserProfile extends Component {
       const response = await fetch("https://localhost:5001/users");
       const payload = await response.json();
       this.setState({user: payload, loadUser: false})  
+    } catch(err){console.log(err);}
+  }
+
+  fetchContactList = async () => {
+    try{
+      const response = await fetch("https://localhost:5001/contacts");
+      const payload = await response.json();
+      this.setState({contactList: payload})  
+      console.log(payload);
     } catch(err){console.log(err);}
   }
 
@@ -109,10 +119,14 @@ class UserProfile extends Component {
   };
 
   renderSendTicket = () => {
+    let contactList;
+    if(this.state.contactList){contactList = this.state.contactList}
     if (this.state.sendTicketShow) {
       return (
         <React.Fragment>
-          <SendTicketBS></SendTicketBS>
+          <SendTicketBS
+            contactList={contactList}
+          ></SendTicketBS>
         </React.Fragment>
       );
     }
