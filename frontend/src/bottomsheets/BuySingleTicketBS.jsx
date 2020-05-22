@@ -18,7 +18,7 @@ class BuySingleTicketBS extends Component {
 			choosePayment: false,
 			confirmation: false,
 			order: {name : ''},
-			tickets:  null
+			tickets: []
 			}
 	};
 
@@ -42,7 +42,6 @@ class BuySingleTicketBS extends Component {
 	createTicketInOrder = () => {
 	let ticketsPrint =  [];
 	let ticketsChosen = this.state.ticketTypeNum;
-    console.log(ticketsChosen);
     for(let i =0; i<ticketsChosen.length; i++){
         if(ticketsChosen[i].number > 0){
 			let count = ticketsChosen[i].number;
@@ -212,6 +211,39 @@ class BuySingleTicketBS extends Component {
 		} catch(err) {
 			console.log(err);
 		}
+		this.getNewOrderID()
+	}
+
+	getNewOrderID = async () => {
+		let data;
+		try{
+			const response = await fetch("https://localhost:5001/orders", {method: "get"});
+			const payload = await response.json();
+			data = payload;
+		} catch(err){}
+
+		if(data) {
+			let id = data[data.length-1].id
+			this.submitTickets(id);
+		}
+	}
+
+	submitTickets = async (id) => {
+		const url = `https://localhost:5001/orders/${id}/basictickets`;
+		const payload = this.state.tickets[0]
+		let response;
+
+		try{
+			response = await fetch(url, {
+				method: "post", 
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(payload)
+			});
+		} catch(err) {
+			console.log(err);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -241,7 +273,7 @@ class BuySingleTicketBS extends Component {
 	}
 
 	render() {
-		
+		console.log(this.state.tickets);
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
