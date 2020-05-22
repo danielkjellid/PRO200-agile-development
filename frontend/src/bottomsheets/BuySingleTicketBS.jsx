@@ -12,8 +12,8 @@ class BuySingleTicketBS extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			editNumberOfTravellers: false,
-			numberOfTravellers: ticketTypes,
+			chooseTicketType: false,
+			ticketTypeNum: ticketTypes,
 			chooseDestination: true,
 			startPoint: '',
 			endPoint: '',
@@ -23,44 +23,38 @@ class BuySingleTicketBS extends Component {
 			confirmation: false,
 			order: {
 				orderName: '',
-				tickets: [
-					{
-						type: "Voksen",
-						startPoint: '',
-						endPoint: '',
-						referenceCode: '',
-						seat: '',
-						price: 0
-					}
-				]
+				tickets:  null
 			}
 		};
 	}
 
 	
-	/*
-	const createTicket = () => {
-    let ticketsPrint =  [];
-    
-    for(let i =0; i<tickets.length; i++){
-        if(tickets[i].number > 0){
-            let count = tickets[i].number;
+	
+	createTicketInOrder = () => {
+	let ticketsPrint =  [];
+	let ticketsChosen = this.state.ticketTypeNum;
+    console.log(ticketsChosen);
+    for(let i =0; i<ticketsChosen.length; i++){
+        if(ticketsChosen[i].number > 0){
+			let count = ticketsChosen[i].number;
             while(count > 0){
-                ticketsPrint.push({type: tickets[i].type});
+				ticketsPrint.push({type: ticketsChosen[i].type, 
+									startPoint: this.state.startPoint,
+									endPoint: this.state.endPoint,
+									referenceCode: '',
+									seat: '',
+									price: 0});
                 count--;
             } 
-        }
+        } else {continue}
     }
-    return ticketsPrint;
+    this.setState(prevState => ({
+		order:{
+			...prevState.order,
+			tickets: ticketsPrint
+		}
+	}))
 };
-
-console.log(createTicket());
-	
-	
-	*/
-
-
-
 
 	//function that creates unique name for the order every time it's mounted
 	componentDidMount() {
@@ -88,22 +82,22 @@ console.log(createTicket());
 	//////////////////////////////////////////////////////////////////////////////
 
 	addNumber = (id) => {
-		this.setState({ number: this.state.numberOfTravellers[id].number++ });
+		this.setState({ number: this.state.ticketTypeNum[id].number++ });
 	};
 
 	removeNumber = (id) => {
-		let number = this.state.numberOfTravellers[id].number;
+		let number = this.state.ticketTypeNum[id].number;
 		if (number > 0) {
-			this.setState({ number: this.state.numberOfTravellers[id].number-- });
+			this.setState({ number: this.state.ticketTypeNum[id].number-- });
 		}
 	};
 
 	editTravellersHandler = () => {
-		this.setState({ editNumberOfTravellers: true });
+		this.setState({ chooseTicketType: true });
 	};
 
 	hideEditNumberOfTravellers = () => {
-		this.setState({ editNumberOfTravellers: false });
+		this.setState({ chooseTicketType: false });
 	};
 
 
@@ -115,10 +109,10 @@ console.log(createTicket());
 	//////////////////////////////////////////////////////////////////////////////
 
 	renderEditNumberOfTravellers = () => {
-		if (this.state.editNumberOfTravellers) {
+		if (this.state.chooseTicketType) {
 			return (
 				<div className="editNumberOfTravellersContainer">
-					{this.state.numberOfTravellers.map((item, index) => {
+					{this.state.ticketTypeNum.map((item, index) => {
 						return (
 							<EditTravellers
 								key={index}
@@ -150,11 +144,11 @@ console.log(createTicket());
 		return(
 			<ChooseDeparture
 				chooseDeparture={this.state.chooseDeparture}
-				editNumberOfTravellers={this.state.editNumberOfTravellers}
-				numberOfTravellers={this.state.numberOfTravellers}
+				editNumberOfTravellers={this.state.chooseTicketType}
+				numberOfTravellers={this.state.ticketTypeNum}
 				editTravellersHandler={this.editTravellersHandler}
 				renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
-				continueToSeats={this.continueToSeats}
+				continueToSeats={this.continueToSeatsHandler}
 				startPoint={this.state.startPoint}
 				endPoint={this.state.endPoint}
 			></ChooseDeparture>
@@ -180,7 +174,10 @@ console.log(createTicket());
 		}
 	};
 
-	
+	continueToSeatsHandler = () => {
+		this.continueToSeats();
+		this.createTicketInOrder()
+	}
 
 	//////////////////////////////////////////////////////////////////////////////
 	// functions to trigger different modals depend on which one is 'true' in state
@@ -204,7 +201,7 @@ console.log(createTicket());
 
 
 	render() {
-
+		console.log(this.state.order.tickets);
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
