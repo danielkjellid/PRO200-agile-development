@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import numberOfTravellers from '../numberOfTravellers';
 import EditTravellers from '../bottomsheets/EditTravellers';
 import Seats from '../components/Seats';
 import ChooseDestination from '../components/buySingleTicketComponents/ChooseDestination';
@@ -18,12 +17,10 @@ class BuySingleTicketBS extends Component {
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
-			order: {
-				orderName: '',
-				tickets:  null
+			order: {name : ''},
+			tickets:  null
 			}
-		};
-	}
+	};
 
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,26 +50,18 @@ class BuySingleTicketBS extends Component {
 				ticketsPrint.push({type: ticketsChosen[i].type, 
 									startPoint: this.state.startPoint,
 									endPoint: this.state.endPoint,
-									referenceCode: '',
-									seat: '',
+									referenceCode: '2xdfe',
+									seat: '14b',
 									price: 0});
                 count--;
             } 
         } else {continue}
     }
-    this.setState(prevState => ({
-		order:{
-			...prevState.order,
-			tickets: ticketsPrint
-		}
-	}))
-};
+    this.setState({tickets: ticketsPrint});
+	};
 
 	restartOrder = () => {
-		this.setState({order:{
-							orderName: '',
-							tickets: null
-		}});
+		this.setState({order: {name : ''}})
 	}
 
 	setUniqueOrderName = () => {
@@ -82,10 +71,7 @@ class BuySingleTicketBS extends Component {
 			name = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}
 			${date.getSeconds()}`
 		
-			this.setState({order: {
-				orderName: name,
-				tickets: []
-			}})
+			this.setState({order: {name: name}});
 	}
 
 	setStartPoint = (value) => {
@@ -198,7 +184,7 @@ class BuySingleTicketBS extends Component {
 			return(
 				<div className={this.state.choosePayment ? 'displayBlock' : 'displayNone'}>
 					<div>Betaling site</div>
-					<button onClick={this.continueToConfirmation} className="fortsettButton fortsettButtonActive">
+					<button onClick={() => {this.continueToConfirmation(); this.submitNewOrder()}} className="fortsettButton fortsettButtonActive">
 						Bekreft og betal bestillingen
 					</button>
 				</div>
@@ -207,7 +193,29 @@ class BuySingleTicketBS extends Component {
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
-	// functions to trigger different modals depend on which one is 'true' in state
+	// updating API
+	//////////////////////////////////////////////////////////////////////////////
+
+	submitNewOrder = async () => {
+		const url = "https://localhost:5001/orders";
+		const payload = this.state.order;
+		let response;
+
+		try{
+			response = await fetch(url, {
+				method: "post", 
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(payload)
+			});
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////////
+	// functions to trigger different modals, depending on which one is 'true' in state
 	//////////////////////////////////////////////////////////////////////////////
 	continueToDepartures = () => {
 		this.setState({ chooseDestination: false, chooseDeparture: true });
@@ -224,6 +232,7 @@ class BuySingleTicketBS extends Component {
 
 	continueToConfirmation = () => {
 		this.setState({ choosePayment: false, confirmation: true  });
+		console.log(this.state.order);
 	};
 
 	continueToSeatsHandler = () => {
