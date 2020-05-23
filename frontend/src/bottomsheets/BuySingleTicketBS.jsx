@@ -69,11 +69,10 @@ class BuySingleTicketBS extends Component {
 	setUniqueOrderName = () => {
 		this.restartOrder();
 		let name;
-			let date = new Date();
-			name = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}
-			${date.getSeconds()}`
-		
-			this.setState({order: {name: name}});
+		let date = new Date();
+		const months = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"]
+		name = `${date.getFullYear()}-${months[date.getMonth()]}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+		this.setState({order: {name: name}});
 	}
 
 	setStartPoint = (value) => {
