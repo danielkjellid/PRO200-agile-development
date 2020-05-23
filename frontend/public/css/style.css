@@ -123,6 +123,10 @@
   background-color: #00685e;
 }
 
+.vy-green {
+  color: #00685e;
+}
+
 .fortsettButtonDisabled {
   background-color: #a0aec0;
 }
@@ -130,7 +134,7 @@
 /* departure card section*/
 
 .routeCard {
-  width: 90%;
+  
   height: 200px;
   border: 2px solid black;
   display: flex;
@@ -173,9 +177,9 @@
 }
 
 .button {
-  padding: 10px 20px;
+  
   background-color: #c2e6de;
-  border: none;
+  
 }
 
 .button2 {
