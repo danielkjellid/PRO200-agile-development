@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import TicketOrder from './components/TicketOrder';
 
 class Tickets extends Component {
   constructor(props) {
@@ -26,39 +27,15 @@ class Tickets extends Component {
     }
   }
 
-  fetchTicketsByOrder = async (id) => {
-    try {
-      const response = await fetch(
-        `https://localhost:5001/orders/${id}/basictickets`
-      );
-      const payload = await response.json();
-      this.setState({
-        ticketsByOrder: payload
-      })
-    } catch(err) {
-      console.log(err);
-    }
-  }
+ 
   
   showTicketsByOrder = (id) => {
-      this.fetchTicketsByOrder(id)
+
+    this.fetchTicketsByOrder(id)
     if (this.state.ticketsByOrder > 0) { this.renderTicketsByOrder() }
   }
   
-  renderTicketsByOrder = () => {
-    
-        return (this.state.ticketsByOrder.map((item, index) => {
-          return (
-            <div key={index}>
-              <p>{item.type}</p>
-              <p>{item.startPoint}</p>
-              <p>{item.endPoint}</p>
-              <p>{item.price}</p>
-            </div>
-          )
-        }))
-      
-  }
+
   
   render() {
     let inhold;
@@ -66,10 +43,15 @@ class Tickets extends Component {
       inhold =  <div>Is Loading</div>;
     } else {
       inhold= (this.state.orders.map((item) => {
-        return (<div key={item.id}><p  onClick={() => this.showTicketsByOrder(item.id)}>
-          {item.name}</p><div>{this.renderTicketsByOrder()}</div></div>)
-      }
-      ))
+        return (
+          <div>
+            <TicketOrder 
+              key={item.id} 
+              id={item.id}
+              itemName={item.name}>  
+            </TicketOrder>
+          </div>
+      )}))
     }
     
     return (
