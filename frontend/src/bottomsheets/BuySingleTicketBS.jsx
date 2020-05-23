@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import HeaderBuySingle from '../components/buySingleTicketComponents/HeaderBuySingle';
 import EditTravellers from '../bottomsheets/EditTravellers';
-import Seats from '../components/Seats';
 import ChooseDestination from '../components/buySingleTicketComponents/ChooseDestination';
 import ChooseDeparture from '../components/buySingleTicketComponents/ChooseDeparture';
+import ChooseSeats from '../components/buySingleTicketComponents/ChooseSeats';
+import ChoosePayment from '../components/buySingleTicketComponents/ChoosePayment';
+import Confirmation from '../components/buySingleTicketComponents/Confirmation';
 
 class BuySingleTicketBS extends Component {
 	constructor(props) {
@@ -131,66 +134,6 @@ class BuySingleTicketBS extends Component {
 				</div>);}
 	};
 
-	renderChooseDestination = () => {
-		return(
-			<ChooseDestination 
-				chooseDestination={this.state.chooseDestination}
-				hideBuySingleTicket={this.props.hideBuySingleTicket}
-				continueToDepartures={this.continueToDepartures}
-				setStartPoint={this.setStartPoint}
-				setEndPoint={this.setEndPoint}
-			></ChooseDestination>
-		)
-	}
-
-	renderChooseDeparture = () => {
-		
-		return(
-			<ChooseDeparture
-				chooseDeparture={this.state.chooseDeparture}
-				editNumberOfTravellers={this.state.chooseTicketType}
-				numberOfTravellers={this.state.ticketTypeNum}
-				editTravellersHandler={this.editTravellersHandler}
-				renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
-				continueToSeats={this.continueToSeatsHandler}
-				startPoint={this.state.startPoint}
-				endPoint={this.state.endPoint}
-			></ChooseDeparture>
-		)
-	}
-
-	renderChooseSeats = () => {
-		if(this.state.chooseSeat){
-			return (
-				<div
-						className={this.state.chooseSeat ? 'displayBlock' : 'displayNone'}
-					>
-						<div>Choose the seat site</div>
-						<Seats />
-						<button
-							onClick={this.continueToPayment}
-							className="fortsettButton fortsettButtonActive"
-						>
-							Fortsett til betaling
-						</button>
-					</div>	
-			);
-		}
-	};
-
-	renderChoosePayment = () => {
-		if(this.state.choosePayment){
-			return(
-				<div className={this.state.choosePayment ? 'displayBlock' : 'displayNone'}>
-					<div>Betaling site</div>
-					<button onClick={() => {this.continueToConfirmation(); this.submitNewOrder()}} className="fortsettButton fortsettButtonActive">
-						Bekreft og betal bestillingen
-					</button>
-				</div>
-			)
-		}
-	}
-
 	//////////////////////////////////////////////////////////////////////////////
 	// updating API
 	//////////////////////////////////////////////////////////////////////////////
@@ -246,9 +189,9 @@ class BuySingleTicketBS extends Component {
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
 	// functions to trigger different modals, depending on which one is 'true' in state
-	//////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
 	continueToDepartures = () => {
 		this.setState({ chooseDestination: false, chooseDeparture: true });
 		this.setUniqueOrderName();
@@ -273,46 +216,56 @@ class BuySingleTicketBS extends Component {
 	}
 
 	render() {
-		console.log(this.state.tickets);
+
 		return (
+
+				
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
-					{/* header of the BuySingleTicket bottom sheet */}
-					<div className="flex flex-row justify-between p-5 border-b border-grey-300 mb-5">
-						<p className="font-medium">Kjøp enkeltbillett</p>
-						<button onClick={() => {this.props.endTransaction(); this.restartOrder(); this.initTicketTypes()}}>
-						<svg className="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"/></svg>
-						</button>
-					</div>
+					<HeaderBuySingle
+						endTransaction={this.props.endTransaction}
+						restartOrder={this.restartOrder}
+						initTicketTypes={this.initTicketTypes}>
+					</HeaderBuySingle>
 
-
-					{this.renderChooseDestination()}	
+					<ChooseDestination 
+						chooseDestination={this.state.chooseDestination}
+						hideBuySingleTicket={this.props.hideBuySingleTicket}
+						continueToDepartures={this.continueToDepartures}
+						setStartPoint={this.setStartPoint}
+						setEndPoint={this.setEndPoint}
+					></ChooseDestination>	
 					
-					{this.renderChooseDeparture()}
+					<ChooseDeparture
+						chooseDeparture={this.state.chooseDeparture}
+						editNumberOfTravellers={this.state.chooseTicketType}
+						numberOfTravellers={this.state.ticketTypeNum}
+						editTravellersHandler={this.editTravellersHandler}
+						renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
+						continueToSeats={this.continueToSeatsHandler}
+						startPoint={this.state.startPoint}
+						endPoint={this.state.endPoint}
+					></ChooseDeparture>
 					
 					{this.renderEditNumberOfTravellers()}
 					
-					{this.renderChooseSeats()}
+					<ChooseSeats 
+						continueToPayment={this.continueToPayment}
+						chooseSeat={this.state.chooseSeat}> 	
+					</ChooseSeats>
 			
-					{this.renderChoosePayment()}	
+					<ChoosePayment 
+						choosePayment={this.state.choosePayment}
+						continueToConfirmation={this.continueToConfirmation}
+						submitNewOrder={this.submitNewOrder}>
+					</ChoosePayment>	
 
-					
+					<Confirmation
+						endTransaction={this.props.endTransaction}
+						confirmation={this.state.confirmation}
+						renderSendTicket={this.props.renderSendTicket}
+					></Confirmation>		
 
-
-					<div
-						className={this.state.confirmation ? 'displayBlock' : 'displayNone'}
-					>
-						<div>Send videre</div>
-						<button onClick={this.props.renderSendTicket} className="fortsettButton fortsettButtonActive">
-							Send billetter til venner
-						</button>
-						<button
-							
-							className="fortsettButton fortsettButtonActive"
-						>
-							Se billettene
-						</button>
-					</div>
 				</div>
 			</div>
 		);
