@@ -73,6 +73,7 @@ class Seats extends Component {
 				{ id: 60, status: 1 },
 			],
 		],
+		selectedSeats: [],
 	};
 
 	gridLayout = {
@@ -89,17 +90,76 @@ class Seats extends Component {
 	};
 
 	handleSelectSeat = (seat, row) => {
+		const numberOfTravellers = this.props.numberOfTravellers.reduce(
+			(prevVal, currVal) => prevVal + currVal.number,
+			0
+		);
 		const seats = [...this.state.seats];
-		const index = seats[row].indexOf(seat);
+		var index = seats[row].indexOf(seat);
 		seats[row][index] = { ...seat };
-		if (seat.status === 1) {
-			seats[row][index].status = 2;
-		} else if (seat.status === 2) {
-			seats[row][index].status = 1;
-		}
 
-		this.setState({ seats });
+		const clearedSeats = this.clearSelectedSeats(seats, numberOfTravellers);
+
+		const newSeats = this.selectAvailableSeats(
+			clearedSeats,
+			row,
+			index,
+			numberOfTravellers
+		);
+		this.setState({ newSeats });
 	};
+
+	selectAvailableSeats(seats, row, index, numberOfTravellers) {
+		console.log(
+			'Row: ',
+			row,
+			'index: ',
+			index,
+			'NumberOfTravellers: ',
+			numberOfTravellers
+		);
+		const selectedSeats = this.state.selectedSeats;
+		for (var i = 0; i < numberOfTravellers; i++) {
+			if (index + i >= seats[row].length) {
+				if (row + 1 >= seats.length) {
+					row = 0;
+				}
+				row++;
+				index = 0;
+			}
+			let currentSeat = seats[row][index + i];
+			if (currentSeat.status === 1) {
+				console.log('Seat: ', index + i, ' is available');
+				selectedSeats.push({ currentSeat, row });
+				currentSeat.status = 2;
+			} else if (currentSeat.status === 0) {
+				console.log('Seat: ', index + i, ' not available');
+				seats = this.selectAvailableSeats(
+					seats,
+					row,
+					index + i + 1,
+					numberOfTravellers - i
+				);
+				return seats;
+			}
+		}
+		this.setState({ selectedSeats });
+		return seats;
+	}
+
+	clearSelectedSeats(seats, numberOfTravellers) {
+		if (this.state.selectedSeats.length !== 0) {
+			const selectedSeats = this.state.selectedSeats;
+			for (var i = 0; i < numberOfTravellers; i++) {
+				const index = seats[selectedSeats[i].row].indexOf(
+					selectedSeats[i].currentSeat
+				);
+				console.log(seats[i].currentSeat);
+			}
+			this.setState({ selectedSeats });
+		}
+		return seats;
+	}
 
 	render() {
 		return (
@@ -109,6 +169,7 @@ class Seats extends Component {
 						{row.map((col, j) => (
 							<Seat
 								key={col.id}
+								selectedSeats={this.state.selectedSeats}
 								row={i}
 								seat={col}
 								onSelect={this.handleSelectSeat}

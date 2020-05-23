@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import EditTravellers from '../bottomsheets/EditTravellers';
 import ticketTypes from '../fakeData/ticketTypes';
 
-
 import Seats from '../components/Seats';
 import ChooseDestination from '../components/buySingleTicketComponents/ChooseDestination';
 import ChooseDeparture from '../components/buySingleTicketComponents/ChooseDeparture';
@@ -25,19 +24,18 @@ class BuySingleTicketBS extends Component {
 				orderName: '',
 				tickets: [
 					{
-						type: "Voksen",
+						type: 'Voksen',
 						startPoint: '',
 						endPoint: '',
 						referenceCode: '',
 						seat: '',
-						price: 0
-					}
-				]
-			}
+						price: 0,
+					},
+				],
+			},
 		};
 	}
 
-	
 	/*
 	const createTicket = () => {
     let ticketsPrint =  [];
@@ -59,32 +57,31 @@ console.log(createTicket());
 	
 	*/
 
-
-
-
 	//function that creates unique name for the order every time it's mounted
 	componentDidMount() {
 		let name;
-   		let date = new Date();
-    	name = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}
-    	${date.getSeconds()}`
-    
-    	this.setState({order: {
-      		orderName: name,
-      		tickets: []
-    	}})
+		let date = new Date();
+		name = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}
+    	${date.getSeconds()}`;
+
+		this.setState({
+			order: {
+				orderName: name,
+				tickets: [],
+			},
+		});
 	}
 
 	setStartPoint = (value) => {
-		this.setState({startPoint: value})
-	}
+		this.setState({ startPoint: value });
+	};
 
 	setEndPoint = (value) => {
-		this.setState({endPoint: value})
-	}
+		this.setState({ endPoint: value });
+	};
 
 	//////////////////////////////////////////////////////////////////////////////
-	// functions to handle number and types of the tickests 
+	// functions to handle number and types of the tickests
 	//////////////////////////////////////////////////////////////////////////////
 
 	addNumber = (id) => {
@@ -106,10 +103,6 @@ console.log(createTicket());
 		this.setState({ editNumberOfTravellers: false });
 	};
 
-
-
-
-
 	//////////////////////////////////////////////////////////////////////////////
 	// functions to render different modals depending on the state
 	//////////////////////////////////////////////////////////////////////////////
@@ -130,24 +123,25 @@ console.log(createTicket());
 						);
 					})}
 					<button onClick={this.hideEditNumberOfTravellers}>Fortsett</button>
-				</div>);}
+				</div>
+			);
+		}
 	};
 
 	renderChooseDestination = () => {
-		return(
-			<ChooseDestination 
+		return (
+			<ChooseDestination
 				chooseDestination={this.state.chooseDestination}
 				hideBuySingleTicket={this.props.hideBuySingleTicket}
 				continueToDepartures={this.continueToDepartures}
 				setStartPoint={this.setStartPoint}
 				setEndPoint={this.setEndPoint}
 			></ChooseDestination>
-		)
-	}
+		);
+	};
 
 	renderChooseDeparture = () => {
-		
-		return(
+		return (
 			<ChooseDeparture
 				chooseDeparture={this.state.chooseDeparture}
 				editNumberOfTravellers={this.state.editNumberOfTravellers}
@@ -158,29 +152,25 @@ console.log(createTicket());
 				startPoint={this.state.startPoint}
 				endPoint={this.state.endPoint}
 			></ChooseDeparture>
-		)
-	}
+		);
+	};
 
 	renderChooseSeats = () => {
-		if(this.state.chooseSeat){
+		if (this.state.chooseSeat) {
 			return (
-				<div
-						className={this.state.chooseSeat ? 'displayBlock' : 'displayNone'}
+				<div className={this.state.chooseSeat ? 'displayBlock' : 'displayNone'}>
+					<div>Choose the seat site</div>
+					<Seats numberOfTravellers={this.state.numberOfTravellers} />
+					<button
+						onClick={this.continueToPayment}
+						className="fortsettButton fortsettButtonActive"
 					>
-						<div>Choose the seat site</div>
-						<Seats />
-						<button
-							onClick={this.continueToPayment}
-							className="fortsettButton fortsettButtonActive"
-						>
-							Fortsett til betaling
-						</button>
-					</div>	
+						Fortsett til betaling
+					</button>
+				</div>
 			);
 		}
 	};
-
-	
 
 	//////////////////////////////////////////////////////////////////////////////
 	// functions to trigger different modals depend on which one is 'true' in state
@@ -201,10 +191,7 @@ console.log(createTicket());
 		this.setState({ chooseSeat: false, choosePayment: true });
 	};
 
-
-
 	render() {
-
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
@@ -212,22 +199,27 @@ console.log(createTicket());
 					<div className="flex flex-row justify-between p-5 border-b border-grey-300 mb-5">
 						<p className="font-medium">Kjøp enkeltbillett</p>
 						<button onClick={this.props.endTransaction}>
-						<svg className="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"/></svg>
+							<svg
+								className="h-5 w-5 text-gray-600"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+									clipRule="evenodd"
+									fillRule="evenodd"
+								/>
+							</svg>
 						</button>
 					</div>
 
+					{this.renderChooseDestination()}
 
-					{this.renderChooseDestination()}	
-					
 					{this.renderChooseDeparture()}
-					
-					{this.renderEditNumberOfTravellers()}
-					
-					{this.renderChooseSeats()}
-			
-						
 
-					
+					{this.renderEditNumberOfTravellers()}
+
+					{this.renderChooseSeats()}
 
 					<div
 						className={
@@ -247,13 +239,13 @@ console.log(createTicket());
 						className={this.state.confirmation ? 'displayBlock' : 'displayNone'}
 					>
 						<div>Send videre</div>
-						<button onClick={this.props.renderSendTicket} className="fortsettButton fortsettButtonActive">
-							Send billetter til venner
-						</button>
 						<button
-							
+							onClick={this.props.renderSendTicket}
 							className="fortsettButton fortsettButtonActive"
 						>
+							Send billetter til venner
+						</button>
+						<button className="fortsettButton fortsettButtonActive">
 							Se billettene
 						</button>
 					</div>
