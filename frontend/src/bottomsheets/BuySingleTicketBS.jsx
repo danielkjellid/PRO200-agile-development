@@ -81,6 +81,7 @@ class BuySingleTicketBS extends Component {
 			'Feb',
 			'Mar',
 			'Apr',
+			'May',
 			'Jun',
 			'Jul',
 			'Aug',
@@ -268,6 +269,7 @@ class BuySingleTicketBS extends Component {
 					<ChooseSeats
 						continueToPayment={this.continueToPayment}
 						chooseSeat={this.state.chooseSeat}
+						numberOfTravellers={this.state.tickets}
 					></ChooseSeats>
 
 					<ChoosePayment

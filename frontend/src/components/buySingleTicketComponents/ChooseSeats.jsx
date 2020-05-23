@@ -5,7 +5,7 @@ class ChooseSeats extends Component {
         return (
             <div className={this.props.chooseSeat ? 'displayBlock' : 'displayNone'}>
 				<div>Choose the seat site</div>
-				<Seats />
+				<Seats numberOfTravellers={this.props.numberOfTravellers}/>
                 <button			
                     onClick={this.props.continueToPayment}
 					className="fortsettButton fortsettButtonActive">
