@@ -5,6 +5,7 @@ namespace VyShare.Models.Dto
 {
     public class BasicTicketDto
     {
+        public Guid Id { get; set; }
         public Guid TicketHolderId { get; set; }
         public string Type { get; set; }
         public string StartPoint { get; set; }
@@ -20,7 +21,8 @@ namespace VyShare.Models.Dto
 
         public BasicTicketDto(BasicTicket basicTicket)
         {
-            TicketHolderId = basicTicket.TicketHolder.Id;
+            Id = basicTicket.Id;
+            TicketHolderId = basicTicket.TicketHolder?.Id ?? Guid.Empty;
             Type = basicTicket.Type;
             StartPoint = basicTicket.StartPoint;
             EndPoint = basicTicket.EndPoint;

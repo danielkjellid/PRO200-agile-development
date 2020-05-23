@@ -1,76 +1,99 @@
 import React, { Component } from 'react';
-//import numberOfTravellers from '../numberOfTravellers';
+import HeaderBuySingle from '../components/buySingleTicketComponents/HeaderBuySingle';
 import EditTravellers from '../bottomsheets/EditTravellers';
-import ticketTypes from '../fakeData/ticketTypes';
-
-import Seats from '../components/Seats';
 import ChooseDestination from '../components/buySingleTicketComponents/ChooseDestination';
 import ChooseDeparture from '../components/buySingleTicketComponents/ChooseDeparture';
+import ChooseSeats from '../components/buySingleTicketComponents/ChooseSeats';
+import ChoosePayment from '../components/buySingleTicketComponents/ChoosePayment';
+import Confirmation from '../components/buySingleTicketComponents/Confirmation';
 
 class BuySingleTicketBS extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			editNumberOfTravellers: false,
-			numberOfTravellers: ticketTypes,
-			chooseDestination: true,
+			chooseTicketType: false,
+			ticketTypeNum: [],
 			startPoint: '',
 			endPoint: '',
+			chooseDestination: true,
 			chooseDeparture: false,
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
-			order: {
-				orderName: '',
-				tickets: [
-					{
-						type: 'Voksen',
-						startPoint: '',
-						endPoint: '',
-						referenceCode: '',
-						seat: '',
-						price: 0,
-					},
-				],
-			},
+			order: { name: '' },
+			tickets: [],
 		};
 	}
 
-	/*
-	const createTicket = () => {
-    let ticketsPrint =  [];
-    
-    for(let i =0; i<tickets.length; i++){
-        if(tickets[i].number > 0){
-            let count = tickets[i].number;
-            while(count > 0){
-                ticketsPrint.push({type: tickets[i].type});
-                count--;
-            } 
-        }
-    }
-    return ticketsPrint;
-};
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	// functions that deal with order data, that will be parsed to API after transaction is over
+	//////////////////////////////////////////////////////////////////////////////////////////////
 
-console.log(createTicket());
-	
-	
-	*/
-
-	//function that creates unique name for the order every time it's mounted
 	componentDidMount() {
+		this.initTicketTypes();
+	}
+
+	initTicketTypes = () => {
+		const editTravellers = [
+			{ type: 'Voksen', number: 1 },
+			{ type: 'Barn (6-17 år)', number: 0 },
+			{ type: 'Ungdom (18-19 år)', number: 0 },
+			{ type: 'Student', number: 0 },
+			{ type: 'Honnør', number: 0 },
+		];
+		this.setState({ ticketTypeNum: editTravellers });
+	};
+
+	createTicketInOrder = () => {
+		let ticketsPrint = [];
+		let ticketsChosen = this.state.ticketTypeNum;
+		for (let i = 0; i < ticketsChosen.length; i++) {
+			if (ticketsChosen[i].number > 0) {
+				let count = ticketsChosen[i].number;
+				while (count > 0) {
+					ticketsPrint.push({
+						type: ticketsChosen[i].type,
+						startPoint: this.state.startPoint,
+						endPoint: this.state.endPoint,
+						referenceCode: '2xdfe',
+						seat: '14b',
+						price: 0,
+					});
+					count--;
+				}
+			} else {
+				continue;
+			}
+		}
+		this.setState({ tickets: ticketsPrint });
+	};
+
+	restartOrder = () => {
+		this.setState({ order: { name: '' } });
+	};
+
+	setUniqueOrderName = () => {
+		this.restartOrder();
 		let name;
 		let date = new Date();
-		name = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}
-    	${date.getSeconds()}`;
-
-		this.setState({
-			order: {
-				orderName: name,
-				tickets: [],
-			},
-		});
-	}
+		const months = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Okt',
+			'Nov',
+			'Dec',
+		];
+		name = `${date.getFullYear()}-${
+			months[date.getMonth()]
+		}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+		this.setState({ order: { name: name } });
+	};
 
 	setStartPoint = (value) => {
 		this.setState({ startPoint: value });
@@ -85,22 +108,22 @@ console.log(createTicket());
 	//////////////////////////////////////////////////////////////////////////////
 
 	addNumber = (id) => {
-		this.setState({ number: this.state.numberOfTravellers[id].number++ });
+		this.setState({ number: this.state.ticketTypeNum[id].number++ });
 	};
 
 	removeNumber = (id) => {
-		let number = this.state.numberOfTravellers[id].number;
+		let number = this.state.ticketTypeNum[id].number;
 		if (number > 0) {
-			this.setState({ number: this.state.numberOfTravellers[id].number-- });
+			this.setState({ number: this.state.ticketTypeNum[id].number-- });
 		}
 	};
 
 	editTravellersHandler = () => {
-		this.setState({ editNumberOfTravellers: true });
+		this.setState({ chooseTicketType: true });
 	};
 
 	hideEditNumberOfTravellers = () => {
-		this.setState({ editNumberOfTravellers: false });
+		this.setState({ chooseTicketType: false });
 	};
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -108,10 +131,10 @@ console.log(createTicket());
 	//////////////////////////////////////////////////////////////////////////////
 
 	renderEditNumberOfTravellers = () => {
-		if (this.state.editNumberOfTravellers) {
+		if (this.state.chooseTicketType) {
 			return (
 				<div className="editNumberOfTravellersContainer">
-					{this.state.numberOfTravellers.map((item, index) => {
+					{this.state.ticketTypeNum.map((item, index) => {
 						return (
 							<EditTravellers
 								key={index}
@@ -128,55 +151,69 @@ console.log(createTicket());
 		}
 	};
 
-	renderChooseDestination = () => {
-		return (
-			<ChooseDestination
-				chooseDestination={this.state.chooseDestination}
-				hideBuySingleTicket={this.props.hideBuySingleTicket}
-				continueToDepartures={this.continueToDepartures}
-				setStartPoint={this.setStartPoint}
-				setEndPoint={this.setEndPoint}
-			></ChooseDestination>
-		);
+	//////////////////////////////////////////////////////////////////////////////
+	// updating API
+	//////////////////////////////////////////////////////////////////////////////
+
+	submitNewOrder = async () => {
+		const url = 'https://localhost:5001/orders';
+		const payload = this.state.order;
+		let response;
+
+		try {
+			response = await fetch(url, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
+		} catch (err) {
+			console.log(err);
+		}
+		this.getNewOrderID();
 	};
 
-	renderChooseDeparture = () => {
-		return (
-			<ChooseDeparture
-				chooseDeparture={this.state.chooseDeparture}
-				editNumberOfTravellers={this.state.editNumberOfTravellers}
-				numberOfTravellers={this.state.numberOfTravellers}
-				editTravellersHandler={this.editTravellersHandler}
-				renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
-				continueToSeats={this.continueToSeats}
-				startPoint={this.state.startPoint}
-				endPoint={this.state.endPoint}
-			></ChooseDeparture>
-		);
-	};
+	getNewOrderID = async () => {
+		let data;
+		try {
+			const response = await fetch('https://localhost:5001/orders', {
+				method: 'get',
+			});
+			const payload = await response.json();
+			data = payload;
+		} catch (err) {}
 
-	renderChooseSeats = () => {
-		if (this.state.chooseSeat) {
-			return (
-				<div className={this.state.chooseSeat ? 'displayBlock' : 'displayNone'}>
-					<div>Choose the seat site</div>
-					<Seats numberOfTravellers={this.state.numberOfTravellers} />
-					<button
-						onClick={this.continueToPayment}
-						className="fortsettButton fortsettButtonActive"
-					>
-						Fortsett til betaling
-					</button>
-				</div>
-			);
+		if (data) {
+			let id = data[data.length - 1].id;
+			this.submitTickets(id);
 		}
 	};
 
-	//////////////////////////////////////////////////////////////////////////////
-	// functions to trigger different modals depend on which one is 'true' in state
-	//////////////////////////////////////////////////////////////////////////////
+	submitTickets = async (id) => {
+		const url = `https://localhost:5001/orders/${id}/basictickets`;
+		const payload = this.state.tickets[0];
+		let response;
+
+		try {
+			response = await fetch(url, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////
+	// functions to trigger different modals, depending on which one is 'true' in state
+	///////////////////////////////////////////////////////////////////////////////////
 	continueToDepartures = () => {
 		this.setState({ chooseDestination: false, chooseDeparture: true });
+		this.setUniqueOrderName();
 	};
 
 	continueToSeats = () => {
@@ -184,71 +221,66 @@ console.log(createTicket());
 	};
 
 	continueToPayment = () => {
-		this.setState({ chooseSeat: false, confirmation: true });
+		this.setState({ chooseSeat: false, choosePayment: true });
 	};
 
 	continueToConfirmation = () => {
-		this.setState({ chooseSeat: false, choosePayment: true });
+		this.setState({ choosePayment: false, confirmation: true });
+		console.log(this.state.order);
+	};
+
+	continueToSeatsHandler = () => {
+		this.continueToSeats();
+		this.createTicketInOrder();
 	};
 
 	render() {
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
-					{/* header of the BuySingleTicket bottom sheet */}
-					<div className="flex flex-row justify-between p-5 border-b border-grey-300 mb-5">
-						<p className="font-medium">Kjøp enkeltbillett</p>
-						<button onClick={this.props.endTransaction}>
-							<svg
-								className="h-5 w-5 text-gray-600"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-							>
-								<path
-									d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-									clipRule="evenodd"
-									fillRule="evenodd"
-								/>
-							</svg>
-						</button>
-					</div>
+					<HeaderBuySingle
+						endTransaction={this.props.endTransaction}
+						restartOrder={this.restartOrder}
+						initTicketTypes={this.initTicketTypes}
+					></HeaderBuySingle>
 
-					{this.renderChooseDestination()}
+					<ChooseDestination
+						chooseDestination={this.state.chooseDestination}
+						hideBuySingleTicket={this.props.hideBuySingleTicket}
+						continueToDepartures={this.continueToDepartures}
+						setStartPoint={this.setStartPoint}
+						setEndPoint={this.setEndPoint}
+					></ChooseDestination>
 
-					{this.renderChooseDeparture()}
+					<ChooseDeparture
+						chooseDeparture={this.state.chooseDeparture}
+						editNumberOfTravellers={this.state.chooseTicketType}
+						numberOfTravellers={this.state.ticketTypeNum}
+						editTravellersHandler={this.editTravellersHandler}
+						renderEditNumberOfTravellers={this.renderEditNumberOfTravellers}
+						continueToSeats={this.continueToSeatsHandler}
+						startPoint={this.state.startPoint}
+						endPoint={this.state.endPoint}
+					></ChooseDeparture>
 
 					{this.renderEditNumberOfTravellers()}
 
-					{this.renderChooseSeats()}
+					<ChooseSeats
+						continueToPayment={this.continueToPayment}
+						chooseSeat={this.state.chooseSeat}
+					></ChooseSeats>
 
-					<div
-						className={
-							this.state.choosePayment ? 'displayBlock' : 'displayNone'
-						}
-					>
-						<div>Betaling site</div>
-						<button
-							onClick={this.continueToConfirmation}
-							className="fortsettButton fortsettButtonActive"
-						>
-							Bekreft og betal bestillingen
-						</button>
-					</div>
+					<ChoosePayment
+						choosePayment={this.state.choosePayment}
+						continueToConfirmation={this.continueToConfirmation}
+						submitNewOrder={this.submitNewOrder}
+					></ChoosePayment>
 
-					<div
-						className={this.state.confirmation ? 'displayBlock' : 'displayNone'}
-					>
-						<div>Send videre</div>
-						<button
-							onClick={this.props.renderSendTicket}
-							className="fortsettButton fortsettButtonActive"
-						>
-							Send billetter til venner
-						</button>
-						<button className="fortsettButton fortsettButtonActive">
-							Se billettene
-						</button>
-					</div>
+					<Confirmation
+						endTransaction={this.props.endTransaction}
+						confirmation={this.state.confirmation}
+						renderSendTicket={this.props.renderSendTicket}
+					></Confirmation>
 				</div>
 			</div>
 		);
