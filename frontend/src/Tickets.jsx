@@ -46,6 +46,7 @@ class Tickets extends Component {
         return (
           <div>
             <TicketOrder 
+              contactList={this.props.searchContact}
               key={item.id} 
               id={item.id}
               itemName={item.name}>  
@@ -57,6 +58,7 @@ class Tickets extends Component {
     return (
       <div>
         <Link to={'/'}>Tilbake</Link>
+       
         {inhold}
       </div>    
     )

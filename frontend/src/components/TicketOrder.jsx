@@ -7,6 +7,7 @@ class TicketOrder extends Component {
         }
     }
 
+
     fetchTicketsByOrder = async (id) => {
         try {
           const response = await fetch(
@@ -21,14 +22,23 @@ class TicketOrder extends Component {
         }
       }
 
+      searchContact = (id) => {
+        let contactArr = this.props.contactList.find((item) => item.id === id)
+        if(contactArr){
+          return contactArr.firstName
+        } else {return "Niks"}
+      }
+
       renderTicketsByOrder = () => {
+        
         return (this.state.tickets.map((item, index) => {
           return (
             <div key={index}>
-              <p>{item.type}</p>
-              <p>{item.startPoint}</p>
-              <p>{item.endPoint}</p>
-              <p>{item.price}</p>
+              <p>{this.searchContact(item.ticketHolderId)}</p>
+              <p>Type: {item.type}</p>
+              <p>Fra: {item.startPoint}</p>
+              <p>Til: {item.endPoint}</p>
+              <p>Pris: {item.price}</p>
             </div>
           )
         }))

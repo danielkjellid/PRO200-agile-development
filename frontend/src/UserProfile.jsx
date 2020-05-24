@@ -20,9 +20,7 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       //I create fake user data for now
-      user: [],
       name: '',
-      loadUser: true,
       contactList: [],
       chooseTicket: false,
       singleTicket: false,
@@ -47,27 +45,27 @@ class UserProfile extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchUserInfo();
-    this.fetchContactList();
-  }
+  // componentDidMount() {
+  //   this.fetchUserInfo();
+  //   this.fetchContactList();
+  // }
 
-  fetchUserInfo = async () => { 
-    try{
-      const response = await fetch("https://localhost:5001/users");
-      const payload = await response.json();
-      this.setState({user: payload, loadUser: false})  
-    } catch(err){console.log(err);}
-  }
+  // fetchUserInfo = async () => { 
+  //   try{
+  //     const response = await fetch("https://localhost:5001/users");
+  //     const payload = await response.json();
+  //     this.setState({user: payload, loadUser: false})  
+  //   } catch(err){console.log(err);}
+  // }
 
-  fetchContactList = async () => {
-    try{
-      const response = await fetch("https://localhost:5001/contacts");
-      const payload = await response.json();
-      this.setState({contactList: payload})  
-      console.log(payload);
-    } catch(err){console.log(err);}
-  }
+  // fetchContactList = async () => {
+  //   try{
+  //     const response = await fetch("https://localhost:5001/contacts");
+  //     const payload = await response.json();
+  //     this.setState({contactList: payload})  
+  //     console.log(payload);
+  //   } catch(err){console.log(err);}
+  // }
 
   newTicketButtonHandler = () => {
     const newTicketShow = this.state.chooseTicket;
@@ -153,7 +151,10 @@ class UserProfile extends Component {
   };
 
   render() {
-    let userName = !this.state.loadUser ? this.state.user[0].firstName : "un"
+    let userName = this.props.user;
+    let userNameDisplay = userName ? userName[0].firstName : "nope";
+    
+
     return (
       <div>
         {this.renderChooseTicket()}
@@ -172,7 +173,7 @@ class UserProfile extends Component {
                 <div className="ml-5">
 
                   <h1 className="font-bold text-2xl text-gray-800">
-                    God morgen, {userName}
+                    God morgen, {userNameDisplay}
                   </h1>
                   <div className="flex items-center">
                     <svg
