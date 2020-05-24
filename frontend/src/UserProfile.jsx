@@ -45,28 +45,6 @@ class UserProfile extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.fetchUserInfo();
-  //   this.fetchContactList();
-  // }
-
-  // fetchUserInfo = async () => { 
-  //   try{
-  //     const response = await fetch("https://localhost:5001/users");
-  //     const payload = await response.json();
-  //     this.setState({user: payload, loadUser: false})  
-  //   } catch(err){console.log(err);}
-  // }
-
-  // fetchContactList = async () => {
-  //   try{
-  //     const response = await fetch("https://localhost:5001/contacts");
-  //     const payload = await response.json();
-  //     this.setState({contactList: payload})  
-  //     console.log(payload);
-  //   } catch(err){console.log(err);}
-  // }
-
   newTicketButtonHandler = () => {
     const newTicketShow = this.state.chooseTicket;
 
@@ -82,9 +60,6 @@ class UserProfile extends Component {
   resetOrderName = () => {
     
   }
-
-
-    
 
   buySingleTicketButtonHandler = () => {
     const buySingleTicketShow = this.state.singleTicket;
@@ -206,6 +181,23 @@ class UserProfile extends Component {
         </div>
 
         {/* page content */}
+        {/* temporarily here. just need some clickable contaclist */}
+        <Link to={"/contactList"}>
+                <div className="text-sm text-gray-900 flex items-center">
+                  Kontakter
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    className="h-5 w-5 text-gray-600"
+                  >
+                    <path
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </Link>
         {/* contains info about active ticket, environment calc and ticket stas */}
         <div className="px-5 py-10">
           {/* section */}
@@ -223,13 +215,14 @@ class UserProfile extends Component {
                   >
                     <path
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
                     />
                   </svg>
                 </div>
               </Link>
             </div>
+          
             {/* section content */}
             <ActiveTicket
               activeTicket={this.state.activeTicket}

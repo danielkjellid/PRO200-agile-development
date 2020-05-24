@@ -6,7 +6,7 @@ import Tickets from "./Tickets";
 import UserDetails from "./UserDetails";
 import UserProfile from "./UserProfile";
 import Navbar from "./components/navbar";
-import Contact from "./components/Contact";
+import ContactList from "./ContactList";
 
 class App extends Component {
   constructor(props) {
@@ -104,8 +104,12 @@ class App extends Component {
                 {/* For testing the component */}
                 <Route
                   exact
-                  path="/contact"
-                  render={(props) => <Contact {...props}></Contact>}
+                  path="/contactList"
+                  render={(props) => 
+                    <ContactList 
+                      {...props}
+                      contacts={this.state.contactList}>
+                    </ContactList>}
                 ></Route>
 
                 <Route component={this.notFound}></Route>
