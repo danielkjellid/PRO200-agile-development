@@ -65,13 +65,6 @@ class App extends Component {
     }
   }
 
-  searchContat = (id) => {
-    if(this.state.contactList){
-      let contact = this.state.contactList.find((item) => item.id===id)
-      console.log(contact);
-    } 
-  }
-
   render() {
     console.log(this.state.contactList);
     return (
