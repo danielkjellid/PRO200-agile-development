@@ -268,6 +268,7 @@ class BuySingleTicketBS extends Component {
 					<ChooseSeats
 						continueToPayment={this.continueToPayment}
 						chooseSeat={this.state.chooseSeat}
+						tickets={this.state.tickets}
 					></ChooseSeats>
 
 					<ChoosePayment
