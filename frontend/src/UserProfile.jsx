@@ -20,9 +20,7 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       //I create fake user data for now
-      user: [],
       name: '',
-      loadUser: true,
       contactList: [],
       chooseTicket: false,
       singleTicket: false,
@@ -47,28 +45,6 @@ class UserProfile extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchUserInfo();
-    this.fetchContactList();
-  }
-
-  fetchUserInfo = async () => { 
-    try{
-      const response = await fetch("https://localhost:5001/users");
-      const payload = await response.json();
-      this.setState({user: payload, loadUser: false})  
-    } catch(err){console.log(err);}
-  }
-
-  fetchContactList = async () => {
-    try{
-      const response = await fetch("https://localhost:5001/contacts");
-      const payload = await response.json();
-      this.setState({contactList: payload})  
-      console.log(payload);
-    } catch(err){console.log(err);}
-  }
-
   newTicketButtonHandler = () => {
     const newTicketShow = this.state.chooseTicket;
 
@@ -84,9 +60,6 @@ class UserProfile extends Component {
   resetOrderName = () => {
     
   }
-
-
-    
 
   buySingleTicketButtonHandler = () => {
     const buySingleTicketShow = this.state.singleTicket;
@@ -153,7 +126,10 @@ class UserProfile extends Component {
   };
 
   render() {
-    let userName = !this.state.loadUser ? this.state.user[0].firstName : "un"
+    let userName = this.props.user;
+    let userNameDisplay = userName ? userName[0].firstName : "nope";
+    
+
     return (
       <div>
         {this.renderChooseTicket()}
@@ -172,7 +148,7 @@ class UserProfile extends Component {
                 <div className="ml-5">
 
                   <h1 className="font-bold text-2xl text-gray-800">
-                    God morgen, {userName}
+                    God morgen, {userNameDisplay}
                   </h1>
                   <div className="flex items-center">
                     <svg
@@ -193,10 +169,10 @@ class UserProfile extends Component {
                 </div>
               </div>
             </div>
-            <div class="pt-4">
+            <div className="pt-4">
               <button
                 onClick={this.newTicketButtonHandler}
-                className="bg-vy-green-700 text-white text-sm font-medium rounded-lg px-4 py-3 w-full hover:bg-vy-green-900"
+                className="bg-vy-green-300 text-white text-sm font-medium rounded-lg px-4 py-3 w-full hover:bg-vy-green-400"
               >
                 Ny billett
               </button>
@@ -205,6 +181,23 @@ class UserProfile extends Component {
         </div>
 
         {/* page content */}
+        {/* temporarily here. just need some clickable contaclist */}
+        <Link to={"/contactList"}>
+          <div className="text-sm text-gray-900 flex items-center">
+            Kontakter
+            <svg
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              className="h-5 w-5 text-gray-600"
+            >
+              <path
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+                fillRule="evenodd"
+              />
+            </svg>
+          </div>
+        </Link>
         {/* contains info about active ticket, environment calc and ticket stas */}
         <div className="px-5 py-10">
           {/* section */}
@@ -222,13 +215,14 @@ class UserProfile extends Component {
                   >
                     <path
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
+                      clipRule="evenodd"
+                      fillRule="evenodd"
                     />
                   </svg>
                 </div>
               </Link>
             </div>
+          
             {/* section content */}
             <ActiveTicket
               activeTicket={this.state.activeTicket}
@@ -241,15 +235,15 @@ class UserProfile extends Component {
             {/* section header */}
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg text-gray-900">Miljøkalkulator</h2>
-              <div class="inline-block relative w-40">
-                <select class="block appearance-none w-full bg-white hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight text-sm focus:outline-none focus:shadow-outline">
+              <div className="inline-block relative w-40">
+                <select className="block appearance-none w-full bg-white hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight text-sm focus:outline-none focus:shadow-outline">
                   <option>Siste 30 dager</option>
                   <option>Siste 60 dager</option>
                   <option>Siste 120 dager</option>
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
-                    class="fill-current h-4 w-4"
+                    className="fill-current h-4 w-4"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >

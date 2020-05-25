@@ -81,6 +81,7 @@ class BuySingleTicketBS extends Component {
 			'Feb',
 			'Mar',
 			'Apr',
+			'May',
 			'Jun',
 			'Jul',
 			'Aug',
@@ -133,19 +134,28 @@ class BuySingleTicketBS extends Component {
 	renderEditNumberOfTravellers = () => {
 		if (this.state.chooseTicketType) {
 			return (
-				<div className="editNumberOfTravellersContainer">
-					{this.state.ticketTypeNum.map((item, index) => {
-						return (
-							<EditTravellers
-								key={index}
-								type={item.type}
-								number={item.number}
-								add={() => this.addNumber(index)}
-								remove={() => this.removeNumber(index)}
-							></EditTravellers>
-						);
-					})}
-					<button onClick={this.hideEditNumberOfTravellers}>Fortsett</button>
+				<div className="m-5">
+					<div className="mb-2 bg-white rounded-lg z-10 block relative px-5 pb-5">
+						{this.state.ticketTypeNum.map((item, index) => {
+							return (
+								<EditTravellers
+									key={index}
+									type={item.type}
+									number={item.number}
+									add={() => this.addNumber(index)}
+									remove={() => this.removeNumber(index)}
+								></EditTravellers>
+							);
+						})}
+					</div>
+					<div>
+						<button
+							onClick={this.hideEditNumberOfTravellers}
+							className="relative z-10 p-3 w-full bg-white text-center text-sm font-medium text-gray-900 rounded-md hover:bg-gray-100"
+						>
+							Fortsett
+						</button>
+					</div>
 				</div>
 			);
 		}

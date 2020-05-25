@@ -6,7 +6,7 @@ import Tickets from "./Tickets";
 import UserDetails from "./UserDetails";
 import UserProfile from "./UserProfile";
 import Navbar from "./components/navbar";
-import Contact from "./components/Contact";
+import ContactList from "./ContactList";
 
 class App extends Component {
   constructor(props) {
@@ -14,8 +14,34 @@ class App extends Component {
 
     this.state = {
       coverSite: false,
+      loadUser: true,
+      user: '',
+      contactList: ''
     };
   }
+
+    componentDidMount() {
+    this.fetchUserInfo();
+    this.fetchContactList();
+  }
+
+  fetchUserInfo = async () => { 
+    try{
+      const response = await fetch("https://localhost:5001/users");
+      const payload = await response.json();
+      this.setState({user: payload, loadUser: false})  
+    } catch(err){console.log(err);}
+  }
+
+  fetchContactList = async () => {
+    try{
+      const response = await fetch("https://localhost:5001/contacts");
+      const payload = await response.json();
+      this.setState({contactList: payload})  
+      console.log(payload);
+    } catch(err){console.log(err);}
+  }
+
 
   notFound = () => {
     return <h1>not found</h1>;
@@ -31,7 +57,16 @@ class App extends Component {
     this.setState({ coverSite: false });
   };
 
+  sendUser = () => {
+    if(this.state.user){
+      return this.state.user
+    } else {
+      return 'empty'
+    }
+  }
+
   render() {
+    console.log(this.state.contactList);
     return (
       <BrowserRouter>
         <div>
@@ -48,6 +83,7 @@ class App extends Component {
                       {...props}
                       fadeBackground={this.fadeBackground}
                       endTransaction={this.endTransaction}
+                      user={this.state.user}
                     ></UserProfile>
                   )}
                 ></Route>
@@ -57,16 +93,23 @@ class App extends Component {
                   render={(props) => <UserDetails {...props}></UserDetails>}
                 ></Route>
                 <Route
-                  exact
-                  path="/tickets"
-                  render={(props) => <Tickets {...props}></Tickets>}
+                  exact path="/tickets"
+                  render={(props) => 
+                    <Tickets 
+                    {...props}
+                    searchContact={this.state.contactList}
+                    ></Tickets>}
                 ></Route>
 
                 {/* For testing the component */}
                 <Route
                   exact
-                  path="/contact"
-                  render={(props) => <Contact {...props}></Contact>}
+                  path="/contactList"
+                  render={(props) => 
+                    <ContactList 
+                      {...props}
+                      contacts={this.state.contactList}>
+                    </ContactList>}
                 ></Route>
 
                 <Route component={this.notFound}></Route>
