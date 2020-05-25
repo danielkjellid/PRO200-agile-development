@@ -21,7 +21,7 @@ class BuySingleTicketBS extends Component {
 			choosePayment: false,
 			confirmation: false,
 			order: { name: '' },
-			tickets: [],
+			tickets: null,
 		};
 	}
 
@@ -193,7 +193,7 @@ class BuySingleTicketBS extends Component {
 
 	submitTickets = async (id) => {
 		const url = `https://localhost:5001/orders/${id}/basictickets`;
-		const payload = this.state.tickets[0];
+		const payload = this.state.tickets;
 		let response;
 
 		try {
