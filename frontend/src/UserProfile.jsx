@@ -1,5 +1,4 @@
-// e8007e4db60528762be401e35489e959
-// Add this as a X-TripGo-Key header to your API calls to authenticate.
+
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
@@ -7,13 +6,6 @@ import ChooseTicketBS from "./bottomsheets/ChooseTicketBS";
 import BuySingleTicketBS from "./bottomsheets/BuySingleTicketBS";
 import ActiveTicket from "./components/ActiveTicket";
 import SendTicketBS from "./bottomsheets/sendTicketsBS";
-
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//API that fetches Contacts from db must be implemented here and save in a state
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
 
 class UserProfile extends Component {
   constructor(props) {
