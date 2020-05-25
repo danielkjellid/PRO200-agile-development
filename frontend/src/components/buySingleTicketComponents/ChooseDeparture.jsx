@@ -33,17 +33,18 @@ class ChooseDeparture extends Component {
 			<div className={this.props.chooseDeparture ? 'block' : 'hidden'}>
 				<div>
 					<div className={this.props.editNumberOfTravellers ? 'modalBack' : null}></div>
-					<div className="numberOfTravellers mr-5 ml-5 pb-5 border-b border-grey-300">
+					<div className="numberOfTravellers mr-5 ml-5 pb-5 border-b border-grey-300 flex items-center justify-between">
 						<div className="">
 							<h4 className="text-sm font-medium text-gray-800">Reisende</h4>
 							{this.props.numberOfTravellers.map((item) => {
 								if (item.number > 0) {
-									return (<p className="text-sm" key={item.type}>{item.type} : {item.number}</p>);
+									return (<p className="text-sm text-gray-900" key={item.type}>{item.number}x {item.type}</p>);
 								}
 							})}
 						</div>
-						<button className="px-4 rounded-md button" onClick={this.props.editTravellersHandler}>
-							<p className="vy-green text-sm m-0 font-medium">Rediger</p>
+						<button onClick={this.props.editTravellersHandler}
+							className="p-3 bg-vy-green-200 text-center text-sm font-medium text-vy-green-300 rounded-md hover:bg-vy-green-100">
+							Rediger
 						</button>
 					</div>
 
