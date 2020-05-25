@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 class ChooseDestination extends Component {
     render() {
         return (
-            <div className={this.props.chooseDestination ? "displayBlock" : "displayNone"}>
+            <div className={this.props.chooseDestination ? "block" : "hidden"}>
                 <div>
                     <div className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer" onClick={this.props.hideBuySingleTicket}>
                         <svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
@@ -18,9 +18,9 @@ class ChooseDestination extends Component {
                     <p className="text-sm font-medium pb-1 text-gray-800">Når vil du reise?</p>
                 </div>{" "}
                 {/* this section will be developed later */}
-                <div className="p-5">
+                <div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
                     <button onClick={this.props.continueToDepartures}
-                            className="p-3 w-full bg-vy-green-700 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-900">
+                            className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
                             Fortsett til avganger og billetter
                     </button>
                 </div>

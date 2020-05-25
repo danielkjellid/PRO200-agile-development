@@ -11,26 +11,32 @@ class Seats extends Component {
 				{ id: 4, status: 0 },
 				{ id: 5, status: 0 },
 				{ id: 6, status: 1 },
+			],
+			[
 				{ id: 7, status: 1 },
 				{ id: 8, status: 0 },
 				{ id: 9, status: 0 },
 				{ id: 10, status: 1 },
 				{ id: 11, status: 1 },
 				{ id: 12, status: 0 },
+			],
+			[
 				{ id: 13, status: 1 },
 				{ id: 14, status: 1 },
 				{ id: 15, status: 1 },
-			],
-			[
 				{ id: 16, status: 0 },
 				{ id: 17, status: 1 },
 				{ id: 18, status: 1 },
+			],
+			[
 				{ id: 19, status: 1 },
 				{ id: 20, status: 1 },
 				{ id: 21, status: 1 },
 				{ id: 22, status: 1 },
 				{ id: 23, status: 1 },
 				{ id: 24, status: 1 },
+			],
+			[
 				{ id: 25, status: 1 },
 				{ id: 26, status: 0 },
 				{ id: 27, status: 0 },
@@ -45,26 +51,32 @@ class Seats extends Component {
 				{ id: 34, status: 1 },
 				{ id: 35, status: 0 },
 				{ id: 36, status: 1 },
+			],
+			[
 				{ id: 37, status: 1 },
 				{ id: 38, status: 1 },
 				{ id: 39, status: 0 },
 				{ id: 40, status: 1 },
 				{ id: 41, status: 1 },
 				{ id: 42, status: 0 },
+			],
+			[
 				{ id: 43, status: 1 },
 				{ id: 44, status: 0 },
 				{ id: 45, status: 0 },
-			],
-			[
 				{ id: 46, status: 0 },
 				{ id: 47, status: 1 },
 				{ id: 48, status: 1 },
+			],
+			[
 				{ id: 49, status: 1 },
 				{ id: 50, status: 0 },
 				{ id: 51, status: 1 },
 				{ id: 52, status: 1 },
 				{ id: 53, status: 1 },
 				{ id: 54, status: 0 },
+			],
+			[
 				{ id: 55, status: 1 },
 				{ id: 56, status: 0 },
 				{ id: 57, status: 0 },
@@ -78,87 +90,101 @@ class Seats extends Component {
 
 	gridLayout = {
 		display: 'grid',
-		gridTemplateColumns: '25px 25px 25px',
-		gridGap: '10px',
+		gridTemplateColumns: '25px 25px 25px 50px 25px 25px 25px',
+		columnGap: '10px',
 	};
 
 	mainGridLayout = {
 		display: 'grid',
-		padding: '50px',
-		gridTemplateColumns: 'auto auto',
-		gridRowGap: '50px',
+		rowGap: '10px',
+		justifyItems: 'center',
+	};
+
+	gridSpacingItem = {
+		height: '25px',
+		gridColumnStart: '1',
+		gridColumnEnd: '8',
 	};
 
 	handleSelectSeat = (seat, row) => {
-		const numberOfTravellers = this.props.numberOfTravellers.reduce(
-			(prevVal, currVal) => prevVal + currVal.number,
-			0
-		);
+		if (seat.status === 0) {
+			return;
+		}
+
+		const numberOfTravellers = this.props.tickets.length;
 		const seats = [...this.state.seats];
 		var index = seats[row].indexOf(seat);
 		seats[row][index] = { ...seat };
 
-		const clearedSeats = this.clearSelectedSeats(seats, numberOfTravellers);
-
-		const newSeats = this.selectAvailableSeats(
-			clearedSeats,
+		const selectedSeats = this.selectAvailableSeats(
+			seats,
 			row,
 			index,
 			numberOfTravellers
 		);
-		this.setState({ newSeats });
+
+		this.setState({ selectedSeats });
 	};
 
 	selectAvailableSeats(seats, row, index, numberOfTravellers) {
-		console.log(
-			'Row: ',
-			row,
-			'index: ',
-			index,
-			'NumberOfTravellers: ',
-			numberOfTravellers
-		);
-		const selectedSeats = this.state.selectedSeats;
+		const selectedSeats = [];
+
+		const intitialTravellers = numberOfTravellers;
+
 		for (var i = 0; i < numberOfTravellers; i++) {
 			if (index + i >= seats[row].length) {
 				if (row + 1 >= seats.length) {
 					row = 0;
+					index = 0;
+				} else {
+					row++;
+					index = 0;
 				}
-				row++;
-				index = 0;
-			}
-			let currentSeat = seats[row][index + i];
-			if (currentSeat.status === 1) {
-				console.log('Seat: ', index + i, ' is available');
-				selectedSeats.push({ currentSeat, row });
-				currentSeat.status = 2;
-			} else if (currentSeat.status === 0) {
-				console.log('Seat: ', index + i, ' not available');
-				seats = this.selectAvailableSeats(
-					seats,
-					row,
-					index + i + 1,
-					numberOfTravellers - i
-				);
-				return seats;
+				if (seats[row][index].status === 0) {
+					numberOfTravellers = intitialTravellers - selectedSeats.length;
+					i = -1;
+				} else {
+					selectedSeats.push({ seat: seats[row][index], row: row });
+					index--;
+				}
+			} else {
+				if (seats[row][index + i].status === 0) {
+					numberOfTravellers++;
+				} else {
+					selectedSeats.push({ seat: seats[row][index + i], row: row });
+				}
 			}
 		}
-		this.setState({ selectedSeats });
-		return seats;
+
+		return selectedSeats;
 	}
 
-	clearSelectedSeats(seats, numberOfTravellers) {
-		if (this.state.selectedSeats.length !== 0) {
-			const selectedSeats = this.state.selectedSeats;
-			for (var i = 0; i < numberOfTravellers; i++) {
-				const index = seats[selectedSeats[i].row].indexOf(
-					selectedSeats[i].currentSeat
-				);
-				console.log(seats[i].currentSeat);
-			}
-			this.setState({ selectedSeats });
+	checkForRow(row) {
+		if (row === 5) {
+			return <div style={this.gridSpacingItem} />;
 		}
-		return seats;
+	}
+
+	choosenSeatText() {
+		const { selectedSeats } = this.state;
+
+		if (selectedSeats.length === 0) {
+			return;
+		}
+
+		return (
+			<div>
+				Rad {selectedSeats[0].row + 1}, sete
+				{selectedSeats.map((element) => {
+					if (selectedSeats.indexOf(element) === selectedSeats.length - 1) {
+						return ' ' + element.seat.id + ' ';
+					} else {
+						return ' ' + element.seat.id + ', ';
+					}
+				})}
+				valgt
+			</div>
+		);
 	}
 
 	render() {
@@ -166,17 +192,36 @@ class Seats extends Component {
 			<div style={this.mainGridLayout}>
 				{this.state.seats.map((row, i) => (
 					<div style={this.gridLayout} key={i}>
-						{row.map((col, j) => (
-							<Seat
-								key={col.id}
-								selectedSeats={this.state.selectedSeats}
-								row={i}
-								seat={col}
-								onSelect={this.handleSelectSeat}
-							></Seat>
-						))}
+						{this.checkForRow(i)}
+						{row.map((col, j) => {
+							if (j === 3) {
+								return (
+									<React.Fragment>
+										<div />
+										<Seat
+											key={col.id}
+											selectedSeats={this.state.selectedSeats}
+											row={i}
+											seat={col}
+											onSelect={this.handleSelectSeat}
+										></Seat>
+									</React.Fragment>
+								);
+							} else {
+								return (
+									<Seat
+										key={col.id}
+										selectedSeats={this.state.selectedSeats}
+										row={i}
+										seat={col}
+										onSelect={this.handleSelectSeat}
+									></Seat>
+								);
+							}
+						})}
 					</div>
 				))}
+				{this.choosenSeatText()}
 			</div>
 		);
 	}
