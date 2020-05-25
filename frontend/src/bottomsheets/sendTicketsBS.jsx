@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import boughtTickets from "../fakeData/boughtTicket";
 import Contact from "../components/Contact";
+import HeaderSendTickets from "../components/sendTicketsComponents/HeaderSendTickets";
 
 class SendTicketBS extends Component {
   constructor(props) {
@@ -96,13 +97,17 @@ class SendTicketBS extends Component {
   };
 
   render() {
+    console.log(this.props.contactList);
     return (
-      <div className="modalSendTickets">
-        <p>Send billetter ja</p>
-        <button>x</button>
-        {this.reviewTicket()}
-        {this.openContactList()}
-        {this.renderButton()}
+      <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
+        <div className="">
+          <HeaderSendTickets end={this.props.endSendingTickets}>
+          </HeaderSendTickets>
+   
+          {this.reviewTicket()}
+          {this.openContactList()}
+          {this.renderButton()}
+        </div>
       </div>
     );
   }

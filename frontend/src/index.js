@@ -84,6 +84,7 @@ class App extends Component {
                       fadeBackground={this.fadeBackground}
                       endTransaction={this.endTransaction}
                       user={this.state.user}
+                      contactList={this.state.contactList}
                     ></UserProfile>
                   )}
                 ></Route>

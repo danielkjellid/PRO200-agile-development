@@ -57,10 +57,6 @@ class UserProfile extends Component {
     }
   };
 
-  resetOrderName = () => {
-    
-  }
-
   buySingleTicketButtonHandler = () => {
     const buySingleTicketShow = this.state.singleTicket;
     this.setState({ singleTicket: !buySingleTicketShow });
@@ -97,7 +93,7 @@ class UserProfile extends Component {
 
   sendTicketsHandler = () => {
     this.setState({ sendTicketShow: true });
-    this.endTransaction();
+    this.setState({ singleTicket: false });
   };
 
   renderSendTicket = () => {
@@ -107,7 +103,8 @@ class UserProfile extends Component {
       return (
         <React.Fragment>
           <SendTicketBS
-            contactList={contactList}
+            contactList={this.props.contactList}
+            endSendingTickets={this.endSendingTickets}
           ></SendTicketBS>
         </React.Fragment>
       );
@@ -115,15 +112,20 @@ class UserProfile extends Component {
   };
 
   hideBuySingleTicket = () => {
-    this.setState({ singleTicket: false });
+    this.endTransaction();
     this.newTicketButtonHandler();
-    this.props.endTransaction();
+    
   };
 
   endTransaction = () => {
     this.setState({ singleTicket: false });
     this.props.endTransaction();
   };
+
+  endSendingTickets = () => {
+    this.setState({ sendTicketShow: false });
+    this.props.endTransaction();
+  }
 
   render() {
     let userName = this.props.user;
