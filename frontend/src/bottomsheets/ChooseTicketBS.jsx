@@ -3,15 +3,6 @@ import React, { Component } from 'react';
 class ChooseTicketBS extends Component {
     render() {
 
-        const modalBack = {
-            width: "100%",
-            height: "100vh",
-            zIndex: 1,
-            position: "fixed",
-            backgroundColor: "black",
-            opacity: "0.5"
-        }
-
         return (
             <div>
                 <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg modal">

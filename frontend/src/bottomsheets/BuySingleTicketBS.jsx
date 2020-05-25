@@ -21,7 +21,7 @@ class BuySingleTicketBS extends Component {
 			choosePayment: false,
 			confirmation: false,
 			order: { name: '' },
-			tickets: [],
+			tickets: null,
 		};
 	}
 
@@ -33,6 +33,7 @@ class BuySingleTicketBS extends Component {
 		this.initTicketTypes();
 	}
 
+	//this function initialize all the ticket types with default Voksen: 1
 	initTicketTypes = () => {
 		const editTravellers = [
 			{ type: 'Voksen', number: 1 },
@@ -44,6 +45,7 @@ class BuySingleTicketBS extends Component {
 		this.setState({ ticketTypeNum: editTravellers });
 	};
 
+	//this function creates array of objects(tickets) that are furthermore posted in API
 	createTicketInOrder = () => {
 		let ticketsPrint = [];
 		let ticketsChosen = this.state.ticketTypeNum;
@@ -72,24 +74,12 @@ class BuySingleTicketBS extends Component {
 		this.setState({ order: { name: '' } });
 	};
 
+	//this function sets a name for the order by default its the date order was executed
 	setUniqueOrderName = () => {
 		this.restartOrder();
 		let name;
 		let date = new Date();
-		const months = [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Okt',
-			'Nov',
-			'Dec',
-		];
+		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Okt','Nov','Dec',];
 		name = `${date.getFullYear()}-${
 			months[date.getMonth()]
 		}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -168,10 +158,9 @@ class BuySingleTicketBS extends Component {
 	submitNewOrder = async () => {
 		const url = 'https://localhost:5001/orders';
 		const payload = this.state.order;
-		let response;
-
+		
 		try {
-			response = await fetch(url, {
+			await fetch(url, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
@@ -202,11 +191,10 @@ class BuySingleTicketBS extends Component {
 
 	submitTickets = async (id) => {
 		const url = `https://localhost:5001/orders/${id}/basictickets`;
-		const payload = this.state.tickets[0];
-		let response;
+		const payload = this.state.tickets;
 
 		try {
-			response = await fetch(url, {
+			await fetch(url, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
@@ -222,21 +210,28 @@ class BuySingleTicketBS extends Component {
 	// functions to trigger different modals, depending on which one is 'true' in state
 	///////////////////////////////////////////////////////////////////////////////////
 	continueToDepartures = () => {
-		this.setState({ chooseDestination: false, chooseDeparture: true });
+		let chooseDeparture = this.state.chooseDeparture
+		let chooseDestination = this.state.chooseDestination
+		this.setState({ chooseDestination: !chooseDestination, chooseDeparture: !chooseDeparture });
 		this.setUniqueOrderName();
 	};
 
 	continueToSeats = () => {
-		this.setState({ chooseDeparture: false, chooseSeat: true });
+		let chooseDeparture = this.state.chooseDeparture
+		let chooseSeat = this.state.chooseSeat
+		this.setState({ chooseDeparture: !chooseDeparture, chooseSeat: !chooseSeat });
 	};
 
 	continueToPayment = () => {
-		this.setState({ chooseSeat: false, choosePayment: true });
+		let chooseSeat = this.state.chooseSeat
+		let choosePayment = this.state.choosePayment
+		this.setState({ chooseSeat: !chooseSeat, choosePayment: !choosePayment });
 	};
 
 	continueToConfirmation = () => {
-		this.setState({ choosePayment: false, confirmation: true });
-		console.log(this.state.order);
+		let choosePayment = this.state.choosePayment
+		let confirmation = this.state.confirmation
+		this.setState({ choosePayment: !choosePayment, confirmation: !confirmation });
 	};
 
 	continueToSeatsHandler = () => {
@@ -271,6 +266,7 @@ class BuySingleTicketBS extends Component {
 						continueToSeats={this.continueToSeatsHandler}
 						startPoint={this.state.startPoint}
 						endPoint={this.state.endPoint}
+						back={this.continueToDepartures}
 					></ChooseDeparture>
 
 					{this.renderEditNumberOfTravellers()}
@@ -279,12 +275,14 @@ class BuySingleTicketBS extends Component {
 						continueToPayment={this.continueToPayment}
 						chooseSeat={this.state.chooseSeat}
 						tickets={this.state.tickets}
+						back={this.continueToSeats}
 					></ChooseSeats>
 
 					<ChoosePayment
 						choosePayment={this.state.choosePayment}
 						continueToConfirmation={this.continueToConfirmation}
 						submitNewOrder={this.submitNewOrder}
+						back={this.continueToPayment}
 					></ChoosePayment>
 
 					<Confirmation

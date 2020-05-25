@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
 // denne 
 class Contact extends Component {
+<<<<<<< HEAD
     constructor(props){
         super(props)
         this.state = {active: false};
+=======
+  	containerStyle = {
+        backgroundColor: "grey",
+        padding: "10px 25px",
+      
+    };
+    
+    nameStyle = {
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+>>>>>>> 11c93e27b21c9b96fb0461b618ff0eae19f33d45
 
         this.handleClick = this.handleClick.bind(this);
     }
