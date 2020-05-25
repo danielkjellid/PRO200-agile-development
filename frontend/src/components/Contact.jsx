@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 // denne 
 class Contact extends Component {
+<<<<<<< HEAD
+    constructor(props){
+        super(props)
+        this.state = {active: false};
+=======
   	containerStyle = {
         backgroundColor: "grey",
         padding: "10px 25px",
@@ -10,46 +15,53 @@ class Contact extends Component {
     nameStyle = {
         whiteSpace: "nowrap",
         overflow: "hidden",
+>>>>>>> 11c93e27b21c9b96fb0461b618ff0eae19f33d45
 
-        // Does not work..
-        textverflow: "ellipsis",
-    };
+        this.handleClick = this.handleClick.bind(this);
+    }
 
-    contactInfoStyle = {
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        marginBottom: "5px",
+    handleClick() {
+        this.setState( prevState => {
+			return {active: !prevState.active};
+		});
+    }
 
-        // Does not work..
-        textverflow: "ellipsis"
-       
-    };
+	
 
 	render() {
 		
 			return (
-				<div class="flex" style={this.containerStyle} >
+				<div className="flex flex-row justify-between items-center px-5 py-4 border-b border-gray-300" >
 
-                    {/* Contact picture */}
-                    <div class="w-1/4 mx-4" style={{backgroundColor: "red", width: "35px", height: "35px", borderRadius: "50%"}}>
-                        {/* TODO: Add rounded img */}
-                    </div>
+                    <div className="flex flex-row">
 
-                   
-                    <div class="w-1/2">
-                        {/* Contact name */}
-                        <p class="text-500 font-bold" style={this.nameStyle}>
-                            {this.props.name} 
-                        </p>
-                        {/* Contact info */}
-                        <p class="text-black text-opacity-75" style={this.contactInfoStyle}>
-                            {this.props.phone}
-                        </p>
+                        {/* Contact picture */}
+                        <div className="rounded-full bg-gray-400 w-10 10-8 mr-2">
+                            {/* TODO: Add rounded img */}
+                        </div>
+
+        
+                        <div>
+                            {/* Contact name */}
+                            <p class="text-black font-base" style={this.nameStyle}>
+                                {this.props.name} 
+                            </p>
+                            {/* Contact info */}
+                            <p className="text-black text-gray-700" style={{fontSize: "10px"}}>
+                                {this.props.phone} +47 1337 420 1738
+                            </p>
+                        </div>
+
                     </div>
 
                     {/* Checkbox */}
-                    <div class="w-1/4 pl-4 mt-4">
-                        <input type="checkbox"></input>
+                    <div>
+                        <button onClick={this.handleClick} className="w-5 h-5 rounded-full p-0 border border-gray-400">
+                            {this.state.active 
+                                ? <svg className="w-full h-full text-green-700 rounded-full" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" fillRule="evenodd"/></svg>
+                                : '' 
+                            }
+                        </button>
                     </div>
 
                 </div>
