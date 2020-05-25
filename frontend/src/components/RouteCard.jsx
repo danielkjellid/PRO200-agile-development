@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 //testing comment
 class RouteCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+ 
   render() {
     return (
       <div

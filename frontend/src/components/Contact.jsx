@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 // denne 
 class Contact extends Component {
-    constructor(props){
-        super(props)
-    }
-
-	containerStyle = {
+  	containerStyle = {
         backgroundColor: "grey",
         padding: "10px 25px",
       

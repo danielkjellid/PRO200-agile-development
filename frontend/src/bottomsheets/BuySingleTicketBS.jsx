@@ -109,13 +109,14 @@ class BuySingleTicketBS extends Component {
 	//////////////////////////////////////////////////////////////////////////////
 
 	addNumber = (id) => {
-		this.setState({ number: this.state.ticketTypeNum[id].number++ });
+		let number = this.state.ticketTypeNum[id].number;
+		this.setState({ number: number++ });
 	};
 
 	removeNumber = (id) => {
 		let number = this.state.ticketTypeNum[id].number;
 		if (number > 0) {
-			this.setState({ number: this.state.ticketTypeNum[id].number-- });
+			this.setState({ number: number-- });
 		}
 	};
 
@@ -168,10 +169,9 @@ class BuySingleTicketBS extends Component {
 	submitNewOrder = async () => {
 		const url = 'https://localhost:5001/orders';
 		const payload = this.state.order;
-		let response;
-
+		
 		try {
-			response = await fetch(url, {
+			await fetch(url, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
@@ -203,10 +203,9 @@ class BuySingleTicketBS extends Component {
 	submitTickets = async (id) => {
 		const url = `https://localhost:5001/orders/${id}/basictickets`;
 		const payload = this.state.tickets;
-		let response;
 
 		try {
-			response = await fetch(url, {
+			await fetch(url, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
@@ -236,7 +235,6 @@ class BuySingleTicketBS extends Component {
 
 	continueToConfirmation = () => {
 		this.setState({ choosePayment: false, confirmation: true });
-		console.log(this.state.order);
 	};
 
 	continueToSeatsHandler = () => {
