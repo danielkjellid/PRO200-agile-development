@@ -170,17 +170,16 @@ class BuySingleTicketBS extends Component {
 		} catch (err) {
 			console.log(err);
 		}
-		this.getNewOrderID();
+		this.getLastOrderID();
 	};
 
-	getNewOrderID = async () => {
+	getLastOrderID = async () => {
 		let data;
 		try {
 			const response = await fetch('https://localhost:5001/orders', {
 				method: 'get',
 			});
-			const payload = await response.json();
-			data = payload;
+			data = await response.json();
 		} catch (err) {}
 
 		if (data) {
