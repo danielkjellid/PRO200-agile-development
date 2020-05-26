@@ -12,15 +12,7 @@ class SendTicketBS extends Component {
       contactListShow: false,
       sentTicketsConfirmationShow: false,
       loadOrder: false,
-      order: '',
-      ticketByType: [
-        {type: 'Voksen', tickets:[]},
-        {type: 'Barn', tickets:[]},
-        {type: 'Ungdom', tickets:[]},
-        {type: 'Student', tickets:[]},
-        {type: 'Honnør', tickets:[]},
-        
-      ],
+      ticketByType: [],
       renderButtonText: ["Send billetter", "Fortsett"],
     };
   }
@@ -29,7 +21,7 @@ class SendTicketBS extends Component {
     this.fetchTheLastOrder();
   }
 ////////////////////////////////////////////////////
-//1. make a method to fetch the last purchased order
+//1. make a method to fetch the last purchased order DONE
 //2. make a method to fetch the correct order from the tickets list if doesnt have ticketHolders
 //3. make a method to seperate all the tickets by type.
 //4. make a method to send the ticket to the correct ticketHolderID
@@ -55,7 +47,8 @@ class SendTicketBS extends Component {
       tickets = await response.json();
     } catch(err){console.log(err);}
 
-    this.setState({order: tickets, loadOrder: true}) //run method to split the tickets by type
+    this.setState({loadOrder: true}) //run method to split the tickets by type
+    this.seperateByType(tickets);
   }
 
 
@@ -66,6 +59,25 @@ class SendTicketBS extends Component {
     });
   };
 
+  //this method seperates tickets by types and adds 'active: false' to every ticket to make 
+  //it interactive while clicking in the checkbox
+  seperateByType = (array) => {
+    let tickeyByType = [
+      {type: 'Voksen', tickets:[]},
+      {type: 'Barn (6-17 år)', tickets:[]},
+      {type: 'Ungdom (18-19 år)', tickets:[]},
+      {type: 'Student', tickets:[]},
+      {type: 'Honnør', tickets:[]}
+    ];
+    
+    for(let i = 0; i<array.length; i++){
+      for(let j = 0; j<tickeyByType.length; j++){
+        array[i].active = false
+        if(array[i].type == tickeyByType[j].type){
+          tickeyByType[j].tickets.push(array[i])}}
+          this.setState({ticketByType: tickeyByType})
+    } 
+  }
 
 
   openContactList = () => {
@@ -142,14 +154,14 @@ class SendTicketBS extends Component {
   };
 
   render() {
-    if(this.state.loadOrder){console.log(this.state.order)};
+    if(this.state.loadOrder){console.log(this.state.ticketByType)};
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
         <div className="">
           <HeaderSendTickets end={this.props.endSendingTickets}>
           </HeaderSendTickets>
    
-          {this.reviewTicket()}
+          {/* {this.reviewTicket()} */}
           {this.openContactList()}
           {this.renderButton()}
         </div>
