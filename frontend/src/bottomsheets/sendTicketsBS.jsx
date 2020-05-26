@@ -142,7 +142,7 @@ class SendTicketBS extends Component {
           </HeaderSendTickets>
    
           {this.reviewTicket()}
-          <ContactListSendTicket passiveTickets={this.state.chooseTicketHolder} contactListShow={this.state.contactListShow}>
+          <ContactListSendTicket passiveTickets={this.state.chooseTicketHolder} contactListShow={this.state.contactListShow} contactList={this.props.contactList}>
 
           </ContactListSendTicket>
           {this.renderButton()}
