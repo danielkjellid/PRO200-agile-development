@@ -119,9 +119,10 @@ class SendTicketBS extends Component {
         <React.Fragment>
           <div>
             {this.state.ticketByType.map((item,index) => {
-              if(item.tickets.passive.length > 0){
+              if (item.tickets.passive.length > 0) {
+                let passive = item.tickets.passive;
                 return (
-                <div key={index}>{item.type}:  <div onClick={() => this.pickContact(item.tickets.passive)}>{item.tickets.active.length}/{item.tickets.passive.length}</div>
+                <div key={index}>{item.type}:  <div onClick={() => this.pickContact(passive)}>{item.tickets.active.length}/{item.tickets.passive.length}</div>
                 </div>
                 );
               }

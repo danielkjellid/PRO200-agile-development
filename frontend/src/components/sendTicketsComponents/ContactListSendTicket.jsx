@@ -33,7 +33,9 @@ class ContactListSendTicket extends Component {
       );
     }
 
-    return { content };
+    return(
+        <div>{ content }</div>
+    ) 
   }
 }
 
