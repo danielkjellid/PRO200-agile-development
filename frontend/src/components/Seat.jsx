@@ -20,9 +20,9 @@ class Seat extends Component {
 			}
 		}
 
-		if (!seat.status) {
+		if (seat.taken) {
 			return occupiedSeatIcon;
-		} else if (seat.status === 1) {
+		} else if (!seat.taken) {
 			return availableSeatIcon;
 		} else {
 			return null;
