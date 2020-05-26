@@ -25,6 +25,7 @@ class SendTicketBS extends Component {
 //2. make a method to fetch the correct order from the tickets list if doesnt have ticketHolders
 //3. make a method to seperate all the tickets by type.
 //4. make a method to send the ticket to the correct ticketHolderID
+//5. make a method that limits number of selections in checkbox
 ////////////////////////////////////////////////////
   fetchTheLastOrder = async () => {
     let order;
@@ -63,18 +64,18 @@ class SendTicketBS extends Component {
   //it interactive while clicking in the checkbox
   seperateByType = (array) => {
     let tickeyByType = [
-      {type: 'Voksen', tickets:[]},
-      {type: 'Barn (6-17 år)', tickets:[]},
-      {type: 'Ungdom (18-19 år)', tickets:[]},
-      {type: 'Student', tickets:[]},
-      {type: 'Honnør', tickets:[]}
+      {type: 'Voksen', tickets:{passive: [], active: []}},
+      {type: 'Barn (6-17 år)', tickets:{passive: [], active: []}},
+      {type: 'Ungdom (18-19 år)', tickets:{passive: [], active: []}},
+      {type: 'Student', tickets:{passive: [], active: []}},
+      {type: 'Honnør', tickets:{passive: [], active: []}}
     ];
     
     for(let i = 0; i<array.length; i++){
       for(let j = 0; j<tickeyByType.length; j++){
         array[i].active = false
         if(array[i].type == tickeyByType[j].type){
-          tickeyByType[j].tickets.push(array[i])}}
+          tickeyByType[j].tickets.passive.push(array[i])}}
           this.setState({ticketByType: tickeyByType})
     } 
   }
@@ -132,20 +133,23 @@ class SendTicketBS extends Component {
       return (
         <React.Fragment>
           <div>
-            {this.state.boughtTickets.map((item) => {
-              return (
-                <div>
-                  {item.ticket}
-                  <div
-                    onClick={() => {
-                      this.pickContact(item.id);
-                    }}
-                  >
-                    {item.activeTicket}
-                    {item.passiveTicket}
-                  </div>
-                </div>
-              );
+            {this.state.ticketByType.map((item,index) => {
+              if(item.tickets.passive.length > 0){
+                return (
+                <div key={index}>{item.type}:  {item.tickets.active.length}/{item.tickets.passive.length}</div>
+                //   <div>
+                //     {item.ticket}
+                //     <div
+                //       onClick={() => {
+                //         this.pickContact(item.id);
+                //       }}
+                //     >
+                //       {item.activeTicket}
+                //       {item.passiveTicket}
+                //     </div>
+                //   </div>
+                );
+              }
             })}
           </div>
         </React.Fragment>
@@ -161,7 +165,7 @@ class SendTicketBS extends Component {
           <HeaderSendTickets end={this.props.endSendingTickets}>
           </HeaderSendTickets>
    
-          {/* {this.reviewTicket()} */}
+          {this.reviewTicket()}
           {this.openContactList()}
           {this.renderButton()}
         </div>
