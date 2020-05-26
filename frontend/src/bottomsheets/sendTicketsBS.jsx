@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import boughtTickets from "../fakeData/boughtTicket";
 import Contact from "../components/Contact";
 import HeaderSendTickets from "../components/sendTicketsComponents/HeaderSendTickets";
+import ContactListSendTicket from '../components/sendTicketsComponents/ContactListSendTicket';
 
 class SendTicketBS extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class SendTicketBS extends Component {
       sentTicketsConfirmationShow: false,
       loadOrder: false,
       ticketByType: [],
+      chooseTicketHolder: "",
       renderButtonText: ["Send billetter", "Fortsett"],
     };
   }
@@ -53,10 +55,11 @@ class SendTicketBS extends Component {
   }
 
 
-  pickContact = (id) => {
+  pickContact = (array) => {
     this.setState({
       reviewTicketsShow: false,
       contactListShow: true,
+      chooseTicketHolder: array
     });
   };
 
@@ -81,24 +84,6 @@ class SendTicketBS extends Component {
   }
 
 
-  openContactList = () => {
-    if (this.state.contactListShow) {
-      return (
-        <React.Fragment>
-          <div>
-            <p>Tilbake til billettoversikt</p>
-            <button>Kontakter</button>
-            <button>Grupper</button>
-            <input placeholder="Søk" />
-            
-            {this.props.contactList.map((item)=> {
-              return(<Contact name={item.firstName} lastName={item.lastName} phone={item.phoneNumber}></Contact>)
-            })}
-          </div>
-        </React.Fragment>
-      );
-    }
-  };
 
   backToSendTickets = () => {
     this.setState({ reviewTicketsShow: true, contactListShow: false });
@@ -136,18 +121,8 @@ class SendTicketBS extends Component {
             {this.state.ticketByType.map((item,index) => {
               if(item.tickets.passive.length > 0){
                 return (
-                <div key={index}>{item.type}:  {item.tickets.active.length}/{item.tickets.passive.length}</div>
-                //   <div>
-                //     {item.ticket}
-                //     <div
-                //       onClick={() => {
-                //         this.pickContact(item.id);
-                //       }}
-                //     >
-                //       {item.activeTicket}
-                //       {item.passiveTicket}
-                //     </div>
-                //   </div>
+                <div key={index}>{item.type}:  <div onClick={() => this.pickContact(item.tickets.passive)}>{item.tickets.active.length}/{item.tickets.passive.length}</div>
+                </div>
                 );
               }
             })}
@@ -166,7 +141,9 @@ class SendTicketBS extends Component {
           </HeaderSendTickets>
    
           {this.reviewTicket()}
-          {this.openContactList()}
+          <ContactListSendTicket passiveTickets={this.state.chooseTicketHolder} contactListShow={this.state.contactListShow}>
+
+          </ContactListSendTicket>
           {this.renderButton()}
         </div>
       </div>
