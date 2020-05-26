@@ -5,13 +5,24 @@ import occupiedSeatIcon from '../images/occupiedSeat.png';
 
 class Seat extends Component {
 	isSeatAvailable() {
-		const { status } = this.props.seat;
+		const { seat, selectedSeats } = this.props;
 
-		if (status === 2) {
-			return selectedSeatIcon;
-		} else if (!status) {
+		if (selectedSeats.length !== 0) {
+			var isSelected = false;
+			selectedSeats.forEach((element) => {
+				if (element.seat === seat) {
+					isSelected = true;
+				}
+			});
+
+			if (isSelected) {
+				return selectedSeatIcon;
+			}
+		}
+
+		if (seat.taken) {
 			return occupiedSeatIcon;
-		} else if (status === 1) {
+		} else if (!seat.taken) {
 			return availableSeatIcon;
 		} else {
 			return null;

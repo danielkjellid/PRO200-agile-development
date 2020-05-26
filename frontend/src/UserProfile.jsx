@@ -1,5 +1,4 @@
-// e8007e4db60528762be401e35489e959
-// Add this as a X-TripGo-Key header to your API calls to authenticate.
+
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
@@ -7,13 +6,6 @@ import ChooseTicketBS from "./bottomsheets/ChooseTicketBS";
 import BuySingleTicketBS from "./bottomsheets/BuySingleTicketBS";
 import ActiveTicket from "./components/ActiveTicket";
 import SendTicketBS from "./bottomsheets/sendTicketsBS";
-
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//API that fetches Contacts from db must be implemented here and save in a state
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
 
 class UserProfile extends Component {
   constructor(props) {
@@ -57,10 +49,6 @@ class UserProfile extends Component {
     }
   };
 
-  resetOrderName = () => {
-    
-  }
-
   buySingleTicketButtonHandler = () => {
     const buySingleTicketShow = this.state.singleTicket;
     this.setState({ singleTicket: !buySingleTicketShow });
@@ -97,7 +85,7 @@ class UserProfile extends Component {
 
   sendTicketsHandler = () => {
     this.setState({ sendTicketShow: true });
-    this.endTransaction();
+    this.setState({ singleTicket: false });
   };
 
   renderSendTicket = () => {
@@ -107,7 +95,8 @@ class UserProfile extends Component {
       return (
         <React.Fragment>
           <SendTicketBS
-            contactList={contactList}
+            contactList={this.props.contactList}
+            endSendingTickets={this.endSendingTickets}
           ></SendTicketBS>
         </React.Fragment>
       );
@@ -115,15 +104,20 @@ class UserProfile extends Component {
   };
 
   hideBuySingleTicket = () => {
-    this.setState({ singleTicket: false });
+    this.endTransaction();
     this.newTicketButtonHandler();
-    this.props.endTransaction();
+    
   };
 
   endTransaction = () => {
     this.setState({ singleTicket: false });
     this.props.endTransaction();
   };
+
+  endSendingTickets = () => {
+    this.setState({ sendTicketShow: false });
+    this.props.endTransaction();
+  }
 
   render() {
     let userName = this.props.user;
@@ -169,10 +163,10 @@ class UserProfile extends Component {
                 </div>
               </div>
             </div>
-            <div class="pt-4">
+            <div className="pt-4">
               <button
                 onClick={this.newTicketButtonHandler}
-                className="bg-vy-green-700 text-white text-sm font-medium rounded-lg px-4 py-3 w-full hover:bg-vy-green-900"
+                className="bg-vy-green-300 text-white text-sm font-medium rounded-lg px-4 py-3 w-full hover:bg-vy-green-400"
               >
                 Ny billett
               </button>
@@ -183,21 +177,21 @@ class UserProfile extends Component {
         {/* page content */}
         {/* temporarily here. just need some clickable contaclist */}
         <Link to={"/contactList"}>
-                <div className="text-sm text-gray-900 flex items-center">
-                  Kontakter
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    className="h-5 w-5 text-gray-600"
-                  >
-                    <path
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </Link>
+          <div className="text-sm text-gray-900 flex items-center">
+            Kontakter
+            <svg
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              className="h-5 w-5 text-gray-600"
+            >
+              <path
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+                fillRule="evenodd"
+              />
+            </svg>
+          </div>
+        </Link>
         {/* contains info about active ticket, environment calc and ticket stas */}
         <div className="px-5 py-10">
           {/* section */}
@@ -235,15 +229,15 @@ class UserProfile extends Component {
             {/* section header */}
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg text-gray-900">Miljøkalkulator</h2>
-              <div class="inline-block relative w-40">
-                <select class="block appearance-none w-full bg-white hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight text-sm focus:outline-none focus:shadow-outline">
+              <div className="inline-block relative w-40">
+                <select className="block appearance-none w-full bg-white hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight text-sm focus:outline-none focus:shadow-outline">
                   <option>Siste 30 dager</option>
                   <option>Siste 60 dager</option>
                   <option>Siste 120 dager</option>
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
-                    class="fill-current h-4 w-4"
+                    className="fill-current h-4 w-4"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >

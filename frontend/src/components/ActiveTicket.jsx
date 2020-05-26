@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../images/boughtTicketIcon.png';
-
 class ActiveTickets extends Component {
 
 	formatPhone(value) {
