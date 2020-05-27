@@ -33,13 +33,13 @@ class ChooseDeparture extends Component {
 			<div className={this.props.chooseDeparture ? 'block' : 'hidden'}>
 				<div>
 					<div className={this.props.editNumberOfTravellers ? 'modalBack' : null}></div>
+					<div className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer" onClick={this.props.back}>
+						<svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
+						<p className="text-sm font-medium">Tilbake</p>
+					</div>
 					<div className="numberOfTravellers mr-5 ml-5 pb-5 border-b border-grey-300 flex items-center justify-between">
 						<div className="">
-							<div className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer" onClick={this.props.back}>
-								<svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
-								<p className="text-sm font-medium">Tilbake</p>
-							</div>
-							<h4 className="text-sm font-medium text-gray-800">Reisende</h4>
+							<p className="text-sm font-medium text-gray-800">Reisende</p>
 							{this.props.numberOfTravellers.map((item) => {
 								if (item.number > 0) {
 									return (<p className="text-sm text-gray-900" key={item.type}>{item.number}x {item.type}</p>);
