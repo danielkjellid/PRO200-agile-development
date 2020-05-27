@@ -122,7 +122,7 @@ class UserProfile extends Component {
   render() {
     let userName = this.props.user;
     let userNameDisplay = userName ? userName[0].firstName : "nope";
-    
+
 
     return (
       <div>

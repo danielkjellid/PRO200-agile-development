@@ -53,7 +53,6 @@ class ContactList extends Component {
      }
 
     render() {
-      
          let inhold = this.state.contactList ? 
             <div>
                 <h3>Kontakt Liste</h3>
@@ -65,7 +64,7 @@ class ContactList extends Component {
                                 key={index}
                                 id={item.id}
                                 name={item.firstName}
-                                phone={item.phone}
+                                phone={item.phoneNumber}
                             ></Contact>
                     )
                 })}

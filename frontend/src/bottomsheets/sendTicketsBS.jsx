@@ -13,6 +13,8 @@ class SendTicketBS extends Component {
       contactListShow: false,
       sentTicketsConfirmationShow: false,
       loadOrder: false,
+      actives: [],
+      currentType: '',
       ticketByType: [],
       chooseTicketHolder: "",
       renderButtonText: ["Send billetter", "Fortsett"],
@@ -29,7 +31,8 @@ class SendTicketBS extends Component {
 //4. make a method to send the ticket to the correct ticketHolderID
 //5. make a method that limits number of selections in checkbox
 ////////////////////////////////////////////////////
-  fetchTheLastOrder = async () => {
+
+fetchTheLastOrder = async () => {
     let order;
     try{
       const response = await fetch("https://localhost:5001/orders", {method: "get"});
@@ -40,7 +43,22 @@ class SendTicketBS extends Component {
       let id = order[order.length-1].id;
       this.getAllTicketsFromOrder(id);
     }
+  }
 
+  addToActives = (id) => {
+      let activesArr = this.state.actives;
+      activesArr.push(id);
+      console.log(activesArr);
+      this.setState({actives: activesArr});
+  }
+
+  removeFromActives = (id) => {
+    let activesArr = this.state.actives;
+    let findIndex = activesArr.indexOf(id);
+    if(findIndex > -1){
+      activesArr.splice(findIndex, 1)
+    }
+    this.setState({actives: activesArr})
   }
 
   getAllTicketsFromOrder = async (id) => {
@@ -55,13 +73,16 @@ class SendTicketBS extends Component {
   }
 
 
-  pickContact = (array) => {
+  pickContact = (array, type) => {
     this.setState({
       reviewTicketsShow: false,
       contactListShow: true,
-      chooseTicketHolder: array
+      chooseTicketHolder: array,
+      currentType: type
     });
+    
   };
+
 
   //this method seperates tickets by types and adds 'active: false' to every ticket to make 
   //it interactive while clicking in the checkbox
@@ -83,6 +104,19 @@ class SendTicketBS extends Component {
     } 
   }
 
+ assignContactToTicket= () => {
+   let changeTickets =  this.state.ticketByType.map((item) => {
+     if(item.type === this.state.currentType){
+       console.log(item.tickets);
+       for(let i= 0;i<item.tickets.passive.length;i++){
+         item.tickets.passive[i].ticketHolderId = this.state.actives[i]
+         console.log(item.tickets.passive[i].ticketHolderId + "yes");
+       }
+     }
+  })
+  console.log(changeTickets);
+ }
+ 
 
 
   backToSendTickets = () => {
@@ -104,7 +138,7 @@ class SendTicketBS extends Component {
       buttonClassNameToggle = "fortsettButton fortsettButtonActive";
       return (
         <button
-          onClick={this.backToSendTickets}
+          onClick={() => {this.backToSendTickets(); this.assignContactToTicket()}}
           className={buttonClassNameToggle}
         >
           {this.state.renderButtonText[1]}
@@ -114,6 +148,7 @@ class SendTicketBS extends Component {
   };
 
   reviewTicket = () => {
+    
     if (this.state.reviewTicketsShow) {
       return (
         <React.Fragment>
@@ -121,8 +156,9 @@ class SendTicketBS extends Component {
             {this.state.ticketByType.map((item,index) => {
               if (item.tickets.passive.length > 0) {
                 let passive = item.tickets.passive;
+                const passiveNum = item.tickets.passive.length;
                 return (
-                <div key={index}>{item.type}:  <div onClick={() => this.pickContact(passive)}>{item.tickets.active.length}/{item.tickets.passive.length}</div>
+                <div key={index}>{item.type}:  <div onClick={() => this.pickContact(passive, item.type)}>{item.tickets.active.length}/{passiveNum}</div>
                 </div>
                 );
               }
@@ -134,7 +170,9 @@ class SendTicketBS extends Component {
   };
 
   render() {
-    if(this.state.loadOrder){console.log(this.state.ticketByType)};
+    console.log(this.state.chooseTicketHolder);
+    console.log(this.state.actives);
+    console.log(this.state.ticketByType);
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
         <div className="">
@@ -142,8 +180,12 @@ class SendTicketBS extends Component {
           </HeaderSendTickets>
    
           {this.reviewTicket()}
-          <ContactListSendTicket passiveTickets={this.state.chooseTicketHolder} contactListShow={this.state.contactListShow} contactList={this.props.contactList}>
-
+          <ContactListSendTicket 
+                                passiveTickets={this.state.chooseTicketHolder} 
+                                contactListShow={this.state.contactListShow} 
+                                contactList={this.props.contactList}
+                                addToActives={this.addToActives}
+                                removeFromActives={this.removeFromActives}>
           </ContactListSendTicket>
           {this.renderButton()}
         </div>

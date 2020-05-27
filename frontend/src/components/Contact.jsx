@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// denne 
+
 class Contact extends Component {
     constructor(props){
         super(props)
@@ -11,7 +11,13 @@ class Contact extends Component {
     handleClick() {
         this.setState( prevState => {
 			return {active: !prevState.active};
-		});
+        });
+        if(!this.state.active){
+            console.log(this.props.id);
+            this.props.addToActives(this.props.id);
+        } else {
+            this.props.removeFromActives(this.props.id);
+        }
     }
 
 	
@@ -36,7 +42,7 @@ class Contact extends Component {
                             </p>
                             {/* Contact info */}
                             <p className="text-black text-gray-700" style={{fontSize: "10px"}}>
-                                {this.props.phone} +47 1337 420 1738
+                                +47 {this.props.phone} 
                             </p>
                         </div>
 

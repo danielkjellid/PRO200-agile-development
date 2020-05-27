@@ -38,7 +38,6 @@ class App extends Component {
       const response = await fetch("https://localhost:5001/contacts");
       const payload = await response.json();
       this.setState({contactList: payload})  
-      console.log(payload);
     } catch(err){console.log(err);}
   }
 
@@ -66,8 +65,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.contactList);
-    console.log(this.state.user);
+
     return (
       <BrowserRouter>
         <div>
