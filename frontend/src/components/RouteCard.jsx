@@ -19,7 +19,7 @@ class RouteCard extends Component {
             <p className="mt-2 text-gray-700 text-sm">Spor {this.props.track}</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-700 text-sm">{this.props.travelTime}</p>
+            <p className="text-gray-700 text-sm">{this.props.travelTime} timer</p>
             <span className="mt-5 block px-2 py-2 border border-vy-green-300 rounded-md text-vy-green-300">R30x</span>
           </div>
           <div>
