@@ -47,8 +47,6 @@ class Seats extends Component {
 	selectAvailableSeats(seats, row, index, numberOfTravellers) {
 		const selectedSeats = [];
 
-		const intitialTravellers = numberOfTravellers;
-
 		for (var i = 0; i < numberOfTravellers; i++) {
 			const availableSeat = this.isSeatOccupied(seats, row, index + i);
 
