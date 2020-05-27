@@ -211,15 +211,14 @@ checkIfPassEqAct = () => {
                   <div 
                     onClick={() => this.pickContact(passive, item.type)} 
                     key={index} 
-                    className="cursor-pointer flex items-center justify-between border-b border-gray-300 pb-5"
+                    className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
                   >
                     <div>
                       <p className="font-medium text-gray-700 text-base">{item.type}</p>
                       <p className="mt-px text-gray-700 text-sm">Hvem ønsker du å sende billetten til?</p>
                     </div>
-                    {/* pls put the green color in the ternary after : :) */}
-                    <div className={activeNum!==passiveNum ? "bg-gray-300 flex items-center justify-center rounded-full p-2" : "" }>
-                      <span className="font-semibold text-gray-700 text-base">{activeNum}/{passiveNum}</span>
+                    <div className={activeNum!==passiveNum ? "bg-gray-300 flex items-center justify-center rounded-full p-2" : "bg-vy-green-200 flex items-center justify-center rounded-full p-2"}>
+                      <span className={activeNum!==passiveNum ? "font-semibold text-gray-700 text-sm" : "font-semibold text-vy-green-300 text-sm"}>{activeNum}/{passiveNum}</span>
                     </div>
                   </div>
                 );
