@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VyShare.Models;
 using VyShare.Models.Dto;
 
 namespace VyShare.Controllers
@@ -36,7 +37,7 @@ namespace VyShare.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(Guid orderId, BasicTicketDto basicTicketDto)
+        public async Task<ActionResult<List<BasicTicketDto>>> Add(Guid orderId, List<BasicTicketDto> basicTicketDtos)
         {
             var order = await db.Orders.Include(e => e.BasicTickets).FirstOrDefaultAsync(e => e.Id == orderId);
             if (order == null)
@@ -44,12 +45,18 @@ namespace VyShare.Controllers
                 return NotFound();
             }
 
-            var basicTicket = basicTicketDto.ToBasicTicket(db);
-            order.BasicTickets.Add(basicTicket);
+            var basicTickets = new List<BasicTicket>();
+            foreach (var basicTicketDto in basicTicketDtos)
+            {
+                var basicTicket = basicTicketDto.ToBasicTicket(db);
+                basicTickets.Add(basicTicket);
+                order.BasicTickets.Add(basicTicket);
+            }
             await db.SaveChangesAsync();
-            basicTicketDto = new BasicTicketDto(basicTicket);
 
-            return Ok(basicTicketDto);
+            basicTicketDtos = basicTickets.Select(e => new BasicTicketDto(e)).ToList();
+
+            return Ok(basicTicketDtos);
         }
 
 
@@ -92,7 +99,8 @@ namespace VyShare.Controllers
                 return NotFound("Ticket not found");
             }
 
-            if(basicTicket.TicketHolder != null){
+            if (basicTicket.TicketHolder != null)
+            {
                 return BadRequest("Ticket is already assigned to another person");
             }
 

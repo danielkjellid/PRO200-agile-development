@@ -67,6 +67,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.contactList);
+    console.log(this.state.user);
     return (
       <BrowserRouter>
         <div>

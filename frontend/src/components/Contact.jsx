@@ -31,7 +31,7 @@ class Contact extends Component {
         
                         <div>
                             {/* Contact name */}
-                            <p class="text-black font-base" style={this.nameStyle}>
+                            <p class="text-black font-base">
                                 {this.props.name} 
                             </p>
                             {/* Contact info */}
@@ -44,9 +44,9 @@ class Contact extends Component {
 
                     {/* Checkbox */}
                     <div>
-                        <button onClick={this.handleClick} className="w-5 h-5 rounded-full p-0 border border-gray-400">
+                        <button onClick={this.handleClick} className="w-6 h-6 rounded-full p-0 border border-gray-400">
                             {this.state.active 
-                                ? <svg className="w-full h-full text-green-700 rounded-full" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" fillRule="evenodd"/></svg>
+                                ? <svg className="w-full h-full text-green-700" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" fillRule="evenodd"/></svg>
                                 : '' 
                             }
                         </button>
