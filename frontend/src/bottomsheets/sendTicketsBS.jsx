@@ -179,17 +179,18 @@ checkIfPassEqAct = () => {
     }
 
     if(this.state.ticketsWereSent) {
+      
       return(
-        <div>
+        <div className="flex flex-col">
           <button
             onClick={this.makeAccountInVIpps}
-            className={buttonClassNameToggle}>
+            className="bg-vy-green-200 w-full p-3 text-center text-sm font-medium text-vy-green-300 rounded-md mb-3">
               {this.state.renderButtonText[2]}
           </button>
           <button
-            className={buttonClassNameToggle}>
+            className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
             {this.state.renderButtonText[3]}
-        </button>
+          </button>
         </div>
       )
     }
