@@ -152,14 +152,28 @@ fetchTheLastOrder = async () => {
     if (this.state.reviewTicketsShow) {
       return (
         <React.Fragment>
-          <div>
+          <div className="px-5 pb-5">
             {this.state.ticketByType.map((item,index) => {
               if (item.tickets.passive.length > 0) {
                 let passive = item.tickets.passive;
                 const passiveNum = item.tickets.passive.length;
                 return (
-                <div key={index}>{item.type}:  <div onClick={() => this.pickContact(passive, item.type)}>{item.tickets.active.length}/{passiveNum}</div>
-                </div>
+                  <div 
+                    onClick={() => this.pickContact(passive, item.type)} 
+                    key={index} 
+                    className="cursor-pointer flex items-center justify-between border-b border-gray-300 pb-5"
+                  >
+                    <div>
+                      <p className="font-medium text-gray-700 text-base">{item.type}</p>
+                      <p className="mt-px text-gray-700 text-sm">Hvem ønsker du å sende billetten til?</p>
+                    </div>
+                    <div className="bg-gray-300 flex items-center justify-center rounded-full p-2">
+                      <span className="font-semibold text-gray-700 text-base">{item.tickets.active.length}/{passiveNum}</span>
+                    </div>
+                  </div>
+                // <div key={index}>{item.type}:  
+                //   <div onClick={() => this.pickContact(passive, item.type)}>{item.tickets.active.length}/{passiveNum}</div>
+                // </div>
                 );
               }
             })}
@@ -178,14 +192,13 @@ fetchTheLastOrder = async () => {
         <div className="">
           <HeaderSendTickets end={this.props.endSendingTickets}>
           </HeaderSendTickets>
-   
           {this.reviewTicket()}
           <ContactListSendTicket 
-                                passiveTickets={this.state.chooseTicketHolder} 
-                                contactListShow={this.state.contactListShow} 
-                                contactList={this.props.contactList}
-                                addToActives={this.addToActives}
-                                removeFromActives={this.removeFromActives}>
+            passiveTickets={this.state.chooseTicketHolder} 
+            contactListShow={this.state.contactListShow} 
+            contactList={this.props.contactList}
+            addToActives={this.addToActives}
+            removeFromActives={this.removeFromActives}>
           </ContactListSendTicket>
           {this.renderButton()}
         </div>
