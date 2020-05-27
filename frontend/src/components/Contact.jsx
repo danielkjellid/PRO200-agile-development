@@ -25,9 +25,9 @@ class Contact extends Component {
 	render() {
 		
 			return (
-				<div className="flex flex-row justify-between items-center px-5 py-4 border-b border-gray-300" >
+				<div className="flex flex-row justify-between items-center py-4 border-b border-gray-300" >
 
-                    <div className="flex flex-row">
+                    <div className="flex flex-row ml-5">
 
                         {/* Contact picture */}
                         <div className="rounded-full bg-gray-400 w-10 10-8 mr-2">
@@ -49,7 +49,7 @@ class Contact extends Component {
                     </div>
 
                     {/* Checkbox */}
-                    <div>
+                    <div className="mr-5">
                         <button onClick={this.handleClick} className="w-6 h-6 rounded-full p-0 border border-gray-400">
                             {this.state.active 
                                 ? <svg className="w-full h-full text-green-700" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" fillRule="evenodd"/></svg>
