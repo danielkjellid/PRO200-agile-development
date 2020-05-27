@@ -185,17 +185,18 @@ checkIfPassEqAct = () => {
     }
 
     if(this.state.ticketsWereSent) {
+      
       return(
-        <div>
+        <div className="flex flex-col">
           <button
             onClick={this.makeAccountInVIpps}
-            className={buttonClassNameToggle}>
+            className="bg-vy-green-200 w-full p-3 text-center text-sm font-medium text-vy-green-300 rounded-md mb-3">
               {this.state.renderButtonText[2]}
           </button>
           <button
-            className={buttonClassNameToggle}>
+            className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
             {this.state.renderButtonText[3]}
-        </button>
+          </button>
         </div>
       )
     }
@@ -217,15 +218,14 @@ checkIfPassEqAct = () => {
                   <div 
                     onClick={() => this.pickContact(passive, item.type)} 
                     key={index} 
-                    className="cursor-pointer flex items-center justify-between border-b border-gray-300 pb-5"
+                    className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
                   >
                     <div>
                       <p className="font-medium text-gray-700 text-base">{item.type}</p>
                       <p className="mt-px text-gray-700 text-sm">Hvem ønsker du å sende billetten til?</p>
                     </div>
-                    {/* pls put the green color in the ternary after : :) */}
-                    <div className={activeNum!==passiveNum ? "bg-gray-300 flex items-center justify-center rounded-full p-2" : "" }>
-                      <span className="font-semibold text-gray-700 text-base">{activeNum}/{passiveNum}</span>
+                    <div className={activeNum!==passiveNum ? "bg-gray-300 flex items-center justify-center rounded-full p-2" : "bg-vy-green-200 flex items-center justify-center rounded-full p-2"}>
+                      <span className={activeNum!==passiveNum ? "font-semibold text-gray-700 text-sm" : "font-semibold text-vy-green-300 text-sm"}>{activeNum}/{passiveNum}</span>
                     </div>
                   </div>
                 );
