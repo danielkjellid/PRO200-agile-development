@@ -114,7 +114,7 @@ class Seats extends Component {
 
 		for (let [key, value] of Object.entries(instances)) {
 			text.push(this.renderSeatText(key, value));
-			text.push(<br></br>);
+			text.push(<br key={key}></br>);
 		}
 
 		return text;
@@ -144,7 +144,7 @@ class Seats extends Component {
 						{row.map((col, j) => {
 							if (j === 3) {
 								return (
-									<React.Fragment>
+									<React.Fragment key={col.id}>
 										<div />
 										<Seat
 											key={col.id}
