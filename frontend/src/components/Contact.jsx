@@ -13,7 +13,6 @@ class Contact extends Component {
 			return {active: !prevState.active};
         });
         if(!this.state.active){
-            console.log(this.props.id);
             this.props.addToActives(this.props.id);
         } else {
             this.props.removeFromActives(this.props.id);
@@ -30,18 +29,18 @@ class Contact extends Component {
                     <div className="flex flex-row ml-5">
 
                         {/* Contact picture */}
-                        <div className="rounded-full bg-gray-400 w-10 10-8 mr-2">
+                        <div className="rounded-full bg-gray-400 w-10 h-10 mr-3">
                             {/* TODO: Add rounded img */}
                         </div>
 
         
                         <div>
                             {/* Contact name */}
-                            <p class="text-black font-base">
+                            <p class="text-gray-900 text-base">
                                 {this.props.name} 
                             </p>
                             {/* Contact info */}
-                            <p className="text-black text-gray-700" style={{fontSize: "10px"}}>
+                            <p className="text-gray-700 text-sm">
                                 +47 {this.props.phone} 
                             </p>
                         </div>

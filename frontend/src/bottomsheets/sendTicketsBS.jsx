@@ -111,9 +111,9 @@ fetchTheLastOrder = async () => {
 
 checkIfPassEqAct = () => {
   const ticketsNum = this.state.ticketByType; 
-  let counter = 1;
+  let counter = 0;
   for(let i = 0; i<ticketsNum.length; i++){
-    if(ticketsNum[i].tickets.passive===ticketsNum[i].tickets.active){
+    if(ticketsNum[i].tickets.passive.length===ticketsNum[i].tickets.active.length){
       counter++;
     } else {break;}
   }
@@ -151,20 +151,26 @@ checkIfPassEqAct = () => {
 
   renderButton = () => {
 
-    let truelu = this.checkIfPassEqAct();
-    console.log(truelu);
-   
-   
-
+    let buttonTruth = this.checkIfPassEqAct();
+    
     let buttonClassNameToggle;
 
     if (this.state.reviewTicketsShow) {
-      buttonClassNameToggle = "p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed";
-      return (
-        <button onClick={this.ticketsWereSent}className={buttonClassNameToggle}>
-          {this.state.renderButtonText[0]}
-        </button>
-      );
+      if(!buttonTruth){
+        buttonClassNameToggle = "p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed";
+        return (
+          <button className={buttonClassNameToggle}>
+            {this.state.renderButtonText[0]}
+          </button> 
+        )
+      } else {
+        buttonClassNameToggle = "p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md cursor-not-allowed";
+        return (
+          <button onClick={this.ticketsWereSent} className={buttonClassNameToggle}>
+            {this.state.renderButtonText[0]}
+          </button> 
+        )
+      }
     }
     if (this.state.contactListShow) {
       buttonClassNameToggle = "p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400";
