@@ -96,6 +96,7 @@ class UserProfile extends Component {
         <React.Fragment>
           <SendTicketBS
             contactList={this.props.contactList}
+            endTransaction={this.props.endTransaction}
             endSendingTickets={this.endSendingTickets}
           ></SendTicketBS>
         </React.Fragment>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 import boughtTickets from "../fakeData/boughtTicket";
 import Contact from "../components/Contact";
 import HeaderSendTickets from "../components/sendTicketsComponents/HeaderSendTickets";
@@ -16,6 +17,7 @@ class SendTicketBS extends Component {
       ticketsWereSent: false,
       makeAccountInVIpps: false,
       loadOrder: false,
+      orderId: '',
       actives: [],
       currentType: '',
       ticketByType: [],
@@ -46,8 +48,33 @@ fetchTheLastOrder = async () => {
 
     if(order){
       let id = order[order.length-1].id;
+      this.setState({orderId: id})
       this.getAllTicketsFromOrder(id);
     }
+  }
+
+  updateAPIFetch = async (orderId, basicticketsId, ticketHolderId) => {
+    try {
+      await fetch(`https://localhost:5001/orders/${orderId}/basictickets/${basicticketsId}/assignto/${ticketHolderId}`, {
+        method: 'post',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  updateAPI = () => {
+    this.state.ticketByType.map((item) =>{
+      if(item.tickets.active.length > 0){
+        for(let i = 0; i<item.tickets.active.length;i++){
+          this.updateAPIFetch(
+            this.state.orderId, 
+            item.tickets.active[i].id,
+            item.tickets.active[i].ticketHolderId)
+        }
+      }
+    })
+		
   }
 
   addToActives = (id) => {
@@ -124,7 +151,7 @@ checkIfPassEqAct = () => {
 }
 
  assignContactToTicket= () => {
-   this.state.ticketByType.map((item) => {
+   let ticketsByType = this.state.ticketByType.map((item) => {
      for(let i= 0;i<item.tickets.passive.length;i++){
       if(item.type === this.state.currentType){
         item.tickets.passive[i].ticketHolderId = this.state.actives[i]
@@ -166,7 +193,7 @@ checkIfPassEqAct = () => {
       } else {
         buttonClassNameToggle = "p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md cursor-not-allowed";
         return (
-          <button onClick={this.ticketsWereSent} className={buttonClassNameToggle}>
+          <button onClick={() => {this.ticketsWereSent(); this.updateAPI() }} className={buttonClassNameToggle}>
             {this.state.renderButtonText[0]}
           </button> 
         )
@@ -176,7 +203,7 @@ checkIfPassEqAct = () => {
       buttonClassNameToggle = "p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400";
       return (
         <button
-          onClick={() => {this.backToSendTickets(); this.assignContactToTicket()}}
+          onClick={() => {this.backToSendTickets(); this.assignContactToTicket(this.state.orderId)}}
           className={buttonClassNameToggle}
         >
           {this.state.renderButtonText[1]}
@@ -193,10 +220,12 @@ checkIfPassEqAct = () => {
             className="bg-vy-green-200 w-full p-3 text-center text-sm font-medium text-vy-green-300 rounded-md mb-3">
               {this.state.renderButtonText[2]}
           </button>
-          <button
-            className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
-            {this.state.renderButtonText[3]}
-          </button>
+          <Link to={'/tickets'}>
+            <button onClick={this.props.endTransaction}
+              className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
+              {this.state.renderButtonText[3]}
+            </button>
+          </Link>
         </div>
       )
     }
@@ -239,7 +268,7 @@ checkIfPassEqAct = () => {
 
   render() {
   
-    console.log(this.state.actives);
+    console.log(this.state.ticketByType);
   
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
