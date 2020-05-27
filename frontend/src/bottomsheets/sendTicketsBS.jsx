@@ -127,7 +127,7 @@ fetchTheLastOrder = async () => {
     let buttonClassNameToggle;
 
     if (this.state.reviewTicketsShow) {
-      buttonClassNameToggle = "fortsettButton fortsettButtonDisabled";
+      buttonClassNameToggle = "p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed";
       return (
         <button className={buttonClassNameToggle}>
           {this.state.renderButtonText[0]}
@@ -135,7 +135,7 @@ fetchTheLastOrder = async () => {
       );
     }
     if (this.state.contactListShow) {
-      buttonClassNameToggle = "fortsettButton fortsettButtonActive";
+      buttonClassNameToggle = "p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400";
       return (
         <button
           onClick={() => {this.backToSendTickets(); this.assignContactToTicket()}}
@@ -171,9 +171,6 @@ fetchTheLastOrder = async () => {
                       <span className="font-semibold text-gray-700 text-base">{item.tickets.active.length}/{passiveNum}</span>
                     </div>
                   </div>
-                // <div key={index}>{item.type}:  
-                //   <div onClick={() => this.pickContact(passive, item.type)}>{item.tickets.active.length}/{passiveNum}</div>
-                // </div>
                 );
               }
             })}
@@ -200,7 +197,9 @@ fetchTheLastOrder = async () => {
             addToActives={this.addToActives}
             removeFromActives={this.removeFromActives}>
           </ContactListSendTicket>
-          {this.renderButton()}
+          <div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
+            {this.renderButton()}
+          </div>
         </div>
       </div>
     );
