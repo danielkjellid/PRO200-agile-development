@@ -356,42 +356,55 @@ class ChooseSeats extends Component {
 
 	render() {
 		return (
-			<div className={this.props.chooseSeat ? 'displayBlock' : 'displayNone'}>
-				<div
-					className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer"
-					onClick={this.props.back}
-				>
-					<svg
-						className="h-6 w-6 pr-2 text-gray-600"
-						fill="currentColor"
-						viewBox="0 0 20 20"
+			<div className={this.props.chooseSeat ? 'block' : 'hidden'}>
+				<div className="px-5 pb-5 mx-auto">
+					<div
+						className="flex flex-row items-center mb-5 cursor-pointer"
+						onClick={this.props.back}
 					>
-						<path
-							d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-							clipRule="evenodd"
-							fillRule="evenodd"
+						<svg
+							className="h-6 w-6 pr-2 text-gray-600"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+								clipRule="evenodd"
+								fillRule="evenodd"
+							/>
+						</svg>
+						<p className="text-sm font-medium">Tilbake</p>
+					</div>
+					<div className="inline-block relative w-full">
+							<select onChange={this.handleChange} value={this.state.value} className="block appearance-none w-full bg-white hover:border-gray-400 p-3 pr-8 rounded shadow leading-tight text-sm focus:outline-none focus:shadow-outline">
+									<option value="carriage1">Vogn 1</option>
+									<option value="carriage2">Vogn 2</option>
+									<option value="carriage3">Vogn 3</option>
+							</select>
+							<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+									<svg
+											className="fill-current h-4 w-4"
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+									>
+											<path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+									</svg>
+							</div>
+					</div>
+					<div className="mt-8">
+						<Seats
+							tickets={this.props.tickets}
+							carriage={this.state.currentSelected}
 						/>
-					</svg>
-					<p className="text-sm font-medium">Tilbake</p>
+					</div>
 				</div>
-				<div style={{ textAlign: 'center' }}>
-					<select value={this.state.value} onChange={this.handleChange}>
-						<option value="carriage1">Vogn 1</option>
-						<option value="carriage2">Vogn 2</option>
-						<option value="carriage3">Vogn 3</option>
-					</select>
+				<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
+					<button 
+							onClick={this.props.continueToPayment}
+							className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
+							Fortsett til betaling
+					</button>
 				</div>
-				<br></br>
-				<Seats
-					tickets={this.props.tickets}
-					carriage={this.state.currentSelected}
-				/>
-				<button
-					onClick={this.props.continueToPayment}
-					className="fortsettButton fortsettButtonActive"
-				>
-					Fortsett til betaling
-				</button>
 			</div>
 		);
 	}
