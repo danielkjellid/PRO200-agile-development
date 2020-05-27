@@ -3,6 +3,8 @@ import boughtTickets from "../fakeData/boughtTicket";
 import Contact from "../components/Contact";
 import HeaderSendTickets from "../components/sendTicketsComponents/HeaderSendTickets";
 import ContactListSendTicket from '../components/sendTicketsComponents/ContactListSendTicket';
+import TicketsWereSend from "../components/sendTicketsComponents/TicketsWereSend";
+import MakeAccountInVIpps from "../components/sendTicketsComponents/MakeAccountInVIpps";
 
 class SendTicketBS extends Component {
   constructor(props) {
@@ -11,15 +13,18 @@ class SendTicketBS extends Component {
     this.state = {
       reviewTicketsShow: true,
       contactListShow: false,
-      sentTicketsConfirmationShow: false,
+      ticketsWereSent: false,
+      makeAccountInVIpps: false,
       loadOrder: false,
       actives: [],
       currentType: '',
       ticketByType: [],
       chooseTicketHolder: "",
-      renderButtonText: ["Send billetter", "Fortsett"],
+      renderButtonText: ["Send billetter", "Fortsett", "Opprett oppgjør i Vipps", "Se billettene"],
     };
   }
+
+ 
 
   componentDidMount() {
     this.fetchTheLastOrder();
@@ -104,32 +109,59 @@ fetchTheLastOrder = async () => {
     } 
   }
 
+checkIfPassEqAct = () => {
+  const ticketsNum = this.state.ticketByType; 
+  let counter = 1;
+  for(let i = 0; i<ticketsNum.length; i++){
+    if(ticketsNum[i].tickets.passive===ticketsNum[i].tickets.active){
+      counter++;
+    } else {break;}
+  }
+  console.log(counter);
+  if(counter===ticketsNum.length){
+    return true 
+  } else {return false}
+}
+
  assignContactToTicket= () => {
-   let changeTickets =  this.state.ticketByType.map((item) => {
-     if(item.type === this.state.currentType){
-       console.log(item.tickets);
-       for(let i= 0;i<item.tickets.passive.length;i++){
-         item.tickets.passive[i].ticketHolderId = this.state.actives[i]
-         console.log(item.tickets.passive[i].ticketHolderId + "yes");
-       }
+   this.state.ticketByType.map((item) => {
+     for(let i= 0;i<item.tickets.passive.length;i++){
+      if(item.type === this.state.currentType){
+        item.tickets.passive[i].ticketHolderId = this.state.actives[i]
+        if(this.state.actives.length>0){
+          item.tickets.active.push(item.tickets.passive[i])
+        }
+      } else {continue}
      }
   })
-  console.log(changeTickets);
+  this.setState({actives:[]})
  }
  
+ ticketsWereSent = () => {
+   this.setState({reviewTicketsShow: false, ticketsWereSent: true})
+ }
 
+ makeAccountInVIpps = () => {
+   this.setState({ticketsWereSent: false, makeAccountInVIpps: true})
+ }
 
   backToSendTickets = () => {
     this.setState({ reviewTicketsShow: true, contactListShow: false });
   };
 
   renderButton = () => {
+
+    let truelu = this.checkIfPassEqAct();
+    console.log(truelu);
+   
+   
+
     let buttonClassNameToggle;
 
     if (this.state.reviewTicketsShow) {
       buttonClassNameToggle = "p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed";
       return (
-        <button className={buttonClassNameToggle}>
+        <button onClick={this.ticketsWereSent}className={buttonClassNameToggle}>
           {this.state.renderButtonText[0]}
         </button>
       );
@@ -145,6 +177,23 @@ fetchTheLastOrder = async () => {
         </button>
       );
     }
+
+    if(this.state.ticketsWereSent) {
+      return(
+        <div>
+          <button
+            onClick={this.makeAccountInVIpps}
+            className={buttonClassNameToggle}>
+              {this.state.renderButtonText[2]}
+          </button>
+          <button
+            className={buttonClassNameToggle}>
+            {this.state.renderButtonText[3]}
+        </button>
+        </div>
+      )
+    }
+
   };
 
   reviewTicket = () => {
@@ -157,6 +206,7 @@ fetchTheLastOrder = async () => {
               if (item.tickets.passive.length > 0) {
                 let passive = item.tickets.passive;
                 const passiveNum = item.tickets.passive.length;
+                const activeNum = item.tickets.active.length;
                 return (
                   <div 
                     onClick={() => this.pickContact(passive, item.type)} 
@@ -167,8 +217,9 @@ fetchTheLastOrder = async () => {
                       <p className="font-medium text-gray-700 text-base">{item.type}</p>
                       <p className="mt-px text-gray-700 text-sm">Hvem ønsker du å sende billetten til?</p>
                     </div>
-                    <div className="bg-gray-300 flex items-center justify-center rounded-full p-2">
-                      <span className="font-semibold text-gray-700 text-base">{item.tickets.active.length}/{passiveNum}</span>
+                    {/* pls put the green color in the ternary after : :) */}
+                    <div className={activeNum!==passiveNum ? "bg-gray-300 flex items-center justify-center rounded-full p-2" : "" }>
+                      <span className="font-semibold text-gray-700 text-base">{activeNum}/{passiveNum}</span>
                     </div>
                   </div>
                 );
@@ -181,9 +232,9 @@ fetchTheLastOrder = async () => {
   };
 
   render() {
-    console.log(this.state.chooseTicketHolder);
+  
     console.log(this.state.actives);
-    console.log(this.state.ticketByType);
+  
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
         <div className="">
@@ -197,6 +248,8 @@ fetchTheLastOrder = async () => {
             addToActives={this.addToActives}
             removeFromActives={this.removeFromActives}>
           </ContactListSendTicket>
+          <TicketsWereSend ticketsWereSent={this.state.ticketsWereSent}></TicketsWereSend>
+          <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVIpps}></MakeAccountInVIpps>
           <div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
             {this.renderButton()}
           </div>
