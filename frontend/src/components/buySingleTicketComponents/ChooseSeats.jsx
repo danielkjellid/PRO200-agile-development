@@ -374,7 +374,6 @@ class ChooseSeats extends Component {
 					</svg>
 					<p className="text-sm font-medium">Tilbake</p>
 				</div>
-				<br></br>
 				<div style={{ textAlign: 'center' }}>
 					<select value={this.state.value} onChange={this.handleChange}>
 						<option value="carriage1">Vogn 1</option>

@@ -64,7 +64,6 @@ class Seats extends Component {
 	}
 
 	isSeatOccupied(seats, row, index) {
-		console.log('row: ', row, 'index: ', index);
 		if (index >= seats[row].length) {
 			if (row + 1 >= seats.length) {
 				row = 0;
@@ -74,18 +73,14 @@ class Seats extends Component {
 				index = 0;
 			}
 			if (seats[row][index].taken) {
-				console.log('is occupied');
 				return this.isSeatOccupied(seats, row, index);
 			} else {
-				console.log('is available');
 				return { row: row, index: index };
 			}
 		} else {
 			if (seats[row][index].taken) {
-				console.log('is occupied');
 				return this.isSeatOccupied(seats, row, index + 1);
 			} else {
-				console.log('is available');
 				return { row: row, index: index };
 			}
 		}
@@ -103,25 +98,46 @@ class Seats extends Component {
 			return <div>Velg sete</div>;
 		}
 
+		var instances = selectedSeats
+			.map((element) => element)
+			.reduce((values, val) => {
+				if (val.row in values) {
+					values[val.row].push(val.seat);
+				} else {
+					values[val.row] = [];
+					values[val.row].push(val.seat);
+				}
+				return values;
+			}, {});
+
+		const text = [];
+
+		for (let [key, value] of Object.entries(instances)) {
+			text.push(this.renderSeatText(key, value));
+			text.push(<br></br>);
+		}
+
+		return text;
+	}
+
+	renderSeatText(key, value) {
 		return (
-			<div>
-				Rad {selectedSeats[0].row + 1}, sete
-				{selectedSeats.map((element) => {
-					if (selectedSeats.indexOf(element) === selectedSeats.length - 1) {
-						return ' ' + element.seat.id + ' ';
-					} else {
-						return ' ' + element.seat.id + ', ';
-					}
-				})}
-				valgt
-			</div>
+			'Rad ' +
+			++key +
+			' sete' +
+			value.map((element, index) => {
+				if (index === value.length - 1) {
+					return ' ' + element.id + ' ';
+				} else {
+					return ' ' + element.id;
+				}
+			})
 		);
 	}
 
 	render() {
 		return (
 			<div style={this.mainGridLayout}>
-				{console.log(this.props.carriage)}
 				{this.props.carriage.map((row, i) => (
 					<div style={this.gridLayout} key={i}>
 						{this.checkForRow(i)}
