@@ -22,14 +22,14 @@ namespace VyShare
         {
             var users = SeedUsers();
             modelBuilder.Entity<User>().HasData(users);
-            
+
             var contacts = SeedContacts();
             modelBuilder.Entity<Contact>().HasData(contacts);
-            
-            var order = SeedOrder();
-            modelBuilder.Entity<Order>().HasData(order);
 
-            var basicTickets = SeedBasicTickets(order, users, contacts);
+            var orders = SeedOrders();
+            modelBuilder.Entity<Order>().HasData(orders);
+
+            var basicTickets = SeedBasicTickets(orders, users, contacts);
             modelBuilder.Entity<BasicTicket>().HasData(basicTickets);
 
         }
@@ -44,11 +44,20 @@ namespace VyShare
                     LastName = "Fjellberg",
                     Email = "popokatepetl@online.no",
                     PhoneNumber = "90035412"
+                },
+                new User() {
+                    Id = Guid.NewGuid(),
+                    Username = "marmelade86",
+                    FirstName = "Mia",
+                    LastName = "Mikkelsen",
+                    Email = "marmelade86@gmail.com",
+                    PhoneNumber = "45612039"
                 }
             };
         }
 
-        private List<Contact> SeedContacts(){
+        private List<Contact> SeedContacts()
+        {
             return new List<Contact>(){
                 new Contact() {
                     Id = Guid.NewGuid(),
@@ -63,21 +72,50 @@ namespace VyShare
                     LastName = "Wesenlund",
                     Email = "kathi95@gmail.com",
                     PhoneNumber = "40912854"
+                },
+                new Contact() {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Kim",
+                    LastName = "Kardashian",
+                    Email = "kk@realitytv.com",
+                    PhoneNumber = "92304215"
+                },
+                new Contact() {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Kåre",
+                    LastName = "Fjellberg",
+                    Email = "karefje@online.no",
+                    PhoneNumber = "90002390"
+                },
+                new Contact() {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Kenneth",
+                    LastName = "Kennesen",
+                    Email = "kennekennern51@outlook.com",
+                    PhoneNumber = "40534009"
                 }
             };
         }
 
-        private Order SeedOrder(){
-            return new Order() {
+        private List<Order> SeedOrders()
+        {
+            return new List<Order>() {
+                new Order(){
                     Id = Guid.NewGuid(),
                     Name = "Familietur til Grønnåsen 15.06.20"
+                },
+                new Order(){
+                    Id = Guid.NewGuid(),
+                    Name = "Fotballkamp"
+                }
             };
         }
 
-        private dynamic SeedBasicTickets(Order order, List<User> users, List<Contact> contacts){
-            return new []{
+        private dynamic SeedBasicTickets(List<Order> orders, List<User> users, List<Contact> contacts)
+        {
+            return new[]{
                 new {
-                    OrderId = order.Id,
+                    OrderId = orders[0].Id,
                     Id = Guid.NewGuid(),
                     TicketHolderId = contacts[0].Id,
                     Type = "Honnør",
@@ -88,7 +126,7 @@ namespace VyShare
                     Price = 412m
                 },
                 new {
-                    OrderId = order.Id,
+                    OrderId = orders[0].Id,
                     Id = Guid.NewGuid(),
                     TicketHolderId = contacts[1].Id,
                     Type = "Student",
@@ -97,17 +135,39 @@ namespace VyShare
                     ReferenceCode = "YXHBA6",
                     Seat = "13B",
                     Price = 375m
-                },  
+                },
                 new {
-                    OrderId = order.Id,
+                    OrderId = orders[1].Id,
                     Id = Guid.NewGuid(),
-                    TicketHolderId = users[0].Id,
-                    Type = "Honnør",
-                    StartPoint = "Solheimen",
-                    EndPoint = "Grønnåsen Skole",
-                    ReferenceCode = "YXWO2",
-                    Seat = "01D",
-                    Price = 468m
+                    TicketHolderId = contacts[2].Id,
+                    Type = "Student",
+                    StartPoint = "Sandefjord",
+                    EndPoint = "Ullevål stadion",
+                    ReferenceCode = "OPS34",
+                    Seat = "03A",
+                    Price = 199m
+                },
+                new {
+                    OrderId = orders[1].Id,
+                    Id = Guid.NewGuid(),
+                    TicketHolderId = contacts[3].Id,
+                    Type = "Student",
+                    StartPoint = "Sandefjord",
+                    EndPoint = "Ullevål stadion",
+                    ReferenceCode = "PSD33",
+                    Seat = "03B",
+                    Price = 199m                    
+                },
+                new {
+                    OrderId = orders[1].Id,
+                    Id = Guid.NewGuid(),
+                    TicketHolderId = contacts[4].Id,
+                    Type = "Student",
+                    StartPoint = "Larvik",
+                    EndPoint = "Ullevål stadion",
+                    ReferenceCode = "QSO20",
+                    Seat = "03C",
+                    Price = 219m
                 }
             };
         }
