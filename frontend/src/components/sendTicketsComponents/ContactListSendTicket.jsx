@@ -2,24 +2,17 @@ import React, { Component } from "react";
 import Contact from "../Contact";
 
 class ContactListSendTicket extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      clicks: 0
-    };
-  }
+ 
 
   
-  
+
   render() {
-    let passiveTicketArr;
+
     let content;
     
     if (this.props.contactListShow) {
-      passiveTicketArr =  this.props.passiveTickets;
-      //make a function that reads from ticket types if they have any tickeholdersId other than 00
-      //if yes then the state of the contact has to be active true
+      
+
       content = (
         <div className="">
           <div
@@ -55,6 +48,7 @@ class ContactListSendTicket extends Component {
             <div className="bg-gray-200 px-5 py-1 border-b border-t border-gray-300 text-gray-700 uppercase text-sm font-bold">
               K
             </div>
+            {/* this code below checks if tickets are assigned to persons or not. if yes state is presented as active */}
             {this.props.contactList.map((item, index) => {
               let check = false;
               for(let i = 0; i<this.props.passiveTickets.length; i++){
@@ -63,11 +57,17 @@ class ContactListSendTicket extends Component {
                   break; 
                 } else{continue}
               }
+
+              
+
+
               return (
                 <Contact
+                  addClick={this.props.addClick}
                   addToActives={this.props.addToActives}
                   removeFromActives={this.props.removeFromActives}
                   checkIfTicketAssigned={this.props.passiveTickets}
+                  clicks={this.props.clicks}
                   key={index}
                   id={item.id}
                   name={item.firstName}

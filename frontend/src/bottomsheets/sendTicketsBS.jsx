@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
-import boughtTickets from "../fakeData/boughtTicket";
-import Contact from "../components/Contact";
 import HeaderSendTickets from "../components/sendTicketsComponents/HeaderSendTickets";
 import ContactListSendTicket from '../components/sendTicketsComponents/ContactListSendTicket';
 import TicketsWereSend from "../components/sendTicketsComponents/TicketsWereSend";
@@ -12,17 +10,23 @@ class SendTicketBS extends Component {
     super(props);
 
     this.state = {
+      clicks: 0,
       reviewTicketsShow: true,
       contactListShow: false,
       ticketsWereSent: false,
-      makeAccountInVIpps: false,
+      makeAccountInVipps: false,
       loadOrder: false,
-      orderId: '',
+      orderId: "",
       actives: [],
-      currentType: '',
+      currentType: "",
       ticketByType: [],
-      chooseTicketHolder: "",
-      renderButtonText: ["Send billetter", "Fortsett", "Opprett oppgjør i Vipps", "Se billettene"],
+      ticketsToChange: "",
+      renderButtonText: [
+          "Send billetter", 
+          "Fortsett", 
+          "Opprett oppgjør i Vipps", 
+          "Se billettene"
+      ]
     };
   }
 
@@ -30,6 +34,15 @@ class SendTicketBS extends Component {
 
   componentDidMount() {
     this.fetchTheLastOrder();
+  }
+
+  addClick = () => {
+    this.setState({clicks: this.state.clicks+1})
+  }
+  
+  substractClick = () => {
+    console.log(typeof(this.state.clicks));
+    this.setState({clicks: this.state.clicks - 1})
   }
 ////////////////////////////////////////////////////
 //1. make a method to fetch the last purchased order DONE
@@ -81,6 +94,7 @@ fetchTheLastOrder = async () => {
       let activesArr = this.state.actives;
       activesArr.push(id);
       this.setState({actives: activesArr});
+      this.addClick();
   }
 
   removeFromActives = (id) => {
@@ -90,6 +104,7 @@ fetchTheLastOrder = async () => {
       activesArr.splice(findIndex, 1)
     }
     this.setState({actives: activesArr})
+    this.substractClick();
   }
 
   getAllTicketsFromOrder = async (id) => {
@@ -105,10 +120,11 @@ fetchTheLastOrder = async () => {
 
 
   pickContact = (array, type) => {
+    
     this.setState({
       reviewTicketsShow: false,
       contactListShow: true,
-      chooseTicketHolder: array,
+      ticketsToChange: array,
       currentType: type
     });
     
@@ -135,6 +151,21 @@ fetchTheLastOrder = async () => {
     } 
   }
 
+// checkIfAddClicks = (length) => {
+//   let count = 0;
+//   while(count>0 && count<=length){
+//     console.log("added");
+//     this.addClick();
+//     count++;
+//   }
+// }
+
+checkIfAddClicks = () => {
+  if(this.state.actives>0){
+    this.setState({clicks: this.state.actives.length})
+  }
+}
+
 checkIfPassEqAct = () => {
   const ticketsNum = this.state.ticketByType; 
   let counter = 0;
@@ -154,7 +185,9 @@ checkIfPassEqAct = () => {
       if(item.type === this.state.currentType){
         item.tickets.passive[i].ticketHolderId = this.state.actives[i]
         if(this.state.actives.length>0){
-          item.tickets.active[i] = item.tickets.passive[i]
+          if(item.tickets.passive[i].ticketHolderId){
+            item.tickets.active[i] = item.tickets.passive[i]
+          }
           console.log(item.tickets.active);
         } else {item.tickets.active.length = 0} 
       }
@@ -162,6 +195,10 @@ checkIfPassEqAct = () => {
   })
   this.setState({actives:[]})
   
+  }
+
+  restartClicks = () => {
+    this.setState({clicks: 0})
   }
  
  ticketsWereSent = () => {
@@ -203,7 +240,7 @@ checkIfPassEqAct = () => {
       buttonClassNameToggle = "p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400";
       return (
         <button
-          onClick={() => {this.backToSendTickets(); this.assignContactToTicket(this.state.orderId)}}
+          onClick={() => {this.backToSendTickets(); this.assignContactToTicket(this.state.orderId); this.restartClicks()}}
           className={buttonClassNameToggle}
         >
           {this.state.renderButtonText[1]}
@@ -245,7 +282,7 @@ checkIfPassEqAct = () => {
                 const activeNum = item.tickets.active.length;
                 return (
                   <div 
-                    onClick={() => this.pickContact(passive, item.type)} 
+                    onClick={() => {this.pickContact(passive, item.type); this.checkIfAddClicks();}} 
                     key={index} 
                     className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
                   >
@@ -267,6 +304,8 @@ checkIfPassEqAct = () => {
   };
 
   render() {
+    console.log(this.state.clicks);
+    
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
         <div className="">
@@ -274,14 +313,16 @@ checkIfPassEqAct = () => {
           </HeaderSendTickets>
           {this.reviewTicket()}
           <ContactListSendTicket 
-            passiveTickets={this.state.chooseTicketHolder} 
+            clicks={this.state.clicks}
+            addClick={this.addClick}
+            passiveTickets={this.state.ticketsToChange} 
             contactListShow={this.state.contactListShow} 
             contactList={this.props.contactList}
             addToActives={this.addToActives}
             removeFromActives={this.removeFromActives}>
           </ContactListSendTicket>
           <TicketsWereSend ticketsWereSent={this.state.ticketsWereSent}></TicketsWereSend>
-          <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVIpps}></MakeAccountInVIpps>
+          <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVipps}></MakeAccountInVIpps>
           <div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
             {this.renderButton()}
           </div>
