@@ -80,7 +80,6 @@ fetchTheLastOrder = async () => {
   addToActives = (id) => {
       let activesArr = this.state.actives;
       activesArr.push(id);
-      console.log(activesArr);
       this.setState({actives: activesArr});
   }
 
@@ -144,7 +143,6 @@ checkIfPassEqAct = () => {
       counter++;
     } else {break;}
   }
-  console.log(counter);
   if(counter===ticketsNum.length){
     return true 
   } else {return false}
@@ -267,9 +265,6 @@ checkIfPassEqAct = () => {
   };
 
   render() {
-  
-    console.log(this.state.ticketByType);
-  
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
         <div className="">

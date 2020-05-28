@@ -10,12 +10,16 @@ class ContactListSendTicket extends Component {
     };
   }
 
+  
+  
   render() {
     let passiveTicketArr;
     let content;
-
+    
     if (this.props.contactListShow) {
       passiveTicketArr =  this.props.passiveTickets;
+      //make a function that reads from ticket types if they have any tickeholdersId other than 00
+      //if yes then the state of the contact has to be active true
       content = (
         <div className="">
           <div
@@ -52,16 +56,24 @@ class ContactListSendTicket extends Component {
               K
             </div>
             {this.props.contactList.map((item, index) => {
+              let check = false;
+              for(let i = 0; i<this.props.passiveTickets.length; i++){
+                if(this.props.passiveTickets[i].ticketHolderId === item.id){
+                  check = true;
+                  break; 
+                } else{continue}
+              }
               return (
                 <Contact
                   addToActives={this.props.addToActives}
                   removeFromActives={this.props.removeFromActives}
+                  checkIfTicketAssigned={this.props.passiveTickets}
                   key={index}
                   id={item.id}
                   name={item.firstName}
                   lastName={item.lastName}
                   phone={item.phoneNumber}
-
+                  state={check}
                 ></Contact>
               );
             })}
