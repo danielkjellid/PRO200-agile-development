@@ -149,18 +149,20 @@ checkIfPassEqAct = () => {
 }
 
  assignContactToTicket= () => {
-   let ticketsByType = this.state.ticketByType.map((item) => {
+   this.state.ticketByType.map((item) => {
      for(let i= 0;i<item.tickets.passive.length;i++){
       if(item.type === this.state.currentType){
         item.tickets.passive[i].ticketHolderId = this.state.actives[i]
         if(this.state.actives.length>0){
-          item.tickets.active.push(item.tickets.passive[i])
-        }
-      } else {continue}
-     }
+          item.tickets.active[i] = item.tickets.passive[i]
+          console.log(item.tickets.active);
+        } else {item.tickets.active.length = 0} 
+      }
+      } 
   })
   this.setState({actives:[]})
- }
+  
+  }
  
  ticketsWereSent = () => {
    this.setState({reviewTicketsShow: false, ticketsWereSent: true})
@@ -231,7 +233,7 @@ checkIfPassEqAct = () => {
   };
 
   reviewTicket = () => {
-    
+    console.log(this.state.actives);
     if (this.state.reviewTicketsShow) {
       return (
         <React.Fragment>

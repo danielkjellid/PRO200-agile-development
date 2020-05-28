@@ -9,17 +9,14 @@ class Contact extends Component {
   }
 
   componentDidMount(){
+    if(this.props.state){
+      this.props.addToActives(this.props.id);
+    }
     this.checkIfTicketAssigned();
   }
 
   checkIfTicketAssigned = () => {
     if(this.props.state){
-      this.setState({active: true})
-    }
-  }
-
-  changeState = (truthy) => {
-    if(truthy){
       this.setState({active: true})
     }
   }
