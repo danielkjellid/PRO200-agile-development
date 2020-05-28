@@ -96,6 +96,7 @@ class UserProfile extends Component {
         <React.Fragment>
           <SendTicketBS
             contactList={this.props.contactList}
+            endTransaction={this.props.endTransaction}
             endSendingTickets={this.endSendingTickets}
           ></SendTicketBS>
         </React.Fragment>
@@ -176,6 +177,8 @@ class UserProfile extends Component {
 
         {/* page content */}
         {/* temporarily here. just need some clickable contaclist */}
+        {/* hidden while we convey user survey */}
+        {/*
         <Link to={"/contactList"}>
           <div className="text-sm text-gray-900 flex items-center">
             Kontakter
@@ -192,6 +195,7 @@ class UserProfile extends Component {
             </svg>
           </div>
         </Link>
+        */}
         {/* contains info about active ticket, environment calc and ticket stas */}
         <div className="px-5 py-10">
           {/* section */}

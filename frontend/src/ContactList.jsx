@@ -44,7 +44,6 @@ class ContactList extends Component {
             listBeforeUpdate.push({firstName: name, lastName: lastName, email: email,  phoneNumber: phone})
             this.setState({contactList: listBeforeUpdate})
             this.addNewContactToAPI();
-            console.log(this.state.contactList);
       }
 
      renderNewContact = () => {
@@ -56,7 +55,7 @@ class ContactList extends Component {
          let inhold = this.state.contactList ? 
             <div>
                 <h3>Kontakt Liste</h3>
-                <Link to={'/'}>Tilbake</Link>
+                <Link to={'/'} onClick={this.props.fetchNewContactList} >Tilbake</Link>
                 <button onClick={this.renderNewContact}>Add ny kontakt</button>
                 {this.state.contactList.map((item,index) => {
                     return(

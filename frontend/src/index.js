@@ -108,7 +108,8 @@ class App extends Component {
                   render={(props) => 
                     <ContactList 
                       {...props}
-                      contacts={this.state.contactList}>
+                      contacts={this.state.contactList}
+                      fetchNewContactList={this.fetchContactList}>
                     </ContactList>}
                 ></Route>
 
