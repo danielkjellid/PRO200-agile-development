@@ -6,7 +6,6 @@ import ChooseDeparture from '../components/buySingleTicketComponents/ChooseDepar
 import ChooseSeats from '../components/buySingleTicketComponents/ChooseSeats';
 import ChoosePayment from '../components/buySingleTicketComponents/ChoosePayment';
 import Confirmation from '../components/buySingleTicketComponents/Confirmation';
-import Seats from '../components/Seats';
 
 class BuySingleTicketBS extends Component {
 	constructor(props) {
@@ -80,20 +79,7 @@ class BuySingleTicketBS extends Component {
 		this.restartOrder();
 		let name;
 		let date = new Date();
-		const months = [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Okt',
-			'Nov',
-			'Dec',
-		];
+		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Okt','Nov','Dec',];
 		name = `${date.getFullYear()}-${
 			months[date.getMonth()]
 		}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -172,7 +158,7 @@ class BuySingleTicketBS extends Component {
 	submitNewOrder = async () => {
 		const url = 'https://localhost:5001/orders';
 		const payload = this.state.order;
-
+		
 		try {
 			await fetch(url, {
 				method: 'post',
@@ -223,52 +209,33 @@ class BuySingleTicketBS extends Component {
 	// functions to trigger different modals, depending on which one is 'true' in state
 	///////////////////////////////////////////////////////////////////////////////////
 	continueToDepartures = () => {
-		let chooseDeparture = this.state.chooseDeparture;
-		let chooseDestination = this.state.chooseDestination;
-		this.setState({
-			chooseDestination: !chooseDestination,
-			chooseDeparture: !chooseDeparture,
-		});
+		let chooseDeparture = this.state.chooseDeparture
+		let chooseDestination = this.state.chooseDestination
+		this.setState({ chooseDestination: !chooseDestination, chooseDeparture: !chooseDeparture });
 		this.setUniqueOrderName();
 	};
 
 	continueToSeats = () => {
-		let chooseDeparture = this.state.chooseDeparture;
-		let chooseSeat = this.state.chooseSeat;
-		this.setState({
-			chooseDeparture: !chooseDeparture,
-			chooseSeat: !chooseSeat,
-		});
+		let chooseDeparture = this.state.chooseDeparture
+		let chooseSeat = this.state.chooseSeat
+		this.setState({ chooseDeparture: !chooseDeparture, chooseSeat: !chooseSeat });
 	};
 
 	continueToPayment = () => {
-		let chooseSeat = this.state.chooseSeat;
-		let choosePayment = this.state.choosePayment;
+		let chooseSeat = this.state.chooseSeat
+		let choosePayment = this.state.choosePayment
 		this.setState({ chooseSeat: !chooseSeat, choosePayment: !choosePayment });
 	};
 
 	continueToConfirmation = () => {
-		let choosePayment = this.state.choosePayment;
-		let confirmation = this.state.confirmation;
-		this.setState({
-			choosePayment: !choosePayment,
-			confirmation: !confirmation,
-		});
+		let choosePayment = this.state.choosePayment
+		let confirmation = this.state.confirmation
+		this.setState({ choosePayment: !choosePayment, confirmation: !confirmation });
 	};
 
 	continueToSeatsHandler = () => {
 		this.continueToSeats();
 		this.createTicketInOrder();
-	};
-
-	addSeatsToTickets = (selectedSeats) => {
-		let tickets = [...this.state.tickets];
-
-		tickets.forEach((element, index) => {
-			element.seat = selectedSeats[index];
-		});
-
-		this.setState({ tickets });
 	};
 
 	render() {
@@ -308,9 +275,6 @@ class BuySingleTicketBS extends Component {
 						chooseSeat={this.state.chooseSeat}
 						tickets={this.state.tickets}
 						back={this.continueToSeats}
-						returnSeats={(selectedSeats) =>
-							this.addSeatsToTickets(selectedSeats)
-						}
 					></ChooseSeats>
 
 					<ChoosePayment
