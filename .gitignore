@@ -1,4 +1,5 @@
 node_modules/
+frontend/smsServer/index.js
 backend/vyshare.db
 frontend/public/css/tailwind.generated.css
 package-lock.json
