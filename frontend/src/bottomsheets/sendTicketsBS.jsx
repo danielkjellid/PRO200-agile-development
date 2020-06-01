@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import HeaderSendTickets from '../components/sendTicketsComponents/HeaderSendTickets';
 import boughtTickets from '../fakeData/boughtTicket';
 import Contact from '../components/Contact';
-import HeaderSendTickets from '../components/sendTicketsComponents/HeaderSendTickets';
 import ContactListSendTicket from '../components/sendTicketsComponents/ContactListSendTicket';
 import TicketsWereSend from '../components/sendTicketsComponents/TicketsWereSend';
 import MakeAccountInVIpps from '../components/sendTicketsComponents/MakeAccountInVIpps';
@@ -12,17 +12,18 @@ class SendTicketBS extends Component {
 		super(props);
 
 		this.state = {
+			clicks: 0,
 			reviewTicketsShow: true,
 			contactListShow: false,
 			ticketsWereSent: false,
-			makeAccountInVIpps: false,
+			makeAccountInVipps: false,
 			loadOrder: false,
 			orderId: '',
 			actives: [],
+			selectedContacts: [],
 			currentType: '',
 			ticketByType: [],
-			selectedContacts: [],
-			chooseTicketHolder: '',
+			ticketsToChange: '',
 			renderButtonText: [
 				'Send billetter',
 				'Fortsett',
@@ -35,6 +36,15 @@ class SendTicketBS extends Component {
 	componentDidMount() {
 		this.fetchTheLastOrder();
 	}
+
+	addClick = () => {
+		this.setState({ clicks: this.state.clicks + 1 });
+	};
+
+	substractClick = () => {
+		console.log(typeof this.state.clicks);
+		this.setState({ clicks: this.state.clicks - 1 });
+	};
 	////////////////////////////////////////////////////
 	//1. make a method to fetch the last purchased order DONE
 	//2. make a method to fetch the correct order from the tickets list if doesnt have ticketHolders
@@ -91,8 +101,8 @@ class SendTicketBS extends Component {
 	addToActives = (id) => {
 		let activesArr = this.state.actives;
 		activesArr.push(id);
-		console.log(activesArr);
 		this.setState({ actives: activesArr });
+		this.addClick();
 	};
 
 	removeFromActives = (id) => {
@@ -102,6 +112,7 @@ class SendTicketBS extends Component {
 			activesArr.splice(findIndex, 1);
 		}
 		this.setState({ actives: activesArr });
+		this.substractClick();
 	};
 
 	getAllTicketsFromOrder = async (id) => {
@@ -124,7 +135,7 @@ class SendTicketBS extends Component {
 		this.setState({
 			reviewTicketsShow: false,
 			contactListShow: true,
-			chooseTicketHolder: array,
+			ticketsToChange: array,
 			currentType: type,
 		});
 	};
@@ -151,6 +162,21 @@ class SendTicketBS extends Component {
 		}
 	};
 
+	// checkIfAddClicks = (length) => {
+	//   let count = 0;
+	//   while(count>0 && count<=length){
+	//     console.log("added");
+	//     this.addClick();
+	//     count++;
+	//   }
+	// }
+
+	checkIfAddClicks = () => {
+		if (this.state.actives > 0) {
+			this.setState({ clicks: this.state.actives.length });
+		}
+	};
+
 	checkIfPassEqAct = () => {
 		const ticketsNum = this.state.ticketByType;
 		let counter = 0;
@@ -164,7 +190,6 @@ class SendTicketBS extends Component {
 				break;
 			}
 		}
-		console.log(counter);
 		if (counter === ticketsNum.length) {
 			return true;
 		} else {
@@ -173,15 +198,18 @@ class SendTicketBS extends Component {
 	};
 
 	assignContactToTicket = () => {
-		let ticketsByType = this.state.ticketByType.map((item) => {
+		this.state.ticketByType.map((item) => {
 			for (let i = 0; i < item.tickets.passive.length; i++) {
 				if (item.type === this.state.currentType) {
 					item.tickets.passive[i].ticketHolderId = this.state.actives[i];
 					if (this.state.actives.length > 0) {
-						item.tickets.active.push(item.tickets.passive[i]);
+						if (item.tickets.passive[i].ticketHolderId) {
+							item.tickets.active[i] = item.tickets.passive[i];
+						}
+						console.log(item.tickets.active);
+					} else {
+						item.tickets.active.length = 0;
 					}
-				} else {
-					continue;
 				}
 			}
 		});
@@ -244,6 +272,10 @@ class SendTicketBS extends Component {
 		});
 	};
 
+	restartClicks = () => {
+		this.setState({ clicks: 0 });
+	};
+
 	ticketsWereSent = () => {
 		this.setState({ reviewTicketsShow: false, ticketsWereSent: true });
 	};
@@ -295,6 +327,7 @@ class SendTicketBS extends Component {
 					onClick={() => {
 						this.backToSendTickets();
 						this.assignContactToTicket(this.state.orderId);
+						this.restartClicks();
 					}}
 					className={buttonClassNameToggle}
 				>
@@ -326,6 +359,7 @@ class SendTicketBS extends Component {
 	};
 
 	reviewTicket = () => {
+		console.log(this.state.actives);
 		if (this.state.reviewTicketsShow) {
 			return (
 				<React.Fragment>
@@ -337,7 +371,10 @@ class SendTicketBS extends Component {
 								const activeNum = item.tickets.active.length;
 								return (
 									<div
-										onClick={() => this.pickContact(passive, item.type)}
+										onClick={() => {
+											this.pickContact(passive, item.type);
+											this.checkIfAddClicks();
+										}}
 										key={index}
 										className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
 									>
@@ -377,7 +414,7 @@ class SendTicketBS extends Component {
 	};
 
 	render() {
-		console.log(this.state.ticketByType);
+		console.log(this.state.clicks);
 
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
@@ -387,8 +424,9 @@ class SendTicketBS extends Component {
 					></HeaderSendTickets>
 					{this.reviewTicket()}
 					<ContactListSendTicket
-						assignSelectedContact={this.assignSelectedContact}
-						passiveTickets={this.state.chooseTicketHolder}
+						clicks={this.state.clicks}
+						addClick={this.addClick}
+						passiveTickets={this.state.ticketsToChange}
 						contactListShow={this.state.contactListShow}
 						contactList={this.props.contactList}
 						addToActives={this.addToActives}
@@ -398,7 +436,7 @@ class SendTicketBS extends Component {
 						ticketsWereSent={this.state.ticketsWereSent}
 					></TicketsWereSend>
 					<MakeAccountInVIpps
-						makeAccountInVIpps={this.state.makeAccountInVIpps}
+						makeAccountInVIpps={this.state.makeAccountInVipps}
 					></MakeAccountInVIpps>
 					<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
 						{this.renderButton()}

@@ -57,39 +57,63 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f76eef48-7a89-400e-9258-b82cfc83e8c6"),
+                            Id = new Guid("b888c59c-5556-43f3-a57b-5dcfb2458990"),
                             EndPoint = "Grønnåsen Skole",
-                            OrderId = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            OrderId = new Guid("486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d"),
                             Price = 412m,
                             ReferenceCode = "YXHA5",
                             Seat = "13A",
                             StartPoint = "Volda",
-                            TicketHolderId = new Guid("8489d192-933a-40c0-b01c-d4253bcdb211"),
+                            TicketHolderId = new Guid("64eca478-593b-40d6-8785-dcf4322cbabf"),
                             Type = "Honnør"
                         },
                         new
                         {
-                            Id = new Guid("e9444419-1a72-4f4e-a3c8-bc87b87c1a43"),
+                            Id = new Guid("70189d4e-0a16-4370-b0e5-789b02d25fcf"),
                             EndPoint = "Grønnåsen Skole",
-                            OrderId = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            OrderId = new Guid("486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d"),
                             Price = 375m,
                             ReferenceCode = "YXHBA6",
                             Seat = "13B",
                             StartPoint = "Volda",
-                            TicketHolderId = new Guid("647e718c-ad13-4229-964b-16cf84ac5f6b"),
+                            TicketHolderId = new Guid("f4f86a47-e9a5-49b4-b187-745e6c0bbadb"),
                             Type = "Student"
                         },
                         new
                         {
-                            Id = new Guid("66d89f1b-fe89-4ed8-88cb-fb33d9b43524"),
-                            EndPoint = "Grønnåsen Skole",
-                            OrderId = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
-                            Price = 468m,
-                            ReferenceCode = "YXWO2",
-                            Seat = "01D",
-                            StartPoint = "Solheimen",
-                            TicketHolderId = new Guid("5eca00d9-0810-4698-b61b-0bd4fc09fca3"),
-                            Type = "Honnør"
+                            Id = new Guid("80c634d7-cde3-49ab-878d-db06b6a9ea27"),
+                            EndPoint = "Ullevål stadion",
+                            OrderId = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            Price = 199m,
+                            ReferenceCode = "OPS34",
+                            Seat = "03A",
+                            StartPoint = "Sandefjord",
+                            TicketHolderId = new Guid("865f6842-4fba-4cc7-b556-53bc6323b7b5"),
+                            Type = "Student"
+                        },
+                        new
+                        {
+                            Id = new Guid("210f3066-29da-4506-81aa-71e1bdc3351c"),
+                            EndPoint = "Ullevål stadion",
+                            OrderId = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            Price = 199m,
+                            ReferenceCode = "PSD33",
+                            Seat = "03B",
+                            StartPoint = "Sandefjord",
+                            TicketHolderId = new Guid("42dce654-7c54-44fd-b26d-ef4a3e469acf"),
+                            Type = "Student"
+                        },
+                        new
+                        {
+                            Id = new Guid("bedf6391-e36a-4a41-b2a2-fdf61028524c"),
+                            EndPoint = "Ullevål stadion",
+                            OrderId = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            Price = 219m,
+                            ReferenceCode = "QSO20",
+                            Seat = "03C",
+                            StartPoint = "Larvik",
+                            TicketHolderId = new Guid("e3476b88-c484-426b-aeeb-aab2de097dc3"),
+                            Type = "Student"
                         });
                 });
 
@@ -114,8 +138,13 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("db212431-e6e3-4ac8-acd0-c54c72f1700c"),
+                            Id = new Guid("486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d"),
                             Name = "Familietur til Grønnåsen 15.06.20"
+                        },
+                        new
+                        {
+                            Id = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            Name = "Fotballkamp"
                         });
                 });
 
@@ -157,7 +186,7 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8489d192-933a-40c0-b01c-d4253bcdb211"),
+                            Id = new Guid("64eca478-593b-40d6-8785-dcf4322cbabf"),
                             Email = "katofje@online.no",
                             FirstName = "Kato",
                             LastName = "Fjellberg",
@@ -165,11 +194,35 @@ namespace VyShare.Migrations
                         },
                         new
                         {
-                            Id = new Guid("647e718c-ad13-4229-964b-16cf84ac5f6b"),
+                            Id = new Guid("f4f86a47-e9a5-49b4-b187-745e6c0bbadb"),
                             Email = "kathi95@gmail.com",
                             FirstName = "Kathrine",
                             LastName = "Wesenlund",
                             PhoneNumber = "40912854"
+                        },
+                        new
+                        {
+                            Id = new Guid("865f6842-4fba-4cc7-b556-53bc6323b7b5"),
+                            Email = "kk@realitytv.com",
+                            FirstName = "Kim",
+                            LastName = "Kardashian",
+                            PhoneNumber = "92304215"
+                        },
+                        new
+                        {
+                            Id = new Guid("42dce654-7c54-44fd-b26d-ef4a3e469acf"),
+                            Email = "karefje@online.no",
+                            FirstName = "Kåre",
+                            LastName = "Fjellberg",
+                            PhoneNumber = "90002390"
+                        },
+                        new
+                        {
+                            Id = new Guid("e3476b88-c484-426b-aeeb-aab2de097dc3"),
+                            Email = "kennekennern51@outlook.com",
+                            FirstName = "Kenneth",
+                            LastName = "Kennesen",
+                            PhoneNumber = "40534009"
                         });
                 });
 
@@ -188,12 +241,21 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5eca00d9-0810-4698-b61b-0bd4fc09fca3"),
+                            Id = new Guid("a384222a-89fa-4ac9-a60c-731814bc2732"),
                             Email = "popokatepetl@online.no",
                             FirstName = "Pål",
                             LastName = "Fjellberg",
                             PhoneNumber = "90035412",
                             Username = "popokatepetl"
+                        },
+                        new
+                        {
+                            Id = new Guid("6a50184a-c3db-46bc-9990-ae8e3b35c899"),
+                            Email = "marmelade86@gmail.com",
+                            FirstName = "Mia",
+                            LastName = "Mikkelsen",
+                            PhoneNumber = "45612039",
+                            Username = "marmelade86"
                         });
                 });
 

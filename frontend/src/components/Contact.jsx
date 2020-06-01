@@ -5,8 +5,45 @@ class Contact extends Component {
 		super(props);
 		this.state = { active: false };
 
-		this.handleClick = this.handleClick.bind(this);
+		this.handleClick = this.changeContactState.bind(this);
 	}
+
+	componentDidMount() {
+		if (this.props.state) {
+			this.props.addToActives(this.props.id);
+		}
+		this.checkIfTicketAssigned();
+	}
+
+	checkIfTicketAssigned = () => {
+		if (this.props.state) {
+			this.setState({ active: true });
+		}
+	};
+
+	handleClickz = () => {
+		if (this.props.clicks < this.props.checkIfTicketAssigned.length) {
+			console.log('kurwa');
+			this.changeContactState();
+		} else if (this.state.active) {
+			this.setState({ active: false });
+			this.props.removeFromActives(this.props.id);
+		} else {
+		}
+	};
+
+	changeContactState = () => {
+		console.log('hi');
+		this.setState((prevState) => {
+			return { active: !prevState.active };
+		});
+		if (!this.state.active) {
+			console.log(this.props.id);
+			this.props.addToActives(this.props.id);
+		} else {
+			this.props.removeFromActives(this.props.id);
+		}
+	};
 
 	handleClick() {
 		this.setState((prevState) => {
@@ -21,6 +58,8 @@ class Contact extends Component {
 	}
 
 	render() {
+		console.log(this.props.clicks);
+		console.log('passives' + this.props.checkIfTicketAssigned.length);
 		return (
 			<div className="flex flex-row justify-between items-center py-4 border-b border-gray-300">
 				<div className="flex flex-row ml-5">
@@ -40,7 +79,7 @@ class Contact extends Component {
 				<div className="mr-5">
 					<button
 						onClick={() => {
-							this.handleClick();
+							this.handleClickz();
 							this.props.assignSelectedContact(this.props.item);
 						}}
 						className="w-6 h-6 rounded-full p-0 border border-gray-400"
