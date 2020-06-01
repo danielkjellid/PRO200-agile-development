@@ -33,7 +33,13 @@ class Seat extends Component {
 		return (
 			<div>
 				<img
-					onClick={() => this.props.onSelect(this.props.seat, this.props.row)}
+					onClick={() =>
+						this.props.onSelect(
+							this.props.seat,
+							this.props.row,
+							this.props.carriage
+						)
+					}
 					src={this.isSeatAvailable()}
 					alt="SeatLogo"
 				></img>

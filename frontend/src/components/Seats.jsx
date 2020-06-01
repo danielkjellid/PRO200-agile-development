@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import Seat from './Seat';
 
 class Seats extends Component {
-	state = {
-		selectedSeats: [],
-	};
-
 	gridLayout = {
 		display: 'grid',
 		gridTemplateColumns: '25px 25px 25px 50px 25px 25px 25px',
@@ -24,24 +20,34 @@ class Seats extends Component {
 		gridColumnEnd: '8',
 	};
 
-	handleSelectSeat = (seat, row) => {
+	handleSelectSeat = (seat, row, carriage) => {
 		if (seat.taken) {
 			return;
 		}
-
 		const numberOfTravellers = this.props.tickets.length;
-		const seats = [...this.props.carriage];
-		var index = seats[row].indexOf(seat);
-		seats[row][index] = { ...seat };
+		const selectedSeats = this.props.selectedSeats;
 
-		const selectedSeats = this.selectAvailableSeats(
-			seats,
-			row,
-			index,
-			numberOfTravellers
-		);
+		let alreadySelected = false;
 
-		this.setState({ selectedSeats });
+		selectedSeats.forEach((element, index) => {
+			if (element.seat.id === seat.id && element.carriage === carriage) {
+				selectedSeats.splice(index, 1);
+				return (alreadySelected = true);
+			}
+		});
+
+		if (!alreadySelected) {
+			if (selectedSeats.length < numberOfTravellers) {
+				selectedSeats.push({
+					seat: seat,
+					row: row,
+					carriage: this.props.carriageValue,
+				});
+			} else {
+				return;
+			}
+		}
+		this.props.setSelectedSeats(selectedSeats);
 	};
 
 	selectAvailableSeats(seats, row, index, numberOfTravellers) {
@@ -91,7 +97,7 @@ class Seats extends Component {
 	}
 
 	choosenSeatText() {
-		const { selectedSeats } = this.state;
+		const { selectedSeats } = this.props;
 
 		if (selectedSeats.length === 0) {
 			return (
@@ -112,6 +118,7 @@ class Seats extends Component {
 				}
 				return values;
 			}, {});
+			
 
 		const text = [];
 
@@ -120,6 +127,7 @@ class Seats extends Component {
 				<p
 					style={{ textAlign: 'center' }}
 					className="text-sm text-gray-900 font-medium"
+					key={key}
 				>
 					{this.renderSeatText(key, value)}
 				</p>
@@ -157,8 +165,9 @@ class Seats extends Component {
 										<div />
 										<Seat
 											key={col.id}
-											selectedSeats={this.state.selectedSeats}
+											selectedSeats={this.props.selectedSeats}
 											row={i}
+											carriage={this.props.carriageValue}
 											seat={col}
 											onSelect={this.handleSelectSeat}
 										></Seat>
@@ -168,9 +177,10 @@ class Seats extends Component {
 								return (
 									<Seat
 										key={col.id}
-										selectedSeats={this.state.selectedSeats}
+										selectedSeats={this.props.selectedSeats}
 										row={i}
 										seat={col}
+										carriage={this.props.carriageValue}
 										onSelect={this.handleSelectSeat}
 									></Seat>
 								);
