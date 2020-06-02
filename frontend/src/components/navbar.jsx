@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = () => {
+function Navbar() {
 	return (
 		<nav>
 			<div className="navbar px-5 pb-5 pt-6 bg-white border-b border-gray-300">

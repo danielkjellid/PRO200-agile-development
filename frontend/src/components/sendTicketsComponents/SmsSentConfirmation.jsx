@@ -1,16 +1,10 @@
-import React, {Component} from "react";
+import React from "react";
 
-class SmsSentConfirmation extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-  
-    render() {
-        
+function SmsSentConfirmation(props) {
+    
         let content;
 
-        if (!this.props.isConfirmed) {
+        if (!props.isConfirmed) {
             content = <div className="text-gray-900 text-center font-extrabold pt-5">Billett(ene) ble ikke sendt</div>
         }
         else {
@@ -37,15 +31,10 @@ class SmsSentConfirmation extends Component {
 
         return (
             <div className="bg-white flex">
-                
                 <div className="flex-1"></div>
-                {content}
-                
+                {content}  
             </div>
         )
-}
-
-
 };
 
 export default SmsSentConfirmation;
