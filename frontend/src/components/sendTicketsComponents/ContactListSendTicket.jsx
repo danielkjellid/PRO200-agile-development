@@ -1,23 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import Contact from "../Contact";
 
-class ContactListSendTicket extends Component {
- 
-
-  
-
-  render() {
-
-    let content;
+function ContactListSendTicket(props) {
+  let content;
     
-    if (this.props.contactListShow) {
+    if (props.contactListShow) {
       
 
       content = (
         <div className="">
           <div
             className="flex flex-row items-center mb-5 cursor-pointer px-5"
-            onClick={this.props.back}
+            onClick={props.back}
           >
             <svg
               className="h-6 w-6 pr-2 text-gray-600"
@@ -49,32 +43,30 @@ class ContactListSendTicket extends Component {
               K
             </div>
             {/* this code below checks if tickets are assigned to persons or not. if yes state is presented as active */}
-            {this.props.contactList.map((item, index) => {
+            {props.contactList.map((item, index) => {
               let check = false;
-              for(let i = 0; i<this.props.passiveTickets.length; i++){
-                if(this.props.passiveTickets[i].ticketHolderId === item.id){
+              for(let i = 0; i<props.passiveTickets.length; i++){
+                if(props.passiveTickets[i].ticketHolderId === item.id){
                   check = true;
                   break; 
                 } else{continue}
               }
 
-              
-
 
               return (
                 <Contact
-                  addClick={this.props.addClick}
-                  addToActives={this.props.addToActives}
-                  removeFromActives={this.props.removeFromActives}
-                  checkIfTicketAssigned={this.props.passiveTickets}
-                  clicks={this.props.clicks}
+                  addClick={props.addClick}
+                  addToActives={props.addToActives}
+                  removeFromActives={props.removeFromActives}
+                  checkIfTicketAssigned={props.passiveTickets}
+                  clicks={props.clicks}
                   key={index}
                   id={item.id}
                   name={item.firstName}
                   lastName={item.lastName}
                   phone={item.phoneNumber}
                   state={check}
-                ></Contact>
+                />
               );
             })}
           </div>
@@ -85,7 +77,13 @@ class ContactListSendTicket extends Component {
     return(
         <div>{ content }</div>
     ) 
-  }
+
+  
+
+
+
+    
+  
 }
 
 export default ContactListSendTicket;

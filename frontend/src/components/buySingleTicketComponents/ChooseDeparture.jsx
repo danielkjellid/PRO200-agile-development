@@ -73,7 +73,7 @@ class ChooseDeparture extends Component {
 										track={item.track}
 										numOfStops={item.numberOfStops}
 										price={item.price}									
-									></RouteCard>
+									/>
 								);
 							})}
 						</div>

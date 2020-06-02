@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ChooseTicketBS from "./bottomsheets/ChooseTicketBS";
 import BuySingleTicketBS from "./bottomsheets/BuySingleTicketBS";
 import ActiveTicket from "./components/ActiveTicket";
-import SendTicketBS from "./bottomsheets/sendTicketsBS";
+import SendTicketBS from "./bottomsheets/SendTicketsBS";
 
 class UserProfile extends Component {
   constructor(props) {
@@ -35,6 +35,8 @@ class UserProfile extends Component {
         price: 199,
       },
     };
+
+    this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
   }
 
   newTicketButtonHandler = () => {
@@ -59,12 +61,10 @@ class UserProfile extends Component {
   renderChooseTicket = () => {
     if (this.state.chooseTicket) {
       return (
-        <React.Fragment>
           <ChooseTicketBS
             click={this.buySingleTicketButtonHandler}
             clickX={this.newTicketButtonHandler}
-          ></ChooseTicketBS>
-        </React.Fragment>
+          />
       );
     }
   };
@@ -72,13 +72,11 @@ class UserProfile extends Component {
   renderBuySingleTicket = () => {
     if (this.state.singleTicket) {
       return (
-        <React.Fragment>
           <BuySingleTicketBS
             endTransaction={this.endTransaction}
             hideBuySingleTicket={this.hideBuySingleTicket}
             renderSendTicket={this.sendTicketsHandler}
-          ></BuySingleTicketBS>
-        </React.Fragment>
+          />
       );
     }
   };
@@ -93,13 +91,11 @@ class UserProfile extends Component {
     if(this.state.contactList){contactList = this.state.contactList}
     if (this.state.sendTicketShow) {
       return (
-        <React.Fragment>
           <SendTicketBS
             contactList={this.props.contactList}
             endTransaction={this.props.endTransaction}
             endSendingTickets={this.endSendingTickets}
-          ></SendTicketBS>
-        </React.Fragment>
+          />
       );
     }
   };
@@ -225,7 +221,7 @@ class UserProfile extends Component {
             <ActiveTicket
               activeTicket={this.state.activeTicket}
               ticket={this.state.activeTicketDetails}
-            ></ActiveTicket>
+            />
           </div>
 
           {/* section */}

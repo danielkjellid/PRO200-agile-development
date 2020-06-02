@@ -24,7 +24,6 @@ class Contact extends Component {
 
   handleClickz = () => {
     if(this.props.clicks<this.props.checkIfTicketAssigned.length){
-      console.log("kurwa");
       this.changeContactState();
     } else if(this.state.active){
       this.setState({active: false})

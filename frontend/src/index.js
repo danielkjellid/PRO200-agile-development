@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Tickets from "./Tickets";
 import UserDetails from "./UserDetails";
 import UserProfile from "./UserProfile";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import ContactList from "./ContactList";
 
 class App extends Component {
@@ -70,7 +70,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <div className={this.state.coverSite ? "modalBack" : null}></div>
-          <Navbar></Navbar>
+          <Navbar />
           <div className="bg-gray-100 canvas">
             <div className="content">
               <Switch>
@@ -90,7 +90,7 @@ class App extends Component {
                 <Route
                   exact
                   path="/userdetails"
-                  render={(props) => <UserDetails {...props}></UserDetails>}
+                  render={(props) => <UserDetails {...props} />}
                 ></Route>
                 <Route
                   exact path="/tickets"
@@ -113,7 +113,7 @@ class App extends Component {
                     </ContactList>}
                 ></Route>
 
-                <Route component={this.notFound}></Route>
+                <Route component={this.notFound} />
               </Switch>
             </div>
           </div>
@@ -122,4 +122,4 @@ class App extends Component {
     );
   }
 }
-ReactDOM.render(<App></App>, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -141,7 +141,7 @@ class Seats extends Component {
 											carriage={this.props.carriageValue}
 											seat={col}
 											onSelect={this.handleSelectSeat}
-										></Seat>
+										/>
 									</React.Fragment>
 								);
 							} else {
@@ -153,7 +153,7 @@ class Seats extends Component {
 										seat={col}
 										carriage={this.props.carriageValue}
 										onSelect={this.handleSelectSeat}
-									></Seat>
+									/>
 								);
 							}
 						})}
