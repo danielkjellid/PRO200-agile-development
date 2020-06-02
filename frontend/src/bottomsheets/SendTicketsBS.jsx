@@ -273,7 +273,6 @@ checkIfPassEqAct = () => {
     console.log(this.state.actives);
     if (this.state.reviewTicketsShow) {
       return (
-        <React.Fragment>
           <div className="px-5 pb-5">
             {this.state.ticketByType.map((item,index) => {
               if (item.tickets.passive.length > 0) {
@@ -298,7 +297,6 @@ checkIfPassEqAct = () => {
               }
             })}
           </div>
-        </React.Fragment>
       );
     }
   };

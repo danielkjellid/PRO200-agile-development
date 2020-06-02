@@ -89,7 +89,6 @@ class UserProfile extends Component {
   };
 
   renderSendTicket = () => {
-    let contactList;
     if(this.state.contactList){contactList = this.state.contactList}
     if (this.state.sendTicketShow) {
       return (
