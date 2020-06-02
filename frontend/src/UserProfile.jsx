@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ChooseTicketBS from "./bottomsheets/ChooseTicketBS";
 import BuySingleTicketBS from "./bottomsheets/BuySingleTicketBS";
 import ActiveTicket from "./components/ActiveTicket";
-import SendTicketBS from "./bottomsheets/sendTicketsBS";
+import SendTicketBS from "./bottomsheets/SendTicketsBS";
 
 class UserProfile extends Component {
   constructor(props) {

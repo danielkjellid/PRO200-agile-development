@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Tickets from "./Tickets";
 import UserDetails from "./UserDetails";
 import UserProfile from "./UserProfile";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import ContactList from "./ContactList";
 
 class App extends Component {

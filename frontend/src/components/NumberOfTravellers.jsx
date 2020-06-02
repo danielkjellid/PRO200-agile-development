@@ -1,9 +1,9 @@
 import React from 'react';
 
-function numberOfTravellers(props) {
+function NumberOfTravellers(props) {
     return (
         <div><p>{props.number}x {props.type}</p></div>
     );   
 }
 
-export default numberOfTravellers;
+export default NumberOfTravellers;
