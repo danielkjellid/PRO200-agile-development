@@ -42,7 +42,10 @@ class ContactListSendTicket extends Component {
             </svg>
             <p className="text-sm font-medium">Tilbake til billettoversikt</p>
           </div>
-          <div onClick={this.addNewContactHandler}>Legg til ny kontakt</div>
+          <div className="flex flex-row justify-center align-center items-center cursor-pointer mx-12" onClick={this.addNewContactHandler}>
+            <svg className="text-vy-green-300 w-5 h-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+            <p className="ml-3 text-gray-700 text-md font-medium">Legg til ny kontakt</p>
+          </div>
           <div className="px-5">
             <div className="rounded-md mt-5 mb-3 p-1 flex flex-row w-auto bg-gray-300">
                 <button className="w-full bg-white mr-1 p-2 rounded text-sm font-medium text-gray-700">Kontakter</button>
