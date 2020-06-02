@@ -50,56 +50,26 @@ class Seats extends Component {
 		this.props.setSelectedSeats(selectedSeats);
 	};
 
-	selectAvailableSeats(seats, row, index, numberOfTravellers) {
-		const selectedSeats = [];
-
-		for (var i = 0; i < numberOfTravellers; i++) {
-			const availableSeat = this.isSeatOccupied(seats, row, index + i);
-
-			selectedSeats.push({
-				seat: seats[availableSeat.row][availableSeat.index],
-				row: availableSeat.row,
-			});
-			index = availableSeat.index - i;
-			row = availableSeat.row;
-		}
-
-		//this.props.returnSeats(selectedSeats);
-		return selectedSeats;
-	}
-
-	isSeatOccupied(seats, row, index) {
-		if (index >= seats[row].length) {
-			if (row + 1 >= seats.length) {
-				row = 0;
-				index = 0;
-			} else {
-				row++;
-				index = 0;
-			}
-			if (seats[row][index].taken) {
-				return this.isSeatOccupied(seats, row, index);
-			} else {
-				return { row: row, index: index };
-			}
-		} else {
-			if (seats[row][index].taken) {
-				return this.isSeatOccupied(seats, row, index + 1);
-			} else {
-				return { row: row, index: index };
-			}
-		}
-	}
 	checkForRow(row) {
 		if (row === 5) {
 			return <div style={this.gridSpacingItem} />;
 		}
 	}
 
+	isSeatSelectedInCarriage(selectedSeats) {
+		let isSeatSelected = false;
+		selectedSeats.forEach((element) => {
+			if (element.carriage === this.props.carriageValue) {
+				return (isSeatSelected = true);
+			}
+		});
+		return isSeatSelected;
+	}
+
 	choosenSeatText() {
 		const { selectedSeats } = this.props;
 
-		if (selectedSeats.length === 0) {
+		if (!this.isSeatSelectedInCarriage(selectedSeats)) {
 			return (
 				<div className="m-auto text-center">
 					<p className="text-sm text-gray-900 font-medium">Velg sete</p>
@@ -110,15 +80,16 @@ class Seats extends Component {
 		var instances = selectedSeats
 			.map((element) => element)
 			.reduce((values, val) => {
-				if (val.row in values) {
-					values[val.row].push(val.seat);
-				} else {
-					values[val.row] = [];
-					values[val.row].push(val.seat);
+				if (val.carriage === this.props.carriageValue) {
+					if (val.row in values) {
+						values[val.row].push(val.seat);
+					} else {
+						values[val.row] = [];
+						values[val.row].push(val.seat);
+					}
 				}
 				return values;
 			}, {});
-			
 
 		const text = [];
 

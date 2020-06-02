@@ -371,7 +371,7 @@ class ChooseSeats extends Component {
 	}
 
 	setSelectedSeats(selectedSeats) {
-		this.setState(selectedSeats);
+		this.setState({ selectedSeats });
 	}
 
 	render() {
