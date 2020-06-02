@@ -17,6 +17,8 @@ class DropDownMenu extends Component {
                                 hideDropDownMenu={this.props.hideDropDownMenu}
                                 isStartPoint={this.props.isStartPoint}
                                 isEndPoint={this.props.isEndPoint}
+                                startPoint={this.props.startPoint}
+                                endPoint={this.props.endPoint}
                             />
                         )
                     })

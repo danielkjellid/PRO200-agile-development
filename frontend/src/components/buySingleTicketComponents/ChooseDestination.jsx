@@ -19,6 +19,7 @@ class ChooseDestination extends Component {
 
     clickEndPoint = () => {
         this.setState({drop: true, setEndPoint: true})
+        console.log(this.props.endPoint);
     }
 
     hideDropDownMenu = () => {
@@ -33,6 +34,8 @@ class ChooseDestination extends Component {
                 <DropDownMenu
                     isStartPoint={this.state.setStartPoint}
                     isEndPoint={this.state.setEndPoint}
+                    startPoint={this.props.startPoint}
+                    endPoint={this.props.endPoint}
                     setStartPoint={this.props.setStartPoint}
                     setEndPoint={this.props.setEndPoint}
                     stations={this.state.stations}

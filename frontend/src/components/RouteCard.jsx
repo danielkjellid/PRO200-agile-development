@@ -1,6 +1,11 @@
 import React from "react";
 //testing comment
 function RouteCard(props) {
+
+  let date = new Date();
+  let getStartTime = date.getHours() + ":" + date.getMinutes();
+  let getEndTime = date.getHours() + 2 + ":" + date.getMinutes();
+
   return (
     <div
       onClick={props.click} 
@@ -13,7 +18,7 @@ function RouteCard(props) {
       <div className="flex items-center justify-between border-b border-gray-300 pb-4">
         <div>
           <p className="text-gray-800 text-base font-medium">{props.startStation}</p>
-          <p className="mt-2 text-gray-800 text-xl font-bold">{props.startTime}</p>
+          <p className="mt-2 text-gray-800 text-xl font-bold">{getStartTime}</p>
           <p className="mt-2 text-gray-700 text-sm">Spor {props.track}</p>
         </div>
         <div className="text-center">
@@ -22,14 +27,14 @@ function RouteCard(props) {
         </div>
         <div>
           <p className="text-gray-800 text-base font-medium">{props.endStation}</p>
-          <p className="mt-2 text-gray-800 text-xl font-bold">{props.endTime}</p>
+          <p className="mt-2 text-gray-800 text-xl font-bold">{getEndTime}</p>
           <p className="mt-2 text-gray-700 text-sm">{props.numOfStops} stopp</p>
         </div>
       </div>
       <div className="flex items-center justify-between pt-3">
         <div className="flex items-center">
           <span className="rounded-full bg-vy-green-300 h-2 w-2" />
-          <p className="ml-2 text-gray-700 text-sm">I rute ved Asker kl. 21:19</p>
+          <p className="ml-2 text-gray-700 text-sm">I rute ved Asker</p>
         </div>
         <p className="text-green-700 text-sm text-vy-green-300 font-medium">kr {props.price}</p>
       </div>
