@@ -249,6 +249,8 @@ class BuySingleTicketBS extends Component {
 					/>
 
 					<ChooseDestination
+						startPoint={this.state.startPoint}
+						endPoint={this.state.endPoint}
 						chooseDestination={this.state.chooseDestination}
 						hideBuySingleTicket={this.props.hideBuySingleTicket}
 						continueToDepartures={this.continueToDepartures}
