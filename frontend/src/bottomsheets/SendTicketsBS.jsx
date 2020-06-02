@@ -307,8 +307,7 @@ checkIfPassEqAct = () => {
     return (
       <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
         <div className="">
-          <HeaderSendTickets end={this.props.endSendingTickets}>
-          </HeaderSendTickets>
+          <HeaderSendTickets end={this.props.endSendingTickets} />
           {this.reviewTicket()}
           <ContactListSendTicket 
             clicks={this.state.clicks}
@@ -317,10 +316,11 @@ checkIfPassEqAct = () => {
             contactListShow={this.state.contactListShow} 
             contactList={this.props.contactList}
             addToActives={this.addToActives}
-            removeFromActives={this.removeFromActives}>
-          </ContactListSendTicket>
-          <TicketsWereSend ticketsWereSent={this.state.ticketsWereSent}></TicketsWereSend>
-          <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVipps}></MakeAccountInVIpps>
+            removeFromActives={this.removeFromActives}
+          />
+          
+          <TicketsWereSend ticketsWereSent={this.state.ticketsWereSent} />
+          <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVipps} />
           <div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
             {this.renderButton()}
           </div>

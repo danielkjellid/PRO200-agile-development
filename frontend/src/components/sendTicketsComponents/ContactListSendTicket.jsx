@@ -66,7 +66,7 @@ function ContactListSendTicket(props) {
                   lastName={item.lastName}
                   phone={item.phoneNumber}
                   state={check}
-                ></Contact>
+                />
               );
             })}
           </div>

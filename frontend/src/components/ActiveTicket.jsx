@@ -31,9 +31,7 @@ class ActiveTickets extends Component {
 						<div className="mb-4">
 							<p className="text-gray-600 text-sm">Kjøpt for</p>
 							<div className="flex items-center justify-center mt-2">
-								<div className="h-8 w-8 rounded-full bg-red-400">
-
-								</div>
+								<div className="h-8 w-8 rounded-full bg-red-400" />
 								<div className="ml-2 text-left">
 									<p className="text-gray-900 text-sm">{this.props.ticket.sharedWith.firstname + ' ' + this.props.ticket.sharedWith.lastname}</p>
 									<p className="text-gray-700 text-xs">{this.formatPhone(this.props.ticket.sharedWith.mobile)}</p>

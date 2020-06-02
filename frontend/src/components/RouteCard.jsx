@@ -28,7 +28,7 @@ function RouteCard(props) {
       </div>
       <div className="flex items-center justify-between pt-3">
         <div className="flex items-center">
-          <span className="rounded-full bg-vy-green-300 h-2 w-2"></span>
+          <span className="rounded-full bg-vy-green-300 h-2 w-2" />
           <p className="ml-2 text-gray-700 text-sm">I rute ved Asker kl. 21:19</p>
         </div>
         <p className="text-green-700 text-sm text-vy-green-300 font-medium">kr {props.price}</p>

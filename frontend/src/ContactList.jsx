@@ -64,18 +64,17 @@ class ContactList extends Component {
                                 id={item.id}
                                 name={item.firstName}
                                 phone={item.phoneNumber}
-                            ></Contact>
+                            />
                     )
                 })}
             
                 <div style={{display: this.state.addNewContact ? 'block' : 'none'}}>
-                    <AddNewContact add={this.addNewContactToState}></AddNewContact>
+                    <AddNewContact add={this.addNewContactToState} />
                 </div> 
             </div> : <div>is loading</div>
         return (
             <div>
                 {inhold}
-
             </div>
            
         );

@@ -134,7 +134,7 @@ class BuySingleTicketBS extends Component {
 									number={item.number}
 									add={() => this.addNumber(index)}
 									remove={() => this.removeNumber(index)}
-								></EditTravellers>
+								/>
 							);
 						})}
 					</div>
@@ -246,7 +246,7 @@ class BuySingleTicketBS extends Component {
 						endTransaction={this.props.endTransaction}
 						restartOrder={this.restartOrder}
 						initTicketTypes={this.initTicketTypes}
-					></HeaderBuySingle>
+					/>
 
 					<ChooseDestination
 						chooseDestination={this.state.chooseDestination}
@@ -254,7 +254,7 @@ class BuySingleTicketBS extends Component {
 						continueToDepartures={this.continueToDepartures}
 						setStartPoint={this.setStartPoint}
 						setEndPoint={this.setEndPoint}
-					></ChooseDestination>
+					/>
 
 					<ChooseDeparture
 						chooseDeparture={this.state.chooseDeparture}
@@ -266,7 +266,7 @@ class BuySingleTicketBS extends Component {
 						startPoint={this.state.startPoint}
 						endPoint={this.state.endPoint}
 						back={this.continueToDepartures}
-					></ChooseDeparture>
+					/>
 
 					{this.renderEditNumberOfTravellers()}
 
@@ -275,20 +275,20 @@ class BuySingleTicketBS extends Component {
 						chooseSeat={this.state.chooseSeat}
 						tickets={this.state.tickets}
 						back={this.continueToSeats}
-					></ChooseSeats>
+					/>
 
 					<ChoosePayment
 						choosePayment={this.state.choosePayment}
 						continueToConfirmation={this.continueToConfirmation}
 						submitNewOrder={this.submitNewOrder}
 						back={this.continueToPayment}
-					></ChoosePayment>
+					/>
 
 					<Confirmation
 						endTransaction={this.props.endTransaction}
 						confirmation={this.state.confirmation}
 						renderSendTicket={this.props.renderSendTicket}
-					></Confirmation>
+					/>
 				</div>
 			</div>
 		);
