@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class AddNewContact extends Component {
+class AddNewContactLater extends Component {
     state = { 
         name: '',
         lastName: '',
@@ -19,4 +19,4 @@ class AddNewContact extends Component {
     }
 }
 
-export default AddNewContact;
+export default AddNewContactLater;

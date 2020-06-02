@@ -1,17 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import Contact from "../Contact";
+import AddNewContactSendTicket from "./AddNewContactSendTicket";
 
-function ContactListSendTicket(props) {
+class ContactListSendTicket extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      addNewContactShow: false
+    }
+  }
+
+  addNewContactHandler = () => {
+    let addNewContact = this.state.addNewContactShow
+    this.setState({addNewContactShow: !addNewContact})
+  }
+
+  render() {
   let content;
-    
-    if (props.contactListShow) {
-      
+  let addNewContact;
+  
+    this.state.addNewContactShow ? addNewContact = <AddNewContactSendTicket changeHandler={this.addNewContactHandler} /> : addNewContact = null
 
+
+    if (this.props.contactListShow) {
       content = (
         <div className="">
           <div
             className="flex flex-row items-center mb-5 cursor-pointer px-5"
-            onClick={props.back}
+            onClick={this.props.back}
           >
             <svg
               className="h-6 w-6 pr-2 text-gray-600"
@@ -26,6 +42,7 @@ function ContactListSendTicket(props) {
             </svg>
             <p className="text-sm font-medium">Tilbake til billettoversikt</p>
           </div>
+          <div onClick={this.addNewContactHandler}>Legg til ny kontakt</div>
           <div className="px-5">
             <div className="rounded-md mt-5 mb-3 p-1 flex flex-row w-auto bg-gray-300">
                 <button className="w-full bg-white mr-1 p-2 rounded text-sm font-medium text-gray-700">Kontakter</button>
@@ -43,10 +60,10 @@ function ContactListSendTicket(props) {
               K
             </div>
             {/* this code below checks if tickets are assigned to persons or not. if yes state is presented as active */}
-            {props.contactList.map((item, index) => {
+            {this.props.contactList.map((item, index) => {
               let check = false;
-              for(let i = 0; i<props.passiveTickets.length; i++){
-                if(props.passiveTickets[i].ticketHolderId === item.id){
+              for(let i = 0; i<this.props.passiveTickets.length; i++){
+                if(this.props.passiveTickets[i].ticketHolderId === item.id){
                   check = true;
                   break; 
                 } else{continue}
@@ -55,11 +72,11 @@ function ContactListSendTicket(props) {
 
               return (
                 <Contact
-                  addClick={props.addClick}
-                  addToActives={props.addToActives}
-                  removeFromActives={props.removeFromActives}
-                  checkIfTicketAssigned={props.passiveTickets}
-                  clicks={props.clicks}
+                  addClick={this.props.addClick}
+                  addToActives={this.props.addToActives}
+                  removeFromActives={this.props.removeFromActives}
+                  checkIfTicketAssigned={this.props.passiveTickets}
+                  clicks={this.props.clicks}
                   key={index}
                   id={item.id}
                   name={item.firstName}
@@ -75,10 +92,12 @@ function ContactListSendTicket(props) {
     }
 
     return(
-        <div>{ content }</div>
+        <div>
+          { addNewContact }
+          { content }
+        </div>
     ) 
-
-  
+    }
 
 
 
