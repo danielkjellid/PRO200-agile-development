@@ -118,8 +118,22 @@ class UserProfile extends Component {
 
   render() {
     let userName = this.props.user;
-    let userNameDisplay = userName ? userName[0].firstName : "nope";
+    let userNameDisplay = userName ? userName[0].firstName : "kunde";
 
+    const date = new Date()
+    const hours = date.getHours()
+    let timeOfDay
+    const timeOfDayStyle = {
+      fontSize: 30
+    }
+
+    if (hours < 12) {
+      timeOfDay = "morgen"
+    } else if (hours >= 12 && hours < 17) {
+      timeOfDay = "ettermiddag"
+    } else {
+      timeOfDay = "kveld"
+    }
 
     return (
       <div>
@@ -139,7 +153,7 @@ class UserProfile extends Component {
                 <div className="ml-5">
 
                   <h1 className="font-bold text-2xl text-gray-800">
-                    God morgen, {userNameDisplay}
+                    God {timeOfDay}, {userNameDisplay}
                   </h1>
                   <div className="flex items-center">
                     <svg
