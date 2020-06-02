@@ -35,6 +35,8 @@ class UserProfile extends Component {
         price: 199,
       },
     };
+
+    this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
   }
 
   newTicketButtonHandler = () => {
@@ -85,6 +87,7 @@ class UserProfile extends Component {
   };
 
   renderSendTicket = () => {
+    let contactList;
     if(this.state.contactList){contactList = this.state.contactList}
     if (this.state.sendTicketShow) {
       return (
@@ -218,7 +221,7 @@ class UserProfile extends Component {
             <ActiveTicket
               activeTicket={this.state.activeTicket}
               ticket={this.state.activeTicketDetails}
-            ></ActiveTicket>
+            />
           </div>
 
           {/* section */}
