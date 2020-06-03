@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ActiveTicket from './ActiveTicket';
+import Ticket from './Ticket';
 import ActiveTicketDetails from './ActiveTicketDetails';
 
 class ActiveTickets extends Component {
@@ -41,15 +41,15 @@ class ActiveTickets extends Component {
         return (  
         <div>
             {!activeTicketDetailsShow ?
-            <div className="px-5 py-10">
+            <div className="px-5 py-6">
             {/* section */}
                 <div>
                 {/* section header */}
                     <div className="flex items-center justify-between mb-5">
-                        <h2 className="text-lg text-gray-900">Billetter</h2>
+                        <h2 className="text-lg text-gray-900">Aktiv billett</h2>
                         <Link to={"/tickets"}>
                         <div className="text-sm text-gray-900 flex items-center">
-                            Se alle
+                            Se alle billetter
                             <svg
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -66,9 +66,10 @@ class ActiveTickets extends Component {
                     </div>
             
                 {/* section content */}
-                <ActiveTicket
+                <Ticket
                     click={this.activeTicketHandler}
                     ticket={this.state.activeTicketDetails}
+                    active={true}
                 />
                 </div>     
             </div> : <ActiveTicketDetails click={this.activeTicketHandler}/>
