@@ -37,6 +37,7 @@ class BuySingleTicketBS extends Component {
 	initTicketTypes = () => {
 		const editTravellers = [
 			{ type: 'Voksen', number: 1 },
+			{ type: 'Barn (0-5 år)', number: 0 },
 			{ type: 'Barn (6-17 år)', number: 0 },
 			{ type: 'Ungdom (18-19 år)', number: 0 },
 			{ type: 'Student', number: 0 },
