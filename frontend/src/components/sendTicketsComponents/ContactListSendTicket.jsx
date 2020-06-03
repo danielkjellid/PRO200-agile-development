@@ -28,8 +28,8 @@ class ContactListSendTicket extends Component {
 	updateContactList = (newContact) => {
 		this.state.contactList.push(newContact);
 		this.submitContact();
-		// console.log(this.state.contactList);
-		// this.props.sendSMS(newContact);
+		console.log(this.state.contactList);
+		this.props.sendSMS(newContact);
 	};
 
 	submitContact = async () => {

@@ -209,17 +209,16 @@ class SendTicketBS extends Component {
 	};
 
 	sendOnSMS = (ticketInfo) => {
-		// const ticket = this.state.ticketsToChange[0];
+		const ticket = this.state.ticketsToChange[0];
 		// console.log(ticket);
-		console.log("sms sent");
-		let person;
+		let person = ticketInfo
 
-		for(let i=0; i<this.props.contactList.length; i++){
-			if(this.props.contactList[i].id === ticketInfo.ticketHolderId){
-				person = this.props.contactList[i];
-				break;
-			}
-		}
+		// for(let i=0; i<this.props.contactList.length; i++){
+		// 	if(this.props.contactList[i].id === ticketInfo.ticketHolderId){
+		// 		person = this.props.contactList[i];
+		// 		break;
+		// 	}
+		// }
 
 		console.log(person);
 
@@ -231,11 +230,11 @@ class SendTicketBS extends Component {
 				' ' +
 				person.lastName +
 				'. Sete: ' +
-				ticketInfo.seat +
+				ticket.seat +
 				', Type billett: ' +
-				ticketInfo.type +
+				ticket.type +
 				', Referanse kode: ' +
-				ticketInfo.referenceCode,
+				ticket.referenceCode,
 		};
 
 		fetch(
