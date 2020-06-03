@@ -75,24 +75,7 @@ class ContactListSendTicket extends Component {
 
 		if (this.props.contactListShow) {
 			content = (
-				<div className="">
-					<div
-						className="flex flex-row items-center mb-5 cursor-pointer px-5"
-						onClick={this.props.back}
-					>
-						<svg
-							className="h-6 w-6 pr-2 text-gray-600"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-						>
-							<path
-								d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-								clipRule="evenodd"
-								fillRule="evenodd"
-							/>
-						</svg>
-						<p className="text-sm font-medium">Tilbake til billettoversikt</p>
-					</div>
+				<div>
 					<div
 						className="flex flex-row justify-center align-center items-center cursor-pointer mx-12"
 						onClick={this.addNewContactHandler}
