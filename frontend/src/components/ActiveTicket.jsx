@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class ActiveTickets extends Component {
+class ActiveTicket extends Component {
 
 	formatPhone(value) {
 		// clean the string
@@ -15,7 +15,7 @@ class ActiveTickets extends Component {
 	}
 
 	render() {
-		if (this.props.activeTicket) {
+		
 			return (
 				<div>
 					<div className="relative h-10 w-10 bg-green-400 rounded-full shadow m-auto flex items-center justify-center">
@@ -23,7 +23,7 @@ class ActiveTickets extends Component {
 							<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
 						</svg>
 					</div>
-					<div className="bg-white shadow rounded-md -mt-5 text-center px-10 py-10">
+					<div onClick={this.props.click} className="bg-white shadow rounded-md -mt-5 text-center px-10 py-10">
 						<div className="mb-4">
 							<p className="text-gray-900 font-medium text-base">{this.props.ticket.type}</p>
 							<p className="text-gray-600 font-medium text-base">{this.props.ticket.group}</p>
@@ -48,10 +48,7 @@ class ActiveTickets extends Component {
 					</div>
 				</div>
 			)
-		} else {
-			return <div>Ingen aktive billetter</div>;
 		}
-	}
 }
 
-export default ActiveTickets;
+export default ActiveTicket;
