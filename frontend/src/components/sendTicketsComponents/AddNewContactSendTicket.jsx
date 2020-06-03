@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 class AddNewContactSendTicket extends Component {
-	state = {
-		firstName: '',
-		lastName: '',
-		email: '',
-		phoneNumber: '',
-	};
+	state ={
+			firstName: '',
+			lastName: '',
+			email: '',
+			phoneNumber: ''
+	}
+	
 	handleFirstNameChange = (event) => {
-		this.setState({ firstName: event.target.value });
+		this.setState({firstName: event.target.value});
 	};
 
 	handleLastNameChange = (event) => {
@@ -22,25 +23,18 @@ class AddNewContactSendTicket extends Component {
 		this.setState({ email: event.target.value });
 	};
 
-	submitContact = async () => {
-		console.log('Submit contact');
-		const url = 'https://localhost:5001/contacts';
-		const payload = this.state;
-
-		try {
-			await fetch(url, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(payload),
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	makeObject = () => {
+		let newContact = {firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				phoneNumber: this.state.phoneNumber,
+				email: this.state.email};
+		this.props.updateContactList(newContact)	
+	}
+	
 
 	render() {
+
+
 		return (
 			<div className="mx-5 absolute bottom-0">
 				<div className="bg-white rounded-md mb-3 p-6 text-center shadow-xl">
@@ -63,7 +57,7 @@ class AddNewContactSendTicket extends Component {
 					className="shadow-xl p-3 w-full bg-white text-center text-sm font-medium text-black rounded-md hover:cursor mb-6"
 					onClick={() => {
 						this.props.changeHandler();
-						this.submitContact();
+						this.makeObject();	
 					}}
 				>
 					Send til telefonnummer
