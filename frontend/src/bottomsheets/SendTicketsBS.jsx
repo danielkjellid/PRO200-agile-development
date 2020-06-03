@@ -268,7 +268,7 @@ class SendTicketBS extends Component {
 				);
 			} else {
 				buttonClassNameToggle =
-					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md cursor-not-allowed';
+					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md';
 				return (
 					<button
 						onClick={() => {
