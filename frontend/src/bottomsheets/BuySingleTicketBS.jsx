@@ -240,7 +240,7 @@ class BuySingleTicketBS extends Component {
 	};
 
 	render() {
-		if(this.state.endPoint){console.log(this.state.endPoint)}
+		
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
