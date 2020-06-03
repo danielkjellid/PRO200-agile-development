@@ -234,8 +234,6 @@ class SendTicketBS extends Component {
 						active[0].referenceCode,
 				};
 
-				console.log(text);
-
 				fetch(
 					`http://127.0.0.1:4000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
 				).catch((err) => console.error(err));
