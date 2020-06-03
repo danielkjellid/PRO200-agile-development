@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import TicketOrder from './components/TicketOrder';
+import UserHeader from './components/UserHeader'
 
 class Tickets extends Component {
   constructor(props) {
@@ -57,6 +58,10 @@ class Tickets extends Component {
     
     return (
       <div>
+        <UserHeader
+          userName={this.props.user}
+          buttonHandler={this.newTicketButtonHandler}
+        />
         <Link to={'/'}>Tilbake</Link>
         {inhold}
       </div>    

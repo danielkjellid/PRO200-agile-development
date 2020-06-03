@@ -98,6 +98,7 @@ class App extends Component {
                     <Tickets 
                     {...props}
                     searchContact={this.state.contactList}
+                    user={this.state.user}
                     ></Tickets>}
                 ></Route>
 
