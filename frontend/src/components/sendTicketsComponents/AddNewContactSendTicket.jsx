@@ -49,7 +49,7 @@ class AddNewContactSendTicket extends Component {
 						<input
 							className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
 							placeholder="Skriv inn telefonnummer..."
-							onChange={this.handleFirstNameChange}
+							onChange={this.handlePhoneChange}
 						/>
 					</div>
 				</div>
