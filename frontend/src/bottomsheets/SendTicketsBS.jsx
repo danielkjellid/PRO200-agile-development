@@ -104,7 +104,7 @@ class SendTicketBS extends Component {
 
 	removeFromActives = (id) => {
 		let activesArr = this.state.actives;
-		let findElement = activesArr.find((element) => element.id === id);
+		let findElement = activesArr.find((element) => element === id);
 		let findIndex = activesArr.indexOf(findElement);
 		console.log(findIndex);
 		if (findIndex > -1) {
