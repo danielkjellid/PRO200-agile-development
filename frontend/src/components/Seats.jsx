@@ -56,20 +56,10 @@ class Seats extends Component {
 		}
 	}
 
-	isSeatSelectedInCarriage(selectedSeats) {
-		let isSeatSelected = false;
-		selectedSeats.forEach((element) => {
-			if (element.carriage === this.props.carriageValue) {
-				return (isSeatSelected = true);
-			}
-		});
-		return isSeatSelected;
-	}
-
 	choosenSeatText() {
 		const { selectedSeats } = this.props;
 
-		if (!this.isSeatSelectedInCarriage(selectedSeats)) {
+		if (selectedSeats.length === 0) {
 			return (
 				<div className="m-auto text-center">
 					<p className="text-sm text-gray-900 font-medium">Velg sete</p>
@@ -80,41 +70,70 @@ class Seats extends Component {
 		var instances = selectedSeats
 			.map((element) => element)
 			.reduce((values, val) => {
-				if (val.carriage === this.props.carriageValue) {
-					if (val.row in values) {
-						values[val.row].push(val.seat);
-					} else {
-						values[val.row] = [];
-						values[val.row].push(val.seat);
+				if (val.carriage in values) {
+					if (val.row in values[val.carriage])
+						values[val.carriage][val.row].push(val.seat);
+					else {
+						values[val.carriage][val.row] = [];
+						values[val.carriage][val.row].push(val.seat);
 					}
+				} else {
+					values[val.carriage] = {};
+					values[val.carriage][val.row] = [];
+					values[val.carriage][val.row].push(val.seat);
 				}
+
 				return values;
 			}, {});
 
 		const text = [];
 
-		for (let [key, value] of Object.entries(instances)) {
+		for (let [carriage, value] of Object.entries(instances)) {
 			text.push(
 				<p
 					style={{ textAlign: 'center' }}
 					className="text-sm text-gray-900 font-medium"
-					key={key}
+					key={carriage}
 				>
-					{this.renderSeatText(key, value)}
+					{this.retrieveCarriageText(carriage)}
 				</p>
 			);
+			for (let [row, seat] of Object.entries(value)) {
+				text.push(
+					<p
+						style={{ textAlign: 'center' }}
+						className="text-sm text-gray-900 font-medium"
+						key={row}
+					>
+						{this.renderSeatText(row, seat)}
+					</p>
+				);
+			}
 		}
 
 		return text;
 	}
 
-	renderSeatText(key, value) {
+	retrieveCarriageText(carriage) {
+		switch (carriage) {
+			case 'carriage1':
+				return 'Vogn 1';
+			case 'carriage2':
+				return 'Vogn 2';
+			case 'carriage3':
+				return 'Vogn 3';
+			default:
+				return 'Error: not finding carriage';
+		}
+	}
+
+	renderSeatText(row, seat) {
 		return (
 			'Rad ' +
-			++key +
+			++row +
 			', sete' +
-			value.map((element, index) => {
-				if (index === value.length - 1) {
+			seat.map((element, index) => {
+				if (index === seat.length - 1) {
 					return ' ' + element.id + ' ';
 				} else {
 					return ' ' + element.id;
