@@ -99,6 +99,14 @@ class Tickets extends Component {
 
   // TODO: attach renderTickets functions to API, however we need the API to show more base info
 
+  // function to render tickets until flags are fixed in backend
+  // to be replaced with the other renderXTickets afterwards
+  renderTempTickets() {
+    let tickets = this.state.orders
+
+    return (<TicketList title='Midlertidig inntil backend' tickets={tickets}/>)
+  }
+
   renderActiveTickets() {
     let activeTickets = this.state.dummyTickets.filter(ticket => ticket.active == true)
 
@@ -124,23 +132,6 @@ class Tickets extends Component {
   }
   
   render() {
-    let content;
-    if (!this.state.isLoaded) {
-      content =  <div>Is Loading</div>;
-    } else {
-      content = (this.state.orders.map((item) => {
-        return (
-          <div>
-            <TicketOrder 
-              contactList={this.props.searchContact}
-              key={item.id} 
-              id={item.id}
-              itemName={item.name}
-            />  
-          </div>
-      )}))
-    }
-    
     return (
       <div>
         <UserHeader
@@ -150,10 +141,11 @@ class Tickets extends Component {
         <Link to={'/'}>Tilbake</Link>
 
         {/* conditionally render ticketlists based on requirements wont render empty lists */}
-        {this.renderActiveTickets()}
+        {this.renderTempTickets()}
+        {/* commentend out until we're able to filter based on active */}
+        {/* {this.renderActiveTickets()}
         {this.renderExpiredSingularTickets()}
-        {this.renderExpiredGroupTickets()}
-        {content}
+        {this.renderExpiredGroupTickets()} */}
       </div>    
     )
   }

@@ -1,3 +1,5 @@
+// to be removed when ticketList and TicketItem is up and running
+
 import React, { Component } from 'react';
 class TicketOrder extends Component {
     constructor(props){

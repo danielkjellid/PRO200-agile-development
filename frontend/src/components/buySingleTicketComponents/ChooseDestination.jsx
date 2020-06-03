@@ -61,9 +61,9 @@ class ChooseDestination extends Component {
                     */}
                     <div className="pl-5 pr-5 pb-5">
                         <p className="text-sm font-medium pb-1 text-gray-800">Avreise og destinasjon</p>
-                        <input className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Avreise"  value={this.props.startPoint} onClick={this.clickStartPoint}/>
+                        <input className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Avreise"  value={this.props.startPoint} onClick={this.clickStartPoint}/>
                         {this.state.drop ? this.renderDropDownMenu() : null}
-                        <input className="px-3 py-2 w-full border rounded border-gray-400 text-sm text-gray-700" placeholder="Destinasjon" value={this.props.endPoint} onClick={this.clickEndPoint}/>
+                        <input className="px-3 py-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Destinasjon" value={this.props.endPoint} onClick={this.clickEndPoint}/>
                     </div>
                 </div>
                 <div className="px-5">

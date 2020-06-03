@@ -338,6 +338,13 @@ class SendTicketBS extends Component {
 		if (this.state.reviewTicketsShow) {
 			return (
 				<div className="px-5 pb-5">
+					<div className="pt-1 pb-6 text-center">
+						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
+					</div>
+					<div className="flex items-center border-b border-gray-300 pb-5">
+						<input type="checkbox"/>
+						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
+					</div>
 					{this.state.ticketByType.map((item, index) => {
 						if (item.tickets.passive.length > 0) {
 							let passive = item.tickets.passive;
