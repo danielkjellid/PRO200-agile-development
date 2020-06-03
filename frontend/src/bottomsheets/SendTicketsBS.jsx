@@ -205,7 +205,6 @@ class SendTicketBS extends Component {
 						if (item.tickets.passive[i].ticketHolderId) {
 							item.tickets.active[i] = item.tickets.passive[i];
 						}
-						console.log(item.tickets.active);
 					} else {
 						item.tickets.active.length = 0;
 					}
@@ -234,6 +233,8 @@ class SendTicketBS extends Component {
 						', Referanse kode: ' +
 						active[0].referenceCode,
 				};
+
+				console.log(text);
 
 				fetch(
 					`http://127.0.0.1:4000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
@@ -280,6 +281,7 @@ class SendTicketBS extends Component {
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
+							this.sendOnSMS(this.state.ticketByType);
 						}}
 						className={buttonClassNameToggle}
 					>
@@ -332,7 +334,6 @@ class SendTicketBS extends Component {
 	};
 
 	reviewTicket = () => {
-		console.log(this.state.actives);
 		if (this.state.reviewTicketsShow) {
 			return (
 				<div className="px-5 pb-5">
@@ -385,8 +386,6 @@ class SendTicketBS extends Component {
 	};
 
 	render() {
-		console.log(this.state.clicks);
-
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
