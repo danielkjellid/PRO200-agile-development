@@ -80,6 +80,7 @@ class App extends Component {
                   render={(props) => (
                     <UserProfile
                       {...props}
+                      updateContactList={this.fetchContactList}
                       fadeBackground={this.fadeBackground}
                       endTransaction={this.endTransaction}
                       user={this.state.user}

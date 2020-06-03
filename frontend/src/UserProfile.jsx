@@ -78,6 +78,7 @@ class UserProfile extends Component {
     if (this.state.sendTicketShow) {
       return (
           <SendTicketBS
+            updateContactList={this.props.updateContactList}
             contactList={this.props.contactList}
             endTransaction={this.props.endTransaction}
             endSendingTickets={this.endSendingTickets}
