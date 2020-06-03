@@ -1,123 +1,121 @@
+import React, { Component } from 'react';
+import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
+import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
+import SendTicketBS from './bottomsheets/SendTicketsBS';
+import ActiveTickets from './components/ActiveTickets';
 
-
-import React, { Component } from "react";
-import ChooseTicketBS from "./bottomsheets/ChooseTicketBS";
-import BuySingleTicketBS from "./bottomsheets/BuySingleTicketBS";
-import SendTicketBS from "./bottomsheets/SendTicketsBS";
-import ActiveTickets from "./components/ActiveTickets";
-
-import UserHeader from './components/UserHeader'
+import UserHeader from './components/UserHeader';
 
 class UserProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //I create fake user data for now
-      name: '',
-      contactList: [],
-      chooseTicket: false,
-      singleTicket: false,
-      periodTicket: false,
-      sendTicketShow: false,
-      activeTicket: true,
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			//I create fake user data for now
+			name: '',
+			contactList: [],
+			chooseTicket: false,
+			singleTicket: false,
+			periodTicket: false,
+			sendTicketShow: false,
+			activeTicket: true,
+		};
 
-    this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
-  }
+		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
+	}
 
-  newTicketButtonHandler = () => {
-    const newTicketShow = this.state.chooseTicket;
-    
-    if (newTicketShow) {
-      this.setState({ chooseTicket: false });
-      this.props.endTransaction();
-    } else {
-      this.setState({ chooseTicket: true });
-      this.props.fadeBackground();
-    }
-  };
+	newTicketButtonHandler = () => {
+		const newTicketShow = this.state.chooseTicket;
 
-  buySingleTicketButtonHandler = () => {
-    const buySingleTicketShow = this.state.singleTicket;
-    this.setState({ singleTicket: !buySingleTicketShow });
-    this.newTicketButtonHandler();
-    this.props.fadeBackground();
-  };
+		if (newTicketShow) {
+			this.setState({ chooseTicket: false });
+			this.props.endTransaction();
+		} else {
+			this.setState({ chooseTicket: true });
+			this.props.fadeBackground();
+		}
+	};
 
-  renderChooseTicket = () => {
-    if (this.state.chooseTicket) {
-      return (
-          <ChooseTicketBS
-            click={this.buySingleTicketButtonHandler}
-            clickX={this.newTicketButtonHandler}
-          />
-      );
-    }
-  };
+	buySingleTicketButtonHandler = () => {
+		const buySingleTicketShow = this.state.singleTicket;
+		this.setState({ singleTicket: !buySingleTicketShow });
+		this.newTicketButtonHandler();
+		this.props.fadeBackground();
+	};
 
-  renderBuySingleTicket = () => {
-    if (this.state.singleTicket) {
-      return (
-          <BuySingleTicketBS
-            endTransaction={this.endTransaction}
-            hideBuySingleTicket={this.hideBuySingleTicket}
-            renderSendTicket={this.sendTicketsHandler}
-          />
-      );
-    }
-  };
+	renderChooseTicket = () => {
+		if (this.state.chooseTicket) {
+			return (
+				<ChooseTicketBS
+					click={this.buySingleTicketButtonHandler}
+					clickX={this.newTicketButtonHandler}
+				/>
+			);
+		}
+	};
 
-  sendTicketsHandler = () => {
-    this.setState({ sendTicketShow: true });
-    this.setState({ singleTicket: false });
-  };
+	renderBuySingleTicket = () => {
+		if (this.state.singleTicket) {
+			return (
+				<BuySingleTicketBS
+					endTransaction={this.endTransaction}
+					hideBuySingleTicket={this.hideBuySingleTicket}
+					renderSendTicket={this.sendTicketsHandler}
+				/>
+			);
+		}
+	};
 
-  renderSendTicket = () => {
-    let contactList;
-    if(this.state.contactList){contactList = this.state.contactList}
-    if (this.state.sendTicketShow) {
-      return (
-          <SendTicketBS
-            updateContactList={this.props.updateContactList}
-            contactList={this.props.contactList}
-            endTransaction={this.props.endTransaction}
-            endSendingTickets={this.endSendingTickets}
-          />
-      );
-    }
-  };
+	sendTicketsHandler = () => {
+		this.setState({ sendTicketShow: true });
+		this.setState({ singleTicket: false });
+	};
 
-  hideBuySingleTicket = () => {
-    this.endTransaction();
-    this.newTicketButtonHandler();
-    
-  };
+	renderSendTicket = () => {
+		let contactList;
+		if (this.state.contactList) {
+			contactList = this.state.contactList;
+		}
+		if (this.state.sendTicketShow) {
+			return (
+				<SendTicketBS
+					updateContactList={this.props.updateContactList}
+					contactList={this.props.contactList}
+					endTransaction={this.props.endTransaction}
+					endSendingTickets={this.endSendingTickets}
+				/>
+			);
+		}
+	};
 
-  endTransaction = () => {
-    this.setState({ singleTicket: false });
-    this.props.endTransaction();
-  };
+	hideBuySingleTicket = () => {
+		this.endTransaction();
+		this.newTicketButtonHandler();
+	};
 
-  endSendingTickets = () => {
-    this.setState({ sendTicketShow: false });
-    this.props.endTransaction();
-  }
+	endTransaction = () => {
+		this.setState({ singleTicket: false });
+		this.props.endTransaction();
+	};
 
-  render() {
-    
-    return (
-      <div>
-        {this.renderChooseTicket()}
-        {this.renderBuySingleTicket()}
-        {this.renderSendTicket()}
-        <UserHeader
-          userName={this.props.user}
-          buttonHandler={this.newTicketButtonHandler}
-        />
-        <ActiveTickets /> 
-      </div>  
-    );
-  }
+	endSendingTickets = () => {
+		this.setState({ sendTicketShow: false });
+		this.props.endTransaction();
+	};
+
+	render() {
+		return (
+			<div>
+				{this.renderChooseTicket()}
+				{this.renderBuySingleTicket()}
+				{this.renderSendTicket()}
+				<UserHeader
+					userName={this.props.user}
+					buttonHandler={this.newTicketButtonHandler}
+				/>
+				<ActiveTickets />
+			</div>
+		);
+	}
 }
 
 export default UserProfile;

@@ -8,28 +8,28 @@ class ContactListSendTicket extends Component {
 		this.state = {
 			addNewContactShow: false,
 			contactList: '',
-			
 		};
 	}
 
-
-	componentDidMount(){
+	componentDidMount() {
 		this.fetchContactList();
 	}
 
-	fetchContactList = async() => {
-		try{
-			const response = await fetch("https://localhost:5001/contacts");
+	fetchContactList = async () => {
+		try {
+			const response = await fetch('https://localhost:5001/contacts');
 			const payload = await response.json();
-			this.setState({contactList: payload})  
-		  } catch(err){console.log(err);}
-	}
+			this.setState({ contactList: payload });
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	updateContactList = (newContact) => {
 		this.state.contactList.push(newContact);
-		this.submitContact(); 
+		this.submitContact();
 		console.log(this.state.contactList);
-	}
+	};
 
 	submitContact = async () => {
 		console.log('Submit contact');
@@ -49,24 +49,24 @@ class ContactListSendTicket extends Component {
 		}
 	};
 
-	
-
 	addNewContactHandler = () => {
 		let addNewContact = this.state.addNewContactShow;
 		this.setState({ addNewContactShow: !addNewContact });
 	};
 
 	render() {
-		if(this.state.update){this.updateHandler()}
+		if (this.state.update) {
+			this.updateHandler();
+		}
 		let content;
 		let addNewContact;
 
 		this.state.addNewContactShow
 			? (addNewContact = (
-					<AddNewContactSendTicket 
+					<AddNewContactSendTicket
 						newContact={this.state.newContact}
 						updateContactList={this.updateContactList}
-						changeHandler={this.addNewContactHandler} 
+						changeHandler={this.addNewContactHandler}
 						submitContact={this.submitContact}
 					/>
 			  ))
@@ -172,7 +172,7 @@ class ContactListSendTicket extends Component {
 									contactItem={item}
 								/>
 							);
-						})}
+						}).splice(0,3)}
 					</div>
 				</div>
 			);

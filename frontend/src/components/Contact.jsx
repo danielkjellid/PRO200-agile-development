@@ -36,9 +36,9 @@ class Contact extends Component {
 			return { active: !prevState.active };
 		});
 		if (!this.state.active) {
-			this.props.addToActives(this.props.contactItem);
+			this.props.addToActives(this.props.id); //contactItem
 		} else {
-			this.props.removeFromActives(this.props.contactItem);
+			this.props.removeFromActives(this.props.id); //contactItem
 		}
 	};
 
@@ -52,7 +52,7 @@ class Contact extends Component {
 					</div>
 					<div>
 						{/* Contact name */}
-						<p class="text-gray-900 text-base">{this.props.name}</p>
+						<p className="text-gray-900 text-base">{this.props.name}</p>
 						{/* Contact info */}
 						<p className="text-gray-700 text-sm">+47 {this.props.phone}</p>
 					</div>
