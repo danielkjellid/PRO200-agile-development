@@ -208,9 +208,21 @@ class SendTicketBS extends Component {
 		this.setState({ actives: [] });
 	};
 
-	sendOnSMS = (person) => {
-		const ticket = this.state.ticketsToChange[0];
-		console.log(ticket);
+	sendOnSMS = (ticketInfo) => {
+		// const ticket = this.state.ticketsToChange[0];
+		// console.log(ticket);
+		console.log("sms sent");
+		let person;
+
+		for(let i=0; i<this.props.contactList.length; i++){
+			if(this.props.contactList[i].id === ticketInfo.ticketHolderId){
+				person = this.props.contactList[i];
+				break;
+			}
+		}
+
+		console.log(person);
+
 		const text = {
 			recipient: person.phoneNumber,
 			textmessage:
@@ -219,11 +231,11 @@ class SendTicketBS extends Component {
 				' ' +
 				person.lastName +
 				'. Sete: ' +
-				ticket.seat +
+				ticketInfo.seat +
 				', Type billett: ' +
-				ticket.type +
+				ticketInfo.type +
 				', Referanse kode: ' +
-				ticket.referenceCode,
+				ticketInfo.referenceCode,
 		};
 
 		fetch(
@@ -269,7 +281,8 @@ class SendTicketBS extends Component {
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
-							this.linkContactToTickets();
+							this.sendOnSMS(this.state.ticketByType[0].tickets.active[0])
+							// this.linkContactToTickets();
 						}}
 						className={buttonClassNameToggle}
 					>
