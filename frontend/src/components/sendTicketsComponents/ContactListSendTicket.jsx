@@ -7,8 +7,47 @@ class ContactListSendTicket extends Component {
 		super(props);
 		this.state = {
 			addNewContactShow: false,
+			contactList: '',
 		};
 	}
+
+	componentDidMount() {
+		this.fetchContactList();
+	}
+
+	fetchContactList = async () => {
+		try {
+			const response = await fetch('https://localhost:5001/contacts');
+			const payload = await response.json();
+			this.setState({ contactList: payload });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	updateContactList = (newContact) => {
+		this.state.contactList.push(newContact);
+		this.submitContact();
+		console.log(this.state.contactList);
+	};
+
+	submitContact = async () => {
+		console.log('Submit contact');
+		const url = 'https://localhost:5001/contacts';
+		const payload = this.state.contactList;
+
+		try {
+			await fetch(url, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	addNewContactHandler = () => {
 		let addNewContact = this.state.addNewContactShow;
@@ -16,14 +55,19 @@ class ContactListSendTicket extends Component {
 	};
 
 	render() {
+		if (this.state.update) {
+			this.updateHandler();
+		}
 		let content;
 		let addNewContact;
 
 		this.state.addNewContactShow
 			? (addNewContact = (
 					<AddNewContactSendTicket
+						newContact={this.state.newContact}
+						updateContactList={this.updateContactList}
 						changeHandler={this.addNewContactHandler}
-						fetchContactList={this.props.fetchContactList}
+						submitContact={this.submitContact}
 					/>
 			  ))
 			: (addNewContact = null);
@@ -63,8 +107,8 @@ class ContactListSendTicket extends Component {
 						>
 							<path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
 						</svg>
-						<p className="ml-3 text-gray-700 text-md font-medium">
-							Legg til ny kontakt
+						<p className="ml-3 text-gray-700 text-base font-medium">
+							Send til telefonnummer
 						</p>
 					</div>
 					<div className="px-5">
@@ -101,7 +145,7 @@ class ContactListSendTicket extends Component {
 							K
 						</div>
 						{/* this code below checks if tickets are assigned to persons or not. if yes state is presented as active */}
-						{this.props.contactList.map((item, index) => {
+						{this.state.contactList.map((item, index) => {
 							let check = false;
 							for (let i = 0; i < this.props.passiveTickets.length; i++) {
 								if (this.props.passiveTickets[i].ticketHolderId === item.id) {

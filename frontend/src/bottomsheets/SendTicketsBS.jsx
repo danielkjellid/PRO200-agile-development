@@ -390,7 +390,7 @@ class SendTicketBS extends Component {
 					<HeaderSendTickets end={this.props.endSendingTickets} />
 					{this.reviewTicket()}
 					<ContactListSendTicket
-						fetchContactList={this.props.fetchContactList}
+						updateContactList={this.props.updateContactList}
 						back={this.backToReviewTicket}
 						clicks={this.state.clicks}
 						addClick={this.addClick}

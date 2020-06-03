@@ -82,11 +82,11 @@ class App extends Component {
 									render={(props) => (
 										<UserProfile
 											{...props}
+											updateContactList={this.fetchContactList}
 											fadeBackground={this.fadeBackground}
 											endTransaction={this.endTransaction}
 											user={this.state.user}
 											contactList={this.state.contactList}
-											fetchContactList={this.fetchContactList}
 										></UserProfile>
 									)}
 								></Route>
@@ -102,6 +102,7 @@ class App extends Component {
 										<Tickets
 											{...props}
 											searchContact={this.state.contactList}
+											user={this.state.user}
 										></Tickets>
 									)}
 								></Route>
