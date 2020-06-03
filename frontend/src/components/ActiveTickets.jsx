@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Ticket from './Ticket';
+import TicketItem from './TicketItem';
 import ActiveTicketDetails from './ActiveTicketDetails';
 
 class ActiveTickets extends Component {
@@ -66,7 +66,7 @@ class ActiveTickets extends Component {
                     </div>
             
                 {/* section content */}
-                <Ticket
+                <TicketItem
                     click={this.activeTicketHandler}
                     ticket={this.state.activeTicketDetails}
                     active={true}
