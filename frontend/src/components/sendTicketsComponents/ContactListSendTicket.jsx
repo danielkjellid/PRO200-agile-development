@@ -172,7 +172,7 @@ class ContactListSendTicket extends Component {
 									contactItem={item}
 								/>
 							);
-						})}
+						}).splice(0,3)}
 					</div>
 				</div>
 			);

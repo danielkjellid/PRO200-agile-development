@@ -52,7 +52,7 @@ class Contact extends Component {
 					</div>
 					<div>
 						{/* Contact name */}
-						<p class="text-gray-900 text-base">{this.props.name}</p>
+						<p className="text-gray-900 text-base">{this.props.name}</p>
 						{/* Contact info */}
 						<p className="text-gray-700 text-sm">+47 {this.props.phone}</p>
 					</div>
