@@ -29,6 +29,7 @@ class ContactListSendTicket extends Component {
 		this.state.contactList.push(newContact);
 		this.submitContact();
 		console.log(this.state.contactList);
+		this.props.sendSMS(newContact);
 	};
 
 	submitContact = async () => {
@@ -145,34 +146,36 @@ class ContactListSendTicket extends Component {
 							K
 						</div>
 						{/* this code below checks if tickets are assigned to persons or not. if yes state is presented as active */}
-						{this.state.contactList.map((item, index) => {
-							let check = false;
-							for (let i = 0; i < this.props.passiveTickets.length; i++) {
-								if (this.props.passiveTickets[i].ticketHolderId === item.id) {
-									check = true;
-									break;
-								} else {
-									continue;
+						{this.state.contactList
+							.map((item, index) => {
+								let check = false;
+								for (let i = 0; i < this.props.passiveTickets.length; i++) {
+									if (this.props.passiveTickets[i].ticketHolderId === item.id) {
+										check = true;
+										break;
+									} else {
+										continue;
+									}
 								}
-							}
 
-							return (
-								<Contact
-									addClick={this.props.addClick}
-									addToActives={this.props.addToActives}
-									removeFromActives={this.props.removeFromActives}
-									checkIfTicketAssigned={this.props.passiveTickets}
-									clicks={this.props.clicks}
-									key={index}
-									id={item.id}
-									name={item.firstName}
-									lastName={item.lastName}
-									phone={item.phoneNumber}
-									state={check}
-									contactItem={item}
-								/>
-							);
-						}).splice(0,3)}
+								return (
+									<Contact
+										addClick={this.props.addClick}
+										addToActives={this.props.addToActives}
+										removeFromActives={this.props.removeFromActives}
+										checkIfTicketAssigned={this.props.passiveTickets}
+										clicks={this.props.clicks}
+										key={index}
+										id={item.id}
+										name={item.firstName}
+										lastName={item.lastName}
+										phone={item.phoneNumber}
+										state={check}
+										contactItem={item}
+									/>
+								);
+							})
+							.splice(0, 3)}
 					</div>
 				</div>
 			);
