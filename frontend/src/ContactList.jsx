@@ -59,7 +59,7 @@ class ContactList extends Component {
                 <button onClick={this.renderNewContact}>Add ny kontakt</button>
                 {this.state.contactList.map((item,index) => {
                     return(
-                            <Contact
+                            <Contact 
                                 key={index}
                                 id={item.id}
                                 name={item.firstName}
