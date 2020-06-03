@@ -54,10 +54,10 @@ class TicketList extends Component {
                     key={i}
                     id={ticket.id}
                     active={ticket.active}
-                    title={ticket.title}
+                    title={ticket.name}
                     price={ticket.price}
-                    from={ticket.from}
-                    to={ticket.to}
+                    from={ticket.startPoint}
+                    to={ticket.endPoint}
                   />)
               })}
             </div>

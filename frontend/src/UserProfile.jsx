@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ChooseTicketBS from './bottomsheets/ChooseTicketBS';
 import BuySingleTicketBS from './bottomsheets/BuySingleTicketBS';
 import SendTicketBS from './bottomsheets/SendTicketsBS';
-import ActiveTickets from './components/ActiveTickets';
 
 import UserHeader from './components/UserHeader';
+import TicketList from './components/TicketList'
 
 class UserProfile extends Component {
 	constructor(props) {
@@ -112,7 +112,12 @@ class UserProfile extends Component {
 					userName={this.props.user}
 					buttonHandler={this.newTicketButtonHandler}
 				/>
-				<ActiveTickets />
+				<TicketList
+					title="Aktiv billett"
+					linkLabel="Se alle billetter"
+					to="/tickets"
+					tickets={[{id: '0f76be9e-6181-4b0f-bd24-0749204e7d39', name: 'Active ticket', active: true, price: '420,00'}]} 
+				/>
 			</div>
 		);
 	}
