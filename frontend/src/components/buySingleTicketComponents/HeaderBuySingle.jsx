@@ -3,8 +3,12 @@ import React from 'react';
 function HeaderBuySingle(props) {
     return (
         <div className="flex flex-row justify-between p-5 border-b border-grey-300 mb-5" >
-            <svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
-            <p className="font-medium">Kjøp enkeltbillett</p>
+            {!props.confirmation ? 
+            <div>
+                <svg onClick={props.back} className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
+                <p className="font-medium">Kjøp enkeltbillett</p>
+            </div>
+            : null}
             <button onClick={() => {
                 props.endTransaction(); 
                 props.restartOrder(); 

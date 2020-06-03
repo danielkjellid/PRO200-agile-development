@@ -39,6 +39,7 @@ class SendTicketBS extends Component {
 	};
 
 	substractClick = () => {
+		console.log(typeof this.state.clicks);
 		this.setState({ clicks: this.state.clicks - 1 });
 	};
 	////////////////////////////////////////////////////
@@ -204,6 +205,7 @@ class SendTicketBS extends Component {
 						if (item.tickets.passive[i].ticketHolderId) {
 							item.tickets.active[i] = item.tickets.passive[i];
 						}
+						console.log(item.tickets.active);
 					} else {
 						item.tickets.active.length = 0;
 					}
@@ -277,7 +279,6 @@ class SendTicketBS extends Component {
 					<button
 						onClick={() => {
 							this.ticketsWereSent();
-							this.sendOnSMS(this.state.ticketByType);
 							this.updateAPI();
 						}}
 						className={buttonClassNameToggle}
@@ -326,7 +327,12 @@ class SendTicketBS extends Component {
 		}
 	};
 
+	backToReviewTicket = () => {
+		this.setState({ reviewTicketsShow: true, contactListShow: false });
+	};
+
 	reviewTicket = () => {
+		console.log(this.state.actives);
 		if (this.state.reviewTicketsShow) {
 			return (
 				<div className="px-5 pb-5">
@@ -379,12 +385,15 @@ class SendTicketBS extends Component {
 	};
 
 	render() {
+		console.log(this.state.clicks);
+
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
 					<HeaderSendTickets end={this.props.endSendingTickets} />
 					{this.reviewTicket()}
 					<ContactListSendTicket
+						back={this.backToReviewTicket}
 						clicks={this.state.clicks}
 						addClick={this.addClick}
 						passiveTickets={this.state.ticketsToChange}
