@@ -180,12 +180,11 @@ class SendTicketBS extends Component {
 		const ticketsNum = this.state.ticketByType;
 		let result = false;
 		for (let i = 0; i < ticketsNum.length; i++) {
-			if (ticketsNum[i].tickets.active.length>0) {
+			if (ticketsNum[i].tickets.active.length > 0) {
 				result = true;
 				break;
-
 			} else {
-				continue
+				continue;
 			}
 		}
 		return result;
@@ -209,31 +208,27 @@ class SendTicketBS extends Component {
 		this.setState({ actives: [] });
 	};
 
-	sendOnSMS = (ticketsWithContacts) => {
-		ticketsWithContacts.forEach((element) => {
-			const { active } = element.tickets;
-			if (active.length !== 0) {
-				const person = active[0].ticketHolderId;
-				const text = {
-					recipient: person.phoneNumber,
-					textmessage:
-						'Billett kjøpt til ' +
-						person.firstName +
-						' ' +
-						person.lastName +
-						'. Sete: ' +
-						active[0].seat +
-						', Type billett: ' +
-						active[0].type +
-						', Referanse kode: ' +
-						active[0].referenceCode,
-				};
+	sendOnSMS = (person) => {
+		const ticket = this.state.ticketsToChange[0];
+		console.log(ticket);
+		const text = {
+			recipient: person.phoneNumber,
+			textmessage:
+				'Billett kjøpt til ' +
+				person.firstName +
+				' ' +
+				person.lastName +
+				'. Sete: ' +
+				ticket.seat +
+				', Type billett: ' +
+				ticket.type +
+				', Referanse kode: ' +
+				ticket.referenceCode,
+		};
 
-				fetch(
-					`http://127.0.0.1:4000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
-				).catch((err) => console.error(err));
-			}
-		});
+		fetch(
+			`http://127.0.0.1:4000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
+		).catch((err) => console.error(err));
 	};
 
 	restartClicks = () => {
@@ -268,13 +263,13 @@ class SendTicketBS extends Component {
 				);
 			} else {
 				buttonClassNameToggle =
-					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md';
+					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md cursor-not-allowed';
 				return (
 					<button
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
-							this.sendOnSMS(this.state.ticketByType);
+							this.linkContactToTickets();
 						}}
 						className={buttonClassNameToggle}
 					>
@@ -385,6 +380,7 @@ class SendTicketBS extends Component {
 					<HeaderSendTickets end={this.props.endSendingTickets} />
 					{this.reviewTicket()}
 					<ContactListSendTicket
+						sendSMS={this.sendOnSMS}
 						updateContactList={this.props.updateContactList}
 						back={this.backToReviewTicket}
 						clicks={this.state.clicks}
