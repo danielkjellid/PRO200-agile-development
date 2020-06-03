@@ -269,6 +269,10 @@ checkIfPassEqAct = () => {
 
   };
 
+  backToReviewTicket = () => {
+    this.setState({ reviewTicketsShow: true,contactListShow: false,})
+  }
+
   reviewTicket = () => {
     console.log(this.state.actives);
     if (this.state.reviewTicketsShow) {
@@ -310,6 +314,7 @@ checkIfPassEqAct = () => {
           <HeaderSendTickets end={this.props.endSendingTickets} />
           {this.reviewTicket()}
           <ContactListSendTicket 
+            back={this.backToReviewTicket}
             clicks={this.state.clicks}
             addClick={this.addClick}
             passiveTickets={this.state.ticketsToChange} 

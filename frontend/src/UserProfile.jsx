@@ -25,7 +25,7 @@ class UserProfile extends Component {
 
   newTicketButtonHandler = () => {
     const newTicketShow = this.state.chooseTicket;
-
+    
     if (newTicketShow) {
       this.setState({ chooseTicket: false });
       this.props.endTransaction();
