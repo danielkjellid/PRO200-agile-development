@@ -104,7 +104,7 @@ class SendTicketBS extends Component {
 
 	removeFromActives = (id) => {
 		let activesArr = this.state.actives;
-		let findElement = activesArr.find((element) => element.id === id);
+		let findElement = activesArr.find((element) => element === id);
 		let findIndex = activesArr.indexOf(findElement);
 		console.log(findIndex);
 		if (findIndex > -1) {
@@ -178,22 +178,17 @@ class SendTicketBS extends Component {
 
 	checkIfPassEqAct = () => {
 		const ticketsNum = this.state.ticketByType;
-		let counter = 0;
+		let result = false;
 		for (let i = 0; i < ticketsNum.length; i++) {
-			if (
-				ticketsNum[i].tickets.passive.length ===
-				ticketsNum[i].tickets.active.length
-			) {
-				counter++;
-			} else {
+			if (ticketsNum[i].tickets.active.length>0) {
+				result = true;
 				break;
+
+			} else {
+				continue
 			}
 		}
-		if (counter === ticketsNum.length) {
-			return true;
-		} else {
-			return false;
-		}
+		return result;
 	};
 
 	assignContactToTicket = () => {

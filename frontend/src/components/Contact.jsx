@@ -36,9 +36,9 @@ class Contact extends Component {
 			return { active: !prevState.active };
 		});
 		if (!this.state.active) {
-			this.props.addToActives(this.props.contactItem);
+			this.props.addToActives(this.props.id); //contactItem
 		} else {
-			this.props.removeFromActives(this.props.contactItem);
+			this.props.removeFromActives(this.props.id); //contactItem
 		}
 	};
 
