@@ -38,6 +38,8 @@ class AddNewContactSendTicket extends Component {
 		} catch (err) {
 			console.log(err);
 		}
+
+		this.props.fetchContactList();
 	};
 
 	render() {

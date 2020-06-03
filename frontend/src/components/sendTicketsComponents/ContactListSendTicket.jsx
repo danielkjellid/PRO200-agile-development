@@ -21,7 +21,10 @@ class ContactListSendTicket extends Component {
 
 		this.state.addNewContactShow
 			? (addNewContact = (
-					<AddNewContactSendTicket changeHandler={this.addNewContactHandler} />
+					<AddNewContactSendTicket
+						changeHandler={this.addNewContactHandler}
+						fetchContactList={this.props.fetchContactList}
+					/>
 			  ))
 			: (addNewContact = null);
 
