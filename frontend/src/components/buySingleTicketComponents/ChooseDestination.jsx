@@ -71,7 +71,7 @@ class ChooseDestination extends Component {
                 </div>{" "}
                 <div className="px-5">
                     <div className="rounded-md mb-3 p-1 flex flex-row w-auto bg-gray-300">
-                        <button className="w-full bg-white mx-1 p-2 rounded text-sm font-medium text-gray-700">Nå</button>
+                        <button className="w-full bg-white p-2 rounded text-sm font-medium text-gray-700">Nå</button>
                         <button className="w-full bg-transparent  p-2 rounded text-sm font-medium text-gray-700">Ankomst</button>
                         <button className="w-full bg-transparent p-2 rounded text-sm font-medium text-gray-700">Avgang</button>
                     </div>
