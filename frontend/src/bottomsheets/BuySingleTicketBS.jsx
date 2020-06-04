@@ -60,7 +60,7 @@ class BuySingleTicketBS extends Component {
 						endPoint: this.state.endPoint,
 						referenceCode: '2xdfe',
 						seat: '14b',
-						price: 0,
+						price: ticketsChosen[i].price,
 					});
 					count--;
 				}
