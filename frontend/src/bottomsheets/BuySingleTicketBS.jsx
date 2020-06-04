@@ -297,6 +297,9 @@ class BuySingleTicketBS extends Component {
 						continueToConfirmation={this.continueToConfirmation}
 						submitNewOrder={this.submitNewOrder}
 						back={this.continueToPayment}
+						startPoint={this.state.startPoint}
+						endPoint={this.state.endPoint}
+						numberOfTravellers={this.state.ticketTypeNum}
 					/>
 
 					<Confirmation

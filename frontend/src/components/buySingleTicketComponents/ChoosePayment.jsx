@@ -23,6 +23,7 @@ class ChoosePayment extends Component {
 	};
 
 	render() {
+		let totalPriceOrder=0;
 		return (
 			<div className={this.props.choosePayment ? 'block' : 'hidden'}>
 				<div className="px-5 pb-5">
@@ -30,15 +31,22 @@ class ChoosePayment extends Component {
 					<div className="mt-6">
 						<div className="text-center">
 							<h1 className="text-gray-900 font-medium text-xl">Nesten ferdig! <br></br>Bekreft bestillingen</h1>
-							<p className="text-gray-900 text-sm mt-5">Dere vil reise fra Oslo S til Gjøvik mandag, 9. desember, 15:40.</p>
+							<p className="text-gray-900 text-sm mt-5">Dere vil reise fra \ {this.props.startPoint} til {this.props.endPoint} fredag, 5. juni, 15:40.</p>
 						</div>
 						<div className="mt-5 pb-5 border-b border-gray-300">
 							<div className="py-2">
-								<div className="flex items-center justify-between">
-									{/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
-									<p className="font-regular text-gray-900 text-sm">1x Voksen</p>
-									<p className="font-medium text-gray-900 text-sm">kr 109,00</p>
-								</div>
+							{this.props.numberOfTravellers.map(item => {
+								if(item.number>0){
+									totalPriceOrder += item.totalPrice()
+									return(
+									<div className="flex items-center justify-between">
+										{/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
+										<p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
+										<p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>
+									</div>
+									)
+								}
+							})}
 							</div>
 						</div>
 						<div className="mt-5">
@@ -46,7 +54,7 @@ class ChoosePayment extends Component {
 								<div className="flex items-center justify-between">
 									{/* Totalbeløp må regnes ut ved hjelp av billettpriser */}
 									<p className="font-medium text-gray-900 text-sm">Total <span className="text-gray-600 font-normal">(inkl MVA)</span></p>
-									<p className="font-medium text-gray-900 text-sm">kr 672,00</p>
+									<p className="font-medium text-gray-900 text-sm">kr {totalPriceOrder},00</p>
 								</div>
 							</div>
 							<div className="py-2">
