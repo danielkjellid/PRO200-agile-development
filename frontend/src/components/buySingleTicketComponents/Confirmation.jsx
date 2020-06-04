@@ -12,7 +12,7 @@ function Confirmation(props) {
           <div className="py-2">
             <div className="flex items-center justify-between">
               {/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
-              <p className="font-regular text-gray-900 text-sm">1x Voksen</p>
+              <p className="font-regular text-gray-900 text-sm">1 Voksen</p>
               <p className="font-medium text-gray-900 text-sm">kr 109,00</p>
             </div>
           </div>
