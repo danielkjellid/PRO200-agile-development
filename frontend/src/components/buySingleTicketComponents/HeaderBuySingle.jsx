@@ -10,6 +10,7 @@ function HeaderBuySingle(props) {
             </React.Fragment>
             : null}
             <button onClick={() => {
+                props.updateAPI();
                 props.endTransaction(); 
                 props.restartOrder(); 
                 props.initTicketTypes()}}>

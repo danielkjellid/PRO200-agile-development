@@ -38,7 +38,7 @@ function Confirmation(props) {
         </button>
         <Link 
           to={'/tickets'} 
-          onClick={props.endTransaction} 
+          onClick={() => {props.endTransaction(); props.updateAPI();}} 
           className="w-full block p-3 bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
         >
           Se billettene

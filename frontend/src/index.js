@@ -33,7 +33,7 @@ class App extends Component {
 	}
 
 	updateAPI = () =>{
-		this.setState({updateAPI: this.state.updateAPI +1 })
+		window.location.reload(false);
 	}
 
 	fetchOrders = async () => {
@@ -64,10 +64,6 @@ class App extends Component {
 					const payload = await response.json()
 					
 					payloadTaken = payload;
-				} catch (error) {
-					console.log(error)
-				}
-				
 					order.orderName = this.state.orders[i].name;
 					order.id = this.state.orders[i].id;
 					order.isActive = this.state.orders[i].isActive;
@@ -83,6 +79,11 @@ class App extends Component {
 					//order.tickets = payload;
 				
 				tickets.push(order)
+				} catch (error) {
+					console.log(error)
+				}
+					
+					
 			}
 		}
 		this.setState({ tickets: tickets })

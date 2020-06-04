@@ -172,7 +172,6 @@ class BuySingleTicketBS extends Component {
 		} catch (err) {
 			console.log(err);
 		}
-		this.props.updateAPI();
 		this.getLastOrderID();
 	};
 
@@ -259,6 +258,7 @@ class BuySingleTicketBS extends Component {
 						restartOrder={this.restartOrder}
 						initTicketTypes={this.initTicketTypes}
 						confirmation={this.state.confirmation}
+						updateAPI = {this.props.updateAPI}
 					/>
 
 					<ChooseDestination
@@ -303,6 +303,7 @@ class BuySingleTicketBS extends Component {
 						endTransaction={this.props.endTransaction}
 						confirmation={this.state.confirmation}
 						renderSendTicket={this.props.renderSendTicket}
+						updateAPI = {this.props.updateAPI}
 					/>
 				</div>
 			</div>
