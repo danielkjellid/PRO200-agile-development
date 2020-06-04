@@ -60,6 +60,7 @@ class BuyNewTicket extends Component {
 					contactList={this.contactList}
 					endTransaction={this.endTransaction}
 					endSendingTickets={this.endSendingTickets}
+					updateAPI={this.props.updateAPI}
 				/>
 			);
 		}
