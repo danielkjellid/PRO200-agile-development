@@ -8,6 +8,7 @@ import UserProfile from './UserProfile';
 import Navbar from './components/Navbar';
 import ContactList from './ContactList';
 import BuyNewTicket from './components/BuyNewTicket';
+import IntroModal from './components/IntroModal';
 
 class App extends Component {
 	constructor(props) {
@@ -20,7 +21,9 @@ class App extends Component {
 			contactList: '',
 			chooseTicket: false,
 			orders: '',
-			tickets: ''
+			tickets: '',
+			checkIfFirstTimeLaunch: true,
+			firstTimeModal: false
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
@@ -111,6 +114,22 @@ class App extends Component {
 		}
 	};
 
+
+	//this functions checks if app runs for the first time. its super primitive cause hereby I check
+	//if the DB has been updated since the last time. Normally I would never do anything like that but 
+	// in this case it will work. Have to fix before final delivery
+	checkIfFirstTimeLaunch = () => {
+		if(this.state.orders){
+			if(this.state.orders.length > 4){
+				return false
+			} else {return true}
+	}}
+
+	closeIntroModal = () => {
+		this.setState({checkIfFirstTimeLaunch: false})
+	}
+
+
 	notFound = () => {
 		return <h1>not found</h1>;
 	};
@@ -154,10 +173,12 @@ class App extends Component {
 
 
 	render() {
+		
 		return (
 			<BrowserRouter>
 				<div>
 					<div className={this.state.coverSite ? 'modalBack' : null}></div>
+					<div className={this.state.firstTimeModal ? 'modalBack' : null}></div>
 					<Navbar />
 					<BuyNewTicket
 						user={this.state.user[0]}
@@ -167,6 +188,12 @@ class App extends Component {
 						fadeBackground={this.fadeBackground}
 						updateAPI={this.updateAPI}
 					/>
+					{this.state.checkIfFirstTimeLaunch ? 
+						<IntroModal 
+							closeIntroModal={this.closeIntroModal}
+
+						/> : null
+					}
 					<div className="bg-gray-100 canvas">
 						<div className="content">
 							<Switch>
