@@ -360,6 +360,12 @@ class SendTicketBS extends Component {
 
 	}
 
+	renderVipps = () => {
+		if (this.state.makeAccountInVIpps) {
+			return <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVIpps} />
+		}
+	}
+
 	reviewTicket = () => {
 		if (this.state.reviewTicketsShow) {
 			return (
@@ -419,12 +425,21 @@ class SendTicketBS extends Component {
 		}
 	};
 
+	backButton = () => {
+		if (this.state.makeAccountInVIpps) {
+			this.props.endTransaction();
+		} else if (this.state.contactListShow) {
+			this.backToSendTickets();
+		}
+	}
+
 	render() {
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
-					<HeaderSendTickets back={this.backToSendTickets} contactListShow={this.state.contactListShow} />
+					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps} />
 					{this.reviewTicket()}
+					{this.renderVipps()}
 					<ContactListSendTicket
 						sendSMS={this.sendOnSMS}
 						updateContactList={this.props.updateContactList}
