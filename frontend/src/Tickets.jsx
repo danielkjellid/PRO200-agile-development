@@ -75,21 +75,13 @@ class Tickets extends Component {
         },
       ]
     };
+
+    this.renderActiveTickets = this.renderActiveTickets.bind(this);
+    this.renderExpiredGroupTickets = this.renderExpiredGroupTickets.bind(this);
+   
   }
 
-  async componentDidMount() {
-    try {
-      const response = await fetch("https://localhost:5001/orders", {method: "get"});
-      
-      const payload = await response.json();
-      this.setState({
-        orders: payload,
-        isLoaded: true,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
+ 
   
   showTicketsByOrder = (id) => {
 
@@ -107,31 +99,33 @@ class Tickets extends Component {
     return (<TicketList title='Midlertidig inntil backend' tickets={tickets}/>)
   }
 
-  renderActiveTickets() {
-    let activeTickets
-    if(this.props.tickets){
-       activeTickets= this.props.tickets.filter(ticket => ticket.isActive)
-       return (<TicketList title='Aktive billetter' tickets={activeTickets}/>)
+  renderActiveTickets(tickets) {
+    if(tickets){
+      let activeTickets = tickets.filter(ticket => ticket.isActive)
+      return (<TicketList title='Aktive billetter' tickets={activeTickets}/>)
     }
   }
   
-  renderExpiredSingularTickets() {
-    let exipredSingularTickets = this.state.dummyTickets.filter(ticket => ticket.singular == true && ticket.active == false)
+  // renderExpiredSingularTickets() {
+  //   let exipredSingularTickets = this.state.dummyTickets.filter(ticket => ticket.singular == true && ticket.active == false)
 
-    if (exipredSingularTickets.length > 0) {
-      return (<TicketList title='Utgåtte enkeltbilletter' tickets={exipredSingularTickets}/>)
-    }
-  }
+  //   if (exipredSingularTickets.length > 0) {
+  //     return (<TicketList title='Utgåtte enkeltbilletter' tickets={exipredSingularTickets}/>)
+  //   }
+  // }
 
-  renderExpiredGroupTickets() {
-    let expiredGroupTickets = this.state.dummyTickets.filter(ticket => ticket.singular == false && ticket.active == false)
-
-    if (expiredGroupTickets.length > 0) {
+  renderExpiredGroupTickets(tickets) {
+    if(tickets){
+      let expiredGroupTickets = tickets.filter(ticket => ticket.isActive === false)
       return (<TicketList title='Utgåtte gruppebilletter' tickets={expiredGroupTickets}/>)
     }
   }
-  
+
+ 
   render() {
+    
+
+   
     return (
       <div>
         <UserHeader
@@ -140,16 +134,17 @@ class Tickets extends Component {
         />
         <Link to={'/'}>Tilbake</Link>
 
-
+        {this.renderActiveTickets(this.props.tickets)}
+        {this.renderExpiredGroupTickets(this.props.tickets)}
        
 
         {/* conditionally render ticketlists based on requirements wont render empty lists */}
         {/* {this.renderTempTickets()} */}
         {/* commentend out until we're able to filter based on active */}
-        {this.renderActiveTickets()}
+        
         {/*
-        {this.renderExpiredSingularTickets()}
-        {this.renderExpiredGroupTickets()} */}
+        {this.renderExpiredSingularTickets()}*/}
+      
       </div>    
     )
   }

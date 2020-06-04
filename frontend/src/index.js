@@ -38,7 +38,6 @@ class App extends Component {
 		try {
 			const response = await fetch("https://localhost:5001/orders", { method: "get" });
 			const payload = await response.json();
-			console.log(payload);
 			this.setState({
 				isLoaded: true, orders: payload
 			});
@@ -77,7 +76,7 @@ class App extends Component {
 			}
 		}
 		this.setState({ tickets: tickets })
-		console.log(this.state.tickets);
+	
 	}
 
 
