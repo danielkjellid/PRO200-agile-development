@@ -23,16 +23,6 @@ class AddNewContactSendTicket extends Component {
 		this.setState({ email: event.target.value });
 	};
 
-	makeObject = () => {
-		let newContact = {
-			firstName: this.state.firstName,
-			lastName: this.state.lastName,
-			phoneNumber: this.state.phoneNumber,
-			email: this.state.email,
-		};
-		this.props.updateContactList(newContact);
-	};
-
 	render() {
 		return (
 			<div className="mx-5 absolute bottom-0">
@@ -57,7 +47,7 @@ class AddNewContactSendTicket extends Component {
 					className="shadow-xl p-3 w-full bg-white text-center text-sm font-medium text-black rounded-md hover:cursor mb-6"
 					onClick={() => {
 						this.props.changeHandler();
-						this.makeObject();
+						this.props.sendSMS(this.state);
 					}}
 				>
 					Send til telefonnummer

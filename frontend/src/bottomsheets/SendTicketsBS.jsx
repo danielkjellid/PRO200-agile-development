@@ -208,20 +208,9 @@ class SendTicketBS extends Component {
 		this.setState({ actives: [] });
 	};
 
-	sendOnSMS = (ticketInfo) => {
-		const ticket = this.state.ticketsToChange[0];
-		// console.log(ticket);
-		let person = ticketInfo
-
-		// for(let i=0; i<this.props.contactList.length; i++){
-		// 	if(this.props.contactList[i].id === ticketInfo.ticketHolderId){
-		// 		person = this.props.contactList[i];
-		// 		break;
-		// 	}
-		// }
-
+	sendOnSMS = (person) => {
 		console.log(person);
-
+		const tickets = this.state.ticketsToChange;
 		const text = {
 			recipient: person.phoneNumber,
 			textmessage:
@@ -230,16 +219,27 @@ class SendTicketBS extends Component {
 				' ' +
 				person.lastName +
 				'. Sete: ' +
-				ticket.seat +
+				tickets[0].seat +
 				', Type billett: ' +
-				ticket.type +
+				tickets[0].type +
 				', Referanse kode: ' +
-				ticket.referenceCode,
+				tickets[0].referenceCode,
 		};
+
+		tickets.pop();
 
 		fetch(
 			`http://127.0.0.1:4000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
 		).catch((err) => console.error(err));
+
+		this.setState({ ticketsToChange: tickets })
+
+		if (tickets.length === 0) {
+			this.ticketsWereSent();
+		} else {
+			this.backToSendTickets();
+		}
+
 	};
 
 	restartClicks = () => {
@@ -247,7 +247,7 @@ class SendTicketBS extends Component {
 	};
 
 	ticketsWereSent = () => {
-		this.setState({ reviewTicketsShow: false, ticketsWereSent: true });
+		this.setState({ reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false });
 	};
 
 	makeAccountInVIpps = () => {
@@ -280,8 +280,6 @@ class SendTicketBS extends Component {
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
-							this.sendOnSMS(this.state.ticketByType[0].tickets.active[0])
-							// this.linkContactToTickets();
 						}}
 						className={buttonClassNameToggle}
 					>
@@ -341,7 +339,7 @@ class SendTicketBS extends Component {
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
 					<div className="flex items-center border-b border-gray-300 pb-5">
-						<input type="checkbox"/>
+						<input type="checkbox" />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
 					{this.state.ticketByType.map((item, index) => {
