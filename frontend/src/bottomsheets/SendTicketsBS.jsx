@@ -234,13 +234,28 @@ class SendTicketBS extends Component {
 
 		this.setState({ ticketsToChange: tickets })
 
-		if (tickets.length === 0) {
+		if (!this.isMoreTicketsLeft()) {
 			this.ticketsWereSent();
 		} else {
 			this.backToSendTickets();
 		}
 
 	};
+
+	isMoreTicketsLeft = () => {
+		const tickets = this.state.ticketByType;
+
+		let isMoreTickets = false;
+
+		tickets.forEach(element => {
+			if (element.tickets.passive.length !== 0) {
+				return isMoreTickets = true;
+			}
+		})
+
+		console.log("isMoreTickets: ", isMoreTickets);
+		return isMoreTickets;
+	}
 
 	restartClicks = () => {
 		this.setState({ clicks: 0 });
