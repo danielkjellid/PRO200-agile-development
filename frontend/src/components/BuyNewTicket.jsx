@@ -39,6 +39,7 @@ class BuyNewTicket extends Component {
 					endTransaction={this.endTransaction}
 					hideBuySingleTicket={this.hideBuySingleTicket}
 					renderSendTicket={this.sendTicketsHandler}
+					updateAPI={this.props.updateAPI}
 				/>
 			);
 		}

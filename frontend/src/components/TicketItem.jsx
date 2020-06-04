@@ -10,9 +10,6 @@ class TicketItem extends Component {
 		}
 	}
 
-	
-	
-
 	expandTicket() {
 		let expandedTicket = this.state.ticketExpanded
 		this.setState({ ticketExpanded: !expandedTicket })
@@ -68,7 +65,7 @@ class TicketItem extends Component {
 								</div>
 								<div className="flex items-center justify-between pt-6 pb-5 border-b border-gray-300">
 									<div>
-										<p className="text-gray-800 text-base font-medium">Oslo S</p>
+										<p className="text-gray-800 text-base font-medium">{this.props.from}</p>
 										<p className="mt-2 text-gray-800 text-xl font-bold">21:44</p>
 										<p className="mt-2 text-gray-700 text-sm">Spor 11</p>
 									</div>
@@ -77,23 +74,23 @@ class TicketItem extends Component {
 										<span className="mt-5 block px-2 py-2 border border-vy-green-300 rounded-md text-vy-green-300">R30x</span>
 									</div>
 									<div>
-										<p className="text-gray-800 text-base font-medium">Gjøvik</p>
+										<p className="text-gray-800 text-base font-medium">{this.props.to}</p>
 										<p className="mt-2 text-gray-800 text-xl font-bold">23:34</p>
 										<p className="mt-2 text-gray-700 text-sm">6 stopp</p>
 									</div>
 								</div>
 								<div className="pt-6 pb-6">
-									<div className="flex items-center justify-between">
-										<p className="text-gray-900 text-sm">1x Voksen</p>
-										<p className="text-gray-900 text-sm">kr 109,00</p>
-									</div>
-									<div className="mt-3 flex items-center justify-between">
-										<p className="text-gray-900 text-sm">1x Voksen</p>
-										<p className="text-gray-900 text-sm">kr 109,00</p>
-									</div>
+									{this.props.tickets.map(item => {
+										return(
+											<div className="flex items-center justify-between">
+												<p className="text-gray-900 text-sm">1x {item.type}</p>
+												<p className="text-gray-900 text-sm">kr {item.price}</p>
+											</div>
+										)
+									})}
 									<div className="mt-5 flex items-center justify-between">
 										<p className="text-gray-900 text-sm font-medium">Total <span className="text-gray-600 font-normal">(inkl MVA)</span></p>
-										<p className="text-gray-900 text-sm font-medium">kr 227,00</p>
+										<p className="text-gray-900 text-sm font-medium">kr {this.props.price}</p>
 									</div>
 									<div className="mt-3 flex items-center justify-between">
 										<p className="text-gray-900 text-sm">Herav MVA</p>

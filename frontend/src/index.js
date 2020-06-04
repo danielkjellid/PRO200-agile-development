@@ -20,8 +20,7 @@ class App extends Component {
 			contactList: '',
 			chooseTicket: false,
 			orders: '',
-			tickets: '',
-			properObjects: ''
+			tickets: ''
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
@@ -31,7 +30,10 @@ class App extends Component {
 		this.fetchUserInfo();
 		this.fetchContactList();
 		this.fetchOrders();
+	}
 
+	updateAPI = () =>{
+		this.setState({updateAPI: this.state.updateAPI +1 })
 	}
 
 	fetchOrders = async () => {
@@ -48,6 +50,9 @@ class App extends Component {
 		this.fetchAllTickets();
 	}
 
+
+
+	
 	fetchAllTickets = async () => {
 		let tickets = [];
 		let payloadTaken;
@@ -68,7 +73,12 @@ class App extends Component {
 					order.isActive = this.state.orders[i].isActive;
 					order.from = payloadTaken[0].startPoint
 					order.to  = payloadTaken[0].endPoint
-					order.price = 412
+					let totalPrice=0;
+					for(let i=0;i<payloadTaken.length;i++){
+						totalPrice +=  payloadTaken[i].price
+					}
+
+					order.price = totalPrice
 					order.tickets = payloadTaken;
 					//order.tickets = payload;
 				
@@ -154,6 +164,7 @@ class App extends Component {
 						newTicketButtonHandler={this.newTicketButtonHandler}
 						cleanBackground={this.cleanBackground}
 						fadeBackground={this.fadeBackground}
+						updateAPI={this.updateAPI}
 					/>
 					<div className="bg-gray-100 canvas">
 						<div className="content">
@@ -172,6 +183,7 @@ class App extends Component {
 											contactList={this.state.contactList}
 											orders={this.state.orders}
 											tickets={this.state.tickets}
+											
 										></UserProfile>
 									)}
 								></Route>

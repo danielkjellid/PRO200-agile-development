@@ -20,7 +20,7 @@ class BuySingleTicketBS extends Component {
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
-			order: { name: '' },
+			order: { name: '', isActive: true },
 			tickets: null,
 		};
 	}
@@ -72,7 +72,7 @@ class BuySingleTicketBS extends Component {
 	};
 
 	restartOrder = () => {
-		this.setState({ order: { name: '' } });
+		this.setState({ order: { name: '', isActive: true } });
 	};
 
 	//this function sets a name for the order by default its the date order was executed
@@ -84,7 +84,7 @@ class BuySingleTicketBS extends Component {
 		name = `${date.getFullYear()}-${
 			months[date.getMonth()]
 		}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-		this.setState({ order: { name: name } });
+		this.setState({ order: { name: name, isActive: true } });
 	};
 
 	setStartPoint = (value) => {
@@ -172,6 +172,7 @@ class BuySingleTicketBS extends Component {
 		} catch (err) {
 			console.log(err);
 		}
+		this.props.updateAPI();
 		this.getLastOrderID();
 	};
 

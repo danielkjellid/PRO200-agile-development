@@ -4,13 +4,7 @@ import { Link } from 'react-router-dom';
 import TicketItem from './TicketItem'
 
 class TicketList extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-        openedTicket:'',
-   
-    }
-  }
+  
 
   renderHeader(){
     if(this.props.to != null) {
@@ -65,6 +59,7 @@ class TicketList extends Component {
                   from={item.from}
                   to={item.to}
                   price={item.price}
+                  tickets={item.tickets}
                  />
                )
              }) : null}

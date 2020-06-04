@@ -4,17 +4,20 @@ import UserHeader from './components/UserHeader';
 import TicketList from './components/TicketList'
 
 class UserProfile extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			//I create fake user data for now
-			name: '',
-			activeTickets: '',
-		
-		};
+	
+	renderActiveTicketsUserProfile(tickets) {
+		if(tickets){
+		  let activeTickets = tickets.filter(ticket => ticket.isActive)
+		  return (
+		  <TicketList 
+		  	title="Aktiv billett"
+		  	linkLabel="Se alle billetter"
+		  	to="/tickets"
+			tickets={activeTickets}/>)
+		}
+	  }
+	  
 
-		
-	}
 	render() {
 		return (
 			<div>
@@ -23,14 +26,17 @@ class UserProfile extends Component {
 					userName={this.props.user}
 					buttonHandler={this.props.newTicketButtonHandler}
 				/>
-				<TicketList
+
+				{this.renderActiveTicketsUserProfile(this.props.tickets)}
+
+				{/* <TicketList
 					title="Aktiv billett"
 					linkLabel="Se alle billetter"
 					to="/tickets"
 					orders={this.props.orders}
 					tickets={this.props.tickets}
-				/> 
-			}
+				/>  */}
+			
 
 				
 			</div>

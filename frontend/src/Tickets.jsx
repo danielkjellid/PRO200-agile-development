@@ -12,68 +12,6 @@ class Tickets extends Component {
       orders: [],
       areTicketsLoaded: true,
       ticketsByOrder: [],
-      dummyTickets: [
-        {
-          id: '486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d',
-          title: 'A',
-          singular: true,
-          from: 'Oslo S',
-          to: 'Gjøvik',
-          price: '420,00',
-          active: true,
-          expires: '23.03.2020'
-        },
-        {
-          id: '0f76be9e-6181-4b0f-bd24-0749204e7d39',
-          title: 'B',
-          singular: true,
-          from: 'Oslo S',
-          to: 'Gjøvik',
-          price: '420,00',
-          active: false,
-          expires: '23.03.2020'
-        },
-        {
-          id: '85dcd822-1aa1-4362-ab9e-74067e25a023',
-          title: 'C',
-          singular: true,
-          from: 'Oslo S',
-          to: 'Gjøvik',
-          price: '420,00',
-          active: false,
-          expires: '23.03.2020'
-        },
-        {
-          id: '486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d',
-          title: 'D',
-          singular: false,
-          from: 'Oslo S',
-          to: 'Gjøvik',
-          price: '420,00',
-          active: false,
-          expires: '23.03.2020'
-        },
-        {
-          id: '0f76be9e-6181-4b0f-bd24-0749204e7d39',
-          title: 'E',
-          singular: false,
-          from: 'Oslo S',
-          to: 'Gjøvik',
-          price: '420,00',
-          active: false,
-          expires: '23.03.2020'
-        },
-        {
-          id: '85dcd822-1aa1-4362-ab9e-74067e25a023',
-          title: 'F',
-          singular: false,
-          from: 'Oslo S',
-          to: 'Gjøvik',
-          price: '420,00',
-          active: false,
-          expires: '23.03.2020'
-        },
-      ]
     };
 
     this.renderActiveTickets = this.renderActiveTickets.bind(this);
@@ -81,13 +19,6 @@ class Tickets extends Component {
    
   }
 
- 
-  
-  showTicketsByOrder = (id) => {
-
-    this.fetchTicketsByOrder(id)
-    if (this.state.ticketsByOrder > 0) { this.renderTicketsByOrder() }
-  }
 
   // TODO: attach renderTickets functions to API, however we need the API to show more base info
 
