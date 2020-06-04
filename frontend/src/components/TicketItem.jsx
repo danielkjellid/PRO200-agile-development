@@ -35,11 +35,13 @@ class TicketItem extends Component {
 							</div>
 							<div className={this.state.ticketExpanded ? "hidden" : "block ml-4 w-full pr-2"}>
 								<div className="flex justify-between items-center">
-									<p className="font-medium text-base text-gray-900">{this.props.title}</p>
+									<p className="font-medium text-base text-gray-900 truncate w-3/4">{this.props.title}</p>
 									<p className="font-medium text-sm text-gray-900">kr {this.props.price}</p>
 								</div>
 								<div className="mt-2 flex justify-between items-center">
-									<p className="text-gray-700 text-sm">Fra <span className="font-medium text-sm text-gray-900">{this.props.from}</span> til <span className="font-medium text-sm text-gray-900">{this.props.to}</span></p>
+									<div>
+										<p className="text-gray-700 text-sm">Fra <span className="font-medium text-sm text-gray-900">{this.props.from}</span> til <span className="font-medium text-sm text-gray-900">{this.props.to}</span></p>
+									</div>
 									<div className="flex">
 										{/* Colors to be replaces with images  */}
 										<div className="h-8 w-8 border-2 border-white bg-red-200 rounded-full"></div>

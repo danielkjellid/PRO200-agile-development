@@ -60,6 +60,7 @@ class TicketList extends Component {
                   to={item.to}
                   price={item.price}
                   tickets={item.tickets}
+                  active={item.isActive}
                  />
                )
              }) : null}
