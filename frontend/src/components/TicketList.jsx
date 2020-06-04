@@ -104,7 +104,7 @@ class TicketList extends Component {
           </div>
           <div className="bg-white shadow rounded-md">
             <div className="divide-y divide-gray-300">
-              {this.renderActiveTickets()}
+              {/* {this.renderActiveTickets()} */}
             </div>
           </div>
         </div>
