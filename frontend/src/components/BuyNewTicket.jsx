@@ -5,16 +5,16 @@ import BuySingleTicketBS from '../bottomsheets/BuySingleTicketBS';
 import SendTicketBS from '../bottomsheets/SendTicketsBS';
 
 class BuyNewTicket extends Component {
-    constructor(props){
-        super(props);
-        this.state ={
-            singleTicket: false,
+	constructor(props) {
+		super(props);
+		this.state = {
+			singleTicket: false,
 			periodTicket: false,
 			sendTicketShow: false
-        }
-    }
+		}
+	}
 
-    buySingleTicketButtonHandler = () => {
+	buySingleTicketButtonHandler = () => {
 		const buySingleTicketShow = this.state.singleTicket;
 		this.setState({ singleTicket: !buySingleTicketShow });
 		this.props.newTicketButtonHandler();
@@ -50,7 +50,7 @@ class BuyNewTicket extends Component {
 	};
 
 	renderSendTicket = () => {
-		
+
 		if (this.state.sendTicketShow) {
 			return (
 				<SendTicketBS
@@ -69,7 +69,7 @@ class BuyNewTicket extends Component {
 	};
 
 	endTransaction = () => {
-		this.setState({ singleTicket: false });
+		this.setState({ singleTicket: false, sendTicketShow: false });
 		this.props.cleanBackground();
 	};
 
@@ -78,15 +78,15 @@ class BuyNewTicket extends Component {
 		this.endTransaction();
 	};
 
-    render() {
-        return (
-            <div>
-                {this.renderChooseTicket()} {/* change into component tag */} 
-                {this.renderBuySingleTicket()} {/* change into component tag */} 
-                {this.renderSendTicket()} {/* change into component tag */} 
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div>
+				{this.renderChooseTicket()} {/* change into component tag */}
+				{this.renderBuySingleTicket()} {/* change into component tag */}
+				{this.renderSendTicket()} {/* change into component tag */}
+			</div>
+		);
+	}
 }
 
 export default BuyNewTicket;
