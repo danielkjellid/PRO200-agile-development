@@ -6,31 +6,19 @@ class TicketItem extends Component {
 		super(props)
 		this.state = {
 			dataLoaded: false,
-			ticketExpanded: false,
-			tickets: [],
+			ticketExpanded: false
 		}
 	}
 
-	getTickets = async(id) => {
-		if(!this.state.dataLoaded) {
-			try {
-				const response = await fetch(`https://localhost:5001/orders/${id}/basictickets`)
-				const payload = await response.json()
-
-				this.setState({
-					tickets: payload,
-					dataLoaded: true
-				})
-			} catch(error) {
-				console.log(error)
-			}
-		}
-	}
+	
+	
 
 	expandTicket() {
 		let expandedTicket = this.state.ticketExpanded
 		this.setState({ ticketExpanded: !expandedTicket })
 	}
+
+	
 
 	getTripParticipants = (id) => {
 		let contacts = this.props.contactList.find((contact) => contact.id === id)
@@ -41,10 +29,10 @@ class TicketItem extends Component {
 		// this.getTicket(this.props.id)
 		
 		return (
-			<div>
-				<div onClick={() => {this.getTickets(this.props.id); this.expandTicket()}}>
+			<div  >
+				<div onClick={() => { this.expandTicket(); }}>
 					<div className="px-2 py-2">
-						<div className="flex items-center">
+						<div  className="flex items-center">
 							<div style={this.state.ticketExpanded ? { height: 414 + 'px'}  : { height: 96 + 'px' }} className={this.props.active ? "bg-green-400 rounded-full h-64 w-2" : "bg-red-400 rounded-full h-24 w-2"}>
 								{/* Empty div to create left border */}
 							</div>
