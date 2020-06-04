@@ -108,10 +108,10 @@ class Tickets extends Component {
   }
 
   renderActiveTickets() {
-    let activeTickets = this.state.dummyTickets.filter(ticket => ticket.active == true)
-
-    if (activeTickets.length > 0) {
-      return (<TicketList title='Aktive billetter' tickets={activeTickets}/>)
+    let activeTickets
+    if(this.props.tickets){
+       activeTickets= this.props.tickets.filter(ticket => ticket.isActive)
+       return (<TicketList title='Aktive billetter' tickets={activeTickets}/>)
     }
   }
   
@@ -141,15 +141,13 @@ class Tickets extends Component {
         <Link to={'/'}>Tilbake</Link>
 
 
-        <TicketList 
-          orders={this.props.orders}
-					tickets={this.props.tickets}
-        />
+       
 
         {/* conditionally render ticketlists based on requirements wont render empty lists */}
         {/* {this.renderTempTickets()} */}
         {/* commentend out until we're able to filter based on active */}
-        {/* {this.renderActiveTickets()}
+        {this.renderActiveTickets()}
+        {/*
         {this.renderExpiredSingularTickets()}
         {this.renderExpiredGroupTickets()} */}
       </div>    
