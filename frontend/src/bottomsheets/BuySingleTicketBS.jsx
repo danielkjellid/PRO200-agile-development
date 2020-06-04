@@ -243,7 +243,7 @@ class BuySingleTicketBS extends Component {
 	backButtonHandle = () => {
 		if(this.state.chooseDestination){this.props.hideBuySingleTicket()};
 		if(this.state.chooseDeparture){this.setState({chooseDeparture: false, chooseDestination: true})};
-		if(this.state.chooseSeat){this.continueToDepartures()};
+		if(this.state.chooseSeat){this.setState({chooseSeat: false, chooseDeparture: true})};
 		if(this.state.choosePayment){this.continueToPayment()};
 	}
 

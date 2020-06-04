@@ -105,9 +105,9 @@ class UserProfile extends Component {
 	render() {
 		return (
 			<div>
-				{this.renderChooseTicket()}
-				{this.renderBuySingleTicket()}
-				{this.renderSendTicket()}
+				{this.renderChooseTicket()} {/* change into component tag */} 
+				{this.renderBuySingleTicket()} {/* change into component tag */} 
+				{this.renderSendTicket()} {/* change into component tag */} 
 				<UserHeader
 					userName={this.props.user}
 					buttonHandler={this.newTicketButtonHandler}
