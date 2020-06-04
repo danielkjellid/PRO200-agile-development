@@ -51,9 +51,10 @@ class TicketList extends Component {
           <div className="bg-white shadow rounded-md">
             <div className="divide-y divide-gray-300">
              {this.props.tickets ? 
-             this.props.tickets.map(item  => {
+             this.props.tickets.map((item, index)  => {
                return (
-                 <TicketItem 
+                 <TicketItem
+                  key={index} 
                   id={item.id}
                   title={item.orderName}
                   from={item.from}

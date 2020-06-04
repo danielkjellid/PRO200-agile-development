@@ -12,11 +12,11 @@ function Confirmation(props) {
         </div>
         <div className="mt-5 pb-5 border-b border-gray-300">
           <div className="py-2">
-            {props.numberOfTravellers.map(item => {
+            {props.numberOfTravellers.map((item, index) => {
               if(item.number>0){
                 totalPriceOrder += item.totalPrice()
                 return(
-                  <div className="flex items-center justify-between">
+                  <div key={index} className="flex items-center justify-between">
                     {/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
                     <p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
                     <p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>

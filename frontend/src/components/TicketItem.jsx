@@ -82,9 +82,9 @@ class TicketItem extends Component {
 									</div>
 								</div>
 								<div className="pt-6 pb-6">
-									{this.props.tickets.map(item => {
+									{this.props.tickets.map((item, index) => {
 										return(
-											<div className="flex items-center justify-between">
+											<div key={index} className="flex items-center justify-between">
 												<p className="text-gray-900 text-sm">1x {item.type}</p>
 												<p className="text-gray-900 text-sm">kr {item.price}</p>
 											</div>
