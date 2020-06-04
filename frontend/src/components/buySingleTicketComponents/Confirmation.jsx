@@ -41,17 +41,18 @@ function Confirmation(props) {
             </div>
           </div>
         </div>
-        <button onClick={props.renderSendTicket}
-          className="w-full p-3 bg-vy-green-200 text-center text-sm font-medium text-vy-green-300 rounded-md mb-2">
-          Send billetter til venner
-        </button>
         <Link 
           to={'/tickets'} 
           onClick={() => {props.endTransaction(); props.updateAPI();}} 
-          className="w-full block p-3 bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
+          className="w-full block p-3 bg-vy-green-200 text-center text-sm font-medium text-vy-green-300 rounded-md hover:bg-vy-green-100 mb-2"
         >
           Se billettene
+          
         </Link>
+        <button onClick={props.renderSendTicket}
+          className="w-full p-3 bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
+          Send billetter til andre
+        </button>
       </div>
     </div>
   );
