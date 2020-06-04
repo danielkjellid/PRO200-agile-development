@@ -9,6 +9,5 @@ namespace VyShare.Models
         public string ReferenceCode { get; set; }
         public string Seat { get; set; }
         public decimal Price { get; set; }
-        public bool IsActive { get; set; }
     }
 }

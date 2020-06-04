@@ -6,6 +6,7 @@ namespace VyShare.Models.Dto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public bool IsActive { get; set; }
 
         public OrderDto()
         {
@@ -16,6 +17,7 @@ namespace VyShare.Models.Dto
         {
             Id = order.Id;
             Name = order.Name;
+            IsActive = order.IsActive;
         }
 
         public Order ToOrder(Order order = null)
@@ -26,6 +28,7 @@ namespace VyShare.Models.Dto
             }
 
             order.Name = Name;
+            order.IsActive = IsActive;
 
             return order;
         }

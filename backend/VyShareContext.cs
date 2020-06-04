@@ -102,11 +102,13 @@ namespace VyShare
             return new List<Order>() {
                 new Order(){
                     Id = Guid.NewGuid(),
-                    Name = "Familietur til Grønnåsen 15.06.20"
+                    Name = "Familietur til Grønnåsen 15.06.20",
+                    IsActive = true
                 },
                 new Order(){
                     Id = Guid.NewGuid(),
-                    Name = "Fotballkamp"
+                    Name = "Fotballkamp",
+                    IsActive = true
                 }
             };
         }
@@ -123,8 +125,7 @@ namespace VyShare
                     EndPoint = "Grønnåsen Skole",
                     ReferenceCode = "YXHA5",
                     Seat = "13A",
-                    Price = 412m,
-                    IsActive = true
+                    Price = 412m
                 },
                 new {
                     OrderId = orders[0].Id,
@@ -135,8 +136,7 @@ namespace VyShare
                     EndPoint = "Grønnåsen Skole",
                     ReferenceCode = "YXHBA6",
                     Seat = "13B",
-                    Price = 375m,
-                    IsActive = false
+                    Price = 375m
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -147,8 +147,7 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "OPS34",
                     Seat = "03A",
-                    Price = 199m,
-                    IsActive = true
+                    Price = 199m
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -159,8 +158,7 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "PSD33",
                     Seat = "03B",
-                    Price = 199m,
-                    IsActive = false                  
+                    Price = 199m                 
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -171,8 +169,7 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "QSO20",
                     Seat = "03C",
-                    Price = 219m,
-                    IsActive = true
+                    Price = 219m
                 }
             };
         }
