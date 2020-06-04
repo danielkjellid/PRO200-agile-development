@@ -28,8 +28,6 @@ class ContactListSendTicket extends Component {
 	updateContactList = (newContact) => {
 		this.state.contactList.push(newContact);
 		this.submitContact();
-		console.log(this.state.contactList);
-		this.props.sendSMS(newContact);
 	};
 
 	submitContact = async () => {
@@ -64,13 +62,14 @@ class ContactListSendTicket extends Component {
 
 		this.state.addNewContactShow
 			? (addNewContact = (
-					<AddNewContactSendTicket
-						newContact={this.state.newContact}
-						updateContactList={this.updateContactList}
-						changeHandler={this.addNewContactHandler}
-						submitContact={this.submitContact}
-					/>
-			  ))
+				<AddNewContactSendTicket
+					sendSMS={this.props.sendSMS}
+					newContact={this.state.newContact}
+					updateContactList={this.updateContactList}
+					changeHandler={this.addNewContactHandler}
+					submitContact={this.submitContact}
+				/>
+			))
 			: (addNewContact = null);
 
 		if (this.props.contactListShow) {
@@ -158,7 +157,7 @@ class ContactListSendTicket extends Component {
 									/>
 								);
 							})
-							}
+						}
 					</div>
 				</div>
 			);
