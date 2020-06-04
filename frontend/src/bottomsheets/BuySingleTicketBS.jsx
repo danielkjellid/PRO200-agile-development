@@ -36,12 +36,12 @@ class BuySingleTicketBS extends Component {
 	//this function initialize all the ticket types with default Voksen: 1
 	initTicketTypes = () => {
 		const editTravellers = [
-			{ type: 'Voksen', number: 1 },
-			{ type: 'Barn (0-5 år)', number: 0 },
-			{ type: 'Barn (6-17 år)', number: 0 },
-			{ type: 'Ungdom (18-19 år)', number: 0 },
-			{ type: 'Student', number: 0 },
-			{ type: 'Honnør', number: 0 },
+			{ type: 'Voksen', number: 1, price: 340, totalPrice: function() {return this.number * this.price  }},
+			{ type: 'Barn (0-5 år)', number: 0, price: 0 },
+			{ type: 'Barn (6-17 år)', number: 0, price: 280, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Ungdom (18-19 år)', number: 0, price: 290, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Student', number: 0, price: 250, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Honnør', number: 0, price: 120, totalPrice: function() {return this.number * this.price  } },
 		];
 		this.setState({ ticketTypeNum: editTravellers });
 	};
@@ -304,6 +304,7 @@ class BuySingleTicketBS extends Component {
 						confirmation={this.state.confirmation}
 						renderSendTicket={this.props.renderSendTicket}
 						updateAPI = {this.props.updateAPI}
+						numberOfTravellers={this.state.ticketTypeNum}
 					/>
 				</div>
 			</div>

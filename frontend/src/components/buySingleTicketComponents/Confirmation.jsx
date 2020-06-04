@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 function Confirmation(props) {
+
+  let totalPriceOrder=0;
   return (
     <div className={props.confirmation ? 'block' : 'hidden'}>
       <div className="px-5 pb-5">
@@ -10,11 +12,18 @@ function Confirmation(props) {
         </div>
         <div className="mt-5 pb-5 border-b border-gray-300">
           <div className="py-2">
-            <div className="flex items-center justify-between">
-              {/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
-              <p className="font-regular text-gray-900 text-sm">1 Voksen</p>
-              <p className="font-medium text-gray-900 text-sm">kr 109,00</p>
-            </div>
+            {props.numberOfTravellers.map(item => {
+              if(item.number>0){
+                totalPriceOrder += item.totalPrice()
+                return(
+                  <div className="flex items-center justify-between">
+                    {/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
+                    <p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
+                    <p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>
+                  </div>
+                )
+              }
+            })}
           </div>
         </div>
         <div className="my-5">
@@ -22,7 +31,7 @@ function Confirmation(props) {
             <div className="flex items-center justify-between">
               {/* Totalbeløp må regnes ut ved hjelp av billettpriser */}
               <p className="font-medium text-gray-900 text-sm">Total <span className="text-gray-600 font-normal">(inkl MVA)</span></p>
-              <p className="font-medium text-gray-900 text-sm">kr 672,00</p>
+              <p className="font-medium text-gray-900 text-sm">kr {totalPriceOrder}</p>
             </div>
           </div>
           <div className="py-2">
