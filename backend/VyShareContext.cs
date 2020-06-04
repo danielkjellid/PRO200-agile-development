@@ -109,6 +109,16 @@ namespace VyShare
                     Id = Guid.NewGuid(),
                     Name = "Fotballkamp",
                     IsActive = true
+                },
+                new Order(){
+                    Id = Guid.NewGuid(),
+                    Name = "Skitur",
+                    IsActive = false
+                },
+                    new Order(){
+                    Id = Guid.NewGuid(),
+                    Name = "Oslo 11.02.20",
+                    IsActive = false
                 }
             };
         }
@@ -158,7 +168,7 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "PSD33",
                     Seat = "03B",
-                    Price = 199m                 
+                    Price = 199m
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -170,6 +180,50 @@ namespace VyShare
                     ReferenceCode = "QSO20",
                     Seat = "03C",
                     Price = 219m
+                },
+                new {
+                    OrderId = orders[2].Id,
+                    Id = Guid.NewGuid(),
+                    TicketHolderId = contacts[0].Id,
+                    Type = "Honnør",
+                    StartPoint = "Oslo S",
+                    EndPoint = "Gol",
+                    ReferenceCode = "VBW93",
+                    Seat = "09D",
+                    Price = 320m
+                },
+                new {
+                    OrderId = orders[2].Id,
+                    Id = Guid.NewGuid(),
+                    TicketHolderId = contacts[3].Id,
+                    Type = "Student",
+                    StartPoint = "Skøyen",
+                    EndPoint = "Gol",
+                    ReferenceCode = "VNQ92",
+                    Seat = "09E",
+                    Price = 320m
+                },
+                new {
+                    OrderId = orders[2].Id,
+                    Id = Guid.NewGuid(),
+                    TicketHolderId = contacts[1].Id,
+                    Type = "Student",
+                    StartPoint = "Oslo S",
+                    EndPoint = "Gol",
+                    ReferenceCode = "VCS20",
+                    Seat = "09C",
+                    Price = 320m
+                },
+                new {
+                    OrderId = orders[3].Id,
+                    Id = Guid.NewGuid(),
+                    TicketHolderId = contacts[2].Id,
+                    Type = "Student",
+                    StartPoint = "Kolbotn",
+                    EndPoint = "Oslo S",
+                    ReferenceCode = "ARQ42",
+                    Seat = "13D",
+                    Price = 72m
                 }
             };
         }
