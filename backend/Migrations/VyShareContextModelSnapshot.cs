@@ -25,6 +25,9 @@ namespace VyShare.Migrations
                     b.Property<string>("EndPoint")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("TEXT");
 
@@ -57,62 +60,67 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b888c59c-5556-43f3-a57b-5dcfb2458990"),
+                            Id = new Guid("107df416-0344-403a-a765-b00cef44c919"),
                             EndPoint = "Grønnåsen Skole",
-                            OrderId = new Guid("486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d"),
+                            IsActive = true,
+                            OrderId = new Guid("c259810e-6c0b-44ee-a580-f9c703eaf8dd"),
                             Price = 412m,
                             ReferenceCode = "YXHA5",
                             Seat = "13A",
                             StartPoint = "Volda",
-                            TicketHolderId = new Guid("64eca478-593b-40d6-8785-dcf4322cbabf"),
+                            TicketHolderId = new Guid("f0da2c94-0e61-40d4-8ddd-06e84bbc984b"),
                             Type = "Honnør"
                         },
                         new
                         {
-                            Id = new Guid("70189d4e-0a16-4370-b0e5-789b02d25fcf"),
+                            Id = new Guid("dc619660-4158-4a94-81ae-bc956d7f65b7"),
                             EndPoint = "Grønnåsen Skole",
-                            OrderId = new Guid("486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d"),
+                            IsActive = false,
+                            OrderId = new Guid("c259810e-6c0b-44ee-a580-f9c703eaf8dd"),
                             Price = 375m,
                             ReferenceCode = "YXHBA6",
                             Seat = "13B",
                             StartPoint = "Volda",
-                            TicketHolderId = new Guid("f4f86a47-e9a5-49b4-b187-745e6c0bbadb"),
+                            TicketHolderId = new Guid("20eedd7a-1cfe-4e49-9734-a99840fcd02d"),
                             Type = "Student"
                         },
                         new
                         {
-                            Id = new Guid("80c634d7-cde3-49ab-878d-db06b6a9ea27"),
+                            Id = new Guid("8d984c1f-82cf-4523-9cc8-22f953cab172"),
                             EndPoint = "Ullevål stadion",
-                            OrderId = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            IsActive = true,
+                            OrderId = new Guid("3d812e1e-cce7-4c18-aba4-9ed44a4602b0"),
                             Price = 199m,
                             ReferenceCode = "OPS34",
                             Seat = "03A",
                             StartPoint = "Sandefjord",
-                            TicketHolderId = new Guid("865f6842-4fba-4cc7-b556-53bc6323b7b5"),
+                            TicketHolderId = new Guid("5c784931-b68f-45bb-9a64-04eaeedcf9ab"),
                             Type = "Student"
                         },
                         new
                         {
-                            Id = new Guid("210f3066-29da-4506-81aa-71e1bdc3351c"),
+                            Id = new Guid("f6dd9907-59a4-4abc-9baf-eaad7655b823"),
                             EndPoint = "Ullevål stadion",
-                            OrderId = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            IsActive = false,
+                            OrderId = new Guid("3d812e1e-cce7-4c18-aba4-9ed44a4602b0"),
                             Price = 199m,
                             ReferenceCode = "PSD33",
                             Seat = "03B",
                             StartPoint = "Sandefjord",
-                            TicketHolderId = new Guid("42dce654-7c54-44fd-b26d-ef4a3e469acf"),
+                            TicketHolderId = new Guid("0923dfad-0dec-4c77-98e3-8c5fa45f3c1a"),
                             Type = "Student"
                         },
                         new
                         {
-                            Id = new Guid("bedf6391-e36a-4a41-b2a2-fdf61028524c"),
+                            Id = new Guid("f8b50f5c-702d-4262-a831-ff749fde14f0"),
                             EndPoint = "Ullevål stadion",
-                            OrderId = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            IsActive = true,
+                            OrderId = new Guid("3d812e1e-cce7-4c18-aba4-9ed44a4602b0"),
                             Price = 219m,
                             ReferenceCode = "QSO20",
                             Seat = "03C",
                             StartPoint = "Larvik",
-                            TicketHolderId = new Guid("e3476b88-c484-426b-aeeb-aab2de097dc3"),
+                            TicketHolderId = new Guid("bdc35d66-4bff-486c-b704-42813e5ce705"),
                             Type = "Student"
                         });
                 });
@@ -138,12 +146,12 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("486c460b-dbae-4a5a-a3ef-fb9e94e1ff4d"),
+                            Id = new Guid("c259810e-6c0b-44ee-a580-f9c703eaf8dd"),
                             Name = "Familietur til Grønnåsen 15.06.20"
                         },
                         new
                         {
-                            Id = new Guid("0f76be9e-6181-4b0f-bd24-0749204e7d39"),
+                            Id = new Guid("3d812e1e-cce7-4c18-aba4-9ed44a4602b0"),
                             Name = "Fotballkamp"
                         });
                 });
@@ -186,7 +194,7 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("64eca478-593b-40d6-8785-dcf4322cbabf"),
+                            Id = new Guid("f0da2c94-0e61-40d4-8ddd-06e84bbc984b"),
                             Email = "katofje@online.no",
                             FirstName = "Kato",
                             LastName = "Fjellberg",
@@ -194,7 +202,7 @@ namespace VyShare.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f4f86a47-e9a5-49b4-b187-745e6c0bbadb"),
+                            Id = new Guid("20eedd7a-1cfe-4e49-9734-a99840fcd02d"),
                             Email = "kathi95@gmail.com",
                             FirstName = "Kathrine",
                             LastName = "Wesenlund",
@@ -202,7 +210,7 @@ namespace VyShare.Migrations
                         },
                         new
                         {
-                            Id = new Guid("865f6842-4fba-4cc7-b556-53bc6323b7b5"),
+                            Id = new Guid("5c784931-b68f-45bb-9a64-04eaeedcf9ab"),
                             Email = "kk@realitytv.com",
                             FirstName = "Kim",
                             LastName = "Kardashian",
@@ -210,7 +218,7 @@ namespace VyShare.Migrations
                         },
                         new
                         {
-                            Id = new Guid("42dce654-7c54-44fd-b26d-ef4a3e469acf"),
+                            Id = new Guid("0923dfad-0dec-4c77-98e3-8c5fa45f3c1a"),
                             Email = "karefje@online.no",
                             FirstName = "Kåre",
                             LastName = "Fjellberg",
@@ -218,7 +226,7 @@ namespace VyShare.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e3476b88-c484-426b-aeeb-aab2de097dc3"),
+                            Id = new Guid("bdc35d66-4bff-486c-b704-42813e5ce705"),
                             Email = "kennekennern51@outlook.com",
                             FirstName = "Kenneth",
                             LastName = "Kennesen",
@@ -241,7 +249,7 @@ namespace VyShare.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a384222a-89fa-4ac9-a60c-731814bc2732"),
+                            Id = new Guid("335f3979-2207-4eff-ae99-7bc366d24665"),
                             Email = "popokatepetl@online.no",
                             FirstName = "Pål",
                             LastName = "Fjellberg",
@@ -250,7 +258,7 @@ namespace VyShare.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6a50184a-c3db-46bc-9990-ae8e3b35c899"),
+                            Id = new Guid("e8e52516-0d97-4f43-ba26-c7e33b6745d3"),
                             Email = "marmelade86@gmail.com",
                             FirstName = "Mia",
                             LastName = "Mikkelsen",

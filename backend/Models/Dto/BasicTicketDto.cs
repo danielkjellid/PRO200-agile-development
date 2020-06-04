@@ -10,9 +10,10 @@ namespace VyShare.Models.Dto
         public string Type { get; set; }
         public string StartPoint { get; set; }
         public string EndPoint { get; set; }
-        public string ReferenceCode { get; set; } // Frontend: https://getyourticket.no/ref/272732738
+        public string ReferenceCode { get; set; }
         public string Seat { get; set; }
         public decimal Price { get; set; }
+        public bool IsActive { get; set; }
 
         public BasicTicketDto()
         {
@@ -29,6 +30,7 @@ namespace VyShare.Models.Dto
             ReferenceCode = basicTicket.ReferenceCode;
             Seat = basicTicket.Seat;
             Price = basicTicket.Price;
+            IsActive = basicTicket.IsActive;
         }
 
         public BasicTicket ToBasicTicket(VyShareContext db, BasicTicket basicTicket = null)
@@ -44,6 +46,7 @@ namespace VyShare.Models.Dto
             basicTicket.ReferenceCode = ReferenceCode;
             basicTicket.Seat = Seat;
             basicTicket.Price = Price;
+            basicTicket.IsActive = IsActive;
             return basicTicket;
         }
 

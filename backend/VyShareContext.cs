@@ -123,7 +123,8 @@ namespace VyShare
                     EndPoint = "Grønnåsen Skole",
                     ReferenceCode = "YXHA5",
                     Seat = "13A",
-                    Price = 412m
+                    Price = 412m,
+                    IsActive = true
                 },
                 new {
                     OrderId = orders[0].Id,
@@ -134,7 +135,8 @@ namespace VyShare
                     EndPoint = "Grønnåsen Skole",
                     ReferenceCode = "YXHBA6",
                     Seat = "13B",
-                    Price = 375m
+                    Price = 375m,
+                    IsActive = false
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -145,7 +147,8 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "OPS34",
                     Seat = "03A",
-                    Price = 199m
+                    Price = 199m,
+                    IsActive = true
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -156,7 +159,8 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "PSD33",
                     Seat = "03B",
-                    Price = 199m                    
+                    Price = 199m,
+                    IsActive = false                  
                 },
                 new {
                     OrderId = orders[1].Id,
@@ -167,7 +171,8 @@ namespace VyShare
                     EndPoint = "Ullevål stadion",
                     ReferenceCode = "QSO20",
                     Seat = "03C",
-                    Price = 219m
+                    Price = 219m,
+                    IsActive = true
                 }
             };
         }
