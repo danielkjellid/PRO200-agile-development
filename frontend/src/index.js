@@ -101,6 +101,7 @@ class App extends Component {
 						chooseTicket={this.state.chooseTicket}
 						newTicketButtonHandler={this.newTicketButtonHandler}
 						cleanBackground={this.cleanBackground}
+						fadeBackground={this.fadeBackground}
 					/>
 					<div className="bg-gray-100 canvas">
 						<div className="content">

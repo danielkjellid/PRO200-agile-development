@@ -18,7 +18,7 @@ class BuyNewTicket extends Component {
 		const buySingleTicketShow = this.state.singleTicket;
 		this.setState({ singleTicket: !buySingleTicketShow });
 		this.props.newTicketButtonHandler();
-		this.fadeBackground();
+		this.props.fadeBackground();
 	};
 
 	renderChooseTicket = () => {
