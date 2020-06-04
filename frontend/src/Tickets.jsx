@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import TicketOrder from './components/TicketOrder';
 import UserHeader from './components/UserHeader'
 import TicketList from './components/TicketList'
 
