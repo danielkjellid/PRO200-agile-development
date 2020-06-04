@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VyShare.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,72 +79,102 @@ namespace VyShare.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "IsActive", "Name", "UserId" },
-                values: new object[] { new Guid("8e2572c2-13d9-4023-b8af-6385285f3d7d"), true, "Familietur til Grønnåsen 15.06.20", null });
+                values: new object[] { new Guid("281f253d-589e-45de-a54f-76fbc5c26706"), true, "Familietur til Grønnåsen 15.06.20", null });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "IsActive", "Name", "UserId" },
-                values: new object[] { new Guid("8426b257-a5ca-48d6-8f6a-52ec47785a58"), true, "Fotballkamp", null });
+                values: new object[] { new Guid("2d2d8c65-7390-452a-b76e-aaf663ff3076"), true, "Fotballkamp", null });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "IsActive", "Name", "UserId" },
+                values: new object[] { new Guid("41e00ed5-bdd0-49b1-bb4c-640a9c0c59ae"), false, "Skitur", null });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "IsActive", "Name", "UserId" },
+                values: new object[] { new Guid("8d580160-fe0c-469c-94c4-35f13c86a4e5"), false, "Oslo 11.02.20", null });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber" },
-                values: new object[] { new Guid("69808911-4dfa-4ff2-811f-17c1436c557a"), "Contact", "katofje@online.no", "Kato", "Fjellberg", "90125872" });
+                values: new object[] { new Guid("dcc5e755-35f9-4b7c-b17a-53823509293c"), "Contact", "katofje@online.no", "Kato", "Fjellberg", "90125872" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber" },
-                values: new object[] { new Guid("33b72a84-1f0e-49a5-959a-a1224ba88cad"), "Contact", "kathi95@gmail.com", "Kathrine", "Wesenlund", "40912854" });
+                values: new object[] { new Guid("e0eb2039-85b7-49a1-b20d-1ab15312ba11"), "Contact", "kathi95@gmail.com", "Kathrine", "Wesenlund", "40912854" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber" },
-                values: new object[] { new Guid("ee2852ac-0367-4a59-97a8-804156f19b44"), "Contact", "kk@realitytv.com", "Kim", "Kardashian", "92304215" });
+                values: new object[] { new Guid("eba9dcf6-a561-4817-a314-6bfce0c56888"), "Contact", "kk@realitytv.com", "Kim", "Kardashian", "92304215" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber" },
-                values: new object[] { new Guid("2de01bd3-d536-4560-91d8-9555f7344faa"), "Contact", "karefje@online.no", "Kåre", "Fjellberg", "90002390" });
+                values: new object[] { new Guid("ff8754e4-3cff-43a0-8301-245028613ad4"), "Contact", "karefje@online.no", "Kåre", "Fjellberg", "90002390" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber" },
-                values: new object[] { new Guid("4ad9ff01-69cf-41d1-bf98-d2a952ebdc21"), "Contact", "kennekennern51@outlook.com", "Kenneth", "Kennesen", "40534009" });
+                values: new object[] { new Guid("c593f031-a50e-4347-9776-32a99880ba3b"), "Contact", "kennekennern51@outlook.com", "Kenneth", "Kennesen", "40534009" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber", "Password", "Username" },
-                values: new object[] { new Guid("13fa2a73-773c-4ce8-b9fb-2975ecd272ef"), "User", "popokatepetl@online.no", "Pål", "Fjellberg", "90035412", null, "popokatepetl" });
+                values: new object[] { new Guid("2efde4fb-f278-461a-a938-dab1c86d22a6"), "User", "popokatepetl@online.no", "Pål", "Fjellberg", "90035412", null, "popokatepetl" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "Discriminator", "Email", "FirstName", "LastName", "PhoneNumber", "Password", "Username" },
-                values: new object[] { new Guid("1d1f107d-4061-4393-9b7b-70e9fd1699c5"), "User", "marmelade86@gmail.com", "Mia", "Mikkelsen", "45612039", null, "marmelade86" });
+                values: new object[] { new Guid("4289cfb5-ef1f-41f4-944e-476bab860d2c"), "User", "marmelade86@gmail.com", "Mia", "Mikkelsen", "45612039", null, "marmelade86" });
 
             migrationBuilder.InsertData(
                 table: "BasicTickets",
                 columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
-                values: new object[] { new Guid("1b745548-a080-4cbe-8ae0-b259fb33821e"), "Grønnåsen Skole", new Guid("8e2572c2-13d9-4023-b8af-6385285f3d7d"), 412m, "YXHA5", "13A", "Volda", new Guid("69808911-4dfa-4ff2-811f-17c1436c557a"), "Honnør" });
+                values: new object[] { new Guid("d8c6424d-b1e6-4d8e-8197-6830bbe4caa6"), "Grønnåsen Skole", new Guid("281f253d-589e-45de-a54f-76fbc5c26706"), 412m, "YXHA5", "13A", "Volda", new Guid("dcc5e755-35f9-4b7c-b17a-53823509293c"), "Honnør" });
 
             migrationBuilder.InsertData(
                 table: "BasicTickets",
                 columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
-                values: new object[] { new Guid("ae7e5857-8c38-4a94-b51e-9bb4a769067d"), "Grønnåsen Skole", new Guid("8e2572c2-13d9-4023-b8af-6385285f3d7d"), 375m, "YXHBA6", "13B", "Volda", new Guid("33b72a84-1f0e-49a5-959a-a1224ba88cad"), "Student" });
+                values: new object[] { new Guid("ef87e729-d5b9-4a6d-a916-741499101af0"), "Grønnåsen Skole", new Guid("281f253d-589e-45de-a54f-76fbc5c26706"), 375m, "YXHBA6", "13B", "Volda", new Guid("e0eb2039-85b7-49a1-b20d-1ab15312ba11"), "Student" });
 
             migrationBuilder.InsertData(
                 table: "BasicTickets",
                 columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
-                values: new object[] { new Guid("9a0bcee7-182c-4829-86e3-1ad6edbd56c5"), "Ullevål stadion", new Guid("8426b257-a5ca-48d6-8f6a-52ec47785a58"), 199m, "OPS34", "03A", "Sandefjord", new Guid("ee2852ac-0367-4a59-97a8-804156f19b44"), "Student" });
+                values: new object[] { new Guid("8060566d-22ba-47f1-a67f-aee1653e0488"), "Ullevål stadion", new Guid("2d2d8c65-7390-452a-b76e-aaf663ff3076"), 199m, "OPS34", "03A", "Sandefjord", new Guid("eba9dcf6-a561-4817-a314-6bfce0c56888"), "Student" });
 
             migrationBuilder.InsertData(
                 table: "BasicTickets",
                 columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
-                values: new object[] { new Guid("01a204c1-ae0f-4224-8a12-9df247774720"), "Ullevål stadion", new Guid("8426b257-a5ca-48d6-8f6a-52ec47785a58"), 199m, "PSD33", "03B", "Sandefjord", new Guid("2de01bd3-d536-4560-91d8-9555f7344faa"), "Student" });
+                values: new object[] { new Guid("4abb8b6c-f3a2-4440-a27b-71e5e801cb22"), "Ullevål stadion", new Guid("2d2d8c65-7390-452a-b76e-aaf663ff3076"), 199m, "PSD33", "03B", "Sandefjord", new Guid("ff8754e4-3cff-43a0-8301-245028613ad4"), "Student" });
 
             migrationBuilder.InsertData(
                 table: "BasicTickets",
                 columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
-                values: new object[] { new Guid("dbdbdd37-b766-4b3a-b030-d0bdbb66c04d"), "Ullevål stadion", new Guid("8426b257-a5ca-48d6-8f6a-52ec47785a58"), 219m, "QSO20", "03C", "Larvik", new Guid("4ad9ff01-69cf-41d1-bf98-d2a952ebdc21"), "Student" });
+                values: new object[] { new Guid("6963b6b7-e334-44be-ae25-3c9f1038ecb6"), "Ullevål stadion", new Guid("2d2d8c65-7390-452a-b76e-aaf663ff3076"), 219m, "QSO20", "03C", "Larvik", new Guid("c593f031-a50e-4347-9776-32a99880ba3b"), "Student" });
+
+            migrationBuilder.InsertData(
+                table: "BasicTickets",
+                columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
+                values: new object[] { new Guid("42acda43-9601-4b98-839c-5ecc9838ceb7"), "Gol", new Guid("41e00ed5-bdd0-49b1-bb4c-640a9c0c59ae"), 320m, "VBW93", "09D", "Oslo S", new Guid("dcc5e755-35f9-4b7c-b17a-53823509293c"), "Honnør" });
+
+            migrationBuilder.InsertData(
+                table: "BasicTickets",
+                columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
+                values: new object[] { new Guid("b8437d05-414e-44b8-a470-7aefc4de10ba"), "Gol", new Guid("41e00ed5-bdd0-49b1-bb4c-640a9c0c59ae"), 320m, "VNQ92", "09E", "Skøyen", new Guid("ff8754e4-3cff-43a0-8301-245028613ad4"), "Student" });
+
+            migrationBuilder.InsertData(
+                table: "BasicTickets",
+                columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
+                values: new object[] { new Guid("a487e1cc-77bd-4bea-9a00-a17391821779"), "Gol", new Guid("41e00ed5-bdd0-49b1-bb4c-640a9c0c59ae"), 320m, "VCS20", "09C", "Oslo S", new Guid("e0eb2039-85b7-49a1-b20d-1ab15312ba11"), "Student" });
+
+            migrationBuilder.InsertData(
+                table: "BasicTickets",
+                columns: new[] { "Id", "EndPoint", "OrderId", "Price", "ReferenceCode", "Seat", "StartPoint", "TicketHolderId", "Type" },
+                values: new object[] { new Guid("a5de7f9d-b8f3-42de-828f-bee91b5b362f"), "Oslo S", new Guid("8d580160-fe0c-469c-94c4-35f13c86a4e5"), 72m, "ARQ42", "13D", "Kolbotn", new Guid("eba9dcf6-a561-4817-a314-6bfce0c56888"), "Student" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BasicTickets_OrderId",
