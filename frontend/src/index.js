@@ -31,36 +31,39 @@ class App extends Component {
 		this.fetchUserInfo();
 		this.fetchContactList();
 		this.fetchOrders();
-		
+
 	}
 
-	fetchOrders = async() => {
+	fetchOrders = async () => {
 		try {
-			const response = await fetch("https://localhost:5001/orders", {method: "get"});
+			const response = await fetch("https://localhost:5001/orders", { method: "get" });
 			const payload = await response.json();
 			console.log(payload);
 			this.setState({
-			  isLoaded: true, orders: payload
+				isLoaded: true, orders: payload
 			});
-			
-		  } catch (err) {
+
+		} catch (err) {
 			console.log(err);
-		  }
-		  this.fetchAllTickets();
+		}
+		this.fetchAllTickets();
 	}
 
 	fetchAllTickets = async () => {
 		let tickets = [];
-		let payloadTaken
-		if(this.state.orders){
-			for(let i = 0; i< this.state.orders.length; i++){
-				let order = {}
+		if (this.state.orders) {
+			for (let i = 0; i < this.state.orders.length; i++) {
+				let order = {
+					orderName: '',
+					tickets: ''
+				}
 				try {
 					const response = await fetch(`https://localhost:5001/orders/${this.state.orders[i].id}/basictickets`)
 					const payload = await response.json()
-					console.log(payload);
-					payloadTaken = payload
-				} catch(error) {
+					order.orderName = this.state.orders[i].name;
+					order.tickets = payload;
+					tickets.push(order)
+				} catch (error) {
 					console.log(error)
 				}
 				order.orderName = this.state.orders[i].name;
@@ -73,7 +76,7 @@ class App extends Component {
 					tickets.push(order)
 			}
 		}
-		this.setState({tickets: tickets})
+		this.setState({ tickets: tickets })
 	}
 
 
@@ -107,7 +110,7 @@ class App extends Component {
 	};
 
 	cleanBackground = () => {
-		this.setState({coverSite: false})
+		this.setState({ coverSite: false })
 	}
 
 	sendUser = () => {
@@ -135,7 +138,7 @@ class App extends Component {
 		console.log(this.state.chooseTicket);
 	};
 
-	
+
 
 
 
@@ -145,7 +148,8 @@ class App extends Component {
 				<div>
 					<div className={this.state.coverSite ? 'modalBack' : null}></div>
 					<Navbar />
-					<BuyNewTicket 
+					<BuyNewTicket
+						user={this.state.user[0]}
 						chooseTicket={this.state.chooseTicket}
 						newTicketButtonHandler={this.newTicketButtonHandler}
 						cleanBackground={this.cleanBackground}

@@ -346,6 +346,20 @@ class SendTicketBS extends Component {
 		this.setState({ reviewTicketsShow: true, contactListShow: false });
 	};
 
+	setAdultActive = (check) => {
+		const tickets = this.state.ticketByType;
+
+		if (check.target.checked) {
+			tickets[0].tickets.active[0] = tickets[0].tickets.passive[0]
+			tickets[0].tickets.active[0].ticketHolderId = this.props.user.id;
+		} else {
+			tickets[0].tickets.active.pop();
+		}
+
+		this.setState({ ticketByType: tickets })
+
+	}
+
 	reviewTicket = () => {
 		if (this.state.reviewTicketsShow) {
 			return (
@@ -354,7 +368,7 @@ class SendTicketBS extends Component {
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
 					<div className="flex items-center border-b border-gray-300 pb-5">
-						<input type="checkbox" />
+						<input type="checkbox" onClick={this.setAdultActive} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
 					{this.state.ticketByType.map((item, index) => {

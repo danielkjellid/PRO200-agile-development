@@ -54,6 +54,7 @@ class BuyNewTicket extends Component {
 		if (this.state.sendTicketShow) {
 			return (
 				<SendTicketBS
+					user={this.props.user}
 					updateContactList={this.updateContactList}
 					contactList={this.contactList}
 					endTransaction={this.endTransaction}
