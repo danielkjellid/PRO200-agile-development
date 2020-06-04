@@ -20,7 +20,8 @@ class App extends Component {
 			contactList: '',
 			chooseTicket: false,
 			orders: '',
-			tickets: ''
+			tickets: '',
+			properObjects: ''
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
@@ -37,6 +38,7 @@ class App extends Component {
 		try {
 			const response = await fetch("https://localhost:5001/orders", {method: "get"});
 			const payload = await response.json();
+			console.log(payload);
 			this.setState({
 			  isLoaded: true, orders: payload
 			});
@@ -49,21 +51,26 @@ class App extends Component {
 
 	fetchAllTickets = async () => {
 		let tickets = [];
+		let payloadTaken
 		if(this.state.orders){
 			for(let i = 0; i< this.state.orders.length; i++){
-				let order = {
-					orderName: '',
-					tickets: ''
-				}
+				let order = {}
 				try {
 					const response = await fetch(`https://localhost:5001/orders/${this.state.orders[i].id}/basictickets`)
 					const payload = await response.json()
-					order.orderName = this.state.orders[i].name;
-					order.tickets = payload;
-					tickets.push(order)
+					console.log(payload);
+					payloadTaken = payload
 				} catch(error) {
 					console.log(error)
 				}
+				order.orderName = this.state.orders[i].name;
+					order.id = this.state.orders[i].id;
+					order.from = payloadTaken[0].startPoint
+					order.to  = payloadTaken[0].endPoint
+					order.price = 412
+					order.tickets = payloadTaken;
+					//order.tickets = payload;
+					tickets.push(order)
 			}
 		}
 		this.setState({tickets: tickets})

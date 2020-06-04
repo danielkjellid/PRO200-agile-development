@@ -140,8 +140,14 @@ class Tickets extends Component {
         />
         <Link to={'/'}>Tilbake</Link>
 
+
+        <TicketList 
+          orders={this.props.orders}
+					tickets={this.props.tickets}
+        />
+
         {/* conditionally render ticketlists based on requirements wont render empty lists */}
-        {this.renderTempTickets()}
+        {/* {this.renderTempTickets()} */}
         {/* commentend out until we're able to filter based on active */}
         {/* {this.renderActiveTickets()}
         {this.renderExpiredSingularTickets()}

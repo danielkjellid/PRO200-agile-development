@@ -12,54 +12,6 @@ class TicketList extends Component {
     }
   }
 
-  renderActiveTickets = () => {
-   
-   if(this.props.orders && this.props.tickets){
-     this.props.orders.map((item, index) => {
-       if(item.isActive){
-         this.props.tickets[index].map(item => {
-           return(
-             <TicketItem
-             key={this.props.orders[index]}
-             id={this.props.orders[index]}
-             title={item.orderName}
-             price={312}
-             from={item.tickets[0].startPoint}
-             to={item.tickets[0].endPoint}
-             />
-           )
-         })
-       }
-     })
-   }
-    
-    }
-
-    // for(let i=0; i<this.props.orders.length;i++){
-    //   if(this.props.orders[i].isActive && this.props.tickets[i]){
-        
-      
-    //         this.props.tickets[i].tickets.map((item,index) =>{
-    //           item.map()
-
-    //         } )
-    //         // return(
-    //         //   <TicketItem
-                
-    //         //     id={this.props.tickets[i].tickets[0].id}
-    //         //     title={this.props.tickets[i].tickets[0].name}
-    //         //     price={this.props.tickets[i].tickets[0].price}
-    //         //     from={this.props.tickets[i].tickets[0].startPoint}
-    //         //     to={this.props.tickets[i].tickets[0].endPoint}
-    //         //   />
-    //         // )
-          
-    //   }
-    // }
-  
-
-  
-
   renderHeader(){
     if(this.props.to != null) {
       return (
@@ -104,7 +56,18 @@ class TicketList extends Component {
           </div>
           <div className="bg-white shadow rounded-md">
             <div className="divide-y divide-gray-300">
-              {/* {this.renderActiveTickets()} */}
+             {this.props.tickets ? 
+             this.props.tickets.map(item  => {
+               return (
+                 <TicketItem 
+                  id={item.id}
+                  title={item.orderName}
+                  from={item.from}
+                  to={item.to}
+                  price={item.price}
+                 />
+               )
+             }) : null}
             </div>
           </div>
         </div>
