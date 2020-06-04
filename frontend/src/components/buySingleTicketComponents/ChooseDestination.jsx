@@ -13,6 +13,12 @@ class ChooseDestination extends Component {
         }
     }
 
+    checkIfStartAndEnd = () => {
+        if(this.props.startPoint && this.props.endPoint){
+            this.props.continueToDepartures();
+        }
+    }
+
     clickStartPoint = () => {
         this.setState({drop: true, setStartPoint: true})
     }
@@ -48,6 +54,24 @@ class ChooseDestination extends Component {
     render() {
         const date = new Date()
         const hours = date.getHours()
+
+        let proceedButton;
+		if(this.props.startPoint && this.props.endPoint){
+            proceedButton = 
+                            <button onClick={this.checkIfStartAndEnd}
+                                className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
+                                Fortsett til avganger og billetter
+                            </button>
+        } else {
+            proceedButton = 
+                            <button
+                                className="p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed">
+                                Fortsett til avganger og billetter
+                            </button>
+        }
+		
+		
+
         
         return (
             <div className={this.props.chooseDestination ? "block" : "hidden"}>
@@ -87,10 +111,7 @@ class ChooseDestination extends Component {
                     </div>
                 </div>
                 <div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
-                    <button onClick={this.props.continueToDepartures}
-                            className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
-                            Fortsett til avganger og billetter
-                    </button>
+                    {proceedButton}
                 </div>
           </div>
         );    
