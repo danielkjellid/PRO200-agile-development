@@ -7,6 +7,7 @@ import UserDetails from './UserDetails';
 import UserProfile from './UserProfile';
 import Navbar from './components/Navbar';
 import ContactList from './ContactList';
+import BuyNewTicket from './components/BuyNewTicket';
 
 class App extends Component {
 	constructor(props) {
@@ -17,7 +18,10 @@ class App extends Component {
 			loadUser: true,
 			user: '',
 			contactList: '',
+			chooseTicket: false,
 		};
+
+		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
 	}
 
 	componentDidMount() {
@@ -54,10 +58,9 @@ class App extends Component {
 		this.setState({ coverSite: true });
 	};
 
-	endTransaction = () => {
-		//this function make the faded background disappear
-		this.setState({ coverSite: false });
-	};
+	cleanBackground = () => {
+		this.setState({coverSite: false})
+	}
 
 	sendUser = () => {
 		if (this.state.user) {
@@ -67,12 +70,39 @@ class App extends Component {
 		}
 	};
 
+
+
+	//buy new ticket functionality
+
+	newTicketButtonHandler = () => {
+		const newTicketShow = this.state.chooseTicket;
+
+		if (newTicketShow) {
+			this.setState({ chooseTicket: false });
+			this.cleanBackground();
+		} else {
+			this.setState({ chooseTicket: true });
+			this.fadeBackground();
+		}
+		console.log(this.state.chooseTicket);
+	};
+
+	
+
+
+
 	render() {
 		return (
 			<BrowserRouter>
 				<div>
 					<div className={this.state.coverSite ? 'modalBack' : null}></div>
 					<Navbar />
+					<BuyNewTicket 
+						chooseTicket={this.state.chooseTicket}
+						newTicketButtonHandler={this.newTicketButtonHandler}
+						cleanBackground={this.cleanBackground}
+						fadeBackground={this.fadeBackground}
+					/>
 					<div className="bg-gray-100 canvas">
 						<div className="content">
 							<Switch>
@@ -82,6 +112,7 @@ class App extends Component {
 									render={(props) => (
 										<UserProfile
 											{...props}
+											newTicketButtonHandler={this.newTicketButtonHandler}
 											updateContactList={this.fetchContactList}
 											fadeBackground={this.fadeBackground}
 											endTransaction={this.endTransaction}
@@ -101,6 +132,7 @@ class App extends Component {
 									render={(props) => (
 										<Tickets
 											{...props}
+											newTicketButtonHandler={this.newTicketButtonHandler}
 											searchContact={this.state.contactList}
 											user={this.state.user}
 										></Tickets>

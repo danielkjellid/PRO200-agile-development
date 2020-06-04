@@ -136,7 +136,7 @@ class Tickets extends Component {
       <div>
         <UserHeader
           userName={this.props.user}
-          buttonHandler={this.props.buttonHandler}
+          buttonHandler={this.props.newTicketButtonHandler}
         />
         <Link to={'/'}>Tilbake</Link>
 
