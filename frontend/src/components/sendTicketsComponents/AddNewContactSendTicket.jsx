@@ -27,6 +27,9 @@ class AddNewContactSendTicket extends Component {
 		return (
 			<div className="mx-5 absolute bottom-0">
 				<div className="bg-white rounded-md mb-3 p-6 text-center shadow-xl">
+					<button onClick={this.props.changeHandler}>
+						<svg className="cursor-pointer text-gray-700 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" /></svg>
+					</button>
 					<h2 className="text-lg font-medium mb-6">Send til telefonnummer</h2>
 					<p className="text-xs text-gray-700 mb-6">
 						Send billetten til en person som ikke er i kontaktlisten din ved å

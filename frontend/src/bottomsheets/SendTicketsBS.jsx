@@ -409,7 +409,7 @@ class SendTicketBS extends Component {
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
-					<HeaderSendTickets end={this.props.endSendingTickets} />
+					<HeaderSendTickets back={this.backToSendTickets} contactListShow={this.state.contactListShow} />
 					{this.reviewTicket()}
 					<ContactListSendTicket
 						sendSMS={this.sendOnSMS}
