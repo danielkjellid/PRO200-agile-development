@@ -30,6 +30,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		
 		this.fetchUserInfo();
 		this.fetchContactList();
 		this.fetchOrders();
@@ -50,6 +51,7 @@ class App extends Component {
 		} catch (err) {
 			console.log(err);
 		}
+		this.checkIfFirstTimeLaunch();
 		this.fetchAllTickets();
 	}
 
@@ -121,8 +123,8 @@ class App extends Component {
 	checkIfFirstTimeLaunch = () => {
 		if(this.state.orders){
 			if(this.state.orders.length > 4){
-				return false
-			} else {return true}
+				this.setState({checkIfFirstTimeLaunch: false})
+			} else {this.setState({checkIfFirstTimeLaunch: true})}
 	}}
 
 	closeIntroModal = () => {

@@ -290,12 +290,13 @@ class SendTicketBS extends Component {
 				);
 			} else {
 				buttonClassNameToggle =
-					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md cursor-not-allowed';
+					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md';
 				return (
 					<button
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
+							
 						}}
 						className={buttonClassNameToggle}
 					>
@@ -332,7 +333,7 @@ class SendTicketBS extends Component {
 					</button>
 					<Link to={'/tickets'}>
 						<button
-							onClick={this.props.endTransaction}
+							onClick={() => {this.props.endTransaction(); this.props.updateAPI()}}
 							className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
 						>
 							{this.state.renderButtonText[3]}
@@ -454,7 +455,10 @@ class SendTicketBS extends Component {
 						removeFromActives={this.removeFromActives}
 					/>
 
-					<TicketsWereSend ticketsWereSent={this.state.ticketsWereSent} />
+					<TicketsWereSend 
+						ticketsWereSent={this.state.ticketsWereSent} 
+						updateAPI = {this.props.updateAPI}	
+						/>
 					<MakeAccountInVIpps
 						makeAccountInVIpps={this.state.makeAccountInVipps}
 					/>
