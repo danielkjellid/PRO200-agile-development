@@ -40,7 +40,7 @@ namespace VyShare
                 new User() {
                     Id = Guid.NewGuid(),
                     Username = "popokatepetl",
-                    FirstName = "Pål",
+                    FirstName = "Erlend",
                     LastName = "Fjellberg",
                     Email = "popokatepetl@online.no",
                     PhoneNumber = "90035412"
