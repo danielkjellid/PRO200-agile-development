@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MakeAccountInVIpps(props) { 
+function MakeAccountInVIpps(props) {
   return (
     <div className={props.makeAccountInVIpps ? 'block' : 'hidden'}>
       <div className="py-5 px-8 mx-auto text-center">

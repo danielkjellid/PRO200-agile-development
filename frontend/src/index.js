@@ -8,6 +8,7 @@ import UserProfile from './UserProfile';
 import Navbar from './components/Navbar';
 import ContactList from './ContactList';
 import BuyNewTicket from './components/BuyNewTicket';
+import IntroModal from './components/IntroModal';
 
 class App extends Component {
 	constructor(props) {
@@ -19,15 +20,88 @@ class App extends Component {
 			user: '',
 			contactList: '',
 			chooseTicket: false,
+			orders: '',
+			tickets: '',
+			checkIfFirstTimeLaunch: true,
+			firstTimeModal: false
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
+		this.changeOrderName = this.changeOrderName.bind(this)
 	}
 
 	componentDidMount() {
+		
 		this.fetchUserInfo();
 		this.fetchContactList();
+		this.fetchOrders();
 	}
+
+	updateAPI = () =>{
+		window.location.reload(false);
+	}
+
+	fetchOrders = async () => {
+		try {
+			const response = await fetch("https://localhost:5001/orders", { method: "get" });
+			const payload = await response.json();
+			this.setState({
+				isLoaded: true, orders: payload
+			});
+
+		} catch (err) {
+			console.log(err);
+		}
+		this.checkIfFirstTimeLaunch();
+		this.fetchAllTickets();
+	}
+
+	changeOrderName = (id, newName) => {
+	
+		 this.state.orders.map(item => {
+				if(item.id == id){item.orderName=newName;}
+			})
+	
+	}
+
+	
+	fetchAllTickets = async () => {
+		let tickets = [];
+		let payloadTaken;
+		if (this.state.orders) {
+			for (let i = 0; i < this.state.orders.length; i++) {
+				let order = {}
+				try {
+					const response = await fetch(`https://localhost:5001/orders/${this.state.orders[i].id}/basictickets`)
+					const payload = await response.json()
+					
+					payloadTaken = payload;
+					order.orderName = this.state.orders[i].name;
+					order.id = this.state.orders[i].id;
+					order.isActive = this.state.orders[i].isActive;
+					order.from = payloadTaken[0].startPoint
+					order.to  = payloadTaken[0].endPoint
+					let totalPrice=0;
+					for(let i=0;i<payloadTaken.length;i++){
+						totalPrice +=  payloadTaken[i].price
+					}
+
+					order.price = totalPrice
+					order.tickets = payloadTaken;
+					//order.tickets = payload;
+				
+				tickets.push(order)
+				} catch (error) {
+					console.log(error)
+				}
+					
+					
+			}
+		}
+		this.setState({ tickets: tickets })
+	
+	}
+
 
 	fetchUserInfo = async () => {
 		try {
@@ -49,6 +123,22 @@ class App extends Component {
 		}
 	};
 
+
+	//this functions checks if app runs for the first time. its super primitive cause hereby I check
+	//if the DB has been updated since the last time. Normally I would never do anything like that but 
+	// in this case it will work. Have to fix before final delivery
+	checkIfFirstTimeLaunch = () => {
+		if(this.state.orders){
+			if(this.state.orders.length > 4){
+				this.setState({checkIfFirstTimeLaunch: false})
+			} else {this.setState({checkIfFirstTimeLaunch: true})}
+	}}
+
+	closeIntroModal = () => {
+		this.setState({checkIfFirstTimeLaunch: false})
+	}
+
+
 	notFound = () => {
 		return <h1>not found</h1>;
 	};
@@ -59,7 +149,7 @@ class App extends Component {
 	};
 
 	cleanBackground = () => {
-		this.setState({coverSite: false})
+		this.setState({ coverSite: false })
 	}
 
 	sendUser = () => {
@@ -87,22 +177,32 @@ class App extends Component {
 		console.log(this.state.chooseTicket);
 	};
 
-	
+
 
 
 
 	render() {
+		
 		return (
 			<BrowserRouter>
 				<div>
 					<div className={this.state.coverSite ? 'modalBack' : null}></div>
+					<div className={this.state.firstTimeModal ? 'modalBack' : null}></div>
 					<Navbar />
-					<BuyNewTicket 
+					<BuyNewTicket
+						user={this.state.user[0]}
 						chooseTicket={this.state.chooseTicket}
 						newTicketButtonHandler={this.newTicketButtonHandler}
 						cleanBackground={this.cleanBackground}
 						fadeBackground={this.fadeBackground}
+						updateAPI={this.updateAPI}
 					/>
+					{this.state.checkIfFirstTimeLaunch ? 
+						<IntroModal 
+							closeIntroModal={this.closeIntroModal}
+
+						/> : null
+					}
 					<div className="bg-gray-100 canvas">
 						<div className="content">
 							<Switch>
@@ -118,6 +218,9 @@ class App extends Component {
 											endTransaction={this.endTransaction}
 											user={this.state.user}
 											contactList={this.state.contactList}
+											orders={this.state.orders}
+											tickets={this.state.tickets}
+											changeOrderName={this.changeOrderName}
 										></UserProfile>
 									)}
 								></Route>
@@ -135,6 +238,9 @@ class App extends Component {
 											newTicketButtonHandler={this.newTicketButtonHandler}
 											searchContact={this.state.contactList}
 											user={this.state.user}
+											orders={this.state.orders}
+											tickets={this.state.tickets}
+											changeOrderName={this.changeOrderName}
 										></Tickets>
 									)}
 								></Route>

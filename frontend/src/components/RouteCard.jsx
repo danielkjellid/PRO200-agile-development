@@ -3,8 +3,14 @@ import React from "react";
 function RouteCard(props) {
 
   let date = new Date();
-  let getStartTime = date.getHours() + ":" + date.getMinutes();
-  let getEndTime = date.getHours() + 2 + ":" + date.getMinutes();
+  let hours = date.getHours();
+		if(hours<10){hours = '0' + hours}
+		let minutes = date.getMinutes();
+    if(minutes<10){minutes= '0' + minutes}
+    let endHours = date.getHours() + 2
+    if(endHours<10){endHours = '0' + endHours}
+  let getStartTime = hours + ":" + minutes;
+  let getEndTime = endHours + ":" + minutes;
 
   return (
     <div

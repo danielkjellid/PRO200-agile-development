@@ -20,7 +20,7 @@ class BuySingleTicketBS extends Component {
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
-			order: { name: '' },
+			order: { name: '', isActive: true },
 			tickets: null,
 		};
 	}
@@ -36,12 +36,12 @@ class BuySingleTicketBS extends Component {
 	//this function initialize all the ticket types with default Voksen: 1
 	initTicketTypes = () => {
 		const editTravellers = [
-			{ type: 'Voksen', number: 1 },
-			{ type: 'Barn (0-5 år)', number: 0 },
-			{ type: 'Barn (6-17 år)', number: 0 },
-			{ type: 'Ungdom (18-19 år)', number: 0 },
-			{ type: 'Student', number: 0 },
-			{ type: 'Honnør', number: 0 },
+			{ type: 'Voksen', number: 1, price: 340, totalPrice: function() {return this.number * this.price  }},
+			{ type: 'Barn (0-5 år)', number: 0, price: 0, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Barn (6-17 år)', number: 0, price: 280, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Ungdom (18-19 år)', number: 0, price: 290, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Student', number: 0, price: 250, totalPrice: function() {return this.number * this.price  } },
+			{ type: 'Honnør', number: 0, price: 120, totalPrice: function() {return this.number * this.price  } },
 		];
 		this.setState({ ticketTypeNum: editTravellers });
 	};
@@ -60,7 +60,7 @@ class BuySingleTicketBS extends Component {
 						endPoint: this.state.endPoint,
 						referenceCode: '2xdfe',
 						seat: '14b',
-						price: 0,
+						price: ticketsChosen[i].price,
 					});
 					count--;
 				}
@@ -72,7 +72,7 @@ class BuySingleTicketBS extends Component {
 	};
 
 	restartOrder = () => {
-		this.setState({ order: { name: '' } });
+		this.setState({ order: { name: '', isActive: true } });
 	};
 
 	//this function sets a name for the order by default its the date order was executed
@@ -81,10 +81,19 @@ class BuySingleTicketBS extends Component {
 		let name;
 		let date = new Date();
 		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Okt','Nov','Dec',];
+		
+		let hours = date.getHours();
+		if(hours<10){hours = '0' + hours}
+		let minutes = date.getMinutes();
+		if(minutes<10){minutes= '0' + minutes}
+		let seconds = date.getSeconds();
+		if(seconds<10){seconds= '0' + seconds}
+		
+		
 		name = `${date.getFullYear()}-${
 			months[date.getMonth()]
-		}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-		this.setState({ order: { name: name } });
+		}-${date.getDate()} ${hours}:${minutes}:${seconds}`;
+		this.setState({ order: { name: name, isActive: true } });
 	};
 
 	setStartPoint = (value) => {
@@ -258,6 +267,7 @@ class BuySingleTicketBS extends Component {
 						restartOrder={this.restartOrder}
 						initTicketTypes={this.initTicketTypes}
 						confirmation={this.state.confirmation}
+						updateAPI = {this.props.updateAPI}
 					/>
 
 					<ChooseDestination
@@ -296,12 +306,17 @@ class BuySingleTicketBS extends Component {
 						continueToConfirmation={this.continueToConfirmation}
 						submitNewOrder={this.submitNewOrder}
 						back={this.continueToPayment}
+						startPoint={this.state.startPoint}
+						endPoint={this.state.endPoint}
+						numberOfTravellers={this.state.ticketTypeNum}
 					/>
 
 					<Confirmation
 						endTransaction={this.props.endTransaction}
 						confirmation={this.state.confirmation}
 						renderSendTicket={this.props.renderSendTicket}
+						updateAPI = {this.props.updateAPI}
+						numberOfTravellers={this.state.ticketTypeNum}
 					/>
 				</div>
 			</div>

@@ -4,11 +4,8 @@ import { Link } from 'react-router-dom';
 import TicketItem from './TicketItem'
 
 class TicketList extends Component {
-
-	constructor(props) {
-		super(props)
-  }
   
+
   renderHeader(){
     if(this.props.to != null) {
       return (
@@ -40,6 +37,11 @@ class TicketList extends Component {
   }
 
 	render() {
+    
+    
+
+
+
     return (
       <div>
         <div className="px-5 py-6">
@@ -48,18 +50,22 @@ class TicketList extends Component {
           </div>
           <div className="bg-white shadow rounded-md">
             <div className="divide-y divide-gray-300">
-              {this.props.tickets.map((ticket, i) => {
-                return (
-                  <TicketItem 
-                    key={i}
-                    id={ticket.id}
-                    active={ticket.active}
-                    title={ticket.name}
-                    price={ticket.price}
-                    from={ticket.startPoint}
-                    to={ticket.endPoint}
-                  />)
-              })}
+             {this.props.tickets ? 
+             this.props.tickets.map((item, index)  => {
+               return (
+                 <TicketItem
+                  key={index} 
+                  id={item.id}
+                  title={item.orderName}
+                  from={item.from}
+                  to={item.to}
+                  price={item.price}
+                  tickets={item.tickets}
+                  active={item.isActive}
+                  changeOrderName={this.props.changeOrderName}
+                 />
+               )
+             }) : null}
             </div>
           </div>
         </div>

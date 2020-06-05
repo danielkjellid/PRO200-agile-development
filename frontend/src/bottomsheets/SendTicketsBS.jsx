@@ -11,6 +11,7 @@ class SendTicketBS extends Component {
 
 		this.state = {
 			clicks: 0,
+			userInTrip: false,
 			reviewTicketsShow: true,
 			contactListShow: false,
 			ticketsWereSent: false,
@@ -289,12 +290,13 @@ class SendTicketBS extends Component {
 				);
 			} else {
 				buttonClassNameToggle =
-					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md cursor-not-allowed';
+					'p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md';
 				return (
 					<button
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
+							
 						}}
 						className={buttonClassNameToggle}
 					>
@@ -331,7 +333,7 @@ class SendTicketBS extends Component {
 					</button>
 					<Link to={'/tickets'}>
 						<button
-							onClick={this.props.endTransaction}
+							onClick={() => {this.props.endTransaction(); this.props.updateAPI()}}
 							className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
 						>
 							{this.state.renderButtonText[3]}
@@ -346,6 +348,26 @@ class SendTicketBS extends Component {
 		this.setState({ reviewTicketsShow: true, contactListShow: false });
 	};
 
+	setAdultActive = (check) => {
+		const tickets = this.state.ticketByType;
+
+		if (check.target.checked) {
+			tickets[0].tickets.active[0] = tickets[0].tickets.passive[0]
+			tickets[0].tickets.active[0].ticketHolderId = this.props.user.id;
+		} else {
+			tickets[0].tickets.active.pop();
+		}
+
+		this.setState({ ticketByType: tickets, userInTrip: check.target.checked })
+
+	}
+
+	renderVipps = () => {
+		if (this.state.makeAccountInVIpps) {
+			return <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVIpps} />
+		}
+	}
+
 	reviewTicket = () => {
 		if (this.state.reviewTicketsShow) {
 			return (
@@ -354,7 +376,7 @@ class SendTicketBS extends Component {
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
 					<div className="flex items-center border-b border-gray-300 pb-5">
-						<input type="checkbox" />
+						<input type="checkbox" checked={this.state.userInTrip} onClick={this.setAdultActive} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
 					{this.state.ticketByType.map((item, index) => {
@@ -405,12 +427,21 @@ class SendTicketBS extends Component {
 		}
 	};
 
+	backButton = () => {
+		if (this.state.makeAccountInVIpps) {
+			this.props.endTransaction();
+		} else if (this.state.contactListShow) {
+			this.backToSendTickets();
+		}
+	}
+
 	render() {
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
-					<HeaderSendTickets end={this.props.endSendingTickets} />
+					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps} />
 					{this.reviewTicket()}
+					{this.renderVipps()}
 					<ContactListSendTicket
 						sendSMS={this.sendOnSMS}
 						updateContactList={this.props.updateContactList}
@@ -424,7 +455,10 @@ class SendTicketBS extends Component {
 						removeFromActives={this.removeFromActives}
 					/>
 
-					<TicketsWereSend ticketsWereSent={this.state.ticketsWereSent} />
+					<TicketsWereSend 
+						ticketsWereSent={this.state.ticketsWereSent} 
+						updateAPI = {this.props.updateAPI}	
+						/>
 					<MakeAccountInVIpps
 						makeAccountInVIpps={this.state.makeAccountInVipps}
 					/>
