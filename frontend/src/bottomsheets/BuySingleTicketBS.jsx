@@ -37,7 +37,7 @@ class BuySingleTicketBS extends Component {
 	initTicketTypes = () => {
 		const editTravellers = [
 			{ type: 'Voksen', number: 1, price: 340, totalPrice: function() {return this.number * this.price  }},
-			{ type: 'Barn (0-5 år)', number: 0, price: 0 },
+			{ type: 'Barn (0-5 år)', number: 0, price: 0, totalPrice: function() {return this.number * this.price  } },
 			{ type: 'Barn (6-17 år)', number: 0, price: 280, totalPrice: function() {return this.number * this.price  } },
 			{ type: 'Ungdom (18-19 år)', number: 0, price: 290, totalPrice: function() {return this.number * this.price  } },
 			{ type: 'Student', number: 0, price: 250, totalPrice: function() {return this.number * this.price  } },
