@@ -81,9 +81,18 @@ class BuySingleTicketBS extends Component {
 		let name;
 		let date = new Date();
 		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Okt','Nov','Dec',];
+		
+		let hours = date.getHours();
+		if(hours<10){hours = '0' + hours}
+		let minutes = date.getMinutes();
+		if(minutes<10){minutes= '0' + minutes}
+		let seconds = date.getSeconds();
+		if(seconds<10){seconds= '0' + seconds}
+		
+		
 		name = `${date.getFullYear()}-${
 			months[date.getMonth()]
-		}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+		}-${date.getDate()} ${hours}:${minutes}:${seconds}`;
 		this.setState({ order: { name: name, isActive: true } });
 	};
 
