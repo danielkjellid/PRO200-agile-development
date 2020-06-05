@@ -62,6 +62,7 @@ class TicketList extends Component {
                   price={item.price}
                   tickets={item.tickets}
                   active={item.isActive}
+                  changeOrderName={this.props.changeOrderName}
                  />
                )
              }) : null}

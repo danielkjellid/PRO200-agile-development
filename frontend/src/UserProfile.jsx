@@ -10,7 +10,8 @@ class UserProfile extends Component {
 		  let activeTickets = tickets.filter(ticket => ticket.isActive)
 		  return (
 		  <TicketList 
-		  	title="Aktiv billett"
+			  title="Aktiv billett"
+			  changeOrderName={this.props.changeOrderName}
 		  	linkLabel="Se alle billetter"
 		  	to="/tickets"
 			tickets={activeTickets}/>)

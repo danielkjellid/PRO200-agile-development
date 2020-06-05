@@ -27,6 +27,7 @@ class App extends Component {
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
+		this.changeOrderName = this.changeOrderName.bind(this)
 	}
 
 	componentDidMount() {
@@ -55,7 +56,13 @@ class App extends Component {
 		this.fetchAllTickets();
 	}
 
-
+	changeOrderName = (id, newName) => {
+	
+		 this.state.orders.map(item => {
+				if(item.id == id){item.orderName=newName;}
+			})
+	
+	}
 
 	
 	fetchAllTickets = async () => {
@@ -213,7 +220,7 @@ class App extends Component {
 											contactList={this.state.contactList}
 											orders={this.state.orders}
 											tickets={this.state.tickets}
-											
+											changeOrderName={this.changeOrderName}
 										></UserProfile>
 									)}
 								></Route>
@@ -233,6 +240,7 @@ class App extends Component {
 											user={this.state.user}
 											orders={this.state.orders}
 											tickets={this.state.tickets}
+											changeOrderName={this.changeOrderName}
 										></Tickets>
 									)}
 								></Route>

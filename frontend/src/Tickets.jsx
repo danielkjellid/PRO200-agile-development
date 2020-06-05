@@ -32,7 +32,7 @@ class Tickets extends Component {
   renderActiveTickets(tickets) {
     if(tickets){
       let activeTickets = tickets.filter(ticket => ticket.isActive)
-      return (<TicketList title='Aktive billetter' tickets={activeTickets}/>)
+      return (<TicketList changeOrderName={this.props.changeOrderName} title='Aktive billetter' tickets={activeTickets}/>)
     }
   }
   
@@ -47,7 +47,7 @@ class Tickets extends Component {
   renderExpiredGroupTickets(tickets) {
     if(tickets){
       let expiredGroupTickets = tickets.filter(ticket => ticket.isActive === false)
-      return (<TicketList title='Utgåtte gruppebilletter' tickets={expiredGroupTickets}/>)
+      return (<TicketList changeOrderName={this.props.changeOrderName} title='Utgåtte gruppebilletter' tickets={expiredGroupTickets}/>)
     }
   }
 
