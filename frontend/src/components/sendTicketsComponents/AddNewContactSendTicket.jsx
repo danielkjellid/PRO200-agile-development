@@ -8,24 +8,22 @@ class AddNewContactSendTicket extends Component {
 	};
 
 	handleFirstNameChange = (event) => {
-		this.setState({ firstName: event.target.value });
+		this.setState({firstName: event.target.value});
 	};
 
 	handleLastNameChange = (event) => {
-		this.setState({ lastName: event.target.value });
+		this.setState({lastName: event.target.value});
 	};
 
 	handlePhoneChange = (event) => {
-		this.setState({ phoneNumber: event.target.value });
+		this.setState({phoneNumber: event.target.value});
 	};
 
 	handleEmailChange = (event) => {
-		this.setState({ email: event.target.value });
+		this.setState({email: event.target.value});
 	};
 
 	render() {
-
-	
 
 		return (
 			<React.Fragment>

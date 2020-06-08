@@ -1,48 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import UserHeader from './components/UserHeader';
 import TicketList from './components/TicketList'
 
-class UserProfile extends Component {
+function UserProfile(props) {
 	
-	renderActiveTicketsUserProfile(tickets) {
+	const renderActiveTicketsUserProfile = (tickets) => {
 		if(tickets){
 		  let activeTickets = tickets.filter(ticket => ticket.isActive)
 		  return (
 		  <TicketList 
 			  title="Aktiv billett"
-			  changeOrderName={this.props.changeOrderName}
+			  changeOrderName={props.changeOrderName}
 		  	linkLabel="Se alle billetter"
 		  	to="/tickets"
 			tickets={activeTickets}/>)
 		}
 	  }
 	  
-
-	render() {
-		return (
-			<div>
-				
-				<UserHeader
-					userName={this.props.user}
-					buttonHandler={this.props.newTicketButtonHandler}
-				/>
-
-				{this.renderActiveTicketsUserProfile(this.props.tickets)}
-
-				{/* <TicketList
-					title="Aktiv billett"
-					linkLabel="Se alle billetter"
-					to="/tickets"
-					orders={this.props.orders}
-					tickets={this.props.tickets}
-				/>  */}
-			
-
-				
-			</div>
-		);
-	}
+	return (
+		<div>
+			<UserHeader
+				userName={props.user}
+				buttonHandler={props.newTicketButtonHandler}
+			/>
+			{renderActiveTicketsUserProfile(props.tickets)}
+		</div>
+	);
 }
 
 export default UserProfile;

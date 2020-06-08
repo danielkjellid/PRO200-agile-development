@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-
-class DropDownItem extends Component {
-    state = {  }
-
+function DropDownItem(props) {
+  
+    let inhold;
     
-
-    render() {
-
-        let inhold;
-        if(this.props.isStartPoint && this.props.endPoint !== this.props.stationName && this.props.startPoint !== this.props.stationName){
-            inhold = <div onClick={() => {this.props.setStartPoint(this.props.stationName); this.props.hideDropDownMenu()} }className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700">
-                        <p>{this.props.stationName}</p>
-                    </div> 
-        }
-        if(this.props.isEndPoint && this.props.startPoint !== this.props.stationName && this.props.endPoint !== this.props.stationName){
-            inhold = <div onClick={() => {this.props.setEndPoint(this.props.stationName); this.props.hideDropDownMenu()} }className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700">
-                        <p>{this.props.stationName}</p>
-                    </div> 
-        }
-
-        return (
-                <div>{inhold}</div>
-        );
+    if(props.isStartPoint && props.endPoint !== props.stationName && props.startPoint !== props.stationName){
+        inhold = <div onClick={() => {props.setStartPoint(props.stationName); props.hideDropDownMenu()} }className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700">
+                   <p>{props.stationName}</p>
+                </div> 
     }
+    
+    if(props.isEndPoint && props.startPoint !== props.stationName && props.endPoint !== props.stationName){
+        inhold = <div onClick={() => {props.setEndPoint(props.stationName); props.hideDropDownMenu()} }className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700">
+                    <p>{props.stationName}</p>
+                </div> 
+        }
+
+    return (
+            <div>{inhold}</div>
+    );
 }
 
 export default DropDownItem;

@@ -17,7 +17,7 @@ class Contact extends Component {
 
 	checkIfTicketAssigned = () => {
 		if (this.props.state) {
-			this.setState({ active: true });
+			this.setState({active: true});
 		}
 	};
 
@@ -25,7 +25,7 @@ class Contact extends Component {
 		if (this.props.clicks < this.props.checkIfTicketAssigned.length) {
 			this.changeContactState();
 		} else if (this.state.active) {
-			this.setState({ active: false });
+			this.setState({active: false});
 			this.props.removeFromActives(this.props.id);
 		} else {
 		}
@@ -33,7 +33,7 @@ class Contact extends Component {
 
 	changeContactState = () => {
 		this.setState((prevState) => {
-			return { active: !prevState.active };
+			return {active: !prevState.active};
 		});
 		if (!this.state.active) {
 			this.props.addToActives(this.props.id); //contactItem

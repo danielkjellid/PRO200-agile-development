@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-class ActiveTicketDetails extends Component {
-   
-    render() {
-        return (
-            <div>
-                <div onClick={this.props.click}>Tilbake til billettoversikt</div>
-                <div>Ticket details</div>
-            </div>
-        );
-    }
+import React from 'react';
+
+function ActiveTicketDetails(props) {
+
+    return (
+        <div>
+            <div onClick={props.click}>Tilbake til billettoversikt</div>
+            <div>Ticket details</div>
+        </div>
+    );
 }
+
 
 export default ActiveTicketDetails;

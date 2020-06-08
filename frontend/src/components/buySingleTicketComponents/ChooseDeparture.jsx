@@ -12,7 +12,7 @@ class ChooseDeparture extends Component {
 	}
 
 	turnToActive = (id) => {
-		this.setState({ active: id });
+		this.setState({active: id});
 	};
 
 	render() {

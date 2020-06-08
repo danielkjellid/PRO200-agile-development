@@ -4,9 +4,9 @@ import PaymentOption from './PaymentOption';
 class ChoosePayment extends Component {
 	state = {
 		paymentOptions: [
-			{ type: 'card', selected: true },
-			{ type: 'vipps', selected: false },
-			{ type: 'newCard', selected: false },
+			{type: 'card', selected: true},
+			{type: 'vipps', selected: false},
+			{type: 'newCard', selected: false},
 		],
 	};
 
@@ -19,7 +19,7 @@ class ChoosePayment extends Component {
 			? false
 			: true;
 
-		this.setState({ paymentOptions });
+		this.setState({paymentOptions});
 	};
 
 	render() {

@@ -3,17 +3,16 @@ import { Link } from 'react-router-dom';
 
 import TicketItem from './TicketItem'
 
-class TicketList extends Component {
+function TicketList(props) {
   
-
-  renderHeader(){
-    if(this.props.to != null) {
+  const renderHeader =() => {
+    if(props.to != null) {
       return (
         <div className="flex items-center justify-between">
-          <h1 className="text-lg text-gray-900">{this.props.title}</h1>
-          <Link to={this.props.to}>
+          <h1 className="text-lg text-gray-900">{props.title}</h1>
+          <Link to={props.to}>
             <div className="text-sm text-gray-900 flex items-center">
-                {this.props.linkLabel}
+                {props.linkLabel}
                 <svg
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -31,29 +30,23 @@ class TicketList extends Component {
       )
     } else {
       return (
-        <h1 className="text-lg text-gray-900">{this.props.title}</h1>
+        <h1 className="text-lg text-gray-900">{props.title}</h1>
       )
     }
   }
 
-	render() {
-    
-    
-
-
-
-    return (
-      <div>
-        <div className="px-5 py-6">
-          <div className="mb-5">
-            {this.renderHeader()}
-          </div>
-          <div className="bg-white shadow rounded-md">
-            <div className="divide-y divide-gray-300">
-             {this.props.tickets ? 
-             this.props.tickets.map((item, index)  => {
-               return (
-                 <TicketItem
+  return (
+    <div>
+       <div className="px-5 py-6">
+        <div className="mb-5">
+          {renderHeader()}
+        </div>
+        <div className="bg-white shadow rounded-md">
+          <div className="divide-y divide-gray-300">
+          {props.tickets ? 
+            props.tickets.map((item, index)  => {
+              return (
+                <TicketItem
                   key={index} 
                   id={item.id}
                   title={item.orderName}
@@ -62,7 +55,7 @@ class TicketList extends Component {
                   price={item.price}
                   tickets={item.tickets}
                   active={item.isActive}
-                  changeOrderName={this.props.changeOrderName}
+                  changeOrderName={props.changeOrderName}
                  />
                )
              }) : null}
@@ -72,6 +65,5 @@ class TicketList extends Component {
       </div>
     )
   }
-}
 
 export default TicketList

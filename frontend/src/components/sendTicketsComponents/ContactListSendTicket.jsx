@@ -50,7 +50,7 @@ class ContactListSendTicket extends Component {
 
 	addNewContactHandler = () => {
 		let addNewContact = this.state.addNewContactShow;
-		this.setState({ addNewContactShow: !addNewContact });
+		this.setState({addNewContactShow: !addNewContact});
 	};
 
 	render() {
