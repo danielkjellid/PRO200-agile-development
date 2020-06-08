@@ -46,10 +46,10 @@ function TicketList(props) {
         <div className="bg-white shadow rounded-md">
           <div className="divide-y divide-gray-300">
           {props.tickets ? 
-            props.tickets.map((item, index)  => {
+            props.tickets.map((item)  => {
               return (
                 <TicketItem
-                  key={index} 
+                  key={item.id} 
                   id={item.id}
                   title={item.orderName}
                   from={item.from}

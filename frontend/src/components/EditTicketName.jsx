@@ -10,11 +10,11 @@ function EditTicketName(props) {
                 <div className="z-30 mx-5 absolute bottom-0 w-auto">
                     <div className="bg-white rounded-md mb-3 p-6 text-center shadow-xl">
                         <h2 className="text-lg font-medium mb-2">Rediger navn</h2>
-                        <input className="text-sm text-gray-700" />
+                        <input className="text-sm text-gray-700" onChange={props.handleNameChange} value={props.name}/>
                     </div>
                     <button
                         className="shadow-xl p-3 w-full bg-white text-center text-sm font-medium text-black rounded-md hover:cursor mb-6"
-                        onClick={props.closeIntroModal}
+                        onClick={props.acceptChange}
                     >
                         Ok
                     </button>

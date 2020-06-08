@@ -25,11 +25,13 @@ class App extends Component {
 			tickets: '',
 			checkIfFirstTimeLaunch: true,
 			firstTimeModal: false,
-			editNameModal: false
+			editNameModal: false,
+			orderToEdit: '',
+
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
-		this.changeOrderName = this.changeOrderName.bind(this)
+		this.changeOrderName = this.changeOrderName.bind(this);
 	}
 
 	componentDidMount() {
@@ -38,6 +40,50 @@ class App extends Component {
 		this.fetchContactList();
 		this.fetchOrders();
 	}
+
+	changeOrderName = (id) => {
+		//get order by id
+		//show current name in input field
+		//while clickin on ok fetching update
+		//refresh page
+		this.changeOrderNameModal()
+		this.state.orders.map(item => {
+			if(item.id === id){
+				this.setState({orderToEdit: item})
+			}
+		})
+	}
+
+	handleNameChange = (event) => {
+		const oldState = {...this.state.orderToEdit}
+		oldState.name = event.target.value
+		this.setState({orderToEdit: oldState})
+	}
+
+	changeOrderNameModal = () => {
+		this.setState({editNameModal: !this.state.editNameModal})		
+	}
+
+	acceptChange = async() => {
+		const url = `https://localhost:5001/orders/${this.state.orderToEdit.id}`;
+		const payload = this.state.orderToEdit;
+		
+		try {
+			await fetch(url, {
+				method: 'put',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
+		} catch (err) {
+			console.log(err);
+		}
+		this.changeOrderNameModal();
+		this.updateAPI()
+	}
+
+	
 
 	updateAPI = () =>{
 		window.location.reload(false);
@@ -58,15 +104,7 @@ class App extends Component {
 		this.fetchAllTickets();
 	}
 
-	changeOrderName = (id, newName) => {
-	
-		 this.state.orders.map(item => {
-				if(item.id == id){item.orderName=newName;}
-			})
-	
-	}
 
-	
 	fetchAllTickets = async () => {
 		let tickets = [];
 		let payloadTaken;
@@ -190,7 +228,12 @@ class App extends Component {
 				<div>
 					<div className={this.state.coverSite ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
 					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
-					<EditTicketName show={this.state.editNameModal} />
+					<EditTicketName 
+						show={this.state.editNameModal} 
+						name={this.state.orderToEdit.name}
+						handleNameChange={this.handleNameChange}
+						acceptChange={this.acceptChange}
+					/>
 					<Navbar />
 					<BuyNewTicket
 						user={this.state.user[0]}
