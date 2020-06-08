@@ -50,5 +50,19 @@ namespace VyShare.Controllers
             return Ok(orderDto);
         }
 
+        [HttpPut("{orderId}")]
+        public async Task<ActionResult> Update(Guid orderId, OrderDto orderDto)
+        {
+            var order = await db.Orders.FirstOrDefaultAsync(e => e.Id == orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order = orderDto.ToOrder(order);
+
+            await db.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
