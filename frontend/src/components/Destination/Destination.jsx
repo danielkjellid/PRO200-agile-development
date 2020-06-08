@@ -1,6 +1,12 @@
+// framework imports
 import React, { Component } from 'react';
+
+// component imports
 import DestinationDropdownList from './DestinationDropdownList';
+
+// data imports
 import stations from '../../data/stations';
+
 
 class Destination extends Component {
     constructor(props){
@@ -13,81 +19,72 @@ class Destination extends Component {
         }
     }
 
-    checkIfStartAndEnd = () => {
+    // method for checking if departure and arrival is selected
+    // check is used to conditionally render proceed button
+    checkIfDepartureAndArrivalSelected = () => {
         if(this.props.startPoint && this.props.endPoint){
             this.props.continueToDepartures();
         }
     }
 
-    clickStartPoint = () => {
+    // click handlers for selecting departure/arrival
+    clickDepartureStation = () => {
         this.setState({drop: true, setStartPoint: true})
     }
-
-    clickEndPoint = () => {
+    clickArrivalStation = () => {
         this.setState({drop: true, setEndPoint: true})
         console.log(this.props.endPoint);
     }
 
+    // method for hiding dropdown menu once departure/destination has been chosden
     hideDropDownMenu = () => {
             this.setState({drop: false, setStartPoint: false, setEndPoint: false})
     }
 
-    //{e => this.props.setStartPoint(e.target.value)}
-
+    // method for showinf dropdown menu once departure/destination has been clicked
     renderDropDownMenu = () => {
         return (
-            
-                <DestinationDropdownList
-                    isStartPoint={this.state.setStartPoint}
-                    isEndPoint={this.state.setEndPoint}
-                    startPoint={this.props.startPoint}
-                    endPoint={this.props.endPoint}
-                    setStartPoint={this.props.setStartPoint}
-                    setEndPoint={this.props.setEndPoint}
-                    stations={this.state.stations}
-                    hideDropDownMenu={this.hideDropDownMenu}
-                />
-        
+            <DestinationDropdownList
+                isStartPoint={this.state.setStartPoint}
+                isEndPoint={this.state.setEndPoint}
+                startPoint={this.props.startPoint}
+                endPoint={this.props.endPoint}
+                setStartPoint={this.props.setStartPoint}
+                setEndPoint={this.props.setEndPoint}
+                stations={this.state.stations}
+                hideDropDownMenu={this.hideDropDownMenu}
+            />
         )
     }
 
     render() {
-        const date = new Date()
-        const hours = date.getHours()
-
         let proceedButton;
-		if(this.props.startPoint && this.props.endPoint){
-            proceedButton = 
-                            <button onClick={this.checkIfStartAndEnd}
-                                className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
-                                Fortsett til avganger og billetter
-                            </button>
-        } else {
-            proceedButton = 
-                            <button
-                                className="p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed">
-                                Fortsett til avganger og billetter
-                            </button>
-        }
-		
-		
 
-        
+        // check if both start and endpoint has been chosen before allowinf the user to proceed
+		if (this.props.startPoint && this.props.endPoint){
+            proceedButton = (
+                <button onClick={this.checkIfDepartureAndArrivalSelected}
+                    className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
+                    Fortsett til avganger og billetter
+                </button>
+            )
+        } else {
+            proceedButton = (
+                <button
+                    className="p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed">
+                    Fortsett til avganger og billetter
+                </button>
+            )
+        }
+		        
         return (
             <div className={this.props.chooseDestination ? "block" : "hidden"}>
                 <div>
-                    {/* Skal tas bort, men la stå til headeren er ferdig 
-
-                    <div className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer" onClick={this.props.hideBuySingleTicket}>
-                        <svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
-                        <p className="text-sm font-medium">Tilbake til billettvalg</p>
-                    </div>
-                    */}
                     <div className="pl-5 pr-5 pb-5">
                         <p className="text-sm font-medium pb-1 text-gray-800">Avreise og destinasjon</p>
-                        <input className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Avreise"  value={this.props.startPoint} onClick={this.clickStartPoint}/>
+                        <input className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Avreise"  value={this.props.startPoint} onClick={this.clickDepartureStation}/>
                         {this.state.drop ? this.renderDropDownMenu() : null}
-                        <input className="px-3 py-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Destinasjon" value={this.props.endPoint} onClick={this.clickEndPoint}/>
+                        <input className="px-3 py-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Destinasjon" value={this.props.endPoint} onClick={this.clickArrivalStation}/>
                     </div>
                 </div>
                 <div className="px-5">
@@ -116,7 +113,6 @@ class Destination extends Component {
           </div>
         );    
     }
-    
 }
 
 export default Destination;

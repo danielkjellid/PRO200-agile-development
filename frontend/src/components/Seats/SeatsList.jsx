@@ -1,7 +1,13 @@
+// framework imports
 import React from 'react';
+
+// component imports
 import SeatsItem from './SeatsItem';
 
+
 function SeatsList(props) {
+
+    // variables for controlling how seats are displayed in the modal view
 	const gridLayout = {
 		display: 'grid',
 		gridTemplateColumns: '25px 25px 25px 50px 25px 25px 25px',
@@ -20,13 +26,14 @@ function SeatsList(props) {
 		gridColumnEnd: '8',
 	};
 
+    // method for handling the selection of seats
 	const handleSelectSeat = (seat, row, carriage) => {
 		if (seat.taken) {
 			return;
-		}
+        }
+        
 		const numberOfTravellers = props.tickets.length;
 		const selectedSeats = props.selectedSeats;
-
 		let alreadySelected = false;
 
 		selectedSeats.forEach((element, index) => {
@@ -46,7 +53,8 @@ function SeatsList(props) {
 			} else {
 				return;
 			}
-		}
+        }
+        
 		props.setSelectedSeats(selectedSeats);
 	};
 
@@ -57,6 +65,7 @@ function SeatsList(props) {
 	}
 
 	const choosenSeatText =() => {
+
 		const { selectedSeats } = props;
 
 		if (selectedSeats.length === 0) {
@@ -127,6 +136,8 @@ function SeatsList(props) {
 		}
 	}
 
+    // method for displaying information about selected seats
+    // uses the format "Row n, seat n"
 	const renderSeatText = (row, seat) => {
 		return (
 			'Rad ' +
@@ -144,39 +155,42 @@ function SeatsList(props) {
 
 	return (
 		<div style={mainGridLayout}>
-			{props.carriage.map((row, i) => (
-				<div style={gridLayout} key={i}>
-					{checkForRow(i)}
-					{row.map((col, j) => {
-						if (j === 3) {
-							return (
-								<React.Fragment key={col.id}>
-									<div />
-									<SeatsItem
-										key={col.id}
-										selectedSeats={props.selectedSeats}
-										row={i}
-										carriage={props.carriageValue}
-										seat={col}
-										onSelect={handleSelectSeat}
-									/>
-								</React.Fragment>
-							);
-						} else {
-							return (
-								<SeatsItem
-									key={col.id}
-									selectedSeats={props.selectedSeats}
-									row={i}
-									seat={col}
-									carriage={props.carriageValue}
-									onSelect={handleSelectSeat}
-								/>
-							);
-						}
-					})}
-				</div>
-			))}
+            {
+                props.carriage.map((row, i) => (
+                    <div style={gridLayout} key={i}>
+                        {checkForRow(i)}
+                        {
+                            row.map((col, j) => {
+                                if (j === 3) {
+                                    return (
+                                        <React.Fragment key={col.id}>
+                                            <SeatsItem
+                                                key={col.id}
+                                                selectedSeats={props.selectedSeats}
+                                                row={i}
+                                                carriage={props.carriageValue}
+                                                seat={col}
+                                                onSelect={handleSelectSeat}
+                                            />
+                                        </React.Fragment>
+                                    );
+                                } else {
+                                    return (
+                                        <SeatsItem
+                                            key={col.id}
+                                            selectedSeats={props.selectedSeats}
+                                            row={i}
+                                            seat={col}
+                                            carriage={props.carriageValue}
+                                            onSelect={handleSelectSeat}
+                                        />
+                                    );
+                                }
+                            })
+                        }
+                    </div>
+			    ))
+            }
 			<div className="pt-5">
 				{choosenSeatText()}
 				<div className="mt-3 flex items-center">

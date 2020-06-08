@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 // component imports
 import TicketItem from './TicketItem';
 
+
 function TicketList(props) {
   
     const renderHeader =() => {

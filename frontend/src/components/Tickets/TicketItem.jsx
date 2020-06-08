@@ -1,6 +1,7 @@
 // framework imports
 import React, { Component } from 'react';
 
+
 class TicketItem extends Component {
 
     constructor(props) {

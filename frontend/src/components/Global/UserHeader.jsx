@@ -1,4 +1,6 @@
+// framework imports
 import React from 'react'
+
 
 function UserHeader(props) {
 
@@ -9,12 +11,13 @@ function UserHeader(props) {
     const hours = date.getHours()
     let timeOfDay
 
+    // display "Good morning/evening/night" based on the hour of the day
     if (hours < 12) {
-      timeOfDay = "morgen"
+        timeOfDay = "morgen"
     } else if (hours >= 12 && hours < 17) {
-      timeOfDay = "ettermiddag"
+        timeOfDay = "ettermiddag"
     } else {
-      timeOfDay = "kveld"
+        timeOfDay = "kveld"
     }
 
     return (

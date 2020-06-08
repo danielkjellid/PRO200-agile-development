@@ -1,8 +1,11 @@
+// framework imports
 import React, { Component } from 'react';
 
+// component imports
 import ChooseTicketBS from '../../bottomsheets/ChooseTicketBS';
 import BuySingleTicketBS from '../../bottomsheets/BuySingleTicketBS';
 import SendTicketBS from '../../bottomsheets/SendTicketsBS';
+
 
 class BuyNewTicket extends Component {
 	constructor(props) {
@@ -51,7 +54,6 @@ class BuyNewTicket extends Component {
 	};
 
 	renderSendTicket = () => {
-
 		if (this.state.sendTicketShow) {
 			return (
 				<SendTicketBS
