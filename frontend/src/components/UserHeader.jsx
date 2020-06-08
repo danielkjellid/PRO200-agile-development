@@ -1,14 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class UserHeader extends Component {
+function UserHeader(props) {
 
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-
-    let userName = this.props.userName;
+    let userName = props.userName;
     let userNameDisplay = userName ? userName[0].firstName : "kunde";
 
     const date = new Date()
@@ -59,7 +53,7 @@ class UserHeader extends Component {
             </div>
             <div className="pt-4">
               <button
-                onClick={this.props.buttonHandler}
+                onClick={props.buttonHandler}
                 className="bg-vy-green-300 text-white text-sm font-medium rounded-lg px-4 py-3 w-full hover:bg-vy-green-400"
               >
                 Ny billett
@@ -69,7 +63,6 @@ class UserHeader extends Component {
         </div>
       </div>
     )
-  }
 }
 
 export default UserHeader

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class PaymentOption extends Component {
+function PaymentOption(props) {
 
-	getText() {
-		switch (this.props.option.type) {
+	const getText = () => {
+		switch (props.option.type) {
 			case 'card':
 				return <p className="text-sm text-gray-900">Kort **** 1234 <span className="text-gray-700 text-xs">- Utløper 06/22</span></p>
 			case 'vipps':
@@ -15,8 +15,8 @@ class PaymentOption extends Component {
 		}
 	}
 
-	renderSvg = () => {
-		switch (this.props.option.type) {
+	const renderSvg = () => {
+		switch (props.option.type) {
 			case 'card':
 				return	<svg width="55" height="18" viewBox="0 0 55 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<g clipPath="url(#clip0)">
@@ -45,30 +45,28 @@ class PaymentOption extends Component {
 		}
 	};
 
-	render() {
 		return (
-			<div onClick={() => this.props.isSelected(this.props.option)} className={this.props.option.selected ? "border border-vy-green-300 bg-vy-green-100 rounded-md mt-2" : "border border-gray-300 bg-white rounded-md mt-2"}>
+			<div onClick={() => props.isSelected(props.option)} className={props.option.selected ? "border border-vy-green-300 bg-vy-green-100 rounded-md mt-2" : "border border-gray-300 bg-white rounded-md mt-2"}>
 				<div className="flex items-center justify-between py-3 px-3">
 					<div className="flex items-center">
 						<div className="mr-2 flex items-center">
-							<button onClick={() => this.props.isSelected(this.props.option)} className="border border-gray-300 h-5 w-5 bg-transparent rounded-full">
+							<button onClick={() => props.isSelected(props.option)} className="border border-gray-300 h-5 w-5 bg-transparent rounded-full">
 								{
-									this.props.option.selected 
+									props.option.selected 
 										? <svg className="h-full w-full text-green-400" fill="currentColor" viewBox="0 0 20 20">
 												<path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
 											</svg>
 										: ""}
 							</button>
 						</div>
-						{this.getText()}
+						{getText()}
 					</div>
 					<div>
-						{this.renderSvg()}
+						{renderSvg()}
 					</div>
 				</div>
 			</div>
 		);
 	}
-}
 
 export default PaymentOption;

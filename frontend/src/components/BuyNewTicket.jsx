@@ -46,8 +46,8 @@ class BuyNewTicket extends Component {
 	};
 
 	sendTicketsHandler = () => {
-		this.setState({ sendTicketShow: true });
-		this.setState({ singleTicket: false });
+		this.setState({sendTicketShow: true});
+		this.setState({singleTicket: false});
 	};
 
 	renderSendTicket = () => {

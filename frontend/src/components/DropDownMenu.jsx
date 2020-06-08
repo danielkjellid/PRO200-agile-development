@@ -1,35 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DropDownItem from './DropDownItem';
 
 
-class DropDownMenu extends Component {
-    state = {  }
+function DropDownMenu(props) {
     
-    render() {
-        let inhold =this.props.stations.map(item => {
-                        return(
-                            <DropDownItem 
-                                stationName={item.name} 
-                                click={this.props.click}
-                                drop={this.props.drop}
-                                setStartPoint={this.props.setStartPoint}
-                                setEndPoint={this.props.setEndPoint}
-                                hideDropDownMenu={this.props.hideDropDownMenu}
-                                isStartPoint={this.props.isStartPoint}
-                                isEndPoint={this.props.isEndPoint}
-                                startPoint={this.props.startPoint}
-                                endPoint={this.props.endPoint}
-                            />
-                        )
-                    })
+    let inhold =props.stations.map(item => {
+        return(
+            <DropDownItem 
+                stationName={item.name} 
+                click={props.click}
+                drop={props.drop}
+                setStartPoint={props.setStartPoint}
+                setEndPoint={props.setEndPoint}
+                hideDropDownMenu={props.hideDropDownMenu}
+                isStartPoint={props.isStartPoint}
+                isEndPoint={props.isEndPoint}
+                startPoint={props.startPoint}
+                endPoint={props.endPoint}
+            />
+        )
+    })
    
-        
-        return (
-            <div>
-                {inhold}
-            </div>
-        );
-    }
+    return (
+        <div>
+            {inhold}
+        </div>
+    );
 }
+
 
 export default DropDownMenu;

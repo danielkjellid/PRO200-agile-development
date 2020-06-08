@@ -8,7 +8,6 @@ import MakeAccountInVIpps from '../components/sendTicketsComponents/MakeAccountI
 class SendTicketBS extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			clicks: 0,
 			userInTrip: false,
@@ -36,20 +35,12 @@ class SendTicketBS extends Component {
 	}
 
 	addClick = () => {
-		this.setState({ clicks: this.state.clicks + 1 });
+		this.setState({clicks: this.state.clicks + 1});
 	};
 
 	substractClick = () => {
-		console.log(typeof this.state.clicks);
-		this.setState({ clicks: this.state.clicks - 1 });
+		this.setState({clicks: this.state.clicks - 1});
 	};
-	////////////////////////////////////////////////////
-	//1. make a method to fetch the last purchased order DONE
-	//2. make a method to fetch the correct order from the tickets list if doesnt have ticketHolders
-	//3. make a method to seperate all the tickets by type.
-	//4. make a method to send the ticket to the correct ticketHolderID
-	//5. make a method that limits number of selections in checkbox
-	////////////////////////////////////////////////////
 
 	fetchTheLastOrder = async () => {
 		let order;
@@ -127,7 +118,7 @@ class SendTicketBS extends Component {
 			console.log(err);
 		}
 
-		this.setState({ loadOrder: true }); //run method to split the tickets by type
+		this.setState({loadOrder: true}); //run method to split the tickets by type
 		this.seperateByType(tickets);
 	};
 
@@ -144,11 +135,11 @@ class SendTicketBS extends Component {
 	//it interactive while clicking in the checkbox
 	seperateByType = (array) => {
 		let tickeyByType = [
-			{ type: 'Voksen', tickets: { passive: [], active: [] } },
-			{ type: 'Barn (6-17 år)', tickets: { passive: [], active: [] } },
-			{ type: 'Ungdom (18-19 år)', tickets: { passive: [], active: [] } },
-			{ type: 'Student', tickets: { passive: [], active: [] } },
-			{ type: 'Honnør', tickets: { passive: [], active: [] } },
+			{type: 'Voksen', tickets: { passive: [], active: []}} ,
+			{type: 'Barn (6-17 år)', tickets: { passive: [], active: []}},
+			{type: 'Ungdom (18-19 år)', tickets: { passive: [], active: []}},
+			{type: 'Student', tickets: { passive: [], active: []}},
+			{type: 'Honnør', tickets: { passive: [], active: []}},
 		];
 
 		for (let i = 0; i < array.length; i++) {
@@ -158,18 +149,9 @@ class SendTicketBS extends Component {
 					tickeyByType[j].tickets.passive.push(array[i]);
 				}
 			}
-			this.setState({ ticketByType: tickeyByType });
+			this.setState({ticketByType: tickeyByType});
 		}
 	};
-
-	// checkIfAddClicks = (length) => {
-	//   let count = 0;
-	//   while(count>0 && count<=length){
-	//     console.log("added");
-	//     this.addClick();
-	//     count++;
-	//   }
-	// }
 
 	checkIfAddClicks = () => {
 		if (this.state.actives > 0) {
@@ -206,7 +188,7 @@ class SendTicketBS extends Component {
 				}
 			}
 		});
-		this.setState({ actives: [] });
+		this.setState({actives: []});
 	};
 
 	sendOnSMS = (person) => {
@@ -240,7 +222,6 @@ class SendTicketBS extends Component {
 		} else {
 			this.backToSendTickets();
 		}
-
 	};
 
 	isMoreTicketsLeft = () => {
@@ -259,19 +240,19 @@ class SendTicketBS extends Component {
 	}
 
 	restartClicks = () => {
-		this.setState({ clicks: 0 });
+		this.setState({clicks: 0});
 	};
 
 	ticketsWereSent = () => {
-		this.setState({ reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false });
+		this.setState({reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false});
 	};
 
 	makeAccountInVIpps = () => {
-		this.setState({ ticketsWereSent: false, makeAccountInVIpps: true });
+		this.setState({ticketsWereSent: false, makeAccountInVIpps: true});
 	};
 
 	backToSendTickets = () => {
-		this.setState({ reviewTicketsShow: true, contactListShow: false });
+		this.setState({reviewTicketsShow: true, contactListShow: false});
 	};
 
 	renderButton = () => {
@@ -345,7 +326,7 @@ class SendTicketBS extends Component {
 	};
 
 	backToReviewTicket = () => {
-		this.setState({ reviewTicketsShow: true, contactListShow: false });
+		this.setState({reviewTicketsShow: true, contactListShow: false});
 	};
 
 	setAdultActive = (check) => {
@@ -358,7 +339,7 @@ class SendTicketBS extends Component {
 			tickets[0].tickets.active.pop();
 		}
 
-		this.setState({ ticketByType: tickets, userInTrip: check.target.checked })
+		this.setState({ticketByType: tickets, userInTrip: check.target.checked})
 
 	}
 
@@ -439,7 +420,7 @@ class SendTicketBS extends Component {
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
 				<div className="">
-					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps} />
+					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps}/>
 					{this.reviewTicket()}
 					{this.renderVipps()}
 					<ContactListSendTicket

@@ -20,30 +20,31 @@ class BuySingleTicketBS extends Component {
 			chooseSeat: false,
 			choosePayment: false,
 			confirmation: false,
-			order: { name: '', isActive: true },
+			order: {name: '', isActive: true},
 			tickets: null,
 		};
 	}
-
-	/////////////////////////////////////////////////////////////////////////////////////////////
-	// functions that deal with order data, that will be parsed to API after transaction is over
-	//////////////////////////////////////////////////////////////////////////////////////////////
 
 	componentDidMount() {
 		this.initTicketTypes();
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	// functions that deal with Order data, that will be parsed to API after transaction is over
+	//////////////////////////////////////////////////////////////////////////////////////////////
+
 	//this function initialize all the ticket types with default Voksen: 1
 	initTicketTypes = () => {
+
 		const editTravellers = [
-			{ type: 'Voksen', number: 1, price: 340, totalPrice: function() {return this.number * this.price  }},
-			{ type: 'Barn (0-5 år)', number: 0, price: 0, totalPrice: function() {return this.number * this.price  } },
-			{ type: 'Barn (6-17 år)', number: 0, price: 280, totalPrice: function() {return this.number * this.price  } },
-			{ type: 'Ungdom (18-19 år)', number: 0, price: 290, totalPrice: function() {return this.number * this.price  } },
-			{ type: 'Student', number: 0, price: 250, totalPrice: function() {return this.number * this.price  } },
-			{ type: 'Honnør', number: 0, price: 120, totalPrice: function() {return this.number * this.price  } },
+			{type: 'Voksen', number: 1, price: 340, totalPrice: function() {return this.number * this.price}},
+			{type: 'Barn (0-5 år)', number: 0, price: 0, totalPrice: function() {return this.number * this.price}},
+			{type: 'Barn (6-17 år)', number: 0, price: 280, totalPrice: function() {return this.number * this.price}},
+			{type: 'Ungdom (18-19 år)', number: 0, price: 290, totalPrice: function() {return this.number * this.price}},
+			{type: 'Student', number: 0, price: 250, totalPrice: function() {return this.number * this.price}},
+			{type: 'Honnør', number: 0, price: 120, totalPrice: function() {return this.number * this.price}},
 		];
-		this.setState({ ticketTypeNum: editTravellers });
+		this.setState({ticketTypeNum: editTravellers});
 	};
 
 	//this function creates array of objects(tickets) that are furthermore posted in API
@@ -68,14 +69,14 @@ class BuySingleTicketBS extends Component {
 				continue;
 			}
 		}
-		this.setState({ tickets: ticketsPrint });
+		this.setState({tickets: ticketsPrint});
 	};
 
 	restartOrder = () => {
-		this.setState({ order: { name: '', isActive: true } });
+		this.setState({order: {name: '', isActive: true}});
 	};
 
-	//this function sets a name for the order by default its the date order was executed
+	//this function sets a default name for the order, it's the date order was purchased
 	setUniqueOrderName = () => {
 		this.restartOrder();
 		let name;
@@ -93,15 +94,15 @@ class BuySingleTicketBS extends Component {
 		name = `${date.getFullYear()}-${
 			months[date.getMonth()]
 		}-${date.getDate()} ${hours}:${minutes}:${seconds}`;
-		this.setState({ order: { name: name, isActive: true } });
+		this.setState({order: {name: name, isActive: true}});
 	};
 
 	setStartPoint = (value) => {
-		this.setState({ startPoint: value });
+		this.setState({startPoint: value});
 	};
 
 	setEndPoint = (value) => {
-		this.setState({ endPoint: value });
+		this.setState({endPoint: value});
 		
 	};
 
@@ -110,22 +111,22 @@ class BuySingleTicketBS extends Component {
 	//////////////////////////////////////////////////////////////////////////////
 
 	addNumber = (id) => {
-		this.setState({ number: this.state.ticketTypeNum[id].number++ });
+		this.setState({number: this.state.ticketTypeNum[id].number++});
 	};
 
 	removeNumber = (id) => {
 		let number = this.state.ticketTypeNum[id].number;
 		if (number > 0) {
-			this.setState({ number: this.state.ticketTypeNum[id].number-- });
+			this.setState({ number: this.state.ticketTypeNum[id].number--});
 		}
 	};
 
 	editTravellersHandler = () => {
-		this.setState({ chooseTicketType: true });
+		this.setState({chooseTicketType: true});
 	};
 
 	hideEditNumberOfTravellers = () => {
-		this.setState({ chooseTicketType: false });
+		this.setState({chooseTicketType: false});
 	};
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -222,26 +223,26 @@ class BuySingleTicketBS extends Component {
 	continueToDepartures = () => {
 		let chooseDeparture = this.state.chooseDeparture
 		let chooseDestination = this.state.chooseDestination
-		this.setState({ chooseDestination: !chooseDestination, chooseDeparture: !chooseDeparture });
+		this.setState({chooseDestination: !chooseDestination, chooseDeparture: !chooseDeparture});
 		this.setUniqueOrderName();
 	};
 
 	continueToSeats = () => {
 		let chooseDeparture = this.state.chooseDeparture
 		let chooseSeat = this.state.chooseSeat
-		this.setState({ chooseDeparture: !chooseDeparture, chooseSeat: !chooseSeat });
+		this.setState({chooseDeparture: !chooseDeparture, chooseSeat: !chooseSeat});
 	};
 
 	continueToPayment = () => {
 		let chooseSeat = this.state.chooseSeat
 		let choosePayment = this.state.choosePayment
-		this.setState({ chooseSeat: !chooseSeat, choosePayment: !choosePayment });
+		this.setState({chooseSeat: !chooseSeat, choosePayment: !choosePayment});
 	};
 
 	continueToConfirmation = () => {
 		let choosePayment = this.state.choosePayment
 		let confirmation = this.state.confirmation
-		this.setState({ choosePayment: !choosePayment, confirmation: !confirmation });
+		this.setState({choosePayment: !choosePayment, confirmation: !confirmation});
 	};
 
 	continueToSeatsHandler = () => {
@@ -267,7 +268,7 @@ class BuySingleTicketBS extends Component {
 						restartOrder={this.restartOrder}
 						initTicketTypes={this.initTicketTypes}
 						confirmation={this.state.confirmation}
-						updateAPI = {this.props.updateAPI}
+						updateAPI={this.props.updateAPI}
 					/>
 
 					<ChooseDestination
@@ -315,7 +316,7 @@ class BuySingleTicketBS extends Component {
 						endTransaction={this.props.endTransaction}
 						confirmation={this.state.confirmation}
 						renderSendTicket={this.props.renderSendTicket}
-						updateAPI = {this.props.updateAPI}
+						updateAPI={this.props.updateAPI}
 						numberOfTravellers={this.state.ticketTypeNum}
 					/>
 				</div>

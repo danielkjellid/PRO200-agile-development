@@ -31,7 +31,7 @@ function RouteCard(props) {
           <p className="text-gray-700 text-sm">{props.travelTime} timer</p>
           <span className="mt-5 block px-2 py-2 border border-vy-green-300 rounded-md text-vy-green-300">R30x</span>
         </div>
-        <div>
+        <div className="text-right">
           <p className="text-gray-800 text-base font-medium">{props.endStation}</p>
           <p className="mt-2 text-gray-800 text-xl font-bold">{getEndTime}</p>
           <p className="mt-2 text-gray-700 text-sm">{props.numOfStops} stopp</p>

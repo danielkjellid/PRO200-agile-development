@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import selectedSeatIcon from '../images/selectedSeat.png';
 import availableSeatIcon from '../images/availableSeat.png';
 import occupiedSeatIcon from '../images/occupiedSeat.png';
 
-class Seat extends Component {
-	isSeatAvailable() {
-		const { seat, selectedSeats, carriage } = this.props;
+function Seat(props) {
+
+	const isSeatAvailable =() => {
+		const { seat, selectedSeats, carriage } = props;
 
 		if (selectedSeats.length !== 0) {
 			var isSelected = false;
@@ -29,23 +30,21 @@ class Seat extends Component {
 		}
 	}
 
-	render() {
-		return (
-			<div>
-				<img
-					onClick={() =>
-						this.props.onSelect(
-							this.props.seat,
-							this.props.row,
-							this.props.carriage
-						)
+	return (
+		<div>
+			<img
+				onClick={() =>
+					props.onSelect(
+						props.seat,
+						props.row,
+						props.carriage
+					)
 					}
-					src={this.isSeatAvailable()}
-					alt="SeatLogo"
-				></img>
-			</div>
-		);
-	}
+				src={isSeatAvailable()}
+				alt="SeatLogo"
+			></img>
+		</div>
+	);
 }
 
 export default Seat;
