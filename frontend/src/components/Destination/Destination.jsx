@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import DropDownMenu from '../DropDownMenu';
+import DestinationDropdownList from './DestinationDropdownList';
 import stations from '../../fakeData/stations';
 
-class ChooseDestination extends Component {
+class Destination extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -37,7 +37,7 @@ class ChooseDestination extends Component {
     renderDropDownMenu = () => {
         return (
             
-                <DropDownMenu
+                <DestinationDropdownList
                     isStartPoint={this.state.setStartPoint}
                     isEndPoint={this.state.setEndPoint}
                     startPoint={this.props.startPoint}
@@ -119,4 +119,4 @@ class ChooseDestination extends Component {
     
 }
 
-export default ChooseDestination;
+export default Destination;

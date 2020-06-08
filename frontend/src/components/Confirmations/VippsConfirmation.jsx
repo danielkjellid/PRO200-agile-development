@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MakeAccountInVIpps(props) {
+function VippsConfirmation(props) {
   return (
     <div className={props.makeAccountInVIpps ? 'block' : 'hidden'}>
       <div className="py-5 px-8 mx-auto text-center">
@@ -13,4 +13,4 @@ function MakeAccountInVIpps(props) {
   );
 }
 
-export default MakeAccountInVIpps;
+export default VippsConfirmation;

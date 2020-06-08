@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderSendTickets from '../components/sendTicketsComponents/HeaderSendTickets';
-import ContactListSendTicket from '../components/sendTicketsComponents/ContactListSendTicket';
-import TicketsWereSend from '../components/sendTicketsComponents/TicketsWereSend';
-import MakeAccountInVIpps from '../components/sendTicketsComponents/MakeAccountInVIpps';
+import HeaderSendTickets from '../components/Global/HeaderSendTickets';
+import ContactList from '../components/Contacts/ContactList';
+import SentTicketConfirmation from '../components/Confirmations/SentTicketConfirmation';
+import VippsConfirmation from '../components/Confirmations/VippsConfirmation';
 
 class SendTicketBS extends Component {
 	constructor(props) {
@@ -345,7 +345,7 @@ class SendTicketBS extends Component {
 
 	renderVipps = () => {
 		if (this.state.makeAccountInVIpps) {
-			return <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVIpps} />
+			return <VippsConfirmation makeAccountInVIpps={this.state.makeAccountInVIpps} />
 		}
 	}
 
@@ -423,7 +423,7 @@ class SendTicketBS extends Component {
 					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps}/>
 					{this.reviewTicket()}
 					{this.renderVipps()}
-					<ContactListSendTicket
+					<ContactList
 						sendSMS={this.sendOnSMS}
 						updateContactList={this.props.updateContactList}
 						back={this.backToReviewTicket}
@@ -436,11 +436,11 @@ class SendTicketBS extends Component {
 						removeFromActives={this.removeFromActives}
 					/>
 
-					<TicketsWereSend 
+					<SentTicketConfirmation 
 						ticketsWereSent={this.state.ticketsWereSent} 
 						updateAPI = {this.props.updateAPI}	
 						/>
-					<MakeAccountInVIpps
+					<VippsConfirmation
 						makeAccountInVIpps={this.state.makeAccountInVipps}
 					/>
 					<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">

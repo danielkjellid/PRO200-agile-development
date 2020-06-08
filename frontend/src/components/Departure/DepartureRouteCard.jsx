@@ -1,6 +1,6 @@
 import React from "react";
 //testing comment
-function RouteCard(props) {
+function DepartureRouteCard(props) {
 
   let date = new Date();
   let hours = date.getHours();
@@ -47,4 +47,4 @@ function RouteCard(props) {
     </div>
   );    
 }
-export default RouteCard;
+export default DepartureRouteCard;

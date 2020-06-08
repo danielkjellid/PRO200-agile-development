@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Contact from './components/Contact';
+import ContactItem from './components/Contacts/ContactItem';
 import {Link} from 'react-router-dom';
-import AddNewContact from './components/AddNewContact';
 
 class ContactList extends Component {
     state = { 
@@ -59,7 +58,7 @@ class ContactList extends Component {
                 <button onClick={this.renderNewContact}>Add ny kontakt</button>
                 {this.state.contactList.map((item,index) => {
                     return(
-                            <Contact 
+                            <ContactItem 
                                 key={index}
                                 id={item.id}
                                 name={item.firstName}
@@ -67,10 +66,6 @@ class ContactList extends Component {
                             />
                     )
                 })}
-            
-                <div style={{display: this.state.addNewContact ? 'block' : 'none'}}>
-                    <AddNewContact add={this.addNewContactToState} />
-                </div> 
             </div> : <div>is loading</div>
         return (
             <div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RouteCard from '../RouteCard';
+import DepartureRouteCard from './DepartureRouteCard';
 import routes from '../../fakeData/readyRoutes';
 
 class ChooseDeparture extends Component {
@@ -64,7 +64,7 @@ class ChooseDeparture extends Component {
 						<div>
 							{this.state.routes.map((item) => {
 								return (
-									<RouteCard
+									<DepartureRouteCard
 										active={this.state.active}
 										click={() => this.turnToActive(item.id)}
 										key={item.id}

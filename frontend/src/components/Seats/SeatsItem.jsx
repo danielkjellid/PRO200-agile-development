@@ -1,9 +1,9 @@
 import React from 'react';
-import selectedSeatIcon from '../images/selectedSeat.png';
-import availableSeatIcon from '../images/availableSeat.png';
-import occupiedSeatIcon from '../images/occupiedSeat.png';
+import selectedSeatIcon from '../../images/selectedSeat.png';
+import availableSeatIcon from '../../images/availableSeat.png';
+import occupiedSeatIcon from '../../images/occupiedSeat.png';
 
-function Seat(props) {
+function SeatsItem(props) {
 
 	const isSeatAvailable =() => {
 		const { seat, selectedSeats, carriage } = props;
@@ -47,4 +47,4 @@ function Seat(props) {
 	);
 }
 
-export default Seat;
+export default SeatsItem;

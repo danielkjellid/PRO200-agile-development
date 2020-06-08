@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import ChooseTicketBS from '../bottomsheets/ChooseTicketBS';
-import BuySingleTicketBS from '../bottomsheets/BuySingleTicketBS';
-import SendTicketBS from '../bottomsheets/SendTicketsBS';
+import ChooseTicketBS from '../../bottomsheets/ChooseTicketBS';
+import BuySingleTicketBS from '../../bottomsheets/BuySingleTicketBS';
+import SendTicketBS from '../../bottomsheets/SendTicketsBS';
 
 class BuyNewTicket extends Component {
 	constructor(props) {

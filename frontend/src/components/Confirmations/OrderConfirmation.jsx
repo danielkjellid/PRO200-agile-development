@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-function Confirmation(props) {
+function OrderConfirmation(props) {
 
   let totalPriceOrder=0;
   return (
@@ -60,4 +60,4 @@ function Confirmation(props) {
   
 }
 
-export default Confirmation;
+export default OrderConfirmation;

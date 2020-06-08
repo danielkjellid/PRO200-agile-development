@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Contact from '../Contact';
-import AddNewContactSendTicket from './AddNewContactSendTicket';
+import ContactItem from './ContactItem';
+import ContactItemAddModal from './ContactItemAddModal';
 
 class ContactListSendTicket extends Component {
 	constructor(props) {
@@ -62,7 +62,7 @@ class ContactListSendTicket extends Component {
 
 		this.state.addNewContactShow
 			? (addNewContact = (
-				<AddNewContactSendTicket
+				<ContactItemAddModal
 					sendSMS={this.props.sendSMS}
 					newContact={this.state.newContact}
 					updateContactList={this.updateContactList}
@@ -141,7 +141,7 @@ class ContactListSendTicket extends Component {
 								}
 
 								return (
-									<Contact
+									<ContactItem
 										addClick={this.props.addClick}
 										addToActives={this.props.addToActives}
 										removeFromActives={this.props.removeFromActives}

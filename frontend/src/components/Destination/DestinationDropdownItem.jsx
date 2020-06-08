@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DropDownItem(props) {
+function DestinationDropdownItem(props) {
   
     let inhold;
     
@@ -21,4 +21,4 @@ function DropDownItem(props) {
     );
 }
 
-export default DropDownItem;
+export default DestinationDropdownItem;

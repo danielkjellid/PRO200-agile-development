@@ -1,12 +1,12 @@
 import React from 'react';
-import DropDownItem from './DropDownItem';
+import DestinationDropdownItem from './DestinationDropdownItem';
 
 
-function DropDownMenu(props) {
+function DestinationDropdownList(props) {
     
     let inhold =props.stations.map(item => {
         return(
-            <DropDownItem 
+            <DestinationDropdownItem 
                 stationName={item.name} 
                 click={props.click}
                 drop={props.drop}
@@ -29,4 +29,4 @@ function DropDownMenu(props) {
 }
 
 
-export default DropDownMenu;
+export default DestinationDropdownList;

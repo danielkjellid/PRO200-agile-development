@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Seats from '../Seats';
-class ChooseSeats extends Component {
+import SeatsList from './SeatsList';
+
+class Seats extends Component {
 	state = {
 		value: 'carriage1',
 		carriage1: [
@@ -402,7 +403,7 @@ class ChooseSeats extends Component {
 						{this.getSelectedSeatsOfMax()}
 					</div>
 					<div className="mt-8">
-						<Seats
+						<SeatsList
 							tickets={this.props.tickets}
 							carriageValue={this.state.value}
 							carriage={this.state.currentSelected}
@@ -426,4 +427,4 @@ class ChooseSeats extends Component {
 	}
 }
 
-export default ChooseSeats;
+export default Seats;

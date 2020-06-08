@@ -1,7 +1,7 @@
 import React from 'react';
-import Seat from './Seat';
+import SeatsItem from './SeatsItem';
 
-function Seats(props) {
+function SeatsList(props) {
 	const gridLayout = {
 		display: 'grid',
 		gridTemplateColumns: '25px 25px 25px 50px 25px 25px 25px',
@@ -152,7 +152,7 @@ function Seats(props) {
 							return (
 								<React.Fragment key={col.id}>
 									<div />
-									<Seat
+									<SeatsItem
 										key={col.id}
 										selectedSeats={props.selectedSeats}
 										row={i}
@@ -164,7 +164,7 @@ function Seats(props) {
 							);
 						} else {
 							return (
-								<Seat
+								<SeatsItem
 									key={col.id}
 									selectedSeats={props.selectedSeats}
 									row={i}
@@ -206,4 +206,4 @@ function Seats(props) {
 	);
 }
 
-export default Seats;
+export default SeatsList;

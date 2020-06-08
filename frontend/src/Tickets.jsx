@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import UserHeader from './components/UserHeader'
-import TicketList from './components/TicketList'
+import UserHeader from './components/Global/UserHeader'
+import TicketList from './components/Tickets/TicketList'
 
 class Tickets extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TicketsWereSend(props) {
+function SentTicketConfirmation(props) {
     let content;
     if(props.ticketsWereSent){
         content =  (
@@ -25,4 +25,4 @@ function TicketsWereSend(props) {
     
 }
 
-export default TicketsWereSend;
+export default SentTicketConfirmation;

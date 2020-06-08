@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import EditTicketName from './EditTicketName';
 
 class TicketItem extends Component {
 

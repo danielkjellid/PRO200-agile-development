@@ -5,11 +5,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Tickets from './Tickets';
 import UserDetails from './UserDetails';
 import UserProfile from './UserProfile';
-import Navbar from './components/Navbar';
+import Navbar from './components/Global/Navbar';
 import ContactList from './ContactList';
-import BuyNewTicket from './components/BuyNewTicket';
-import IntroModal from './components/IntroModal';
-import EditTicketName from './components/EditTicketName';
+import BuyNewTicket from './components/Global/BuyNewTicket';
+import IntroModal from './components/Global/IntroModal';
+import TicketItemEditModal from './components/Tickets/TicketItemEditModal';
 
 class App extends Component {
 	constructor(props) {
@@ -228,7 +228,7 @@ class App extends Component {
 				<div>
 					<div className={this.state.coverSite ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
 					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
-					<EditTicketName 
+					<TicketItemEditModal 
 						show={this.state.editNameModal} 
 						name={this.state.orderToEdit.name}
 						handleNameChange={this.handleNameChange}

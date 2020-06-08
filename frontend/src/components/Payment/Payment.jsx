@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PaymentOption from './PaymentOption';
+import PaymentOption from './PaymentList';
 
-class ChoosePayment extends Component {
+class Payment extends Component {
 	state = {
 		paymentOptions: [
 			{type: 'card', selected: true},
@@ -92,4 +92,4 @@ class ChoosePayment extends Component {
 	}
 }
 
-export default ChoosePayment;
+export default Payment;

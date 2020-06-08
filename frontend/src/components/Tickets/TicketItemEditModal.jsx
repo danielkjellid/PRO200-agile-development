@@ -1,6 +1,6 @@
 import React from 'react';
 
-function EditTicketName(props) {
+function TicketItemEditModal(props) {
 
    
     return(
@@ -34,4 +34,4 @@ function EditTicketName(props) {
 
 }
 
-export default EditTicketName;
+export default TicketItemEditModal;

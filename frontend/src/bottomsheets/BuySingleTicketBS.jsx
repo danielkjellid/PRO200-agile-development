@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import HeaderBuySingle from '../components/buySingleTicketComponents/HeaderBuySingle';
+import HeaderBuySingle from '../components/Global/HeaderBuySingle';
 import EditTravellers from '../bottomsheets/EditTravellers';
-import ChooseDestination from '../components/buySingleTicketComponents/ChooseDestination';
-import ChooseDeparture from '../components/buySingleTicketComponents/ChooseDeparture';
-import ChooseSeats from '../components/buySingleTicketComponents/ChooseSeats';
-import ChoosePayment from '../components/buySingleTicketComponents/ChoosePayment';
-import Confirmation from '../components/buySingleTicketComponents/Confirmation';
+import Destination from '../components/Destination/Destination';
+import Departure from '../components/Departure/Departure';
+import Seats from '../components/Seats/Seats';
+import Payment from '../components/Payment/Payment';
+import OrderConfirmation from '../components/Confirmations/OrderConfirmation';
 
 class BuySingleTicketBS extends Component {
 	constructor(props) {
@@ -271,7 +271,7 @@ class BuySingleTicketBS extends Component {
 						updateAPI={this.props.updateAPI}
 					/>
 
-					<ChooseDestination
+					<Destination
 						startPoint={this.state.startPoint}
 						endPoint={this.state.endPoint}
 						chooseDestination={this.state.chooseDestination}
@@ -281,7 +281,7 @@ class BuySingleTicketBS extends Component {
 						setEndPoint={this.setEndPoint}
 					/>
 
-					<ChooseDeparture
+					<Departure
 						chooseDeparture={this.state.chooseDeparture}
 						editNumberOfTravellers={this.state.chooseTicketType}
 						numberOfTravellers={this.state.ticketTypeNum}
@@ -295,14 +295,14 @@ class BuySingleTicketBS extends Component {
 
 					{this.renderEditNumberOfTravellers()}
 
-					<ChooseSeats
+					<Seats
 						continueToPayment={this.continueToPayment}
 						chooseSeat={this.state.chooseSeat}
 						tickets={this.state.tickets}
 						back={this.continueToSeats}
 					/>
 
-					<ChoosePayment
+					<Payment
 						choosePayment={this.state.choosePayment}
 						continueToConfirmation={this.continueToConfirmation}
 						submitNewOrder={this.submitNewOrder}
@@ -312,7 +312,7 @@ class BuySingleTicketBS extends Component {
 						numberOfTravellers={this.state.ticketTypeNum}
 					/>
 
-					<Confirmation
+					<OrderConfirmation
 						endTransaction={this.props.endTransaction}
 						confirmation={this.state.confirmation}
 						renderSendTicket={this.props.renderSendTicket}
