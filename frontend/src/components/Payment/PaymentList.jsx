@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PaymentOption(props) {
+function PaymentList(props) {
 
 	const getText = () => {
 		switch (props.option.type) {
@@ -69,4 +69,4 @@ function PaymentOption(props) {
 		);
 	}
 
-export default PaymentOption;
+export default PaymentList;

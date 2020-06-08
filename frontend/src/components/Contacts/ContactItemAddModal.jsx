@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class AddNewContactSendTicket extends Component {
+class ContactItemAddModal extends Component {
 	state = {
 		firstName: '',
 		lastName: '',
@@ -64,4 +64,4 @@ class AddNewContactSendTicket extends Component {
 	}
 }
 
-export default AddNewContactSendTicket;
+export default ContactItemAddModal;

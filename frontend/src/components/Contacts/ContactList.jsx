@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContactItem from './ContactItem';
 import ContactItemAddModal from './ContactItemAddModal';
 
-class ContactListSendTicket extends Component {
+class ContactList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -172,4 +172,4 @@ class ContactListSendTicket extends Component {
 	}
 }
 
-export default ContactListSendTicket;
+export default ContactList;

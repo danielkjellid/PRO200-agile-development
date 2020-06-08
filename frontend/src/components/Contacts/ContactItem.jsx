@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Contact extends Component {
+class ContactItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { active: false };
@@ -86,4 +86,4 @@ class Contact extends Component {
 	}
 }
 
-export default Contact;
+export default ContactItem;

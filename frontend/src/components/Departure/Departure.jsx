@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import DepartureRouteCard from './DepartureRouteCard';
-import routes from '../../fakeData/readyRoutes';
+import routes from '../../data/routes';
 
-class ChooseDeparture extends Component {
+class Departure extends Component {
 	constructor(props){
 			super(props);
 			this.state={
@@ -91,4 +91,4 @@ class ChooseDeparture extends Component {
 	}
 }
 
-export default ChooseDeparture;
+export default Departure;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DestinationDropdownList from './DestinationDropdownList';
-import stations from '../../fakeData/stations';
+import stations from '../../data/stations';
 
 class Destination extends Component {
     constructor(props){
