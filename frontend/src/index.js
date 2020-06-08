@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Tickets from './Tickets';
-import UserDetails from './UserDetails';
-import UserProfile from './UserProfile';
+import Tickets from './views/Tickets';
+import UserProfile from './views/UserProfile';
 import Navbar from './components/Global/Navbar';
-import ContactList from './ContactList';
 import BuyNewTicket from './components/Global/BuyNewTicket';
 import IntroModal from './components/Global/IntroModal';
 import TicketItemEditModal from './components/Tickets/TicketItemEditModal';
@@ -19,7 +17,6 @@ class App extends Component {
 			coverSite: false,
 			loadUser: true,
 			user: '',
-			contactList: '',
 			chooseTicket: false,
 			orders: '',
 			tickets: '',
@@ -272,11 +269,6 @@ class App extends Component {
 								></Route>
 								<Route
 									exact
-									path="/userdetails"
-									render={(props) => <UserDetails {...props} />}
-								></Route>
-								<Route
-									exact
 									path="/tickets"
 									render={(props) => (
 										<Tickets
@@ -290,20 +282,6 @@ class App extends Component {
 										></Tickets>
 									)}
 								></Route>
-
-								{/* For testing the component */}
-								<Route
-									exact
-									path="/contactList"
-									render={(props) => (
-										<ContactList
-											{...props}
-											contacts={this.state.contactList}
-											fetchNewContactList={this.fetchContactList}
-										></ContactList>
-									)}
-								></Route>
-
 								<Route component={this.notFound} />
 							</Switch>
 						</div>

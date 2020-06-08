@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import UserHeader from './components/Global/UserHeader';
-import TicketList from './components/Tickets/TicketList'
+import UserHeader from '../components/Global/UserHeader';
+import TicketList from '../components/Tickets/TicketList'
 
 function UserProfile(props) {
 	
