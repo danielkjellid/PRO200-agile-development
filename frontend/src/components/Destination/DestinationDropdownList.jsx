@@ -4,9 +4,10 @@ import DestinationDropdownItem from './DestinationDropdownItem';
 
 function DestinationDropdownList(props) {
     
-    let inhold =props.stations.map(item => {
+    let inhold =props.stations.map((item, index) => {
         return(
             <DestinationDropdownItem 
+                key={index}
                 stationName={item.name} 
                 click={props.click}
                 drop={props.drop}
