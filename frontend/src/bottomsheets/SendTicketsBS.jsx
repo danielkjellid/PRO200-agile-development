@@ -418,7 +418,7 @@ class SendTicketBS extends Component {
 
 	render() {
 		return (
-			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
+			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal modal-footer">
 				<div className="">
 					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps}/>
 					{this.reviewTicket()}

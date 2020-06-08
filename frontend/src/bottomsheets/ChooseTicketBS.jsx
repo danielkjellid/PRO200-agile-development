@@ -3,7 +3,7 @@ import React from 'react';
 function ChooseTicketBS(props) {
     return (
         <div>
-            <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg modal">
+            <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg modal modal-footer">
                 <div className="flex justify-between p-5 border-b border-grey-300 mb-5">
                     <div></div>
                     <h4 className="font-medium">Velg billett</h4>

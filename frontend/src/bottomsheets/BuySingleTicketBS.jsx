@@ -260,7 +260,7 @@ class BuySingleTicketBS extends Component {
 	render() {
 		
 		return (
-			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
+			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal modal-footer">
 				<div className="">
 					<HeaderBuySingle
 						endTransaction={this.props.endTransaction}
