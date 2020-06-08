@@ -18,9 +18,15 @@ class TicketItem extends Component {
 		this.setState({ ticketExpanded: !expandedTicket })
 	}
 
-	changeName = (id, newName) => {
-			this.setState({changeNameMode: true})
-			this.props.changeOrderName(id, newName)
+	changeName = (id) => {
+			//get order by id
+			//show current name in input field
+			//while clickin on ok fetching update
+			//refresh page
+
+			// this.setState({changeNameMode: true})
+			// this.props.changeOrderName(id, newName)
+			
 	}
 
 	getTripParticipants = (id) => {
@@ -71,7 +77,7 @@ class TicketItem extends Component {
 											<div className="h-8 w-8 border-2 border-white bg-red-500 rounded-full -ml-2"></div>
 										</div>
 									</div>
-									<button onClick={() => this.changeName(this.props.id, )} className="bg-white text-gray-900 text-sm font-medium rounded-lg px-4 py-3 hover:bg-gray-100 border border-gray-300">Rediger</button>
+									<button onClick={() => this.changeName(this.props.id)} className="bg-white text-gray-900 text-sm font-medium rounded-lg px-4 py-3 hover:bg-gray-100 border border-gray-300">Rediger</button>
 								</div>
 								<div className="flex items-center justify-between pt-6 pb-5 border-b border-gray-300">
 									<div>

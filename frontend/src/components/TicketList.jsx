@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import TicketItem from './TicketItem'
+
+import TicketItem from './TicketItem';
 
 function TicketList(props) {
   
@@ -37,6 +38,7 @@ function TicketList(props) {
 
   return (
     <div>
+      
        <div className="px-5 py-6">
         <div className="mb-5">
           {renderHeader()}

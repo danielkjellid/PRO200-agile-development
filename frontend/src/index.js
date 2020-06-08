@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import ContactList from './ContactList';
 import BuyNewTicket from './components/BuyNewTicket';
 import IntroModal from './components/IntroModal';
+import EditTicketName from './components/EditTicketName';
 
 class App extends Component {
 	constructor(props) {
@@ -23,7 +24,8 @@ class App extends Component {
 			orders: '',
 			tickets: '',
 			checkIfFirstTimeLaunch: true,
-			firstTimeModal: false
+			firstTimeModal: false,
+			editNameModal: false
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
@@ -188,6 +190,7 @@ class App extends Component {
 				<div>
 					<div className={this.state.coverSite ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
 					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
+					<EditTicketName show={this.state.editNameModal} />
 					<Navbar />
 					<BuyNewTicket
 						user={this.state.user[0]}
