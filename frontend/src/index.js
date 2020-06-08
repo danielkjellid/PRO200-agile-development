@@ -186,8 +186,8 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<div className={this.state.coverSite ? 'modalBack' : null}></div>
-					<div className={this.state.firstTimeModal ? 'modalBack' : null}></div>
+					<div className={this.state.coverSite ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
+					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
 					<Navbar />
 					<BuyNewTicket
 						user={this.state.user[0]}

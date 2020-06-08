@@ -27,7 +27,7 @@ class AddNewContactSendTicket extends Component {
 
 		return (
 			<React.Fragment>
-				<div className="modalBack"></div>
+				<div className="w-full h-full z-10 block fixed bottom-0 bg-black opacity-25"></div>
 				<div className="z-30 mx-5 absolute bottom-0">
 					<div className="bg-white rounded-md mb-3 p-6 text-center shadow-xl">
 						<div className="flex flex-row justify-end">
