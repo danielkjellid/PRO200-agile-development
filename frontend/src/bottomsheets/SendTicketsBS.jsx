@@ -354,6 +354,12 @@ class SendTicketBS extends Component {
 		}
 	}
 
+	onKeydown = (event, passive, itemType) => {
+		if (event.key === 'Enter') {
+			this.pickContact(passive, itemType)
+		}
+	}
+
 	reviewTicket = () => {
 		if (this.state.reviewTicketsShow) {
 			return (
@@ -376,8 +382,11 @@ class SendTicketBS extends Component {
 										this.pickContact(passive, item.type);
 										this.checkIfAddClicks();
 									}}
+									onKeyDown={this.onKeydown(passive, item.type)}
 									key={index}
 									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
+									tabIndex="0"
+									aria-label={'Send ' + item.type}
 								>
 									<div>
 										<p className="font-medium text-gray-700 text-base">
@@ -393,6 +402,8 @@ class SendTicketBS extends Component {
 												? 'bg-gray-300 flex items-center justify-center rounded-full p-2'
 												: 'bg-vy-green-200 flex items-center justify-center rounded-full p-2'
 										}
+										tabIndex="0"
+										aria-label={'Valgt å sende ' + activeNum + ' av ' + passiveNum + ' billetter'}
 									>
 										<span
 											className={

@@ -25,10 +25,16 @@ class TicketItem extends Component {
 		return contacts ? contacts.firstName : ""
 	}
 
+	onKeydown = (event) => {
+		if (event.key === 'Enter') {
+			this.expandTicket()
+		}
+	}
+
 	renderTicket() {		
 		return (
 			<div>
-				<div>
+				<div tabIndex="0" aria-label={'Ticket for ' + this.props.title} onKeyDown={this.onKeydown}>
 					<div className="px-2 py-2">
 						<div  className="flex items-center">
 							<div style={this.state.ticketExpanded ? { height: 414 + 'px'}  : { height: 96 + 'px' }} className={this.props.active ? "bg-green-400 rounded-full h-64 w-2" : "bg-red-400 rounded-full h-24 w-2"}>

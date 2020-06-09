@@ -26,7 +26,7 @@ function DestinationDropdownList(props) {
     })
    
     return (
-        <div ariaLabel="stations">
+        <div aria-label="stations">
             {dropdownItems}
         </div>
     );

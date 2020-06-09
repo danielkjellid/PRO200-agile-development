@@ -43,7 +43,7 @@ class SeatsItem extends Component {
 					)
 				}
 				tabIndex="0"
-				ariaLabel={'Carriage ' + this.props.carriage + ', row ' + this.props.row + ', seat ' + this.props.seat.id + ', taken ' + this.props.seat.taken}
+				aria-label={'Carriage ' + this.props.carriage + ', row ' + this.props.row + ', seat ' + this.props.seat.id + ', taken ' + this.props.seat.taken}
 			>
 				<svg width="22" height="23" viewBox="0 0 22 23" className="cursor-pointer">
 					<path 

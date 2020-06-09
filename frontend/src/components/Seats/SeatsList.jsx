@@ -104,7 +104,7 @@ function SeatsList(props) {
 					className="text-sm text-gray-900 font-medium"
 					key={carriage}
 					tabIndex="0"
-					ariaLabel="chosen carriage"
+					aria-label="chosen carriage"
 				>
 					{retrieveCarriageText(carriage)}
 				</p>
@@ -116,7 +116,7 @@ function SeatsList(props) {
 						className="text-sm text-gray-900 font-medium"
 						key={row}
 						tabIndex="0"
-						ariaLabel="chosen row and seat"
+						aria-label="chosen row and seat"
 					>
 						{renderSeatText(row, seat)}
 					</p>
