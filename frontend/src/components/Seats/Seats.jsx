@@ -5,9 +5,13 @@ import React, { Component } from 'react';
 import SeatsList from './SeatsList';
 
 
+
 class Seats extends Component {
 	state = {
+
+		//dropdown menu state
 		value: 'carriage1',
+		// 3 carriages each with 6 seats in each row and 10 in each column
 		carriage1: [
 			[
 				{ id: 1, taken: true },
@@ -254,6 +258,7 @@ class Seats extends Component {
 				{ id: 60, taken: false },
 			],
 		],
+		// currently selected carriage to be displayed
 		currentSelected: [
 			[
 				{ id: 1, taken: true },
@@ -339,6 +344,8 @@ class Seats extends Component {
 		selectedSeats: [],
 	};
 
+
+
 	handleChange = (event) => {
 		this.setState({
 			value: event.target.value,
@@ -346,6 +353,7 @@ class Seats extends Component {
 		});
 	};
 
+	// returns selected carriage
 	returnCarriage = (event) => {
 		switch (event.target.value) {
 			case 'carriage1':
@@ -360,6 +368,7 @@ class Seats extends Component {
 		}
 	};
 
+	// Displays in text how many seats left
 	getSelectedSeatsOfMax() {
 		const selectedSeatsNum = this.state.selectedSeats.length;
 		const ticketsNum = this.props.tickets;
@@ -375,8 +384,9 @@ class Seats extends Component {
 		);
 	}
 
+
 	setSelectedSeats(selectedSeats) {
-		this.setState({selectedSeats});
+		this.setState({ selectedSeats });
 	}
 
 	render() {

@@ -8,19 +8,19 @@ import SeatsItem from './SeatsItem';
 function SeatsList(props) {
 
 	// variables for controlling how seats are displayed in the modal view
-	const gridLayout = {
+	const rowGridLayout = {
 		display: 'grid',
 		gridTemplateColumns: '25px 25px 50px 25px 25px 25px',
 		columnGap: '10px',
 	};
 
-	const mainGridLayout = {
+	const carriageGridLayout = {
 		display: 'grid',
 		rowGap: '10px',
 		justifyItems: 'center',
 	};
 
-	const gridSpacingItem = {
+	const rowMidleSpace = {
 		height: '25px',
 		gridColumnStart: '1',
 		gridColumnEnd: '7',
@@ -58,12 +58,14 @@ function SeatsList(props) {
 		props.setSelectedSeats(selectedSeats);
 	};
 
+	// return space between row 5 and 6
 	const checkForRow = (row) => {
 		if (row === 5) {
-			return <div style={gridSpacingItem} />;
+			return <div style={rowMidleSpace} />;
 		}
 	}
 
+	// Displays in under carriage which seats are selected {Carriage: 1, Row: 2 Seats: 7, 8}
 	const chosenSeatText = () => {
 
 		const { selectedSeats } = props;
@@ -157,10 +159,10 @@ function SeatsList(props) {
 	}
 
 	return (
-		<div style={mainGridLayout}>
+		<div style={carriageGridLayout}>
 			{
 				props.carriage.map((row, i) => (
-					<div style={gridLayout} key={i}>
+					<div style={rowGridLayout} key={i}>
 						{checkForRow(i)}
 						{
 							row.map((col, j) => {
