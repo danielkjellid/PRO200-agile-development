@@ -1,13 +1,17 @@
+// framework imports
 import React, { Component } from 'react';
+
+// component imports
 import ContactItem from './ContactItem';
 import ContactItemAddModal from './ContactItemAddModal';
 
+
 class ContactList extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			addNewContactShow: false,
-			contactList: '',
 		};
 	}
 
@@ -15,33 +19,12 @@ class ContactList extends Component {
 		this.fetchContactList();
 	}
 
+	// get contacts from API
 	fetchContactList = async () => {
 		try {
 			const response = await fetch('https://localhost:5001/contacts');
 			const payload = await response.json();
 			this.setState({ contactList: payload });
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	updateContactList = (newContact) => {
-		this.state.contactList.push(newContact);
-		this.submitContact();
-	};
-
-	submitContact = async () => {
-		const url = 'https://localhost:5001/contacts';
-		const payload = this.state.contactList;
-
-		try {
-			await fetch(url, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(payload),
-			});
 		} catch (err) {
 			console.log(err);
 		}
@@ -56,23 +39,23 @@ class ContactList extends Component {
 		if (this.state.update) {
 			this.updateHandler();
 		}
-		let content;
+		
+		let contactList;
 		let addNewContact;
 
+		// if add new contact is clicked, show modal with imputs
 		this.state.addNewContactShow
 			? (addNewContact = (
 				<ContactItemAddModal
 					sendSMS={this.props.sendSMS}
 					newContact={this.state.newContact}
-					updateContactList={this.updateContactList}
 					changeHandler={this.addNewContactHandler}
-					submitContact={this.submitContact}
 				/>
 			))
 			: (addNewContact = null);
 
 		if (this.props.contactListShow) {
-			content = (
+			contactList = (
 				<div>
 					<div
 						className="flex flex-row justify-center align-center items-center cursor-pointer mx-12"
@@ -168,7 +151,7 @@ class ContactList extends Component {
 		return (
 			<div>
 				{addNewContact}
-				{content}
+				{contactList}
 			</div>
 		);
 	}

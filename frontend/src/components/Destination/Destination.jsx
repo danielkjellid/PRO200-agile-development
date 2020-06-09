@@ -11,7 +11,7 @@ import stations from '../../data/stations';
 class Destination extends Component {
     constructor(props){
         super(props)
-        this.state={
+        this.state = {
             drop: false, 
             stations: stations,
             setStartPoint: false,
@@ -35,12 +35,12 @@ class Destination extends Component {
         this.setState({drop: true, setEndPoint: true})
     }
 
-    // method for hiding dropdown menu once departure/destination has been chosden
+    // method for hiding dropdown menu once departure/destination has been chosen
     hideDropDownMenu = () => {
         this.setState({drop: false, setStartPoint: false, setEndPoint: false})
     }
 
-    // method for showinf dropdown menu once departure/destination has been clicked
+    // method for shown if dropdown menu once departure/destination has been clicked
     renderDropDownMenu = () => {
         return (
             <DestinationDropdownList

@@ -64,7 +64,7 @@ function SeatsList(props) {
 		}
 	}
 
-	const choosenSeatText = () => {
+	const chosenSeatText = () => {
 
 		const { selectedSeats } = props;
 
@@ -123,7 +123,6 @@ function SeatsList(props) {
 				);
 			}
 		}
-
 		return text;
 	}
 
@@ -181,7 +180,7 @@ function SeatsList(props) {
 				))
 			}
 			<div className="pt-5">
-				{choosenSeatText()}
+				{chosenSeatText()}
 				<div className="mt-3 flex items-center">
 					<div className="flex items-center mr-4">
 						<svg

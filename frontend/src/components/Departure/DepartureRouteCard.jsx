@@ -67,4 +67,5 @@ function DepartureRouteCard(props) {
         </div>
     );    
 }
+
 export default DepartureRouteCard;

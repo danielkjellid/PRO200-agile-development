@@ -15,9 +15,10 @@ class Payment extends Component {
 	};
 
     // method for selecting the clicked payment item
-	handleSelected = (option) => {
+	handleSelectedPayment = (option) => {
 		const paymentOptions = [...this.state.paymentOptions];
-		const index = paymentOptions.indexOf(option);
+        const index = paymentOptions.indexOf(option);
+        
 		paymentOptions[index] = { ...option };
 		paymentOptions.forEach((element) => (element.selected = false));
 		paymentOptions[index].selected = paymentOptions[index].selected
@@ -42,7 +43,7 @@ class Payment extends Component {
 							<div className="py-2">
                             {
                                 this.props.numberOfTravellers.map((item, index) => {
-                                    if(item.number>0){
+                                    if (item.number > 0) {
                                         totalPriceOrder += item.totalPrice()
                                         return(
                                         <div key={index} className="flex items-center justify-between">
@@ -76,7 +77,7 @@ class Payment extends Component {
 									<PaymentList
 										key={index}
 										option={element}
-										isSelected={this.handleSelected}
+										isSelected={this.handleSelectedPayment}
 									/>
 								))
 							}

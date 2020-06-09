@@ -1,26 +1,14 @@
+// framework imports
 import React, { Component } from 'react';
+
+
 class ContactItemAddModal extends Component {
 	state = {
-		firstName: '',
-		lastName: '',
-		email: '',
 		phoneNumber: '',
 	};
 
-	handleFirstNameChange = (event) => {
-		this.setState({firstName: event.target.value});
-	};
-
-	handleLastNameChange = (event) => {
-		this.setState({lastName: event.target.value});
-	};
-
-	handlePhoneChange = (event) => {
+	setTargetPhonenumber = (event) => {
 		this.setState({phoneNumber: event.target.value});
-	};
-
-	handleEmailChange = (event) => {
-		this.setState({email: event.target.value});
 	};
 
 	render() {
@@ -45,7 +33,7 @@ class ContactItemAddModal extends Component {
 							<input
 								className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
 								placeholder="Skriv inn telefonnummer..."
-								onChange={this.handlePhoneChange}
+								onChange={this.setTargetPhonenumber}
 							/>
 						</div>
 					</div>

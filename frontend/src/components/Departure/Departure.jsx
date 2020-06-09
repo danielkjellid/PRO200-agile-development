@@ -18,7 +18,8 @@ class Departure extends Component {
         }
 	}
 
-	turnToActive = (id) => {
+	// method for selecting clicked route card
+	setRouteCardActive = (id) => {
 		this.setState({active: id});
 	};
 
@@ -72,7 +73,7 @@ class Departure extends Component {
                                     return (
                                         <DepartureRouteCard
                                             active={this.state.active}
-                                            click={() => this.turnToActive(item.id)}
+                                            click={() => this.setRouteCardActive(item.id)}
                                             key={item.id}
                                             id={item.id}
                                             startStation={this.props.startPoint}

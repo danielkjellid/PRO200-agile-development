@@ -86,9 +86,9 @@ class BuyNewTicket extends Component {
 	render() {
 		return (
 			<div>
-				{this.renderChooseTicket()} {/* change into component tag */}
-				{this.renderBuySingleTicket()} {/* change into component tag */}
-				{this.renderSendTicket()} {/* change into component tag */}
+				{this.renderChooseTicket()} 
+				{this.renderBuySingleTicket()}
+				{this.renderSendTicket()}
 			</div>
 		);
 	}
