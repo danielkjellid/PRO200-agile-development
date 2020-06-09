@@ -18,11 +18,6 @@ class Tickets extends Component {
    
   }
 
-
-  // TODO: attach renderTickets functions to API, however we need the API to show more base info
-
-  // function to render tickets until flags are fixed in backend
-  // to be replaced with the other renderXTickets afterwards
   renderTempTickets() {
     let tickets = this.state.orders
 
@@ -35,14 +30,6 @@ class Tickets extends Component {
       return <TicketList changeOrderName={this.props.changeOrderName} title='Aktive billetter' tickets={activeTickets} contactList={this.props.contactList}/>
     }
   }
-  
-  // renderExpiredSingularTickets() {
-  //   let exipredSingularTickets = this.state.dummyTickets.filter(ticket => ticket.singular == true && ticket.active == false)
-
-  //   if (exipredSingularTickets.length > 0) {
-  //     return (<TicketList title='Utgåtte enkeltbilletter' tickets={exipredSingularTickets}/>)
-  //   }
-  // }
 
   renderExpiredGroupTickets(tickets) {
     if(tickets){
@@ -54,8 +41,6 @@ class Tickets extends Component {
  
   render() {
     
-
-   
     return (
       <div>
         <UserHeader
@@ -83,15 +68,6 @@ class Tickets extends Component {
 
         {this.renderActiveTickets(this.props.tickets)}
         {this.renderExpiredGroupTickets(this.props.tickets)}
-       
-
-        {/* conditionally render ticketlists based on requirements wont render empty lists */}
-        {/* {this.renderTempTickets()} */}
-        {/* commentend out until we're able to filter based on active */}
-        
-        {/*
-        {this.renderExpiredSingularTickets()}*/}
-      
       </div>    
     )
   }

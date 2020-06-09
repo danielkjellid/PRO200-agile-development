@@ -100,7 +100,6 @@ class SendTicketBS extends Component {
 		let activesArr = this.state.actives;
 		let findElement = activesArr.find((element) => element === id);
 		let findIndex = activesArr.indexOf(findElement);
-		console.log(findIndex);
 		if (findIndex > -1) {
 			activesArr.splice(findIndex, 1);
 		}
@@ -199,7 +198,6 @@ class SendTicketBS extends Component {
 	};
 
 	sendOnSMS = (person) => {
-		console.log(person);
 		const tickets = this.state.ticketsToChange;
 		const text = {
 			recipient: person.phoneNumber,
@@ -242,7 +240,6 @@ class SendTicketBS extends Component {
 			}
 		})
 
-		console.log("isMoreTickets: ", isMoreTickets);
 		return isMoreTickets;
 	}
 

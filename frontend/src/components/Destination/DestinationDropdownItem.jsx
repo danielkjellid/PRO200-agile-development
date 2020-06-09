@@ -15,6 +15,8 @@ function DestinationDropdownItem(props) {
                     props.hideDropDownMenu()
                 }}
                 className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
+                tabIndex="0"
+                ariaLabel={'Departure from ' + props.stationName}
             >
                 <p>{props.stationName}</p>
             </div>
@@ -28,6 +30,8 @@ function DestinationDropdownItem(props) {
                     props.hideDropDownMenu()
                 }}
                 className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
+                tabIndex="0"
+                ariaLabel={'Arrive at ' + props.stationName}
             >
                 <p>{props.stationName}</p>
             </div>
