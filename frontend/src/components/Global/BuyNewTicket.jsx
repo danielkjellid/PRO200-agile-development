@@ -7,7 +7,9 @@ import BuySingleTicketBS from '../../bottomsheets/BuySingleTicketBS';
 import SendTicketBS from '../../bottomsheets/SendTicketsBS';
 
 
+// component that decides which bottom sheets are display depending on the current step in the purchase/sending process
 class BuyNewTicket extends Component {
+	
 	constructor(props) {
 		super(props);
 		this.state = {

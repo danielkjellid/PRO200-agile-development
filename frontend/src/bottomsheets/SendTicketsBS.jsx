@@ -1,11 +1,17 @@
+// framework imports
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+// component imports
 import HeaderSendTickets from '../components/Global/HeaderSendTickets';
 import ContactList from '../components/Contacts/ContactList';
 import SentTicketConfirmation from '../components/Confirmations/SentTicketConfirmation';
 import VippsConfirmation from '../components/Confirmations/VippsConfirmation';
 
+
+// bottom sheet that controls the entire send ticket transaction
 class SendTicketBS extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,7 +19,7 @@ class SendTicketBS extends Component {
 			reviewTicketsShow: true,
 			contactListShow: false,
 			ticketsWereSent: false,
-			makeAccountInVipps: false,
+			splitBillInVipps: false,
 			loadOrder: false,
 			orderId: '',
 			actives: [],
@@ -30,14 +36,12 @@ class SendTicketBS extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchTheLastOrder();
+		this.fetchLatestActiveOrders();
 	}
 
-
-	
-
-	fetchTheLastOrder = async () => {
+	fetchLatestActiveOrders = async () => {
 		let order;
+		
 		try {
 			const response = await fetch('https://localhost:5001/orders', {
 				method: 'get',
@@ -82,7 +86,6 @@ class SendTicketBS extends Component {
 	};
 
 	//when the ticket is assigned to a contact it is copied to 'actives'. shows how many tickets of passive tickets are left
-
 	getAllTicketsFromOrder = async (id) => {
 		let tickets;
 		try {
@@ -107,38 +110,31 @@ class SendTicketBS extends Component {
 			contactListShow: true,
 			currentType: type,
 		});
-
-
 	};
 
-	//seperates tickets by types and adds 'active: false' to every ticket to make
-	//it interactive while clicking in the checkbox
+	// seperates tickets by types and adds 'active: false' to every ticket to make
+	// it interactive while clicking in the checkbox
 	seperateByType = (array) => {
-			let tickets = [
-				{type: 'Voksen', tickets: []},
-				{type: 'Barn (6-17 år)', tickets: []},
-				{type: 'Ungdom (18-19 år)', tickets: []},
-				{type: 'Student', tickets: []},
-				{type: 'Honnør', tickets: []},
-				
-			]
-		
-
-
-			array.map(item => {
-				tickets.map(ticket => {
-					if(item.type === ticket.type){ticket.tickets.push(item)}
-				})
-			})
+		let tickets = [
+			{type: 'Voksen', tickets: []},
+			{type: 'Barn (6-17 år)', tickets: []},
+			{type: 'Ungdom (18-19 år)', tickets: []},
+			{type: 'Student', tickets: []},
+			{type: 'Honnør', tickets: []},
 			
-			this.setState({ ticketByType: tickets });
-			console.log(this.state.ticketByType);
+		]
+
+		array.map(item => {
+			tickets.map(ticket => {
+				if(item.type === ticket.type){ticket.tickets.push(item)}
+			})
+		})
 		
+		this.setState({ ticketByType: tickets });
+		console.log(this.state.ticketByType);
 	};
 
 	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
-	
-
 	assignContactToTicket = (contactId) => {
 		this.state.ticketByType.map(item => {
 			if(item.type === this.state.currentType){
@@ -165,7 +161,7 @@ class SendTicketBS extends Component {
 		})
 	}
 
-	sendOnSMS = (person) => {
+	sendTicketBySMS = (person) => {
 		const tickets = this.state.ticketsToChange;
 		const text = {
 			recipient: person.phoneNumber,
@@ -190,14 +186,14 @@ class SendTicketBS extends Component {
 
 		this.setState({ ticketsToChange: tickets })
 
-		if (!this.isMoreTicketsLeft()) {
+		if (!this.checkIfAllTicketsDistributed()) {
 			this.ticketsWereSent();
 		} else {
 			this.backToSendTickets();
 		}
 	};
 
-	isMoreTicketsLeft = () => {
+	checkIfAllTicketsDistributed = () => {
 		const tickets = this.state.ticketByType;
 
 		let isMoreTickets = false;
@@ -215,8 +211,8 @@ class SendTicketBS extends Component {
 		this.setState({ reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false });
 	};
 
-	makeAccountInVIpps = () => {
-		this.setState({ ticketsWereSent: false, makeAccountInVIpps: true });
+	splitBillInVipps = () => {
+		this.setState({ ticketsWereSent: false, splitBillInVipps: true });
 	};
 
 	backToSendTickets = () => {
@@ -224,12 +220,12 @@ class SendTicketBS extends Component {
 	};
 
 	renderButton = () => {
-		let buttonTruth = true ////have to fix this later
+		let buttonEnabled = true
 
 		let buttonClassNameToggle;
 
 		if (this.state.reviewTicketsShow) {
-			if (!buttonTruth) {
+			if (!buttonEnabled) {
 				buttonClassNameToggle =
 					'p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed';
 				return (
@@ -273,7 +269,7 @@ class SendTicketBS extends Component {
 			return (
 				<div className="flex flex-col">
 					<button
-						onClick={this.makeAccountInVIpps}
+						onClick={this.splitBillInVipps}
 						className="bg-vy-green-200 w-full p-3 text-center text-sm font-medium text-vy-green-300 rounded-md mb-3"
 					>
 						{this.state.renderButtonText[2]}
@@ -295,23 +291,9 @@ class SendTicketBS extends Component {
 		this.setState({ reviewTicketsShow: true, contactListShow: false });
 	};
 
-	// setAdultActive = (check) => {   this function must be updated
-	// 	const tickets = this.state.ticketByType;
-
-	// 	if (check.target.checked) {
-	// 		tickets[0].tickets.active[0] = tickets[0].tickets.passive[0]
-	// 		tickets[0].tickets.active[0].ticketHolderId = this.props.user.id;
-	// 	} else {
-	// 		tickets[0].tickets.active.pop();
-	// 	}
-
-	// 	this.setState({ ticketByType: tickets, userInTrip: check.target.checked })
-
-	// }
-
 	renderVipps = () => {
-		if (this.state.makeAccountInVIpps) {
-			return <VippsConfirmation makeAccountInVIpps={this.state.makeAccountInVIpps} />
+		if (this.state.splitBillInVipps) {
+			return <VippsConfirmation splitBillInVipps={this.state.splitBillInVipps} />
 		}
 	}
 
@@ -332,62 +314,60 @@ class SendTicketBS extends Component {
 						<input type="checkbox" checked={this.state.userInTrip} onClick={this.setAdultActive} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
-					
-					{this.state.ticketByType.map(item => {
-						if(item.tickets.length > 0){
-							let activeNum = 0;
-							item.tickets.map(item => {if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){activeNum++}})
-							return (<div
-								onClick={() => {
-									this.pickContact(item.type);
-									
-								}}
-								//onKeyDown={this.onKeydown(passive, item.type)}
-								key={item.id}
-								className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
-								tabIndex="0"
-								aria-label={'Send ' + item.type}
-							>
-								<div>
-									<p className="font-medium text-gray-700 text-base">
-										{item.type}
-									</p>
-									<p className="mt-px text-gray-700 text-sm">
-										Hvem ønsker du å sende billetten til?
-									</p>
-								</div>
-								<div
-									className={
-										activeNum !== item.tickets.length
-											? 'bg-gray-300 flex items-center justify-center rounded-full p-2'
-											: 'bg-vy-green-200 flex items-center justify-center rounded-full p-2'
-									}
+					{
+						this.state.ticketByType.map(item => {
+							if(item.tickets.length > 0){
+								let activeNum = 0;
+								item.tickets.map(item => {if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){activeNum++}})
+								return (<div
+									onClick={() => {
+										this.pickContact(item.type);
+										
+									}}
+									//onKeyDown={this.onKeydown(passive, item.type)}
+									key={item.id}
+									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
 									tabIndex="0"
-									aria-label={'Valgt å sende ' + activeNum + ' av ' + item.tickets.length + ' billetter'}
+									aria-label={'Send ' + item.type}
 								>
-									<span
+									<div>
+										<p className="font-medium text-gray-700 text-base">
+											{item.type}
+										</p>
+										<p className="mt-px text-gray-700 text-sm">
+											Hvem ønsker du å sende billetten til?
+										</p>
+									</div>
+									<div
 										className={
 											activeNum !== item.tickets.length
+												? 'bg-gray-300 flex items-center justify-center rounded-full p-2'
+												: 'bg-vy-green-200 flex items-center justify-center rounded-full p-2'
+										}
+										tabIndex="0"
+										aria-label={'Valgt å sende ' + activeNum + ' av ' + item.tickets.length + ' billetter'}
+									>
+										<span
+											className={
+												activeNum !== item.tickets.length
 												? 'font-semibold text-gray-700 text-sm'
 												: 'font-semibold text-vy-green-300 text-sm'
-										}
-									>
-										{activeNum}/{item.tickets.length}
-									</span>
-								</div>
-							</div>)
-						}})}
-							
+											}
+										>
+											{activeNum}/{item.tickets.length}
+										</span>
+									</div>
+								</div>)
+							}
+						})
+					}
 				</div>
 			);
 		}
-
-
-						
 	}
 
 	backButton = () => {
-		if (this.state.makeAccountInVIpps) {
+		if (this.state.splitBillInVipps) {
 			this.props.endTransaction();
 		} else if (this.state.contactListShow) {
 			this.setState({ actives: [], clicks: 0 });
@@ -403,7 +383,7 @@ class SendTicketBS extends Component {
 					{this.reviewTicket()}
 					{this.renderVipps()}
 					<ContactList
-						sendSMS={this.sendOnSMS}
+						sendSMS={this.sendTicketBySMS}
 						updateContactList={this.props.updateContactList}
 						back={this.backToReviewTicket}
 						clicks={this.state.clicks}
@@ -422,7 +402,7 @@ class SendTicketBS extends Component {
 						updateAPI={this.props.updateAPI}
 					/>
 					<VippsConfirmation
-						makeAccountInVIpps={this.state.makeAccountInVipps}
+						splitBillInVipps={this.state.splitBillInVipps}
 					/>
 					<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
 						{this.renderButton()}
