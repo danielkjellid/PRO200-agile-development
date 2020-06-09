@@ -2,6 +2,7 @@
 import React from 'react';
 
 
+// modal to edit ticket/trip name
 function TicketItemEditModal(props) {
    
     return (

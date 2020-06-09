@@ -3,6 +3,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 
+// confirmation message after completing an order
 function OrderConfirmation(props) {
 
     let totalPriceOrder = 0;

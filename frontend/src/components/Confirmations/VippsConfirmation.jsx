@@ -1,6 +1,8 @@
 // framework imports
 import React from 'react';
 
+
+// conformation if user selects to split the bill through vipps
 function VippsConfirmation(props) {
 
     return (

@@ -8,6 +8,7 @@ import DestinationDropdownList from './DestinationDropdownList';
 import stations from '../../data/stations';
 
 
+// component that lets the user chose departure and arrival destinations as well as time of travel
 class Destination extends Component {
     constructor(props){
         super(props)

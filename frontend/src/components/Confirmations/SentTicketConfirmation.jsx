@@ -1,6 +1,8 @@
 // framework imports
 import React from 'react';
 
+
+// confirmation message after tickets were sent
 function SentTicketConfirmation(props) {
 
     let content;

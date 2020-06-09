@@ -2,6 +2,7 @@
 import React from 'react';
 
 
+// modal for adjusting travellers and ticket types
 function DepartureEditTravellersModal(props) {
     
     return (
@@ -32,6 +33,5 @@ function DepartureEditTravellersModal(props) {
         </div>
     );
 }
-
 
 export default DepartureEditTravellersModal;

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import UserHeader from '../components/Global/UserHeader'
 import TicketList from '../components/Tickets/TicketList'
 
+
+// view that shows all previous and currently active tickets
 class Tickets extends Component {
     constructor(props) {
         super(props);

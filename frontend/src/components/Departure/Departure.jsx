@@ -8,6 +8,7 @@ import DepartureRouteCard from './DepartureRouteCard';
 import routes from '../../data/routes';
 
 
+// component that displays the available routes based on previous selection, as well as travellers adjustment
 class Departure extends Component {
 
 	constructor(props){

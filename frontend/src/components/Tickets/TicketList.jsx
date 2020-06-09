@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import TicketItem from './TicketItem';
 
 
+// component that displays a list of tickets, as well as a header and optional link
 function TicketList(props) {
   
     const renderHeader =() => {

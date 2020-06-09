@@ -2,6 +2,7 @@
 import React from 'react'
 
 
+// component to display different payment methods
 function PaymentList(props) {
 
     // method for getting payment option text based on the different payment services

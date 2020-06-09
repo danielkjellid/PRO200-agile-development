@@ -5,6 +5,7 @@ import React from 'react';
 import DestinationDropdownItem from './DestinationDropdownItem';
 
 
+// dropdown list that previews stations for easy access to the user
 function DestinationDropdownList(props) {
     
     let dropdownItems = props.stations.map((item, index) => {

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 
 
+// modal for sending ticket to a phone number instead of contact
 class ContactItemAddModal extends Component {
 	state = {
 		phoneNumber: '',

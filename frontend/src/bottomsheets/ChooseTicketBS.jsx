@@ -1,7 +1,8 @@
+// framework imports
 import React from 'react';
 
 
-//modal to choose ticket type, starts the whole transaction
+// modal to choose ticket type, starts the whole transaction
 function ChooseTicketBS(props) {
     return (
         <div>

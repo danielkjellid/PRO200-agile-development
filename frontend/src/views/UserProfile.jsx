@@ -7,6 +7,7 @@ import UserHeader from '../components/Global/UserHeader';
 import TicketList from '../components/Tickets/TicketList'
 
 
+// main page showing user header info and active tickets
 function UserProfile(props) {
 	
 	const renderActiveTicketsUserProfile = (tickets) => {

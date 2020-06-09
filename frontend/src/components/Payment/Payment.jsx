@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import PaymentList from './PaymentList';
 
 
+// component that shows info about purchase as well as purchase options
 class Payment extends Component {
 	state = {
 		paymentOptions: [

@@ -2,6 +2,7 @@
 import React from 'react';
 
 
+// component to control header state and actions during the purchase process
 function HeaderBuySingle(props) {
     return (
         <div className={"flex flex-row items-center justify-between p-5 border-b border-grey-300 mb-5"}>

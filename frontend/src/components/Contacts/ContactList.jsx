@@ -6,6 +6,7 @@ import ContactItem from './ContactItem';
 import ContactItemAddModal from './ContactItemAddModal';
 
 
+// component that displays a list of available contacts
 class ContactList extends Component {
 
 	constructor(props) {

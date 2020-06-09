@@ -2,6 +2,7 @@
 import React from "react";
 
 
+// component that displays a card for each available route based on previous selection
 function DepartureRouteCard(props) {
     let date = new Date();
     let hours = date.getHours();

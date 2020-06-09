@@ -2,6 +2,7 @@
 import React from 'react'
 
 
+// component that displays a page header with user info, as well as button to initiate purchase process
 function UserHeader(props) {
 
     let userName = props.userName;

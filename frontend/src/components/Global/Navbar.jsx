@@ -2,6 +2,7 @@
 import React from 'react';
 
 
+// global navbar of application containing logo and menu icon
 function Navbar() {
 	return (
 		<nav>

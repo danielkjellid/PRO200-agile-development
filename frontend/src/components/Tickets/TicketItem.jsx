@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 
 
+// component for each ticket item - showing both compressed and expanded info about a certain ticket
 class TicketItem extends Component {
 
     constructor(props) {

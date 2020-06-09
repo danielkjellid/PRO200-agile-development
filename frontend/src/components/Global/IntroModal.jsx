@@ -2,6 +2,7 @@
 import React from 'react';
 
 
+// modal that displays the first time the app is opened to inform about the new sharing feature
 function IntroModal(props) {
      return (
 		<React.Fragment>

@@ -2,6 +2,7 @@
 import React from 'react';
 
 
+// dropdown items that displays in a dropdown list to preview selected locations for easy access
 function DestinationDropdownItem(props) {
   
     let dropdownItem;

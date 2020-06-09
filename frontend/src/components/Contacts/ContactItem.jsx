@@ -1,6 +1,8 @@
+// framework imports
 import React, { Component } from 'react';
 
 
+// component that displays each contact in a contact list
 class ContactItem extends Component {
 	constructor(props) {
 		super(props);
@@ -33,14 +35,11 @@ class ContactItem extends Component {
 		return (
 			<div className="flex flex-row justify-between items-center py-4 border-b border-gray-300">
 				<div className="flex flex-row ml-5">
-					{/* Contact picture */}
 					<div className="mr-3">
 						{this.getContactImage(this.props.name)}
 					</div>
 					<div>
-						{/* Contact name */}
 						<p className="text-gray-900 text-base">{this.props.name}</p>
-						{/* Contact info */}
 						<p className="text-gray-700 text-sm">+47 {this.props.phone}</p>
 					</div>
 				</div>
