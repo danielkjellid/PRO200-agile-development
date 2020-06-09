@@ -1,9 +1,10 @@
+// framework imports
 import React from 'react';
 
-function TicketItemEditModal(props) {
 
+function TicketItemEditModal(props) {
    
-    return(
+    return (
         props.show ? 
         <React.Fragment>
             <div className="w-full h-full z-10 block fixed bottom-0 right-0 bg-black opacity-25"></div>

@@ -274,7 +274,7 @@ class App extends Component {
 										<Tickets
 											{...props}
 											newTicketButtonHandler={this.newTicketButtonHandler}
-											searchContact={this.state.contactList}
+											contactList={this.state.contactList}
 											user={this.state.user}
 											orders={this.state.orders}
 											tickets={this.state.tickets}

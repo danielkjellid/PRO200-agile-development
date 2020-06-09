@@ -1,7 +1,8 @@
+// framework imports
 import React from 'react';
 
-function IntroModal(props) {
 
+function IntroModal(props) {
      return (
 		<React.Fragment>
 			<div className="w-full h-full z-10 block fixed bottom-0 bg-black opacity-25"></div>

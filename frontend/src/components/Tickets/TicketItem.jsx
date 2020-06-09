@@ -1,37 +1,33 @@
+// framework imports
 import React, { Component } from 'react';
+
 
 class TicketItem extends Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			dataLoaded: false,
-			ticketExpanded: false,
-			newNameValue: "",
-			
-		}
-	
-		
-	}
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataLoaded: false,
+            ticketExpanded: false,
+            newNameValue: "",
+        }
+    }
 
+    // method to show more information about the ticket by expanding it
 	expandTicket() {
-		let expandedTicket = this.state.ticketExpanded
-		this.setState({ ticketExpanded: !expandedTicket })
+		let expandedTicket = this.state.ticketExpanded;
+		this.setState({ ticketExpanded: !expandedTicket });
 	}
 
-
-	
+    // method for getting the contacts associated with a trip
 	getTripParticipants = (id) => {
-		let contacts = this.props.contactList.find((contact) => contact.id === id)
-		// TODO return contact image
+		let contacts = this.props.contactList.find((contact) => contact.id === id);
+		return contacts ? contacts.firstName : ""
 	}
 
-	renderTicket() {
-		// this.getTicket(this.props.id)
-		
+	renderTicket() {		
 		return (
-			<div  >
-				
+			<div>
 				<div>
 					<div className="px-2 py-2">
 						<div  className="flex items-center">
@@ -89,14 +85,16 @@ class TicketItem extends Component {
 									</div>
 								</div>
 								<div className="pt-6 pb-6">
-									{this.props.tickets.map((item, index) => {
-										return(
-											<div key={index} className="flex items-center justify-between">
-												<p className="text-gray-900 text-sm">1x {item.type}</p>
-												<p className="text-gray-900 text-sm">kr {item.price}</p>
-											</div>
-										)
-									})}
+                                    {
+                                        this.props.tickets.map((item, index) => {
+                                            return (
+                                                <div key={index} className="flex items-center justify-between">
+                                                    <p className="text-gray-900 text-sm">1x {item.type}</p>
+                                                    <p className="text-gray-900 text-sm">kr {item.price}</p>
+                                                </div>
+                                            )
+                                        })
+                                    }
 									<div className="mt-5 flex items-center justify-between">
 										<p className="text-gray-900 text-sm font-medium">Total <span className="text-gray-600 font-normal">(inkl MVA)</span></p>
 										<p className="text-gray-900 text-sm font-medium">kr {this.props.price}</p>
@@ -115,12 +113,12 @@ class TicketItem extends Component {
 	}
 
 	render() {
-			return (
-				<div>
-					{this.renderTicket()}
-				</div>
-			)
-		}
+        return (
+            <div>
+                {this.renderTicket()}
+            </div>
+        )
+	}
 }
 
-export default TicketItem
+export default TicketItem;

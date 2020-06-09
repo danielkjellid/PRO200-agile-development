@@ -1,10 +1,13 @@
+// framework imports
 import React from 'react';
+
+// component imports
 import DestinationDropdownItem from './DestinationDropdownItem';
 
 
 function DestinationDropdownList(props) {
     
-    let inhold =props.stations.map((item, index) => {
+    let dropdownItems = props.stations.map((item, index) => {
         return(
             <DestinationDropdownItem 
                 key={index}
@@ -24,7 +27,7 @@ function DestinationDropdownList(props) {
    
     return (
         <div>
-            {inhold}
+            {dropdownItems}
         </div>
     );
 }

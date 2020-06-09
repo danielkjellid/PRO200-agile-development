@@ -1,14 +1,21 @@
+// framework imports
 import React, { Component } from 'react';
+
+// component imports
 import DepartureRouteCard from './DepartureRouteCard';
+
+// data imports
 import routes from '../../data/routes';
 
+
 class Departure extends Component {
+
 	constructor(props){
-			super(props);
-			this.state={
-					routes: routes,
-					active: null,
-			}
+        super(props);
+        this.state = {
+            routes: routes,
+            active: null,
+        }
 	}
 
 	turnToActive = (id) => {
@@ -17,28 +24,26 @@ class Departure extends Component {
 
 	render() {
 		let proceedButton;
-		this.state.active !== null
-		? proceedButton = 
-							<button onClick={this.props.continueToSeats}
-								className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
-								Fortsett til valg av sete
-							</button>
-		: proceedButton = 
-							<button
-								className="p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed">
-								Fortsett til valg av sete
-							</button>
+        this.state.active !== null
+        
+        // conditionally render proceed button based on state
+		? proceedButton = (
+            <button onClick={this.props.continueToSeats}
+                className="p-3 w-full bg-vy-green-300 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400">
+                Fortsett til valg av sete
+            </button>
+        )
+		: proceedButton = (
+            <button
+                className="p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed">
+                Fortsett til valg av sete
+            </button>
+        )
 														
 		return (
 			<div className={this.props.chooseDeparture ? 'block' : 'hidden'}>
 				<div>
 					<div className={this.props.editNumberOfTravellers ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
-					{/*
-					<div className="flex flex-row items-center mb-5 ml-5 mr-5 cursor-pointer" onClick={this.props.back}>
-						<svg className="h-6 w-6 pr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"/></svg>
-						<p className="text-sm font-medium">Tilbake</p>
-					</div>
-					*/}
 					<div className="numberOfTravellers mr-5 ml-5 pb-5 border-b border-grey-300 flex items-center justify-between">
 						<div className="">
 							<p className="text-sm font-medium text-gray-800 pb-1">Reisende</p>
@@ -62,24 +67,26 @@ class Departure extends Component {
 							<button className="w-full bg-transparent ml-1 p-2 rounded text-sm font-medium text-gray-700">Buss</button>
 						</div>
 						<div>
-							{this.state.routes.map((item) => {
-								return (
-									<DepartureRouteCard
-										active={this.state.active}
-										click={() => this.turnToActive(item.id)}
-										key={item.id}
-										id={item.id}
-										startStation={this.props.startPoint}
-										endStation={this.props.endPoint}
-										travelTime={item.travelTime}
-										startTime={item.startTime}
-										endTime={item.endTime}
-										track={item.track}
-										numOfStops={item.numberOfStops}
-										price={item.price}									
-									/>
-								);
-							})}
+                            {
+                                this.state.routes.map((item) => {
+                                    return (
+                                        <DepartureRouteCard
+                                            active={this.state.active}
+                                            click={() => this.turnToActive(item.id)}
+                                            key={item.id}
+                                            id={item.id}
+                                            startStation={this.props.startPoint}
+                                            endStation={this.props.endPoint}
+                                            travelTime={item.travelTime}
+                                            startTime={item.startTime}
+                                            endTime={item.endTime}
+                                            track={item.track}
+                                            numOfStops={item.numberOfStops}
+                                            price={item.price}									
+                                        />
+                                    );
+                                })
+                            }
 						</div>
 					</div>
 					<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">

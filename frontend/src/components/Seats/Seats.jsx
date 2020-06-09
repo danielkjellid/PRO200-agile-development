@@ -1,5 +1,9 @@
+// framework imports
 import React, { Component } from 'react';
+
+// component imports
 import SeatsList from './SeatsList';
+
 
 class Seats extends Component {
 	state = {

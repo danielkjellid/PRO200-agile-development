@@ -1,11 +1,13 @@
+// framework imports
 import React, { Component } from 'react';
+
 
 class SeatsItem extends Component {
 	constructor(props) {
 		super(props)
 	}
 
-	// function to color seats depending on their state
+	// method to color seats depending on their state
 	isSeatAvailable = () => {
 		// check if seats are already selected
 		if (this.props.selectedSeats.length > 0) {
@@ -31,7 +33,6 @@ class SeatsItem extends Component {
 	}
 
 	render() {
-
 		return (
 			<div
 				onClick={() =>
@@ -49,7 +50,6 @@ class SeatsItem extends Component {
 				</svg>
 			</div>
 		);
-
 	}
 }
 

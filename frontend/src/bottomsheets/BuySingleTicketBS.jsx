@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HeaderBuySingle from '../components/Global/HeaderBuySingle';
-import EditTravellers from '../bottomsheets/EditTravellers';
+import DepartureEditTravellersModal from '../components/Departure/DepartureEditTravellersModal';
 import Destination from '../components/Destination/Destination';
 import Departure from '../components/Departure/Departure';
 import Seats from '../components/Seats/Seats';
@@ -36,7 +36,7 @@ class BuySingleTicketBS extends Component {
 	//initialize all the ticket types with default Voksen: 1
 	initTicketTypes = () => {
 
-		const editTravellers = [
+		const ticketTypes = [
 			{type: 'Voksen', number: 1, price: 340, totalPrice: function() {return this.number * this.price}},
 			{type: 'Barn (0-5 år)', number: 0, price: 0, totalPrice: function() {return this.number * this.price}},
 			{type: 'Barn (6-17 år)', number: 0, price: 280, totalPrice: function() {return this.number * this.price}},
@@ -44,7 +44,7 @@ class BuySingleTicketBS extends Component {
 			{type: 'Student', number: 0, price: 250, totalPrice: function() {return this.number * this.price}},
 			{type: 'Honnør', number: 0, price: 120, totalPrice: function() {return this.number * this.price}},
 		];
-		this.setState({ticketTypeNum: editTravellers});
+		this.setState({ticketTypeNum: ticketTypes});
 	};
 
 	//creates array of objects(tickets) that are furthermore posted in API
@@ -141,7 +141,7 @@ class BuySingleTicketBS extends Component {
 					<div className="mb-2 bg-white rounded-lg z-10 block relative px-5 pb-5">
 						{this.state.ticketTypeNum.map((item, index) => {
 							return (
-								<EditTravellers
+								<DepartureEditTravellersModal
 									key={index}
 									type={item.type}
 									number={item.number}
