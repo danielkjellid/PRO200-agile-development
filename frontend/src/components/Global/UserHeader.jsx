@@ -26,8 +26,8 @@ function UserHeader(props) {
                 <div className="px-5 py-5">
                     <div className="border-b border-gray-300">
                         <div className="flex items-center pb-4">
-                            <div className="h-16 w-16 rounded-full bg-red-400">
-                            {/* img TBA */}
+                            <div>
+                                <img src={process.env.PUBLIC_URL + '/images/' + userNameDisplay.toLowerCase() + '.jpg'} alt={userNameDisplay} className="rounded-full w-16 h-16"/>
                             </div>
                             <div className="ml-5">
                                 <h1 className="font-bold text-2xl text-gray-800">
