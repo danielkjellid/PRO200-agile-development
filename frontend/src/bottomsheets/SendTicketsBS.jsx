@@ -125,15 +125,14 @@ class SendTicketBS extends Component {
 	};
 
 	pickContact = (array, type) => {
-		const currentTicketType = this.state.ticketByType.find(element => (element.type === type));
-		if (currentTicketType.tickets.active.length !== currentTicketType.tickets.passive.length) {
-			this.setState({
-				reviewTicketsShow: false,
-				contactListShow: true,
-				ticketsToChange: array,
-				currentType: type,
-			});
-		}
+
+		this.setState({
+			reviewTicketsShow: false,
+			contactListShow: true,
+			ticketsToChange: array,
+			currentType: type,
+		});
+
 
 	};
 
