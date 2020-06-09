@@ -1,7 +1,10 @@
+// framework imports
 import React from 'react';
 
 function SentTicketConfirmation(props) {
+
     let content;
+
     if(props.ticketsWereSent){
         content =  (
             <div className="text-center px-12 mb-6">
@@ -21,8 +24,6 @@ function SentTicketConfirmation(props) {
             {content}
         </div>
     );
-    
-    
 }
 
 export default SentTicketConfirmation;
