@@ -47,12 +47,14 @@ class Payment extends Component {
                                     if (item.number > 0) {
                                         totalPriceOrder += item.totalPrice()
                                         return(
-                                        <div key={index} className="flex items-center justify-between">
-                                            <p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
-                                            <p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>
-                                        </div>
+											<div key={index} className="flex items-center justify-between">
+												<p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
+												<p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>
+											</div>
                                         )
-                                    }
+                                    } else {
+										return null;
+									}
 							    })
                             }
 							</div>

@@ -10,9 +10,9 @@ class ContactItem extends Component {
 	}
 
 	componentDidMount() {
-		this.props.ticketByType.map(item => {
+		this.props.ticketByType.forEach(item => {
 			if(item.type === this.props.currentType){
-				item.tickets.map(item => {
+				item.tickets.forEach(item => {
 					if(item.ticketHolderId === this.props.id){
 						this.setState({active: true})
 					}

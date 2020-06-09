@@ -72,7 +72,7 @@ class SendTicketBS extends Component {
 	};
 
 	updateAPI = () => {
-		this.state.ticketByType.map((item) => {
+		this.state.ticketByType.forEach((item) => {
 			if (item.tickets.length > 0) {
 				for (let i = 0; i < item.tickets.length; i++) {
 					this.updateAPIFetch(
@@ -121,12 +121,13 @@ class SendTicketBS extends Component {
 			{type: 'Ungdom (18-19 år)', tickets: []},
 			{type: 'Student', tickets: []},
 			{type: 'Honnør', tickets: []},
-			
 		]
 
-		array.map(item => {
-			tickets.map(ticket => {
-				if(item.type === ticket.type){ticket.tickets.push(item)}
+		array.forEach(item => {
+			tickets.forEach(ticket => {
+				if(item.type === ticket.type) {
+					ticket.tickets.push(item)
+				}
 			})
 		})
 		
@@ -136,7 +137,7 @@ class SendTicketBS extends Component {
 
 	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
 	assignContactToTicket = (contactId) => {
-		this.state.ticketByType.map(item => {
+		this.state.ticketByType.forEach(item => {
 			if(item.type === this.state.currentType){
 				for(let i = 0; i<item.tickets.length; i++){
 					if(item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000"){
@@ -149,7 +150,7 @@ class SendTicketBS extends Component {
 	};
 
 	removeContactFromTicket = (contactId) => {
-		this.state.ticketByType.map(item => {
+		this.state.ticketByType.forEach(item => {
 			if(item.type === this.state.currentType){
 				for(let i = 0; i<item.tickets.length; i++){
 					if(item.tickets[i].ticketHolderId === contactId){
@@ -314,17 +315,22 @@ class SendTicketBS extends Component {
 						<input type="checkbox" checked={this.state.userInTrip} onClick={this.setAdultActive} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
-					{
-						this.state.ticketByType.map(item => {
-							if(item.tickets.length > 0){
-								let activeNum = 0;
-								item.tickets.map(item => {if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){activeNum++}})
-								return (<div
+					
+					{this.state.ticketByType.map(item => {
+						if(item.tickets.length > 0) {
+							let activeNum = 0;
+							item.tickets.forEach(item => {
+								if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){
+									activeNum++
+								}
+							})
+
+							return (
+								<div
 									onClick={() => {
 										this.pickContact(item.type);
-										
 									}}
-									//onKeyDown={this.onKeydown(passive, item.type)}
+									// onKeyDown={this.onKeydown(passive, item.type)}
 									key={item.id}
 									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
 									tabIndex="0"
@@ -357,10 +363,12 @@ class SendTicketBS extends Component {
 											{activeNum}/{item.tickets.length}
 										</span>
 									</div>
-								</div>)
-							}
-						})
-					}
+								</div>
+							)
+						} else {
+							return null;
+						}
+					})}		
 				</div>
 			);
 		}

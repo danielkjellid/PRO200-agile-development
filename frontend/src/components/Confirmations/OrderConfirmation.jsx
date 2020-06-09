@@ -22,13 +22,14 @@ function OrderConfirmation(props) {
                                 if (item.number > 0) {
                                     totalPriceOrder += item.totalPrice()
                                     
-                                    return(
+                                    return (
                                         <div key={index} className="flex items-center justify-between">
                                             <p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
                                             <p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>
                                         </div>
                                     )
                                 }
+                                return null;
                             })
                         }
                     </div>

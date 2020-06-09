@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 
 
 class SeatsItem extends Component {
-	constructor(props) {
-		super(props)
-	}
-
 	// method to color seats depending on their state
 	isSeatAvailable = () => {
 		// check if seats are already selected

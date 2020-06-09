@@ -39,7 +39,7 @@ function DepartureRouteCard(props) {
                 : "bg-white border border border-gray-300 rounded-md p-4 mb-5 cursor-pointer hover:bg-vy-green-100 hover:border-vy-green-300"
             }
             tabIndex="0"
-            aria-label={'Linje R30x ' + 'avreise ' + getStartTime + ', annkomst ' + getEndTime + '. Drar fra ' + props.track}
+            aria-label={'Linje R30x avreise ' + getStartTime + ', annkomst ' + getEndTime + '. Drar fra ' + props.track}
             onKeyDown={onKeydown}
         >
         <div className="flex items-center justify-between border-b border-gray-300 pb-4">

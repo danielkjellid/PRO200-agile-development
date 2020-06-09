@@ -50,12 +50,9 @@ class Departure extends Component {
 						<div className="">
 							<p className="text-sm font-medium text-gray-800 pb-1">Reisende</p>
 						
-							{this.props.numberOfTravellers.map((item) => {
-								if (item.number > 0) {
-									return (<p className="text-sm text-gray-900" key={item.type}> <b>{item.number} {item.type}</b></p>);
-								}
-								
-							})}
+							{this.props.numberOfTravellers.map((item) => (
+								item.number > 0 && <p className="text-sm text-gray-900" key={item.type}> <b>{item.number} {item.type}</b></p>
+							))}
 						</div>
 						<button onClick={this.props.editTravellersHandler}
 							className="p-3 bg-vy-green-200 text-center text-sm font-medium text-vy-green-300 rounded-md hover:bg-vy-green-100">

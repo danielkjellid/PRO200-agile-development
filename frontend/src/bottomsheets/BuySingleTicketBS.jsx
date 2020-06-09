@@ -109,14 +109,22 @@ class BuySingleTicketBS extends Component {
 
 	// adds extra traveller
 	addNumber = (id) => {
-		this.setState({number: this.state.ticketTypeNum[id].number++});
+		const { ticketTypeNum } = this.state;
+		
+		let state = [...ticketTypeNum];
+		state[id] = {...state[id], number: ticketTypeNum[id].number + 1}
+		this.setState({ticketTypeNum: state})
 	};
 
 	// remove travellers
 	removeNumber = (id) => {
-		let number = this.state.ticketTypeNum[id].number;
+		const { ticketTypeNum } = this.state;
+
+		let number = ticketTypeNum[id].number;
 		if (number > 0) {
-			this.setState({ number: this.state.ticketTypeNum[id].number--});
+			let state = [...ticketTypeNum];
+			state[id] = {...state[id], number: ticketTypeNum[id].number - 1}
+			this.setState({ticketTypeNum: state})
 		}
 	};
 

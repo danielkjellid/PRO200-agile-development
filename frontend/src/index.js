@@ -44,7 +44,7 @@ class App extends Component {
 		//while clickin on ok fetching update
 		//refresh page
 		this.changeOrderNameModal()
-		this.state.orders.map(item => {
+		this.state.orders.forEach(item => {
 			if(item.id === id){
 				this.setState({orderToEdit: item})
 			}
