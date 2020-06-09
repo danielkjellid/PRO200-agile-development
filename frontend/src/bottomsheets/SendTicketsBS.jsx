@@ -9,7 +9,6 @@ class SendTicketBS extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			clicks: 0,
 			userInTrip: false,
 			reviewTicketsShow: true,
 			contactListShow: false,
@@ -34,14 +33,8 @@ class SendTicketBS extends Component {
 		this.fetchTheLastOrder();
 	}
 
-	//edit clicks. clicks are used to determine how many contacts we can choose to send tickets to.
-	addClick = () => {
-		this.setState({ clicks: this.state.clicks + 1 });
-	};
 
-	substractClick = () => {
-		this.setState({ clicks: this.state.clicks - 1 });
-	};
+	
 
 	fetchTheLastOrder = async () => {
 		let order;
@@ -89,24 +82,6 @@ class SendTicketBS extends Component {
 	};
 
 	//when the ticket is assigned to a contact it is copied to 'actives'. shows how many tickets of passive tickets are left
-	addToActives = (id) => {
-		let activesArr = this.state.actives;
-		activesArr.push(id);
-		this.setState({ actives: activesArr });
-		this.addClick();
-	};
-
-	removeFromActives = (id) => {
-		console.log("remove");
-		let activesArr = this.state.actives;
-		let findElement = activesArr.find((element) => element === id);
-		let findIndex = activesArr.indexOf(findElement);
-		if (findIndex > -1) {
-			activesArr.splice(findIndex, 1);
-		}
-		this.setState({ actives: activesArr });
-		this.substractClick();
-	};
 
 	getAllTicketsFromOrder = async (id) => {
 		let tickets;
@@ -175,26 +150,20 @@ class SendTicketBS extends Component {
 				}
 			}
 		})
-		
-		
-		
-		
-		// this.state.ticketByType.map((item) => {
-		// 	for (let i = 0; i < item.tickets.passive.length; i++) {
-		// 		if (item.type === this.state.currentType) {
-		// 			item.tickets.passive[i].ticketHolderId = this.state.actives[i];
-		// 			if (this.state.actives.length > 0) {
-		// 				if (item.tickets.passive[i].ticketHolderId) {
-		// 					item.tickets.active[i] = item.tickets.passive[i];
-		// 				}
-		// 			} else {
-		// 				item.tickets.active.length = 0;
-		// 			}
-		// 		}
-		// 	}
-		// });
-		// this.setState({ actives: [] });
 	};
+
+	removeContactFromTicket = (contactId) => {
+		this.state.ticketByType.map(item => {
+			if(item.type === this.state.currentType){
+				for(let i = 0; i<item.tickets.length; i++){
+					if(item.tickets[i].ticketHolderId === contactId){
+						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
+						break;
+					}
+				}
+			}
+		})
+	}
 
 	sendOnSMS = (person) => {
 		const tickets = this.state.ticketsToChange;
@@ -241,10 +210,6 @@ class SendTicketBS extends Component {
 
 		return isMoreTickets;
 	}
-
-	restartClicks = () => {
-		this.setState({ clicks: 0 });
-	};
 
 	ticketsWereSent = () => {
 		this.setState({ reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false });
@@ -296,8 +261,6 @@ class SendTicketBS extends Component {
 				<button
 					onClick={() => {
 						this.backToSendTickets();
-						// this.assignContactToTicket();
-						this.restartClicks();
 					}}
 					className={buttonClassNameToggle}
 				>
@@ -332,19 +295,19 @@ class SendTicketBS extends Component {
 		this.setState({ reviewTicketsShow: true, contactListShow: false });
 	};
 
-	setAdultActive = (check) => {
-		const tickets = this.state.ticketByType;
+	// setAdultActive = (check) => {   this function must be updated
+	// 	const tickets = this.state.ticketByType;
 
-		if (check.target.checked) {
-			tickets[0].tickets.active[0] = tickets[0].tickets.passive[0]
-			tickets[0].tickets.active[0].ticketHolderId = this.props.user.id;
-		} else {
-			tickets[0].tickets.active.pop();
-		}
+	// 	if (check.target.checked) {
+	// 		tickets[0].tickets.active[0] = tickets[0].tickets.passive[0]
+	// 		tickets[0].tickets.active[0].ticketHolderId = this.props.user.id;
+	// 	} else {
+	// 		tickets[0].tickets.active.pop();
+	// 	}
 
-		this.setState({ ticketByType: tickets, userInTrip: check.target.checked })
+	// 	this.setState({ ticketByType: tickets, userInTrip: check.target.checked })
 
-	}
+	// }
 
 	renderVipps = () => {
 		if (this.state.makeAccountInVIpps) {
@@ -451,6 +414,7 @@ class SendTicketBS extends Component {
 						ticketByType={this.state.ticketByType}
 						currentType={this.state.currentType}
 						assignContactToTicket={this.assignContactToTicket}
+						removeContactFromTicket={this.removeContactFromTicket}
 					/>
 
 					<SentTicketConfirmation
