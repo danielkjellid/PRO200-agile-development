@@ -76,12 +76,12 @@ class SendTicketBS extends Component {
 
 	updateAPI = () => {
 		this.state.ticketByType.map((item) => {
-			if (item.tickets.active.length > 0) {
-				for (let i = 0; i < item.tickets.active.length; i++) {
+			if (item.tickets.length > 0) {
+				for (let i = 0; i < item.tickets.length; i++) {
 					this.updateAPIFetch(
 						this.state.orderId,
-						item.tickets.active[i].id,
-						item.tickets.active[i].ticketHolderId
+						item.tickets[i].id,
+						item.tickets[i].ticketHolderId
 					);
 				}
 			}
@@ -97,6 +97,7 @@ class SendTicketBS extends Component {
 	};
 
 	removeFromActives = (id) => {
+		console.log("remove");
 		let activesArr = this.state.actives;
 		let findElement = activesArr.find((element) => element === id);
 		let findIndex = activesArr.indexOf(findElement);
@@ -115,6 +116,7 @@ class SendTicketBS extends Component {
 				{ method: 'get' }
 			);
 			tickets = await response.json();
+			
 		} catch (err) {
 			console.log(err);
 		}
@@ -123,12 +125,11 @@ class SendTicketBS extends Component {
 		this.seperateByType(tickets);
 	};
 
-	pickContact = (array, type) => {
+	pickContact = (type) => {
 
 		this.setState({
 			reviewTicketsShow: false,
 			contactListShow: true,
-			ticketsToChange: array,
 			currentType: type,
 		});
 
@@ -138,63 +139,61 @@ class SendTicketBS extends Component {
 	//seperates tickets by types and adds 'active: false' to every ticket to make
 	//it interactive while clicking in the checkbox
 	seperateByType = (array) => {
-		let tickeyByType = [
-			{ type: 'Voksen', tickets: { passive: [], active: [] } },
-			{ type: 'Barn (6-17 år)', tickets: { passive: [], active: [] } },
-			{ type: 'Ungdom (18-19 år)', tickets: { passive: [], active: [] } },
-			{ type: 'Student', tickets: { passive: [], active: [] } },
-			{ type: 'Honnør', tickets: { passive: [], active: [] } },
-		];
+			let tickets = [
+				{type: 'Voksen', tickets: []},
+				{type: 'Barn (6-17 år)', tickets: []},
+				{type: 'Ungdom (18-19 år)', tickets: []},
+				{type: 'Student', tickets: []},
+				{type: 'Honnør', tickets: []},
+				
+			]
+		
 
-		for (let i = 0; i < array.length; i++) {
-			for (let j = 0; j < tickeyByType.length; j++) {
-				array[i].active = false;
-				if (array[i].type === tickeyByType[j].type) {
-					tickeyByType[j].tickets.passive.push(array[i]);
-				}
-			}
-			this.setState({ ticketByType: tickeyByType });
-		}
+
+			array.map(item => {
+				tickets.map(ticket => {
+					if(item.type === ticket.type){ticket.tickets.push(item)}
+				})
+			})
+			
+			this.setState({ ticketByType: tickets });
+			console.log(this.state.ticketByType);
+		
 	};
 
 	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
-	checkIfAddClicks = () => {
-		if (this.state.actives > 0) {
-			this.setState({ clicks: this.state.actives.length });
-		}
-	};
+	
 
-	//
-	checkIfPassEqAct = () => {
-		const ticketsNum = this.state.ticketByType;
-		let result = false;
-		for (let i = 0; i < ticketsNum.length; i++) {
-			if (ticketsNum[i].tickets.active.length > 0) {
-				result = true;
-				break;
-			} else {
-				continue;
-			}
-		}
-		return result;
-	};
-
-	assignContactToTicket = () => {
-		this.state.ticketByType.map((item) => {
-			for (let i = 0; i < item.tickets.passive.length; i++) {
-				if (item.type === this.state.currentType) {
-					item.tickets.passive[i].ticketHolderId = this.state.actives[i];
-					if (this.state.actives.length > 0) {
-						if (item.tickets.passive[i].ticketHolderId) {
-							item.tickets.active[i] = item.tickets.passive[i];
-						}
-					} else {
-						item.tickets.active.length = 0;
+	assignContactToTicket = (contactId) => {
+		this.state.ticketByType.map(item => {
+			if(item.type === this.state.currentType){
+				for(let i = 0; i<item.tickets.length; i++){
+					if(item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000"){
+						item.tickets[i].ticketHolderId = contactId;
+						break;
 					}
 				}
 			}
-		});
-		this.setState({ actives: [] });
+		})
+		
+		
+		
+		
+		// this.state.ticketByType.map((item) => {
+		// 	for (let i = 0; i < item.tickets.passive.length; i++) {
+		// 		if (item.type === this.state.currentType) {
+		// 			item.tickets.passive[i].ticketHolderId = this.state.actives[i];
+		// 			if (this.state.actives.length > 0) {
+		// 				if (item.tickets.passive[i].ticketHolderId) {
+		// 					item.tickets.active[i] = item.tickets.passive[i];
+		// 				}
+		// 			} else {
+		// 				item.tickets.active.length = 0;
+		// 			}
+		// 		}
+		// 	}
+		// });
+		// this.setState({ actives: [] });
 	};
 
 	sendOnSMS = (person) => {
@@ -260,7 +259,7 @@ class SendTicketBS extends Component {
 	};
 
 	renderButton = () => {
-		let buttonTruth = this.checkIfPassEqAct();
+		let buttonTruth = true ////have to fix this later
 
 		let buttonClassNameToggle;
 
@@ -297,7 +296,7 @@ class SendTicketBS extends Component {
 				<button
 					onClick={() => {
 						this.backToSendTickets();
-						this.assignContactToTicket(this.state.orderId);
+						// this.assignContactToTicket();
 						this.restartClicks();
 					}}
 					className={buttonClassNameToggle}
@@ -360,7 +359,7 @@ class SendTicketBS extends Component {
 	}
 
 	reviewTicket = () => {
-		if (this.state.reviewTicketsShow) {
+		if (this.state.reviewTicketsShow){
 			return (
 				<div className="px-5 pb-5">
 					<div className="pt-1 pb-6 text-center">
@@ -370,58 +369,59 @@ class SendTicketBS extends Component {
 						<input type="checkbox" checked={this.state.userInTrip} onClick={this.setAdultActive} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
-					{this.state.ticketByType.map((item, index) => {
-						if (item.tickets.passive.length > 0) {
-							let passive = item.tickets.passive;
-							const passiveNum = item.tickets.passive.length;
-							const activeNum = item.tickets.active.length;
-							return (
-								<div
-									onClick={() => {
-										this.pickContact(passive, item.type);
-										this.checkIfAddClicks();
-									}}
-									onKeyDown={this.onKeydown(passive, item.type)}
-									key={index}
-									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
-									tabIndex="0"
-									aria-label={'Send ' + item.type}
-								>
-									<div>
-										<p className="font-medium text-gray-700 text-base">
-											{item.type}
-										</p>
-										<p className="mt-px text-gray-700 text-sm">
-											Hvem ønsker du å sende billetten til?
-										</p>
-									</div>
-									<div
-										className={
-											activeNum !== passiveNum
-												? 'bg-gray-300 flex items-center justify-center rounded-full p-2'
-												: 'bg-vy-green-200 flex items-center justify-center rounded-full p-2'
-										}
-										tabIndex="0"
-										aria-label={'Valgt å sende ' + activeNum + ' av ' + passiveNum + ' billetter'}
-									>
-										<span
-											className={
-												activeNum !== passiveNum
-													? 'font-semibold text-gray-700 text-sm'
-													: 'font-semibold text-vy-green-300 text-sm'
-											}
-										>
-											{activeNum}/{passiveNum}
-										</span>
-									</div>
+					
+					{this.state.ticketByType.map(item => {
+						if(item.tickets.length > 0){
+							let activeNum = 0;
+							item.tickets.map(item => {if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){activeNum++}})
+							return (<div
+								onClick={() => {
+									this.pickContact(item.type);
+									
+								}}
+								//onKeyDown={this.onKeydown(passive, item.type)}
+								key={item.id}
+								className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
+								tabIndex="0"
+								aria-label={'Send ' + item.type}
+							>
+								<div>
+									<p className="font-medium text-gray-700 text-base">
+										{item.type}
+									</p>
+									<p className="mt-px text-gray-700 text-sm">
+										Hvem ønsker du å sende billetten til?
+									</p>
 								</div>
-							);
-						}
-					})}
+								<div
+									className={
+										activeNum !== item.tickets.length
+											? 'bg-gray-300 flex items-center justify-center rounded-full p-2'
+											: 'bg-vy-green-200 flex items-center justify-center rounded-full p-2'
+									}
+									tabIndex="0"
+									aria-label={'Valgt å sende ' + activeNum + ' av ' + item.tickets.length + ' billetter'}
+								>
+									<span
+										className={
+											activeNum !== item.tickets.length
+												? 'font-semibold text-gray-700 text-sm'
+												: 'font-semibold text-vy-green-300 text-sm'
+										}
+									>
+										{activeNum}/{item.tickets.length}
+									</span>
+								</div>
+							</div>)
+						}})}
+							
 				</div>
 			);
 		}
-	};
+
+
+						
+	}
 
 	backButton = () => {
 		if (this.state.makeAccountInVIpps) {
@@ -448,8 +448,9 @@ class SendTicketBS extends Component {
 						passiveTickets={this.state.ticketsToChange}
 						contactListShow={this.state.contactListShow}
 						contactList={this.props.contactList}
-						addToActives={this.addToActives}
-						removeFromActives={this.removeFromActives}
+						ticketByType={this.state.ticketByType}
+						currentType={this.state.currentType}
+						assignContactToTicket={this.assignContactToTicket}
 					/>
 
 					<SentTicketConfirmation
