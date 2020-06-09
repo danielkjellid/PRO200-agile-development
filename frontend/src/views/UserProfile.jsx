@@ -1,12 +1,16 @@
+// framework imports
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+// component imports
 import UserHeader from '../components/Global/UserHeader';
 import TicketList from '../components/Tickets/TicketList'
+
 
 function UserProfile(props) {
 	
 	const renderActiveTicketsUserProfile = (tickets) => {
+        // only render ticket list if there are active tickets
 		if(tickets.length > 0){
 		  let activeTickets = tickets.filter(ticket => ticket.isActive)
 		  return (
@@ -15,7 +19,9 @@ function UserProfile(props) {
 			  changeOrderName={props.changeOrderName}
 		  	linkLabel="Se alle billetter"
 		  	to="/tickets"
-			tickets={activeTickets}/>)
+            tickets={activeTickets}/>)
+            
+        // if there are noe active tickets, display image with message
 		} else {
 			return (
 				<div className="flex justify-center mx-auto pt-6 px-8">
