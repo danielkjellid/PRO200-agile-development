@@ -5,7 +5,7 @@ import React from 'react'
 function PaymentList(props) {
 
     // method for getting payment option text based on the different payment services
-	const getText = () => {
+	const getPaymentText = () => {
 		switch (props.option.type) {
 			case 'card':
 				return <p className="text-sm text-gray-900">Kort **** 1234 <span className="text-gray-700 text-xs">- Utløper 06/22</span></p>
@@ -19,7 +19,7 @@ function PaymentList(props) {
 	}
 
     // method for rendering visa and vipps logo svgs
-	const renderSvg = () => {
+	const renderPaymentSvg = () => {
 		switch (props.option.type) {
 			case 'card':
 				return	<svg width="55" height="18" viewBox="0 0 55 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,10 +67,10 @@ function PaymentList(props) {
                             }
                         </button>
                     </div>
-                    {getText()}
+                    {getPaymentText()}
                 </div>
                 <div>
-                    {renderSvg()}
+                    {renderPaymentSvg()}
                 </div>
             </div>
         </div>
