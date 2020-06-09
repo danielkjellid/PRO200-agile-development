@@ -33,7 +33,7 @@ class BuySingleTicketBS extends Component {
 	// functions that deal with Order data, that will be parsed to API after transaction is over
 	//////////////////////////////////////////////////////////////////////////////////////////////
 
-	//this function initialize all the ticket types with default Voksen: 1
+	//initialize all the ticket types with default Voksen: 1
 	initTicketTypes = () => {
 
 		const ticketTypes = [
@@ -47,7 +47,7 @@ class BuySingleTicketBS extends Component {
 		this.setState({ticketTypeNum: ticketTypes});
 	};
 
-	//this function creates array of objects(tickets) that are furthermore posted in API
+	//creates array of objects(tickets) that are furthermore posted in API
 	createTicketInOrder = () => {
 		let ticketsPrint = [];
 		let ticketsChosen = this.state.ticketTypeNum;
@@ -76,7 +76,7 @@ class BuySingleTicketBS extends Component {
 		this.setState({order: {name: '', isActive: true}});
 	};
 
-	//this function sets a default name for the order, it's the date order was purchased
+	//sets a default name for the order, it's the date order was purchased
 	setUniqueOrderName = () => {
 		this.restartOrder();
 		let name;
@@ -103,17 +103,18 @@ class BuySingleTicketBS extends Component {
 
 	setEndPoint = (value) => {
 		this.setState({endPoint: value});
-		
 	};
 
 	//////////////////////////////////////////////////////////////////////////////
 	// functions to handle number and types of the tickests
 	//////////////////////////////////////////////////////////////////////////////
 
+	//adds extra traveller
 	addNumber = (id) => {
 		this.setState({number: this.state.ticketTypeNum[id].number++});
 	};
 
+	//remove travellers
 	removeNumber = (id) => {
 		let number = this.state.ticketTypeNum[id].number;
 		if (number > 0) {
@@ -121,18 +122,18 @@ class BuySingleTicketBS extends Component {
 		}
 	};
 
+	//triggers chooseTicketType modal
 	editTravellersHandler = () => {
 		this.setState({chooseTicketType: true});
 	};
 
+	//hides chooseTicketType modal
 	hideEditNumberOfTravellers = () => {
 		this.setState({chooseTicketType: false});
 	};
 
-	//////////////////////////////////////////////////////////////////////////////
-	// functions to render different modals depending on the state
-	//////////////////////////////////////////////////////////////////////////////
 
+	//renders chooseTicketType modal
 	renderEditNumberOfTravellers = () => {
 		if (this.state.chooseTicketType) {
 			return (
@@ -185,6 +186,7 @@ class BuySingleTicketBS extends Component {
 		this.getLastOrderID();
 	};
 
+	//gets last order id to continue sending tickets from
 	getLastOrderID = async () => {
 		let data;
 		try {
