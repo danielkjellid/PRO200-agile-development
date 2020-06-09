@@ -34,6 +34,7 @@ class SendTicketBS extends Component {
 		this.fetchTheLastOrder();
 	}
 
+	//edit clicks. clicks are used to determine how many contacts we can choose to send tickets to.
 	addClick = () => {
 		this.setState({clicks: this.state.clicks + 1});
 	};
@@ -87,6 +88,7 @@ class SendTicketBS extends Component {
 		});
 	};
 
+	//when the ticket is assigned to a contact it is copied to 'actives'. shows how many tickets of passive tickets are left
 	addToActives = (id) => {
 		let activesArr = this.state.actives;
 		activesArr.push(id);
@@ -131,7 +133,7 @@ class SendTicketBS extends Component {
 		});
 	};
 
-	//this method seperates tickets by types and adds 'active: false' to every ticket to make
+	//seperates tickets by types and adds 'active: false' to every ticket to make
 	//it interactive while clicking in the checkbox
 	seperateByType = (array) => {
 		let tickeyByType = [
@@ -153,25 +155,27 @@ class SendTicketBS extends Component {
 		}
 	};
 
+	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
 	checkIfAddClicks = () => {
 		if (this.state.actives > 0) {
 			this.setState({ clicks: this.state.actives.length });
 		}
 	};
 
-	checkIfPassEqAct = () => {
-		const ticketsNum = this.state.ticketByType;
-		let result = false;
-		for (let i = 0; i < ticketsNum.length; i++) {
-			if (ticketsNum[i].tickets.active.length > 0) {
-				result = true;
-				break;
-			} else {
-				continue;
-			}
-		}
-		return result;
-	};
+	//
+	// checkIfPassEqAct = () => {
+	// 	const ticketsNum = this.state.ticketByType;
+	// 	let result = false;
+	// 	for (let i = 0; i < ticketsNum.length; i++) {
+	// 		if (ticketsNum[i].tickets.active.length > 0) {
+	// 			result = true;
+	// 			break;
+	// 		} else {
+	// 			continue;
+	// 		}
+	// 	}
+	// 	return result;
+	// };
 
 	assignContactToTicket = () => {
 		this.state.ticketByType.map((item) => {
