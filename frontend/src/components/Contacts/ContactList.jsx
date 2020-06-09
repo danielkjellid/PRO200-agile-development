@@ -130,6 +130,7 @@ class ContactList extends Component {
 										removeFromActives={this.props.removeFromActives}
 										checkIfTicketAssigned={this.props.passiveTickets}
 										assignContactToTicket={() => this.props.assignContactToTicket(item.id)}
+										removeContactFromTicket={() => this.props.removeContactFromTicket(item.id)}
 										clicks={this.props.clicks}
 										key={index}
 										id={item.id}

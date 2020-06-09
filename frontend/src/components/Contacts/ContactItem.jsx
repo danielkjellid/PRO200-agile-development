@@ -21,8 +21,19 @@ class ContactItem extends Component {
 		})
 	}
 
+	assignOrRemove = () => {
+		if(!this.state.active) {
+			this.props.assignContactToTicket(this.props.id);
+			this.changeState()
+		} else {
+			this.props.removeContactFromTicket(this.props.id);
+			this.changeState();
+		}
+	}
+
 	changeState = () => {
-		this.setState({active: true})
+		let status = this.state.active
+		this.setState({active: !status})
 	}
 
 	getContactImage(name) {
@@ -47,7 +58,7 @@ class ContactItem extends Component {
 				{/* Checkbox */}
 				<div className="mr-5">
 					<button
-						onClick={() => {this.props.assignContactToTicket(this.props.id); this.changeState()}}
+						onClick={this.assignOrRemove}
 						className="w-6 h-6 rounded-full p-0 border border-gray-400"
 					>
 						{this.state.active ? (
