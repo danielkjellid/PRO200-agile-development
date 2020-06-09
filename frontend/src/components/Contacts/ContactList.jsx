@@ -145,6 +145,7 @@ class ContactList extends Component {
 										addToActives={this.props.addToActives}
 										removeFromActives={this.props.removeFromActives}
 										checkIfTicketAssigned={this.props.passiveTickets}
+										assignContactToTicket={() => this.props.assignContactToTicket(item.id)}
 										clicks={this.props.clicks}
 										key={index}
 										id={item.id}
@@ -153,6 +154,8 @@ class ContactList extends Component {
 										phone={item.phoneNumber}
 										state={check}
 										contactItem={item}
+										currentType={this.props.currentType}
+										ticketByType={this.props.ticketByType}
 									/>
 								);
 							})

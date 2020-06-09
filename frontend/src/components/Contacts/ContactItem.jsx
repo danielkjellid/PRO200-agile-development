@@ -5,43 +5,23 @@ class ContactItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { active: false };
-
-		this.handleClick = this.changeContactState.bind(this);
 	}
 
 	componentDidMount() {
-		if (this.props.state) {
-			this.props.addToActives(this.props.id);
-		}
-		this.checkIfTicketAssigned();
+		this.props.ticketByType.map(item => {
+			if(item.type === this.props.currentType){
+				item.tickets.map(item => {
+					if(item.ticketHolderId === this.props.id){
+						this.setState({active: true})
+					}
+				})
+			}
+		})
 	}
 
-	checkIfTicketAssigned = () => {
-		if (this.props.state) {
-			this.setState({active: true});
-		}
-	};
-
-	assignTicket = () => {
-		if (this.props.clicks < this.props.checkIfTicketAssigned.length) {
-			this.changeContactState();
-		} else if (this.state.active) {
-			this.setState({active: false});
-			this.props.removeFromActives(this.props.id);
-		} else {
-		}
-	};
-
-	changeContactState = () => {
-		this.setState((prevState) => {
-			return {active: !prevState.active};
-		});
-		if (!this.state.active) {
-			this.props.addToActives(this.props.id); //contactItem
-		} else {
-			this.props.removeFromActives(this.props.id); //contactItem
-		}
-	};
+	changeState = () => {
+		this.setState({active: true})
+	}
 
 	getContactImage(name) {
 		let sanitizeName = name.toLowerCase();
@@ -68,7 +48,7 @@ class ContactItem extends Component {
 				{/* Checkbox */}
 				<div className="mr-5">
 					<button
-						onClick={this.assignTicket}
+						onClick={() => {this.props.assignContactToTicket(this.props.id); this.changeState()}}
 						className="w-6 h-6 rounded-full p-0 border border-gray-400"
 					>
 						{this.state.active ? (
