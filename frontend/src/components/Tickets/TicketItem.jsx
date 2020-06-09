@@ -22,7 +22,7 @@ class TicketItem extends Component {
     // method for getting the contacts associated with a trip
 	getTripParticipants = (id) => {
 		let contacts = this.props.contactList.find((contact) => contact.id === id);
-		// TODO return contact image
+		return contacts ? contacts.firstName : ""
 	}
 
 	renderTicket() {		

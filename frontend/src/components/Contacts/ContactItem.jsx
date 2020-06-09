@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class ContactItem extends Component {
 	constructor(props) {
 		super(props);
@@ -21,7 +22,7 @@ class ContactItem extends Component {
 		}
 	};
 
-	handleClickz = () => {
+	assignTicket = () => {
 		if (this.props.clicks < this.props.checkIfTicketAssigned.length) {
 			this.changeContactState();
 		} else if (this.state.active) {
@@ -42,13 +43,19 @@ class ContactItem extends Component {
 		}
 	};
 
+	getContactImage(name) {
+		let sanitizeName = name.toLowerCase();
+
+		return <img src={process.env.PUBLIC_URL + '/images/contacts/' + sanitizeName + '.jpeg'} alt={name} className="rounded-full w-10 h-10 border-2 border-gray-300"/>
+	}
+
 	render() {
 		return (
 			<div className="flex flex-row justify-between items-center py-4 border-b border-gray-300">
 				<div className="flex flex-row ml-5">
 					{/* Contact picture */}
-					<div className="rounded-full bg-gray-400 w-10 h-10 mr-3">
-						{/* TODO: Add rounded img */}
+					<div className="mr-3">
+						{this.getContactImage(this.props.name)}
 					</div>
 					<div>
 						{/* Contact name */}
@@ -61,7 +68,7 @@ class ContactItem extends Component {
 				{/* Checkbox */}
 				<div className="mr-5">
 					<button
-						onClick={this.handleClickz}
+						onClick={this.assignTicket}
 						className="w-6 h-6 rounded-full p-0 border border-gray-400"
 					>
 						{this.state.active ? (
