@@ -20,8 +20,7 @@ function ChooseTicketBS(props) {
                 <div className="flex flex-row justify-between pr-5 pl-5 pb-5">
                     <button className="p-8 border border-gray-300 rounded-md font-medium text-gray-700" id="period">Periodebillett</button>
                     <button className="p-8 border border-gray-300 rounded-md font-medium text-gray-700" id="period">Ekstra soner</button>
-                </div>
-                
+                </div> 
             </div>
         </div>
     );
