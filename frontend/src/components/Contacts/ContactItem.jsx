@@ -22,7 +22,7 @@ class ContactItem extends Component {
 		}
 	};
 
-	assignTicket = () => {
+	assignTicketToContact = () => {
 		if (this.props.clicks < this.props.checkIfTicketAssigned.length) {
 			this.changeContactState();
 		} else if (this.state.active) {
@@ -68,7 +68,7 @@ class ContactItem extends Component {
 				{/* Checkbox */}
 				<div className="mr-5">
 					<button
-						onClick={this.assignTicket}
+						onClick={this.assignTicketToContact}
 						className="w-6 h-6 rounded-full p-0 border border-gray-400"
 					>
 						{this.state.active ? (
