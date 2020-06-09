@@ -31,7 +31,6 @@ class ContactList extends Component {
 	};
 
 	submitContact = async () => {
-		console.log('Submit contact');
 		const url = 'https://localhost:5001/contacts';
 		const payload = this.state.contactList;
 

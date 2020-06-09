@@ -33,12 +33,11 @@ class Destination extends Component {
     }
     clickArrivalStation = () => {
         this.setState({drop: true, setEndPoint: true})
-        console.log(this.props.endPoint);
     }
 
     // method for hiding dropdown menu once departure/destination has been chosden
     hideDropDownMenu = () => {
-            this.setState({drop: false, setStartPoint: false, setEndPoint: false})
+        this.setState({drop: false, setStartPoint: false, setEndPoint: false})
     }
 
     // method for showinf dropdown menu once departure/destination has been clicked
@@ -82,9 +81,9 @@ class Destination extends Component {
                 <div>
                     <div className="pl-5 pr-5 pb-5">
                         <p className="text-sm font-medium pb-1 text-gray-800">Avreise og destinasjon</p>
-                        <input className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Avreise"  value={this.props.startPoint} onClick={this.clickDepartureStation}/>
+                        <input className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Avreise"  value={this.props.startPoint} onClick={this.clickDepartureStation} onFocus={this.clickDepartureStation}/>
                         {this.state.drop ? this.renderDropDownMenu() : null}
-                        <input className="px-3 py-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Destinasjon" value={this.props.endPoint} onClick={this.clickArrivalStation}/>
+                        <input className="px-3 py-2 w-full border rounded border-gray-400 text-sm text-gray-700 cursor-pointer" placeholder="Destinasjon" value={this.props.endPoint} onClick={this.clickArrivalStation} onFocus={this.clickArrivalStation}/>
                     </div>
                 </div>
                 <div className="px-5">

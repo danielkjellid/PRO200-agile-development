@@ -211,12 +211,7 @@ class App extends Component {
 			this.setState({ chooseTicket: true });
 			this.fadeBackground();
 		}
-		console.log(this.state.chooseTicket);
 	};
-
-
-
-
 
 	render() {
 		

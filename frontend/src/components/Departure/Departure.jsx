@@ -86,7 +86,7 @@ class Departure extends Component {
                                         />
                                     );
                                 })
-                            }
+														}
 						</div>
 					</div>
 					<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">

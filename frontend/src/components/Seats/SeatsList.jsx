@@ -103,6 +103,8 @@ function SeatsList(props) {
 					style={{ textAlign: 'center' }}
 					className="text-sm text-gray-900 font-medium"
 					key={carriage}
+					tabIndex="0"
+					ariaLabel="chosen carriage"
 				>
 					{retrieveCarriageText(carriage)}
 				</p>
@@ -113,6 +115,8 @@ function SeatsList(props) {
 						style={{ textAlign: 'center' }}
 						className="text-sm text-gray-900 font-medium"
 						key={row}
+						tabIndex="0"
+						ariaLabel="chosen row and seat"
 					>
 						{renderSeatText(row, seat)}
 					</p>
