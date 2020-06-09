@@ -3,6 +3,7 @@ import React from 'react';
 
 
 function DepartureEditTravellersModal(props) {
+    
     return (
         <div className="flex items-center justify-between pt-6">
             <p className="text-gray-900 font-medium text-base">{props.type}</p>
