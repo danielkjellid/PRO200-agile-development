@@ -31,7 +31,7 @@ function DestinationDropdownItem(props) {
                 }}
                 className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
                 tabIndex="0"
-                aria-labels={'Arrive at ' + props.stationName}
+                aria-label={'Arrive at ' + props.stationName}
             >
                 <p>{props.stationName}</p>
             </div>

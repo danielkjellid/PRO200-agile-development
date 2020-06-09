@@ -136,3 +136,8 @@ body {
 .hover\:border-vy-green-400:hover {
   border-color: #004A43;
 }
+
+::-webkit-calendar-picker-indicator {
+  background: transparent;
+  
+}

@@ -149,7 +149,7 @@ class SendTicketBS extends Component {
 		for (let i = 0; i < array.length; i++) {
 			for (let j = 0; j < tickeyByType.length; j++) {
 				array[i].active = false;
-				if (array[i].type == tickeyByType[j].type) {
+				if (array[i].type === tickeyByType[j].type) {
 					tickeyByType[j].tickets.passive.push(array[i]);
 				}
 			}

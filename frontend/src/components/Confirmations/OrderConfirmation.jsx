@@ -17,7 +17,6 @@ function OrderConfirmation(props) {
                 totalPriceOrder += item.totalPrice()
                 return(
                   <div key={index} className="flex items-center justify-between">
-                    {/* trenger NumberOfTravellers for å vise hvilke billetter som er valgt tidligere */}
                     <p className="font-regular text-gray-900 text-sm">{item.number} {item.type}</p>
                     <p className="font-medium text-gray-900 text-sm">kr {item.totalPrice()}</p>
                   </div>
@@ -29,7 +28,6 @@ function OrderConfirmation(props) {
         <div className="my-5">
           <div className="py-2">
             <div className="flex items-center justify-between">
-              {/* Totalbeløp må regnes ut ved hjelp av billettpriser */}
               <p className="font-medium text-gray-900 text-sm">Total <span className="text-gray-600 font-normal">(inkl MVA)</span></p>
               <p className="font-medium text-gray-900 text-sm">kr {totalPriceOrder}</p>
             </div>
