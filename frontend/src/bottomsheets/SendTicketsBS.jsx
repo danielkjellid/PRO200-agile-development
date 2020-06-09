@@ -167,19 +167,19 @@ class SendTicketBS extends Component {
 	};
 
 	//
-	// checkIfPassEqAct = () => {
-	// 	const ticketsNum = this.state.ticketByType;
-	// 	let result = false;
-	// 	for (let i = 0; i < ticketsNum.length; i++) {
-	// 		if (ticketsNum[i].tickets.active.length > 0) {
-	// 			result = true;
-	// 			break;
-	// 		} else {
-	// 			continue;
-	// 		}
-	// 	}
-	// 	return result;
-	// };
+	checkIfPassEqAct = () => {
+		const ticketsNum = this.state.ticketByType;
+		let result = false;
+		for (let i = 0; i < ticketsNum.length; i++) {
+			if (ticketsNum[i].tickets.active.length > 0) {
+				result = true;
+				break;
+			} else {
+				continue;
+			}
+		}
+		return result;
+	};
 
 	assignContactToTicket = () => {
 		this.state.ticketByType.map((item) => {
