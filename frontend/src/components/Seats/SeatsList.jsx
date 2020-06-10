@@ -65,7 +65,7 @@ function SeatsList(props) {
 		}
 	}
 
-	// Displays in under carriage which seats are selected {Carriage: 1, Row: 2 Seats: 7, 8}
+	// displays in under carriage which seats are selected {Carriage: 1, Row: 2 Seats: 7, 8}
 	const chosenSeatText = () => {
 
 		const { selectedSeats } = props;

@@ -20,7 +20,7 @@ class SeatsItem extends Component {
 			}
 		}
 
-		// if seat isnt selected, color depending on availability
+		// if seat isn't selected, color depending on availability
 		if (this.props.seat.taken) {
 			return '#E2E8F0';
 		} else {

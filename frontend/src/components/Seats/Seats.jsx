@@ -9,8 +9,9 @@ import SeatsList from './SeatsList';
 class Seats extends Component {
 	state = {
 
-		//dropdown menu state
+		// dropdown menu state
 		value: 'carriage1',
+
 		// 3 carriages each with 6 seats in each row and 10 in each column
 		carriage1: [
 			[
@@ -258,6 +259,7 @@ class Seats extends Component {
 				{ id: 60, taken: false },
 			],
 		],
+
 		// currently selected carriage to be displayed
 		currentSelected: [
 			[
@@ -344,8 +346,6 @@ class Seats extends Component {
 		selectedSeats: [],
 	};
 
-
-
 	handleChange = (event) => {
 		this.setState({
 			value: event.target.value,
@@ -368,7 +368,7 @@ class Seats extends Component {
 		}
 	};
 
-	// Displays in text how many seats left
+	// displays in text how many seats left
 	getSelectedSeatsOfMax() {
 		const selectedSeatsNum = this.state.selectedSeats.length;
 		const ticketsNum = this.props.tickets;
@@ -383,7 +383,6 @@ class Seats extends Component {
 			</p>
 		);
 	}
-
 
 	setSelectedSeats(selectedSeats) {
 		this.setState({ selectedSeats });
