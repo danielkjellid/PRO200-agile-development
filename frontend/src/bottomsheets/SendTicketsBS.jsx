@@ -24,7 +24,6 @@ class SendTicketBS extends Component {
 			splitBillInVipps: false,
 			loadOrder: false,
 			orderId: '',
-			actives: [],
 			currentType: '',
 			ticketByType: [],
 			ticketsToChange: '',
@@ -437,7 +436,6 @@ class SendTicketBS extends Component {
 			this.props.updateAPI();
 			this.props.endTransaction();
 		} else if (this.state.contactListShow) {
-			this.setState({ actives: [], clicks: 0 });
 			this.backToSendTickets();
 		} else {
 			this.props.updateAPI();
