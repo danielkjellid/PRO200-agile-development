@@ -136,7 +136,6 @@ class SendTicketBS extends Component {
 		})
 
 		this.setState({ ticketByType: tickets });
-		console.log(this.state.ticketByType);
 	};
 
 	addActive = () => {
@@ -363,11 +362,11 @@ class SendTicketBS extends Component {
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
 					<div className="flex items-center border-b border-gray-300 pb-5">
-						<input type="checkbox" checked={this.state.userInTrip} onClick={this.checkIfUser} />
+						<input type="checkbox" defaultChecked={this.state.userInTrip} onClick={this.checkIfUser} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
 
-					{this.state.ticketByType.map(item => {
+					{this.state.ticketByType.map((item, index) => {
 						if (item.tickets.length > 0) {
 							let activeNum = (item.tickets.filter(item => item.ticketHolderId !== "00000000-0000-0000-0000-000000000000")).length
 							return (
@@ -376,7 +375,7 @@ class SendTicketBS extends Component {
 										this.pickContact(item.type, activeNum, item.tickets.length);
 									}}
 									// onKeyDown={this.onKeydown(passive, item.type)}
-									key={item.id}
+									key={index}
 									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
 									tabIndex="0"
 									aria-label={'Send ' + item.type}
