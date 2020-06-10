@@ -61,6 +61,14 @@ class ContactList extends Component {
 					<div
 						className="flex flex-row justify-center align-center items-center cursor-pointer mx-12"
 						onClick={this.addNewContactHandler}
+						tabIndex="0"
+						onKeyDown={ e => {
+							if (e.key === 'Enter') {
+								this.addNewContactHandler()
+							}
+						}}
+						aria-label="Send til telefonnummer"
+
 					>
 						<svg
 							className="text-vy-green-300 w-5 h-5"
