@@ -10,7 +10,6 @@ const runAPI = () => {
     })
 }
 
-
 // run npm install in frontend
 const installDependencies = () => {
     exec('npm install', { cwd: 'frontend' }, (error) => {
@@ -41,7 +40,7 @@ const run = async () => {
         await runFrontend()
 
         console.log('API running on https://localhost:5001/index.html')
-        console.log('Frontend running on http://localhos')
+        console.log('Frontend running on http://localhost:3000/')
         
     } catch (error){
         console.error(error)
