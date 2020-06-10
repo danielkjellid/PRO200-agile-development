@@ -203,7 +203,7 @@ class SendTicketBS extends Component {
 		this.state.ticketByType.forEach(item => {
 			if (item.type === "Voksen") {
 				for (let i = 0; i < item.tickets.length; i++) {
-					if (item.tickets[i].ticketHolderId === "12345678-1234-1234-1234-123456789123") {
+					if (item.tickets[i].ticketHolderId === this.props.user.id) {
 						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
 						this.setState({ userInTrip: false })
 						break;
