@@ -106,12 +106,15 @@ class SendTicketBS extends Component {
 
 	pickContact = (type, activeNum, passiveNum) => {
 
+		const { tickets } = this.state.ticketByType.find(tickets => tickets.type === type);
+
 		this.setState({
 			reviewTicketsShow: false,
 			contactListShow: true,
 			currentType: type,
 			activeNum: activeNum,
-			passiveNum: passiveNum
+			passiveNum: passiveNum,
+			ticketsToChange: tickets,
 		});
 	};
 
@@ -244,12 +247,13 @@ class SendTicketBS extends Component {
 	};
 
 	checkIfAllTicketsDistributed = () => {
-		const tickets = this.state.ticketByType;
+		const ticketByType = this.state.ticketByType;
 
 		let isMoreTickets = false;
 
-		tickets.forEach(element => {
-			if (element.tickets.passive.length !== 0) {
+		ticketByType.forEach(element => {
+			const { tickets } = element;
+			if (tickets.length !== 0) {
 				return isMoreTickets = true;
 			}
 		})
@@ -345,6 +349,28 @@ class SendTicketBS extends Component {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	onKeydown = (event, passive, itemType) => {
+		if (event.key === 'Enter') {
+			this.pickContact(passive, itemType)
+		}
+	}
+
+	// returns only if there is any adult tickets available
+	returnCheckBox = () => {
+		if (this.state.ticketByType.length !== 0) {
+			if (this.state.ticketByType[0].tickets.length !== 0) {
+				return (<div className="flex items-center border-b border-gray-300 pb-5">
+					<input type="checkbox" defaultChecked={this.state.userInTrip} onClick={this.checkIfUser} />
+					<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
+				</div>)
+			}
+
+		}
+	}
+
+>>>>>>> ca70a9abbc4a4ec7fcf9e60cbbe4d33aa3e33f8a
 	reviewTicket = () => {
 		if (this.state.reviewTicketsShow) {
 			return (
@@ -352,6 +378,7 @@ class SendTicketBS extends Component {
 					<div className="pt-1 pb-6 text-center">
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
+<<<<<<< HEAD
 					<div className="flex items-center border-b border-gray-300 pb-5">
 						<input
 							type="checkbox"
@@ -367,6 +394,9 @@ class SendTicketBS extends Component {
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
 
+=======
+					{this.returnCheckBox()}
+>>>>>>> ca70a9abbc4a4ec7fcf9e60cbbe4d33aa3e33f8a
 					{this.state.ticketByType.map((item, index) => {
 						if (item.tickets.length > 0) {
 							let activeNum = (item.tickets.filter(item => item.ticketHolderId !== "00000000-0000-0000-0000-000000000000")).length
