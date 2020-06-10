@@ -235,7 +235,9 @@ class SendTicketBS extends Component {
 
 		fetch(
 			`http://127.0.0.1:4000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
-		).catch((err) => console.error(err));
+		).catch(() => {
+			alert('SMS funksjonen er slått av i demoen da den benytter seg av APIet til Twilio. Der er det kun satt opp en gratis konto som kun kan sende SMS til verifiserte nummere. Vi opplevde også at kontoen ble automatisk sperret hvis det var for mange endpoints som benyttet seg av den. All kode tilknyttet selve APIet kan finnes i smsServer mappen.')
+		});
 
 		this.setState({ ticketsToChange: tickets })
 
