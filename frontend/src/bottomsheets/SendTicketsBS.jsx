@@ -349,8 +349,6 @@ class SendTicketBS extends Component {
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	onKeydown = (event, passive, itemType) => {
 		if (event.key === 'Enter') {
 			this.pickContact(passive, itemType)
@@ -362,7 +360,16 @@ class SendTicketBS extends Component {
 		if (this.state.ticketByType.length !== 0) {
 			if (this.state.ticketByType[0].tickets.length !== 0) {
 				return (<div className="flex items-center border-b border-gray-300 pb-5">
-					<input type="checkbox" defaultChecked={this.state.userInTrip} onClick={this.checkIfUser} />
+					<input type="checkbox"
+						defaultChecked={this.state.userInTrip}
+						onClick={this.checkIfUser}
+						tabIndex="0"
+						onKeyDown={ e => {
+							if (e.key === 'Enter') {
+								this.checkIfUser()
+							}
+						}}
+					/>
 					<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 				</div>)
 			}
@@ -370,7 +377,6 @@ class SendTicketBS extends Component {
 		}
 	}
 
->>>>>>> ca70a9abbc4a4ec7fcf9e60cbbe4d33aa3e33f8a
 	reviewTicket = () => {
 		if (this.state.reviewTicketsShow) {
 			return (
@@ -378,25 +384,7 @@ class SendTicketBS extends Component {
 					<div className="pt-1 pb-6 text-center">
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
-<<<<<<< HEAD
-					<div className="flex items-center border-b border-gray-300 pb-5">
-						<input
-							type="checkbox"
-							checked={this.state.userInTrip}
-							onClick={this.checkIfUser}
-							tabIndex="0"
-							onKeyDown={ e => {
-								if (e.key === 'Enter') {
-									this.checkIfUser()
-								}
-							}}
-						/>
-						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
-					</div>
-
-=======
 					{this.returnCheckBox()}
->>>>>>> ca70a9abbc4a4ec7fcf9e60cbbe4d33aa3e33f8a
 					{this.state.ticketByType.map((item, index) => {
 						if (item.tickets.length > 0) {
 							let activeNum = (item.tickets.filter(item => item.ticketHolderId !== "00000000-0000-0000-0000-000000000000")).length
