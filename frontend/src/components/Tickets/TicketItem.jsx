@@ -18,7 +18,6 @@ class TicketItem extends Component {
 	expandTicket() {
 		let expandedTicket = this.state.ticketExpanded;
 		this.setState({ ticketExpanded: !expandedTicket });
-		console.log('test')
 	}
 
     // method for getting the contacts associated with a trip
