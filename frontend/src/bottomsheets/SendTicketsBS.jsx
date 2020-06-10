@@ -107,12 +107,15 @@ class SendTicketBS extends Component {
 
 	pickContact = (type, activeNum, passiveNum) => {
 
+		const { tickets } = this.state.ticketByType.find(tickets => tickets.type === type);
+
 		this.setState({
 			reviewTicketsShow: false,
 			contactListShow: true,
 			currentType: type,
 			activeNum: activeNum,
-			passiveNum: passiveNum
+			passiveNum: passiveNum,
+			ticketsToChange: tickets,
 		});
 	};
 
@@ -246,12 +249,13 @@ class SendTicketBS extends Component {
 	};
 
 	checkIfAllTicketsDistributed = () => {
-		const tickets = this.state.ticketByType;
+		const ticketByType = this.state.ticketByType;
 
 		let isMoreTickets = false;
 
-		tickets.forEach(element => {
-			if (element.tickets.passive.length !== 0) {
+		ticketByType.forEach(element => {
+			const { tickets } = element;
+			if (tickets.length !== 0) {
 				return isMoreTickets = true;
 			}
 		})
