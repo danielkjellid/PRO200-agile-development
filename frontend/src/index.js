@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Tickets from './Tickets';
-import UserDetails from './UserDetails';
-import UserProfile from './UserProfile';
-import Navbar from './components/Navbar';
-import ContactList from './ContactList';
-import BuyNewTicket from './components/BuyNewTicket';
-import IntroModal from './components/IntroModal';
+import Tickets from './views/Tickets';
+import UserProfile from './views/UserProfile';
+import Navbar from './components/Global/Navbar';
+import BuyNewTicket from './components/Global/BuyNewTicket';
+import IntroModal from './components/Global/IntroModal';
+import TicketItemEditModal from './components/Tickets/TicketItemEditModal';
 
 class App extends Component {
 	constructor(props) {
@@ -18,16 +17,18 @@ class App extends Component {
 			coverSite: false,
 			loadUser: true,
 			user: '',
-			contactList: '',
 			chooseTicket: false,
 			orders: '',
 			tickets: '',
 			checkIfFirstTimeLaunch: true,
-			firstTimeModal: false
+			firstTimeModal: false,
+			editNameModal: false,
+			orderToEdit: '',
+
 		};
 
 		this.newTicketButtonHandler = this.newTicketButtonHandler.bind(this);
-		this.changeOrderName = this.changeOrderName.bind(this)
+		this.changeOrderName = this.changeOrderName.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,6 +37,50 @@ class App extends Component {
 		this.fetchContactList();
 		this.fetchOrders();
 	}
+
+	changeOrderName = (id) => {
+		//get order by id
+		//show current name in input field
+		//while clickin on ok fetching update
+		//refresh page
+		this.changeOrderNameModal()
+		this.state.orders.forEach(item => {
+			if(item.id === id){
+				this.setState({orderToEdit: item})
+			}
+		})
+	}
+
+	handleNameChange = (event) => {
+		const oldState = {...this.state.orderToEdit}
+		oldState.name = event.target.value
+		this.setState({orderToEdit: oldState})
+	}
+
+	changeOrderNameModal = () => {
+		this.setState({editNameModal: !this.state.editNameModal})		
+	}
+
+	acceptChange = async() => {
+		const url = `https://localhost:5001/orders/${this.state.orderToEdit.id}`;
+		const payload = this.state.orderToEdit;
+		
+		try {
+			await fetch(url, {
+				method: 'put',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
+		} catch (err) {
+			console.log(err);
+		}
+		this.changeOrderNameModal();
+		this.updateAPI()
+	}
+
+	
 
 	updateAPI = () =>{
 		window.location.reload(false);
@@ -56,15 +101,7 @@ class App extends Component {
 		this.fetchAllTickets();
 	}
 
-	changeOrderName = (id, newName) => {
-	
-		 this.state.orders.map(item => {
-				if(item.id == id){item.orderName=newName;}
-			})
-	
-	}
 
-	
 	fetchAllTickets = async () => {
 		let tickets = [];
 		let payloadTaken;
@@ -174,20 +211,21 @@ class App extends Component {
 			this.setState({ chooseTicket: true });
 			this.fadeBackground();
 		}
-		console.log(this.state.chooseTicket);
 	};
-
-
-
-
 
 	render() {
 		
 		return (
 			<BrowserRouter>
 				<div>
-					<div className={this.state.coverSite ? 'modalBack' : null}></div>
-					<div className={this.state.firstTimeModal ? 'modalBack' : null}></div>
+					<div className={this.state.coverSite ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
+					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
+					<TicketItemEditModal 
+						show={this.state.editNameModal} 
+						name={this.state.orderToEdit.name}
+						handleNameChange={this.handleNameChange}
+						acceptChange={this.acceptChange}
+					/>
 					<Navbar />
 					<BuyNewTicket
 						user={this.state.user[0]}
@@ -226,17 +264,12 @@ class App extends Component {
 								></Route>
 								<Route
 									exact
-									path="/userdetails"
-									render={(props) => <UserDetails {...props} />}
-								></Route>
-								<Route
-									exact
 									path="/tickets"
 									render={(props) => (
 										<Tickets
 											{...props}
 											newTicketButtonHandler={this.newTicketButtonHandler}
-											searchContact={this.state.contactList}
+											contactList={this.state.contactList}
 											user={this.state.user}
 											orders={this.state.orders}
 											tickets={this.state.tickets}
@@ -244,20 +277,6 @@ class App extends Component {
 										></Tickets>
 									)}
 								></Route>
-
-								{/* For testing the component */}
-								<Route
-									exact
-									path="/contactList"
-									render={(props) => (
-										<ContactList
-											{...props}
-											contacts={this.state.contactList}
-											fetchNewContactList={this.fetchContactList}
-										></ContactList>
-									)}
-								></Route>
-
 								<Route component={this.notFound} />
 							</Switch>
 						</div>

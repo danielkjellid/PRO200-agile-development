@@ -1,9 +1,12 @@
+// framework imports
 import React from 'react';
 
+
+// modal to choose ticket type, starts the whole transaction
 function ChooseTicketBS(props) {
     return (
         <div>
-            <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg modal">
+            <div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md rounded-b-lg modal modal-footer">
                 <div className="flex justify-between p-5 border-b border-grey-300 mb-5">
                     <div></div>
                     <h4 className="font-medium">Velg billett</h4>
@@ -17,8 +20,7 @@ function ChooseTicketBS(props) {
                 <div className="flex flex-row justify-between pr-5 pl-5 pb-5">
                     <button className="p-8 border border-gray-300 rounded-md font-medium text-gray-700" id="period">Periodebillett</button>
                     <button className="p-8 border border-gray-300 rounded-md font-medium text-gray-700" id="period">Ekstra soner</button>
-                </div>
-                
+                </div> 
             </div>
         </div>
     );

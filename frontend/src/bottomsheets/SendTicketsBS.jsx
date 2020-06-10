@@ -1,20 +1,25 @@
+// framework imports
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderSendTickets from '../components/sendTicketsComponents/HeaderSendTickets';
-import ContactListSendTicket from '../components/sendTicketsComponents/ContactListSendTicket';
-import TicketsWereSend from '../components/sendTicketsComponents/TicketsWereSend';
-import MakeAccountInVIpps from '../components/sendTicketsComponents/MakeAccountInVIpps';
 
+// component imports
+import HeaderSendTickets from '../components/Global/HeaderSendTickets';
+import ContactList from '../components/Contacts/ContactList';
+import SentTicketConfirmation from '../components/Confirmations/SentTicketConfirmation';
+import VippsConfirmation from '../components/Confirmations/VippsConfirmation';
+
+
+// bottom sheet that controls the entire send ticket transaction
 class SendTicketBS extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
-			clicks: 0,
 			userInTrip: false,
 			reviewTicketsShow: true,
 			contactListShow: false,
 			ticketsWereSent: false,
-			makeAccountInVipps: false,
+			splitBillInVipps: false,
 			loadOrder: false,
 			orderId: '',
 			actives: [],
@@ -31,19 +36,12 @@ class SendTicketBS extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchTheLastOrder();
+		this.fetchLatestActiveOrders();
 	}
 
-	addClick = () => {
-		this.setState({clicks: this.state.clicks + 1});
-	};
-
-	substractClick = () => {
-		this.setState({clicks: this.state.clicks - 1});
-	};
-
-	fetchTheLastOrder = async () => {
+	fetchLatestActiveOrders = async () => {
 		let order;
+		
 		try {
 			const response = await fetch('https://localhost:5001/orders', {
 				method: 'get',
@@ -74,38 +72,20 @@ class SendTicketBS extends Component {
 	};
 
 	updateAPI = () => {
-		this.state.ticketByType.map((item) => {
-			if (item.tickets.active.length > 0) {
-				for (let i = 0; i < item.tickets.active.length; i++) {
+		this.state.ticketByType.forEach((item) => {
+			if (item.tickets.length > 0) {
+				for (let i = 0; i < item.tickets.length; i++) {
 					this.updateAPIFetch(
 						this.state.orderId,
-						item.tickets.active[i].id,
-						item.tickets.active[i].ticketHolderId
+						item.tickets[i].id,
+						item.tickets[i].ticketHolderId
 					);
 				}
 			}
 		});
 	};
 
-	addToActives = (id) => {
-		let activesArr = this.state.actives;
-		activesArr.push(id);
-		this.setState({ actives: activesArr });
-		this.addClick();
-	};
-
-	removeFromActives = (id) => {
-		let activesArr = this.state.actives;
-		let findElement = activesArr.find((element) => element === id);
-		let findIndex = activesArr.indexOf(findElement);
-		console.log(findIndex);
-		if (findIndex > -1) {
-			activesArr.splice(findIndex, 1);
-		}
-		this.setState({ actives: activesArr });
-		this.substractClick();
-	};
-
+	//when the ticket is assigned to a contact it is copied to 'actives'. shows how many tickets of passive tickets are left
 	getAllTicketsFromOrder = async (id) => {
 		let tickets;
 		try {
@@ -114,85 +94,75 @@ class SendTicketBS extends Component {
 				{ method: 'get' }
 			);
 			tickets = await response.json();
+			
 		} catch (err) {
 			console.log(err);
 		}
 
-		this.setState({loadOrder: true}); //run method to split the tickets by type
+		this.setState({ loadOrder: true }); //run method to split the tickets by type
 		this.seperateByType(tickets);
 	};
 
-	pickContact = (array, type) => {
+	pickContact = (type) => {
+
 		this.setState({
 			reviewTicketsShow: false,
 			contactListShow: true,
-			ticketsToChange: array,
 			currentType: type,
 		});
 	};
 
-	//this method seperates tickets by types and adds 'active: false' to every ticket to make
-	//it interactive while clicking in the checkbox
+	// seperates tickets by types and adds 'active: false' to every ticket to make
+	// it interactive while clicking in the checkbox
 	seperateByType = (array) => {
-		let tickeyByType = [
-			{type: 'Voksen', tickets: { passive: [], active: []}} ,
-			{type: 'Barn (6-17 år)', tickets: { passive: [], active: []}},
-			{type: 'Ungdom (18-19 år)', tickets: { passive: [], active: []}},
-			{type: 'Student', tickets: { passive: [], active: []}},
-			{type: 'Honnør', tickets: { passive: [], active: []}},
-		];
+		let tickets = [
+			{type: 'Voksen', tickets: []},
+			{type: 'Barn (6-17 år)', tickets: []},
+			{type: 'Ungdom (18-19 år)', tickets: []},
+			{type: 'Student', tickets: []},
+			{type: 'Honnør', tickets: []},
+		]
 
-		for (let i = 0; i < array.length; i++) {
-			for (let j = 0; j < tickeyByType.length; j++) {
-				array[i].active = false;
-				if (array[i].type == tickeyByType[j].type) {
-					tickeyByType[j].tickets.passive.push(array[i]);
+		array.forEach(item => {
+			tickets.forEach(ticket => {
+				if(item.type === ticket.type) {
+					ticket.tickets.push(item)
 				}
-			}
-			this.setState({ticketByType: tickeyByType});
-		}
+			})
+		})
+		
+		this.setState({ ticketByType: tickets });
+		console.log(this.state.ticketByType);
 	};
 
-	checkIfAddClicks = () => {
-		if (this.state.actives > 0) {
-			this.setState({ clicks: this.state.actives.length });
-		}
-	};
-
-	checkIfPassEqAct = () => {
-		const ticketsNum = this.state.ticketByType;
-		let result = false;
-		for (let i = 0; i < ticketsNum.length; i++) {
-			if (ticketsNum[i].tickets.active.length > 0) {
-				result = true;
-				break;
-			} else {
-				continue;
-			}
-		}
-		return result;
-	};
-
-	assignContactToTicket = () => {
-		this.state.ticketByType.map((item) => {
-			for (let i = 0; i < item.tickets.passive.length; i++) {
-				if (item.type === this.state.currentType) {
-					item.tickets.passive[i].ticketHolderId = this.state.actives[i];
-					if (this.state.actives.length > 0) {
-						if (item.tickets.passive[i].ticketHolderId) {
-							item.tickets.active[i] = item.tickets.passive[i];
-						}
-					} else {
-						item.tickets.active.length = 0;
+	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
+	assignContactToTicket = (contactId) => {
+		this.state.ticketByType.forEach(item => {
+			if(item.type === this.state.currentType){
+				for(let i = 0; i<item.tickets.length; i++){
+					if(item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000"){
+						item.tickets[i].ticketHolderId = contactId;
+						break;
 					}
 				}
 			}
-		});
-		this.setState({actives: []});
+		})
 	};
 
-	sendOnSMS = (person) => {
-		console.log(person);
+	removeContactFromTicket = (contactId) => {
+		this.state.ticketByType.forEach(item => {
+			if(item.type === this.state.currentType){
+				for(let i = 0; i<item.tickets.length; i++){
+					if(item.tickets[i].ticketHolderId === contactId){
+						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
+						break;
+					}
+				}
+			}
+		})
+	}
+
+	sendTicketBySMS = (person) => {
 		const tickets = this.state.ticketsToChange;
 		const text = {
 			recipient: person.phoneNumber,
@@ -217,14 +187,14 @@ class SendTicketBS extends Component {
 
 		this.setState({ ticketsToChange: tickets })
 
-		if (!this.isMoreTicketsLeft()) {
+		if (!this.checkIfAllTicketsDistributed()) {
 			this.ticketsWereSent();
 		} else {
 			this.backToSendTickets();
 		}
 	};
 
-	isMoreTicketsLeft = () => {
+	checkIfAllTicketsDistributed = () => {
 		const tickets = this.state.ticketByType;
 
 		let isMoreTickets = false;
@@ -235,33 +205,28 @@ class SendTicketBS extends Component {
 			}
 		})
 
-		console.log("isMoreTickets: ", isMoreTickets);
 		return isMoreTickets;
 	}
 
-	restartClicks = () => {
-		this.setState({clicks: 0});
-	};
-
 	ticketsWereSent = () => {
-		this.setState({reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false});
+		this.setState({ reviewTicketsShow: false, ticketsWereSent: true, contactListShow: false });
 	};
 
-	makeAccountInVIpps = () => {
-		this.setState({ticketsWereSent: false, makeAccountInVIpps: true});
+	splitBillInVipps = () => {
+		this.setState({ ticketsWereSent: false, splitBillInVipps: true });
 	};
 
 	backToSendTickets = () => {
-		this.setState({reviewTicketsShow: true, contactListShow: false});
+		this.setState({ reviewTicketsShow: true, contactListShow: false });
 	};
 
 	renderButton = () => {
-		let buttonTruth = this.checkIfPassEqAct();
+		let buttonEnabled = true
 
 		let buttonClassNameToggle;
 
 		if (this.state.reviewTicketsShow) {
-			if (!buttonTruth) {
+			if (!buttonEnabled) {
 				buttonClassNameToggle =
 					'p-3 w-full bg-gray-500 text-center text-sm font-medium text-white rounded-md cursor-not-allowed';
 				return (
@@ -277,7 +242,7 @@ class SendTicketBS extends Component {
 						onClick={() => {
 							this.ticketsWereSent();
 							this.updateAPI();
-							
+
 						}}
 						className={buttonClassNameToggle}
 					>
@@ -293,8 +258,6 @@ class SendTicketBS extends Component {
 				<button
 					onClick={() => {
 						this.backToSendTickets();
-						this.assignContactToTicket(this.state.orderId);
-						this.restartClicks();
 					}}
 					className={buttonClassNameToggle}
 				>
@@ -307,14 +270,14 @@ class SendTicketBS extends Component {
 			return (
 				<div className="flex flex-col">
 					<button
-						onClick={this.makeAccountInVIpps}
+						onClick={this.splitBillInVipps}
 						className="bg-vy-green-200 w-full p-3 text-center text-sm font-medium text-vy-green-300 rounded-md mb-3"
 					>
 						{this.state.renderButtonText[2]}
 					</button>
 					<Link to={'/tickets'}>
 						<button
-							onClick={() => {this.props.endTransaction(); this.props.updateAPI()}}
+							onClick={() => { this.props.endTransaction(); this.props.updateAPI() }}
 							className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
 						>
 							{this.state.renderButtonText[3]}
@@ -326,31 +289,23 @@ class SendTicketBS extends Component {
 	};
 
 	backToReviewTicket = () => {
-		this.setState({reviewTicketsShow: true, contactListShow: false});
+		this.setState({ reviewTicketsShow: true, contactListShow: false });
 	};
 
-	setAdultActive = (check) => {
-		const tickets = this.state.ticketByType;
-
-		if (check.target.checked) {
-			tickets[0].tickets.active[0] = tickets[0].tickets.passive[0]
-			tickets[0].tickets.active[0].ticketHolderId = this.props.user.id;
-		} else {
-			tickets[0].tickets.active.pop();
+	renderVipps = () => {
+		if (this.state.splitBillInVipps) {
+			return <VippsConfirmation splitBillInVipps={this.state.splitBillInVipps} />
 		}
-
-		this.setState({ticketByType: tickets, userInTrip: check.target.checked})
-
 	}
 
-	renderVipps = () => {
-		if (this.state.makeAccountInVIpps) {
-			return <MakeAccountInVIpps makeAccountInVIpps={this.state.makeAccountInVIpps} />
+	onKeydown = (event, passive, itemType) => {
+		if (event.key === 'Enter') {
+			this.pickContact(passive, itemType)
 		}
 	}
 
 	reviewTicket = () => {
-		if (this.state.reviewTicketsShow) {
+		if (this.state.reviewTicketsShow){
 			return (
 				<div className="px-5 pb-5">
 					<div className="pt-1 pb-6 text-center">
@@ -360,19 +315,26 @@ class SendTicketBS extends Component {
 						<input type="checkbox" checked={this.state.userInTrip} onClick={this.setAdultActive} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
-					{this.state.ticketByType.map((item, index) => {
-						if (item.tickets.passive.length > 0) {
-							let passive = item.tickets.passive;
-							const passiveNum = item.tickets.passive.length;
-							const activeNum = item.tickets.active.length;
+					
+					{this.state.ticketByType.map(item => {
+						if(item.tickets.length > 0) {
+							let activeNum = 0;
+							item.tickets.forEach(item => {
+								if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){
+									activeNum++
+								}
+							})
+
 							return (
 								<div
 									onClick={() => {
-										this.pickContact(passive, item.type);
-										this.checkIfAddClicks();
+										this.pickContact(item.type);
 									}}
-									key={index}
+									// onKeyDown={this.onKeydown(passive, item.type)}
+									key={item.id}
 									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
+									tabIndex="0"
+									aria-label={'Send ' + item.type}
 								>
 									<div>
 										<p className="font-medium text-gray-700 text-base">
@@ -384,47 +346,52 @@ class SendTicketBS extends Component {
 									</div>
 									<div
 										className={
-											activeNum !== passiveNum
+											activeNum !== item.tickets.length
 												? 'bg-gray-300 flex items-center justify-center rounded-full p-2'
 												: 'bg-vy-green-200 flex items-center justify-center rounded-full p-2'
 										}
+										tabIndex="0"
+										aria-label={'Valgt å sende ' + activeNum + ' av ' + item.tickets.length + ' billetter'}
 									>
 										<span
 											className={
-												activeNum !== passiveNum
-													? 'font-semibold text-gray-700 text-sm'
-													: 'font-semibold text-vy-green-300 text-sm'
+												activeNum !== item.tickets.length
+												? 'font-semibold text-gray-700 text-sm'
+												: 'font-semibold text-vy-green-300 text-sm'
 											}
 										>
-											{activeNum}/{passiveNum}
+											{activeNum}/{item.tickets.length}
 										</span>
 									</div>
 								</div>
-							);
+							)
+						} else {
+							return null;
 						}
-					})}
+					})}		
 				</div>
 			);
 		}
-	};
+	}
 
 	backButton = () => {
-		if (this.state.makeAccountInVIpps) {
+		if (this.state.splitBillInVipps) {
 			this.props.endTransaction();
 		} else if (this.state.contactListShow) {
+			this.setState({ actives: [], clicks: 0 });
 			this.backToSendTickets();
 		}
 	}
 
 	render() {
 		return (
-			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal">
+			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal modal-footer">
 				<div className="">
-					<HeaderSendTickets back={this.backButton} contactListShow={this.state.contactListShow} makeAccountInVIpps={this.state.makeAccountInVIpps} />
+					<HeaderSendTickets back={this.backButton} />
 					{this.reviewTicket()}
 					{this.renderVipps()}
-					<ContactListSendTicket
-						sendSMS={this.sendOnSMS}
+					<ContactList
+						sendSMS={this.sendTicketBySMS}
 						updateContactList={this.props.updateContactList}
 						back={this.backToReviewTicket}
 						clicks={this.state.clicks}
@@ -432,16 +399,18 @@ class SendTicketBS extends Component {
 						passiveTickets={this.state.ticketsToChange}
 						contactListShow={this.state.contactListShow}
 						contactList={this.props.contactList}
-						addToActives={this.addToActives}
-						removeFromActives={this.removeFromActives}
+						ticketByType={this.state.ticketByType}
+						currentType={this.state.currentType}
+						assignContactToTicket={this.assignContactToTicket}
+						removeContactFromTicket={this.removeContactFromTicket}
 					/>
 
-					<TicketsWereSend 
-						ticketsWereSent={this.state.ticketsWereSent} 
-						updateAPI = {this.props.updateAPI}	
-						/>
-					<MakeAccountInVIpps
-						makeAccountInVIpps={this.state.makeAccountInVipps}
+					<SentTicketConfirmation
+						ticketsWereSent={this.state.ticketsWereSent}
+						updateAPI={this.props.updateAPI}
+					/>
+					<VippsConfirmation
+						splitBillInVipps={this.state.splitBillInVipps}
 					/>
 					<div className="px-5 pt-5 pb-6 bg-gray-100 modal-footer">
 						{this.renderButton()}
