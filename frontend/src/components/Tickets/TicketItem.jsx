@@ -18,6 +18,7 @@ class TicketItem extends Component {
 	expandTicket() {
 		let expandedTicket = this.state.ticketExpanded;
 		this.setState({ ticketExpanded: !expandedTicket });
+		console.log('test')
 	}
 
     // method for getting the contacts associated with a trip
@@ -35,13 +36,13 @@ class TicketItem extends Component {
 	renderTicket() {		
 		return (
 			<div>
-				<div tabIndex="0" aria-label={'Ticket for ' + this.props.title} onKeyDown={this.onKeydown}>
+				<div tabIndex="0" aria-label={'Ticket for ' + this.props.title} onKeyDown={this.onKeydown} onClick={() => this.expandTicket()} >
 					<div className="px-2 py-2">
 						<div  className="flex items-center">
 							<div style={this.state.ticketExpanded ? { height: 414 + 'px'}  : { height: 96 + 'px' }} className={this.props.active ? "bg-green-400 rounded-full h-64 w-2" : "bg-red-400 rounded-full h-24 w-2"}>
 								{/* Empty div to create left border */}
 							</div>
-							<div onClick={() => this.expandTicket()} className={this.state.ticketExpanded ? "hidden" : "block ml-4 w-full pr-2"}>
+							<div className={this.state.ticketExpanded ? "hidden" : "block ml-4 w-full pr-2"}>
 								<div className="flex justify-between items-center">
 									<p className="font-medium text-base text-gray-900 truncate w-3/4">{this.props.title}</p>
 									<p className="font-medium text-sm text-gray-900">kr {this.props.price}</p>
