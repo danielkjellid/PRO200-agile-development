@@ -369,13 +369,7 @@ class SendTicketBS extends Component {
 
 					{this.state.ticketByType.map(item => {
 						if (item.tickets.length > 0) {
-							let activeNum = 0;
-							item.tickets.forEach(item => {
-								if (item.ticketHolderId !== "00000000-0000-0000-0000-000000000000") {
-									activeNum++
-								}
-							})
-
+							let activeNum = (item.tickets.filter(item => item.ticketHolderId !== "00000000-0000-0000-0000-000000000000")).length
 							return (
 								<div
 									onClick={() => {
