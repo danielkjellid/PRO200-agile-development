@@ -52,10 +52,10 @@ class TicketItem extends Component {
 									</div>
 									<div className="flex">
 										{/* Colors to be replaces with images  */}
-										<div className="h-8 w-8 border-2 border-white bg-red-200 rounded-full"></div>
-										<div className="h-8 w-8 border-2 border-white bg-red-300 rounded-full -ml-2"></div>
-										<div className="h-8 w-8 border-2 border-white bg-red-400 rounded-full -ml-2"></div>
-										<div className="h-8 w-8 border-2 border-white bg-red-500 rounded-full -ml-2"></div>
+										<img src={process.env.PUBLIC_URL + '/images/contacts/kathrine.jpeg'} alt="Kathrine" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full"/>
+										<img src={process.env.PUBLIC_URL + '/images/contacts/kato.jpeg'} alt="Kato" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full -ml-2"/>
+										<img src={process.env.PUBLIC_URL + '/images/contacts/kim.jpeg'} alt="Kim" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full -ml-2"/>
+										<img src={process.env.PUBLIC_URL + '/images/contacts/Kenneth.jpeg'} alt="Kenneth" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full -ml-2"/>
 									</div>
 								</div>
 							</div>
@@ -67,10 +67,10 @@ class TicketItem extends Component {
 										
 										<div className="flex mt-1">
 											{/* Colors to be replaces with images  */}
-											<div className="h-8 w-8 border-2 border-white bg-red-200 rounded-full"></div>
-											<div className="h-8 w-8 border-2 border-white bg-red-300 rounded-full -ml-2"></div>
-											<div className="h-8 w-8 border-2 border-white bg-red-400 rounded-full -ml-2"></div>
-											<div className="h-8 w-8 border-2 border-white bg-red-500 rounded-full -ml-2"></div>
+											<img src={process.env.PUBLIC_URL + '/images/contacts/kathrine.jpeg'} alt="Kathrine" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full"/>
+											<img src={process.env.PUBLIC_URL + '/images/contacts/kato.jpeg'} alt="Kato" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full -ml-2"/>
+											<img src={process.env.PUBLIC_URL + '/images/contacts/kim.jpeg'} alt="Kim" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full -ml-2"/>
+											<img src={process.env.PUBLIC_URL + '/images/contacts/Kenneth.jpeg'} alt="Kenneth" className="h-8 w-8 border-2 border-white bg-red-200 rounded-full -ml-2"/>
 										</div>
 									</div>
 									<button onClick={() => this.props.changeOrderName(this.props.id)} className="bg-white text-gray-900 text-sm font-medium rounded-lg px-4 py-3 hover:bg-gray-100 border border-gray-300">Rediger</button>
