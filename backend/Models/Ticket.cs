@@ -9,7 +9,7 @@ namespace VyShare.Models
         public TicketType Type { get; set; }
         public Station StartPoint { get; set; }
         public Station EndPoint { get; set; }
-        public string ReferenceCode { get; set; } // Frontend: https://getyourticket.no/ref/272732738
+        public string ReferenceCode { get; set; }
         public string Seat { get; set; }
         public decimal Price => CalculateTicketCost();
 

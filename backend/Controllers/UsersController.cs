@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VyShare.Models;
 using VyShare.Models.Dto;
 
 namespace VyShare.Controllers

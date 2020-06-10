@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace VyShare.Models
@@ -7,7 +6,7 @@ namespace VyShare.Models
     {
         public virtual ICollection<Order> Orders { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; } // Storing password in clear text for now
+        public string Password { get; set; } // Storing password in clear text for demo purposes
 
     }
 }

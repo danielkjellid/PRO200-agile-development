@@ -1,5 +1,3 @@
-using System;
-
 namespace VyShare.Models
 {
     public class Person : Entity
