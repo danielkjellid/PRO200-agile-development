@@ -362,7 +362,7 @@ class SendTicketBS extends Component {
 			if (this.state.ticketByType[0].tickets.length !== 0) {
 				return (<div className="flex items-center border-b border-gray-300 pb-5">
 					<input type="checkbox"
-						defaultChecked={this.state.userInTrip}
+						checked={this.state.userInTrip}
 						onClick={this.checkIfUser}
 						tabIndex="0"
 						onKeyDown={ e => {
