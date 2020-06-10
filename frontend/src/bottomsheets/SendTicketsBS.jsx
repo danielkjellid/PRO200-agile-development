@@ -43,7 +43,7 @@ class SendTicketBS extends Component {
 
 	fetchLatestActiveOrders = async () => {
 		let order;
-		
+
 		try {
 			const response = await fetch('https://localhost:5001/orders', {
 				method: 'get',
@@ -96,7 +96,7 @@ class SendTicketBS extends Component {
 				{ method: 'get' }
 			);
 			tickets = await response.json();
-			
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -105,7 +105,7 @@ class SendTicketBS extends Component {
 		this.seperateByType(tickets);
 	};
 
-	pickContact = (type,activeNum, passiveNum) => {
+	pickContact = (type, activeNum, passiveNum) => {
 
 		this.setState({
 			reviewTicketsShow: false,
@@ -120,41 +120,41 @@ class SendTicketBS extends Component {
 	// it interactive while clicking in the checkbox
 	seperateByType = (array) => {
 		let tickets = [
-			{type: 'Voksen', tickets: []},
-			{type: 'Barn (6-17 år)', tickets: []},
-			{type: 'Ungdom (18-19 år)', tickets: []},
-			{type: 'Student', tickets: []},
-			{type: 'Honnør', tickets: []},
+			{ type: 'Voksen', tickets: [] },
+			{ type: 'Barn (6-17 år)', tickets: [] },
+			{ type: 'Ungdom (18-19 år)', tickets: [] },
+			{ type: 'Student', tickets: [] },
+			{ type: 'Honnør', tickets: [] },
 		]
 
 		array.forEach(item => {
 			tickets.forEach(ticket => {
-				if(item.type === ticket.type) {
+				if (item.type === ticket.type) {
 					ticket.tickets.push(item)
 				}
 			})
 		})
-		
+
 		this.setState({ ticketByType: tickets });
 		console.log(this.state.ticketByType);
 	};
 
 	addActive = () => {
-		this.setState({activeNum: this.state.activeNum + 1})
+		this.setState({ activeNum: this.state.activeNum + 1 })
 	}
 
 	removeActive = () => {
-		if(this.state.activeNum>0){
-			this.setState({activeNum: this.state.activeNum -1})
+		if (this.state.activeNum > 0) {
+			this.setState({ activeNum: this.state.activeNum - 1 })
 		}
 	}
 
 	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
 	assignContactToTicket = (contactId) => {
 		this.state.ticketByType.forEach(item => {
-			if(item.type === this.state.currentType){
-				for(let i = 0; i<item.tickets.length; i++){
-					if(item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000"){
+			if (item.type === this.state.currentType) {
+				for (let i = 0; i < item.tickets.length; i++) {
+					if (item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000") {
 						item.tickets[i].ticketHolderId = contactId;
 						break;
 					}
@@ -166,11 +166,11 @@ class SendTicketBS extends Component {
 
 	assignMainUserToTicket = () => {
 		this.state.ticketByType.forEach(item => {
-			if(item.type === "Voksen"){
-				for(let i = 0; i<item.tickets.length; i++){
-					if(item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000"){
-						item.tickets[i].ticketHolderId = "12345678-1234-1234-1234-123456789123";
-						this.setState({userInTrip: true})
+			if (item.type === "Voksen") {
+				for (let i = 0; i < item.tickets.length; i++) {
+					if (item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000") {
+						item.tickets[i].ticketHolderId = this.props.user.id;
+						this.setState({ userInTrip: true })
 						break;
 					}
 				}
@@ -179,7 +179,7 @@ class SendTicketBS extends Component {
 	}
 
 	checkIfUser = () => {
-		if(!this.state.userInTrip) {
+		if (!this.state.userInTrip) {
 			this.assignMainUserToTicket()
 		} else {
 			this.removeMainUserFromTicket()
@@ -188,9 +188,9 @@ class SendTicketBS extends Component {
 
 	removeContactFromTicket = (contactId) => {
 		this.state.ticketByType.forEach(item => {
-			if(item.type === this.state.currentType){
-				for(let i = 0; i<item.tickets.length; i++){
-					if(item.tickets[i].ticketHolderId === contactId){
+			if (item.type === this.state.currentType) {
+				for (let i = 0; i < item.tickets.length; i++) {
+					if (item.tickets[i].ticketHolderId === contactId) {
 						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
 						break;
 					}
@@ -201,11 +201,11 @@ class SendTicketBS extends Component {
 
 	removeMainUserFromTicket = () => {
 		this.state.ticketByType.forEach(item => {
-			if(item.type === "Voksen"){
-				for(let i = 0; i<item.tickets.length; i++){
-					if(item.tickets[i].ticketHolderId === "12345678-1234-1234-1234-123456789123"){
+			if (item.type === "Voksen") {
+				for (let i = 0; i < item.tickets.length; i++) {
+					if (item.tickets[i].ticketHolderId === "12345678-1234-1234-1234-123456789123") {
 						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
-						this.setState({userInTrip: false})
+						this.setState({ userInTrip: false })
 						break;
 					}
 				}
@@ -356,7 +356,7 @@ class SendTicketBS extends Component {
 	}
 
 	reviewTicket = () => {
-		if (this.state.reviewTicketsShow){
+		if (this.state.reviewTicketsShow) {
 			return (
 				<div className="px-5 pb-5">
 					<div className="pt-1 pb-6 text-center">
@@ -366,16 +366,16 @@ class SendTicketBS extends Component {
 						<input type="checkbox" checked={this.state.userInTrip} onClick={this.checkIfUser} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
-					
+
 					{this.state.ticketByType.map(item => {
-						if(item.tickets.length > 0) {
+						if (item.tickets.length > 0) {
 							let activeNum = 0;
 							item.tickets.forEach(item => {
-								if(item.ticketHolderId !== "00000000-0000-0000-0000-000000000000"){
+								if (item.ticketHolderId !== "00000000-0000-0000-0000-000000000000") {
 									activeNum++
 								}
 							})
-							
+
 							return (
 								<div
 									onClick={() => {
@@ -407,8 +407,8 @@ class SendTicketBS extends Component {
 										<span
 											className={
 												activeNum !== item.tickets.length
-												? 'font-semibold text-gray-700 text-sm'
-												: 'font-semibold text-vy-green-300 text-sm'
+													? 'font-semibold text-gray-700 text-sm'
+													: 'font-semibold text-vy-green-300 text-sm'
 											}
 										>
 											{activeNum}/{item.tickets.length}
@@ -419,18 +419,32 @@ class SendTicketBS extends Component {
 						} else {
 							return null;
 						}
-					})}		
+					})}
 				</div>
 			);
 		}
 	}
 
+	// Handle back/cancel button in header
 	backButton = () => {
 		if (this.state.splitBillInVipps) {
+			this.props.updateAPI();
 			this.props.endTransaction();
 		} else if (this.state.contactListShow) {
 			this.setState({ actives: [], clicks: 0 });
 			this.backToSendTickets();
+		} else {
+			this.props.updateAPI();
+			this.props.endTransaction();
+		}
+	}
+
+	// returns back button or a cancel button in header
+	returnArrowOrXBtn = () => {
+		if (this.state.contactListShow) {
+			return <svg className="cursor-pointer text-gray-700 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" /></svg>
+		} else {
+			return <svg className="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd" /></svg>
 		}
 	}
 
@@ -438,7 +452,7 @@ class SendTicketBS extends Component {
 		return (
 			<div className="w-full z-10 absolute bottom-0 h-auto bg-white rounded-t-md modal modal-footer">
 				<div className="">
-					<HeaderSendTickets back={this.backButton} />
+					<HeaderSendTickets back={this.backButton} returnArrowOrXBtn={this.returnArrowOrXBtn} />
 					{this.reviewTicket()}
 					{this.renderVipps()}
 					<ContactList
