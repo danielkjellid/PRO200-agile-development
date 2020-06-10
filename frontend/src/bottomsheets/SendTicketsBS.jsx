@@ -15,6 +15,8 @@ class SendTicketBS extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			activeNum: 0,
+			passiveNum: 0,
 			userInTrip: false,
 			reviewTicketsShow: true,
 			contactListShow: false,
@@ -103,12 +105,14 @@ class SendTicketBS extends Component {
 		this.seperateByType(tickets);
 	};
 
-	pickContact = (type) => {
+	pickContact = (type,activeNum, passiveNum) => {
 
 		this.setState({
 			reviewTicketsShow: false,
 			contactListShow: true,
 			currentType: type,
+			activeNum: activeNum,
+			passiveNum: passiveNum
 		});
 	};
 
@@ -135,6 +139,16 @@ class SendTicketBS extends Component {
 		console.log(this.state.ticketByType);
 	};
 
+	addActive = () => {
+		this.setState({activeNum: this.state.activeNum + 1})
+	}
+
+	removeActive = () => {
+		if(this.state.activeNum>0){
+			this.setState({activeNum: this.state.activeNum -1})
+		}
+	}
+
 	//checks state of the chosen contacts. if contacts were assigned to a ticket, checkbox will be checked
 	assignContactToTicket = (contactId) => {
 		this.state.ticketByType.forEach(item => {
@@ -148,6 +162,29 @@ class SendTicketBS extends Component {
 			}
 		})
 	};
+	//12345678-1234-1234-1234-123456789123
+
+	assignMainUserToTicket = () => {
+		this.state.ticketByType.forEach(item => {
+			if(item.type === "Voksen"){
+				for(let i = 0; i<item.tickets.length; i++){
+					if(item.tickets[i].ticketHolderId === "00000000-0000-0000-0000-000000000000"){
+						item.tickets[i].ticketHolderId = "12345678-1234-1234-1234-123456789123";
+						this.setState({userInTrip: true})
+						break;
+					}
+				}
+			}
+		})
+	}
+
+	checkIfUser = () => {
+		if(!this.state.userInTrip) {
+			this.assignMainUserToTicket()
+		} else {
+			this.removeMainUserFromTicket()
+		}
+	}
 
 	removeContactFromTicket = (contactId) => {
 		this.state.ticketByType.forEach(item => {
@@ -155,6 +192,20 @@ class SendTicketBS extends Component {
 				for(let i = 0; i<item.tickets.length; i++){
 					if(item.tickets[i].ticketHolderId === contactId){
 						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
+						break;
+					}
+				}
+			}
+		})
+	}
+
+	removeMainUserFromTicket = () => {
+		this.state.ticketByType.forEach(item => {
+			if(item.type === "Voksen"){
+				for(let i = 0; i<item.tickets.length; i++){
+					if(item.tickets[i].ticketHolderId === "12345678-1234-1234-1234-123456789123"){
+						item.tickets[i].ticketHolderId = "00000000-0000-0000-0000-000000000000";
+						this.setState({userInTrip: false})
 						break;
 					}
 				}
@@ -217,7 +268,7 @@ class SendTicketBS extends Component {
 	};
 
 	backToSendTickets = () => {
-		this.setState({ reviewTicketsShow: true, contactListShow: false });
+		this.setState({ reviewTicketsShow: true, contactListShow: false, passiveNum: 0, activeNum: 0 });
 	};
 
 	renderButton = () => {
@@ -312,7 +363,7 @@ class SendTicketBS extends Component {
 						<p className="text-gray-700 text-sm">Her kan du sende noen eller alle av billettene til venner og bekjente. Velg hvem i kontaktlisten du ønsker å sende billetten til ved å trykke på billettypen under.</p>
 					</div>
 					<div className="flex items-center border-b border-gray-300 pb-5">
-						<input type="checkbox" checked={this.state.userInTrip} onClick={this.setAdultActive} />
+						<input type="checkbox" checked={this.state.userInTrip} onClick={this.checkIfUser} />
 						<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 					</div>
 					
@@ -324,11 +375,11 @@ class SendTicketBS extends Component {
 									activeNum++
 								}
 							})
-
+							
 							return (
 								<div
 									onClick={() => {
-										this.pickContact(item.type);
+										this.pickContact(item.type, activeNum, item.tickets.length);
 									}}
 									// onKeyDown={this.onKeydown(passive, item.type)}
 									key={item.id}
@@ -394,15 +445,16 @@ class SendTicketBS extends Component {
 						sendSMS={this.sendTicketBySMS}
 						updateContactList={this.props.updateContactList}
 						back={this.backToReviewTicket}
-						clicks={this.state.clicks}
-						addClick={this.addClick}
-						passiveTickets={this.state.ticketsToChange}
+						activeNum={this.state.activeNum}
+						passiveNum={this.state.passiveNum}
 						contactListShow={this.state.contactListShow}
 						contactList={this.props.contactList}
 						ticketByType={this.state.ticketByType}
 						currentType={this.state.currentType}
 						assignContactToTicket={this.assignContactToTicket}
 						removeContactFromTicket={this.removeContactFromTicket}
+						addActive={this.addActive}
+						removeActive={this.removeActive}
 					/>
 
 					<SentTicketConfirmation

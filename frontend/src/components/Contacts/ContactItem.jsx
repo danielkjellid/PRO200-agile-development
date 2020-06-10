@@ -15,6 +15,7 @@ class ContactItem extends Component {
 				item.tickets.forEach(item => {
 					if(item.ticketHolderId === this.props.id){
 						this.setState({active: true})
+						this.props.addActive();
 					}
 				})
 			}
@@ -22,12 +23,17 @@ class ContactItem extends Component {
 	}
 
 	assignOrRemove = () => {
-		if(!this.state.active) {
+		
+		if(!this.state.active && this.props.activeNum !== this.props.passiveNum) {
 			this.props.assignContactToTicket(this.props.id);
-			this.changeState()
-		} else {
+			this.changeState();
+			this.props.addActive();
+		} else if(this.state.active) {
 			this.props.removeContactFromTicket(this.props.id);
 			this.changeState();
+			this.props.removeActive();
+		} else {
+			
 		}
 	}
 

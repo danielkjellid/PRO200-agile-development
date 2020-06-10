@@ -113,34 +113,23 @@ class ContactList extends Component {
 						{/* this code below checks if tickets are assigned to persons or not. if yes state is presented as active */}
 						{this.state.contactList
 							.map((item, index) => {
-								let check = false;
-								for (let i = 0; i < this.props.passiveTickets.length; i++) {
-									if (this.props.passiveTickets[i].ticketHolderId === item.id) {
-										check = true;
-										break;
-									} else {
-										continue;
-									}
-								}
-
+								
 								return (
 									<ContactItem
-										addClick={this.props.addClick}
-										addToActives={this.props.addToActives}
-										removeFromActives={this.props.removeFromActives}
-										checkIfTicketAssigned={this.props.passiveTickets}
 										assignContactToTicket={() => this.props.assignContactToTicket(item.id)}
 										removeContactFromTicket={() => this.props.removeContactFromTicket(item.id)}
-										clicks={this.props.clicks}
-										key={index}
+										activeNum={this.props.activeNum}
+										passiveNum={this.props.passiveNum}
+										key={item.id}
 										id={item.id}
 										name={item.firstName}
 										lastName={item.lastName}
 										phone={item.phoneNumber}
-										state={check}
 										contactItem={item}
 										currentType={this.props.currentType}
 										ticketByType={this.props.ticketByType}
+										addActive={this.props.addActive}
+										removeActive={this.props.removeActive}
 									/>
 								);
 							})
