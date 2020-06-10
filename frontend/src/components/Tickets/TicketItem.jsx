@@ -85,7 +85,7 @@ class TicketItem extends Component {
 										<p className="text-gray-700 text-sm">2 timer</p>
 										<span className="mt-5 block px-2 py-2 border border-vy-green-300 rounded-md text-vy-green-300">R30x</span>
 									</div>
-									<div>
+									<div className="text-right">
 										<p className="text-gray-800 text-base font-medium">{this.props.to}</p>
 										<p className="mt-2 text-gray-800 text-xl font-bold">23:34</p>
 										<p className="mt-2 text-gray-700 text-sm">6 stopp</p>
