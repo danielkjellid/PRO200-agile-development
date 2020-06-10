@@ -24,12 +24,6 @@ function DepartureRouteCard(props) {
     let getStartTime = hours + ":" + minutes;
     let getEndTime = endHours + ":" + minutes;
 
-    let onKeydown = (event) => {
-        if (event.key === 'Enter') {
-            return props.click
-        }
-    }
-
     return (
         <div
             onClick={props.click} 
@@ -40,7 +34,11 @@ function DepartureRouteCard(props) {
             }
             tabIndex="0"
             aria-label={'Linje R30x avreise ' + getStartTime + ', annkomst ' + getEndTime + '. Drar fra ' + props.track}
-            onKeyDown={onKeydown}
+            onKeyDown={ e => {
+                if (e.key === 'Enter') {
+                    props.click()
+                }
+            }}
         >
         <div className="flex items-center justify-between border-b border-gray-300 pb-4">
             <div>

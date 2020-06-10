@@ -18,6 +18,12 @@ function DestinationDropdownItem(props) {
                 className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
                 tabIndex="0"
                 aria-label={'Departure from ' + props.stationName}
+                onKeyDown={ e => {
+                    if (e.key === 'Enter') {
+                        props.setStartPoint(props.stationName); 
+                        props.hideDropDownMenu()
+                    }
+                }}
             >
                 <p>{props.stationName}</p>
             </div>
@@ -33,6 +39,13 @@ function DestinationDropdownItem(props) {
                 className="px-3 py-2 mb-2 w-full border rounded border-gray-400 text-sm text-gray-700"
                 tabIndex="0"
                 aria-label={'Arrive at ' + props.stationName}
+                onKeyDown={ e => {
+                    if (e.key === 'Enter') {
+                        props.setEndPoint(props.stationName); 
+                        props.hideDropDownMenu()
+                    }
+                }}
+
             >
                 <p>{props.stationName}</p>
             </div>
