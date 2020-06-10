@@ -1,6 +1,5 @@
 // framework imports
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 // component imports
 import HeaderSendTickets from '../components/Global/HeaderSendTickets';
@@ -328,14 +327,12 @@ class SendTicketBS extends Component {
 					>
 						{this.state.renderButtonText[2]}
 					</button>
-					<Link to={'/tickets'}>
-						<button
-							onClick={() => { this.props.endTransaction(); this.props.updateAPI() }}
-							className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
-						>
-							{this.state.renderButtonText[3]}
-						</button>
-					</Link>
+					<button
+						onClick={() => { this.props.endTransaction(); this.props.updateAPI() }}
+						className="bg-vy-green-300 w-full p-3 text-center text-sm font-medium text-white rounded-md hover:bg-vy-green-400"
+					>
+						{this.state.renderButtonText[3]}
+					</button>
 				</div>
 			);
 		}
@@ -362,7 +359,16 @@ class SendTicketBS extends Component {
 		if (this.state.ticketByType.length !== 0) {
 			if (this.state.ticketByType[0].tickets.length !== 0) {
 				return (<div className="flex items-center border-b border-gray-300 pb-5">
-					<input type="checkbox" defaultChecked={this.state.userInTrip} onClick={this.checkIfUser} />
+					<input type="checkbox"
+						defaultChecked={this.state.userInTrip}
+						onClick={this.checkIfUser}
+						tabIndex="0"
+						onKeyDown={ e => {
+							if (e.key === 'Enter') {
+								this.checkIfUser()
+							}
+						}}
+					/>
 					<span className="ml-2 mb-px text-sm text-gray-700 font-medium">Jeg skal være med på turen</span>
 				</div>)
 			}
@@ -386,11 +392,15 @@ class SendTicketBS extends Component {
 									onClick={() => {
 										this.pickContact(item.type, activeNum, item.tickets.length);
 									}}
-									// onKeyDown={this.onKeydown(passive, item.type)}
 									key={index}
 									className="cursor-pointer flex items-center justify-between border-b border-gray-300 py-5"
 									tabIndex="0"
 									aria-label={'Send ' + item.type}
+									onKeyDown={ e => {
+										if (e.key === 'Enter') {
+											this.pickContact(item.type, activeNum, item.tickets.length);
+										}
+									}}
 								>
 									<div>
 										<p className="font-medium text-gray-700 text-base">
