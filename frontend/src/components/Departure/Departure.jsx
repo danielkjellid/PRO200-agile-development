@@ -45,7 +45,7 @@ class Departure extends Component {
 		return (
 			<div className={this.props.chooseDeparture ? 'block' : 'hidden'}>
 				<div>
-					<div className={this.props.editNumberOfTravellers ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
+					<div className={this.props.editNumberOfTravellers ? 'w-full h-full z-10 block absolute bottom-0 bg-black opacity-25' : null}></div>
 					<div className="numberOfTravellers mr-5 ml-5 pb-5 border-b border-grey-300 flex items-center justify-between">
 						<div className="">
 							<p className="text-sm font-medium text-gray-800 pb-1">Reisende</p>

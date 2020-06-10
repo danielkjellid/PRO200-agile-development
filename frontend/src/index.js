@@ -218,8 +218,8 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<div className={this.state.coverSite ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
-					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block fixed bottom-0 bg-black opacity-25' : null}></div>
+					<div className={this.state.coverSite ? 'w-full h-full z-10 block absolute bottom-0 bg-black opacity-25' : null}></div>
+					<div className={this.state.firstTimeModal ? 'w-full h-full z-10 block absolute bottom-0 bg-black opacity-25' : null}></div>
 					<TicketItemEditModal 
 						show={this.state.editNameModal} 
 						name={this.state.orderToEdit.name}
